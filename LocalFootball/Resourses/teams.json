@@ -1,0 +1,168 @@
+[
+    {
+        "name":"Lonesom",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1999,
+        "emblemaName": "Wolf",
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 5,
+                "numberOfWins": 3,
+                "numberOfLesions": 1,
+                "numberOfDraws": 1,
+                "goalsScored": 10,
+                "goalsConceded": 5,
+                "penaltyScored": 3,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Liga1",
+                    "score": 5,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 5,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 1,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 0
+                    }
+                },
+                {
+                    "tournamentName": "Liga2",
+                    "score": 10,
+                    "position": 1,
+                    "statistics":
+                    {
+                        "numberOfGames": 10,
+                        "numberOfWins": 7,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 19,
+                        "goalsConceded": 9,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name":"FCB",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1974,
+        "emblemaName": "FCB",
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 10,
+                "numberOfWins": 6,
+                "numberOfLesions": 7,
+                "numberOfDraws": 1,
+                "goalsScored": 10,
+                "goalsConceded": 3,
+                "penaltyScored": 3,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Liga1",
+                    "score": 3,
+                    "position": 12,
+                    "statistics":
+                    {
+                        "numberOfGames": 1,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 3,
+                        "numberOfDraws": 1,
+                        "goalsScored": 10,
+                        "goalsConceded": 4,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "Liga2",
+                    "score": 34,
+                    "position": 1,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name":"RealMadrid",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 2000,
+        "emblemaName": "RealMadrid",
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 75,
+                "numberOfWins": 75,
+                "numberOfLesions": 0,
+                "numberOfDraws": 0,
+                "goalsScored": 100,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Liga1",
+                    "score": 105,
+                    "position": 7,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                },
+                {
+                    "tournamentName": "Liga2",
+                    "score": 0,
+                    "position": 10,
+                    "statistics":
+                    {
+                        "numberOfGames": 2,
+                        "numberOfWins": 7,
+                        "numberOfLesions": 2,
+                        "numberOfDraws": 3,
+                        "goalsScored": 30,
+                        "goalsConceded": 9,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    }
+]
+ 

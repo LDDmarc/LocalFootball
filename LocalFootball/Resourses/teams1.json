@@ -1,0 +1,15 @@
+[
+    {
+        "name":"Lonesom",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1999,
+        "emblemaName": "Wolf",
+        "statistics":
+        {
+            "numberOfGames": 5,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 1
+        }
+    }
+]

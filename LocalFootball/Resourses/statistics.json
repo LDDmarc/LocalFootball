@@ -1,0 +1,13 @@
+[
+    {
+        "numberOfGames": 5,
+        "numberOfWins": 3,
+        "numberOfLesions": 1,
+        "numberOfDraws": 1,
+        "goalsScored": 10,
+        "goalsConceded": 5,
+        "penaltyScored": 3,
+        "penaltyConceded": 0
+    }
+]
+ 
