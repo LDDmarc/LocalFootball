@@ -46,18 +46,17 @@ class TeamsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath)
         let team = teams[indexPath.row]
         cell.textLabel?.text = team.name
-        
-        //cell.detailTextLabel?.text = team.teamColors.first
-//        if let statics = team.statistics {
-//            cell.detailTextLabel?.text = "Number of games: \(statics.numberOfGames), number of wins: \(statics.numberOfWins)"
-//        }
-        
         if let imageData = team.emblemaImageData {
             cell.imageView?.image = UIImage(data: imageData)
         }
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = DetailTeamViewController()
+        nextVC.team = teams[indexPath.row]
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
     
     //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     //        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath)

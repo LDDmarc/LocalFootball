@@ -32,6 +32,8 @@
 		BCE7035424434C0D009D55FC /* statistics.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035324434C0C009D55FC /* statistics.json */; };
 		BCE7035624434CC6009D55FC /* teams1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035524434CC6009D55FC /* teams1.json */; };
 		BCE7035824434E09009D55FC /* statistics1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035724434E09009D55FC /* statistics1.json */; };
+		BCE747D22443684100984011 /* DetailTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747D02443684100984011 /* DetailTeamViewController.swift */; };
+		BCE747D32443684100984011 /* DetailTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE747D12443684100984011 /* DetailTeamViewController.xib */; };
 		BCF5D593243F70D5009E9876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D592243F70D5009E9876 /* AppDelegate.swift */; };
 		BCF5D595243F70D5009E9876 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D594243F70D5009E9876 /* SceneDelegate.swift */; };
 		BCF5D597243F70D5009E9876 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D596243F70D5009E9876 /* ViewController.swift */; };
@@ -67,6 +69,8 @@
 		BCE7035324434C0C009D55FC /* statistics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = statistics.json; sourceTree = "<group>"; };
 		BCE7035524434CC6009D55FC /* teams1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams1.json; sourceTree = "<group>"; };
 		BCE7035724434E09009D55FC /* statistics1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = statistics1.json; sourceTree = "<group>"; };
+		BCE747D02443684100984011 /* DetailTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTeamViewController.swift; sourceTree = "<group>"; };
+		BCE747D12443684100984011 /* DetailTeamViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTeamViewController.xib; sourceTree = "<group>"; };
 		BCF5D58F243F70D5009E9876 /* LocalFootball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalFootball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF5D592243F70D5009E9876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCF5D594243F70D5009E9876 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				BCF5D596243F70D5009E9876 /* ViewController.swift */,
 				BCF5D598243F70D5009E9876 /* Main.storyboard */,
 				BCF5D5AD243F7913009E9876 /* TeamsTableViewController.swift */,
+				BCE747D02443684100984011 /* DetailTeamViewController.swift */,
+				BCE747D12443684100984011 /* DetailTeamViewController.xib */,
 				BCB8554C244067EB004BEA34 /* Resourses */,
 				BCF5D59E243F70D7009E9876 /* Assets.xcassets */,
 				BCF5D5A0243F70D7009E9876 /* LaunchScreen.storyboard */,
@@ -221,6 +227,7 @@
 				BCA823562440C6FE00FA67FF /* matches.json in Resources */,
 				BCF5D59A243F70D5009E9876 /* Main.storyboard in Resources */,
 				BCB85549244067E5004BEA34 /* RealMadrid.png in Resources */,
+				BCE747D32443684100984011 /* DetailTeamViewController.xib in Resources */,
 				BCB85548244067E5004BEA34 /* Millionarios.png in Resources */,
 				BCE7035824434E09009D55FC /* statistics1.json in Resources */,
 				BCB8554A244067E5004BEA34 /* FCB.png in Resources */,
@@ -248,6 +255,7 @@
 				BCF5D597243F70D5009E9876 /* ViewController.swift in Sources */,
 				BC24870624433EBF00454D14 /* TeamStatistic+CoreDataProperties.swift in Sources */,
 				BCA823532440AC5200FA67FF /* MatchResults+CoreDataClass.swift in Sources */,
+				BCE747D22443684100984011 /* DetailTeamViewController.swift in Sources */,
 				BCF5D593243F70D5009E9876 /* AppDelegate.swift in Sources */,
 				BCA82349244093A700FA67FF /* Team+CoreDataClass.swift in Sources */,
 				BCA823592440E3DA00FA67FF /* Tournament+CoreDataClass.swift in Sources */,
