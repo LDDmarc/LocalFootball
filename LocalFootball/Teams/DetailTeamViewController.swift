@@ -52,7 +52,6 @@ class DetailTeamViewController: UIViewController {
             
         }
         
-        
     }
     /*
     // MARK: - Navigation

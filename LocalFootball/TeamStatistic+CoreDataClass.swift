@@ -18,6 +18,12 @@ public class TeamStatistic: NSManagedObject, Decodable {
         case tournamentStatistics = "tournamentStatistics"
     }
     
+    var teamTournamentStatistic: [TournamentStatistics] {
+        get {
+            tournamentStatistics.flatMap { $0.allObjects as? [TournamentStatistics] } ?? []
+        }
+    }
+    
     required convenience public init(from decoder: Decoder) throws {
         guard let contexUserInfoKey = CodingUserInfoKey.context,
             let managedObjectContext = decoder.userInfo[contexUserInfoKey] as? NSManagedObjectContext,

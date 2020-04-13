@@ -47,7 +47,7 @@ public class Team: NSManagedObject, Decodable {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
-         //   uuid = try values.decode(UUID.self, forKey: .uuid)
+            //uuid = try values.decode(UUID.self, forKey: .uuid)
             name = try values.decode(String?.self, forKey: .name)
             yearOfFoundation = try values.decode(Int16.self, forKey: .yearOfFoundation)
             

@@ -69,9 +69,9 @@
         <element name="MatchResults" positionX="-707.15625" positionY="-483.80078125" width="128" height="118"/>
         <element name="Statistics" positionX="-47.578125" positionY="-334.3515625" width="128" height="193"/>
         <element name="Team" positionX="-66.1484375" positionY="-579.8046875" width="128" height="163"/>
+        <element name="TeamStatistic" positionX="-283.2890625" positionY="-387.03515625" width="128" height="88"/>
         <element name="Temp" positionX="-807.99609375" positionY="-589.234375" width="128" height="58"/>
         <element name="Tournament" positionX="-302.140625" positionY="-805.42578125" width="128" height="193"/>
         <element name="TournamentStatistics" positionX="-471.421875" positionY="-239.96875" width="128" height="118"/>
-        <element name="TeamStatistic" positionX="-283.2890625" positionY="-387.03515625" width="128" height="88"/>
     </elements>
 </model>

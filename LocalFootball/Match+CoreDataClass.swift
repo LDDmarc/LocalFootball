@@ -13,6 +13,12 @@ import CoreData
 @objc(Match)
 public class Match: NSManagedObject, Decodable {
     
+    lazy var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return df
+    }()
+    
     var results: [MatchResults] {
         get {
             matchResults.flatMap { $0.allObjects as? [MatchResults] } ?? []
@@ -35,9 +41,12 @@ public class Match: NSManagedObject, Decodable {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
-            //  date = try values.decode(Date.self, forKey: .date)
+
+            if let dateStr = try values.decode(String?.self, forKey: .date) {
+                date = dateFormatter.date(from: dateStr)
+            }
             team1Name = try values.decode(String?.self, forKey: .team1Name)
-            team2Name = try values.decode(String?.self, forKey: .team1Name)
+            team2Name = try values.decode(String?.self, forKey: .team2Name)
             
             matchResults = try values.decode(Set<MatchResults>.self, forKey: .matchResults) as NSSet
             
