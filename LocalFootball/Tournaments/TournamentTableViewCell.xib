@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="226" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="535" height="226"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="535" height="226"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название турнира" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZY-hL-qMm">
+                        <rect key="frame" x="150" y="13" width="235" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="360-iy-kaa">
+                        <rect key="frame" x="8" y="55" width="150" height="150"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="OPR-GM-Zv4"/>
+                            <constraint firstAttribute="height" constant="150" id="hRo-GD-PVy"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.01.2019 - 01.01.2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Js4-VC-S2K">
+                        <rect key="frame" x="176" y="63" width="182" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 команд" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKQ-lt-pZl">
+                        <rect key="frame" x="176" y="99" width="85" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="654-cV-LqY">
+                        <rect key="frame" x="273" y="94.5" width="38" height="30"/>
+                        <state key="normal" title="Show"/>
+                        <connections>
+                            <action selector="showTeams:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LoK-rF-PeW"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация о турнире" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taw-qG-pqf">
+                        <rect key="frame" x="176" y="128" width="190" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завершен" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgd-xp-i9w">
+                        <rect key="frame" x="438" y="184" width="81" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="taw-qG-pqf" firstAttribute="top" secondItem="rKQ-lt-pZl" secondAttribute="bottom" constant="8" id="ByM-iO-yQa"/>
+                    <constraint firstItem="taw-qG-pqf" firstAttribute="leading" secondItem="rKQ-lt-pZl" secondAttribute="leading" id="IV3-lX-l7K"/>
+                    <constraint firstAttribute="trailing" secondItem="Qgd-xp-i9w" secondAttribute="trailing" constant="16" id="KvT-yX-jnm"/>
+                    <constraint firstItem="rKQ-lt-pZl" firstAttribute="top" secondItem="Js4-VC-S2K" secondAttribute="bottom" constant="15" id="MW6-m1-L30"/>
+                    <constraint firstAttribute="bottom" secondItem="360-iy-kaa" secondAttribute="bottom" constant="21" id="Nvd-hg-GmP"/>
+                    <constraint firstItem="rKQ-lt-pZl" firstAttribute="leading" secondItem="Js4-VC-S2K" secondAttribute="leading" id="RWq-Yj-7ug"/>
+                    <constraint firstItem="654-cV-LqY" firstAttribute="leading" secondItem="rKQ-lt-pZl" secondAttribute="trailing" constant="12" id="U9y-So-n7g"/>
+                    <constraint firstItem="360-iy-kaa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="VAz-Ke-JcS"/>
+                    <constraint firstItem="654-cV-LqY" firstAttribute="centerY" secondItem="rKQ-lt-pZl" secondAttribute="centerY" id="WOf-GD-YUK"/>
+                    <constraint firstItem="XZY-hL-qMm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="ZdS-M1-mll"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="taw-qG-pqf" secondAttribute="trailing" constant="16" id="dB0-KE-uJy"/>
+                    <constraint firstItem="360-iy-kaa" firstAttribute="top" secondItem="XZY-hL-qMm" secondAttribute="bottom" constant="8" id="eCX-eW-Tet"/>
+                    <constraint firstItem="Js4-VC-S2K" firstAttribute="top" secondItem="360-iy-kaa" secondAttribute="top" constant="8" id="edn-dp-WoV"/>
+                    <constraint firstItem="Qgd-xp-i9w" firstAttribute="bottom" secondItem="360-iy-kaa" secondAttribute="bottom" id="nbn-J3-D20"/>
+                    <constraint firstItem="XZY-hL-qMm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="v2q-ki-1AH"/>
+                    <constraint firstItem="Js4-VC-S2K" firstAttribute="leading" secondItem="360-iy-kaa" secondAttribute="trailing" constant="18" id="vmy-kn-IJW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="tournamentDatesLabel" destination="Js4-VC-S2K" id="BfT-Sc-Itv"/>
+                <outlet property="tournamentImageView" destination="360-iy-kaa" id="R9o-XL-gCN"/>
+                <outlet property="tournamentInfoLabel" destination="taw-qG-pqf" id="ffg-rF-lce"/>
+                <outlet property="tournamentNameLabel" destination="XZY-hL-qMm" id="j1A-Kh-Igo"/>
+                <outlet property="tournamentTeamsLabel" destination="rKQ-lt-pZl" id="EjJ-TO-2P8"/>
+                <outlet property="tournmentStatusLabel" destination="Qgd-xp-i9w" id="Gdj-1D-8rl"/>
+            </connections>
+            <point key="canvasLocation" x="-122.46376811594205" y="155.35714285714286"/>
+        </tableViewCell>
+    </objects>
+</document>

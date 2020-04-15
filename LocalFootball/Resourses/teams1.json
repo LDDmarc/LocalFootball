@@ -3,7 +3,7 @@
         "name":"Lonesom",
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1999,
-        "emblemaName": "Wolf",
+        "logoName": "Wolf",
         "statistics":
         {
             "numberOfGames": 5,

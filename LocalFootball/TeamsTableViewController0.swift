@@ -45,7 +45,7 @@ class TeamsTableViewController0: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath)
         let team = teams[indexPath.row]
         cell.textLabel?.text = team.name
-        if let imageData = team.emblemaImageData {
+        if let imageData = team.logoImageData {
             cell.imageView?.image = UIImage(data: imageData)
         }
         return cell
@@ -65,7 +65,7 @@ class TeamsTableViewController0: UITableViewController {
 //
 //           // cell.textLabel?.text = dateFormatter.string(from: match.date!)
 //
-////            if let imageData = (match.teams?[0] as? Team)?.emblemaImageData {
+////            if let imageData = (match.teams?[0] as? Team)?.logoImageData {
 ////                cell.imageView?.image = UIImage(data: imageData)
 ////            }
 //            return cell

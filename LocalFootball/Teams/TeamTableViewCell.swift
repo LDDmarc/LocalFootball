@@ -10,7 +10,7 @@ import UIKit
 
 class TeamTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var teamEmblemaImageView: UIImageView!
+    @IBOutlet weak var teamLogoImageView: UIImageView!
     @IBOutlet weak var teamNameLabel: UILabel!
     
     

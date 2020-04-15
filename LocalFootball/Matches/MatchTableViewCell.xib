@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
                             <constraint firstAttribute="height" constant="60" id="bdv-nw-nZ9"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EU5-q1-d4x">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EU5-q1-d4x">
                         <rect key="frame" x="0.0" y="0.0" width="485" height="45"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Дата" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCA-iX-ND0">
@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jCA-iX-ND0" firstAttribute="centerY" secondItem="EU5-q1-d4x" secondAttribute="centerY" id="1E1-gi-UcK"/>
                             <constraint firstAttribute="height" constant="45" id="2CM-XM-nP5"/>
@@ -104,10 +104,10 @@
             <connections>
                 <outlet property="backGroundView" destination="EU5-q1-d4x" id="Jg6-Zg-2Xn"/>
                 <outlet property="dateLabel" destination="jCA-iX-ND0" id="dqh-Cx-n0S"/>
-                <outlet property="team1EmblemaImageView" destination="fY3-fY-G7F" id="6Cc-z5-T0E"/>
+                <outlet property="team1LogoImageView" destination="fY3-fY-G7F" id="6Cc-z5-T0E"/>
                 <outlet property="team1NameLabel" destination="x5A-c3-B6i" id="2oQ-s6-blA"/>
                 <outlet property="team1ScoreLabel" destination="4cn-KM-WCi" id="VLu-mJ-ASk"/>
-                <outlet property="team2EmblemaImageView" destination="Sr6-D7-LM6" id="TcM-0v-Sis"/>
+                <outlet property="team2LogoImageView" destination="Sr6-D7-LM6" id="TcM-0v-Sis"/>
                 <outlet property="team2NameLabel" destination="dU3-1J-lIE" id="nxA-nq-0PD"/>
                 <outlet property="team2ScoreLabel" destination="H6M-Vf-SF0" id="4bL-Lw-vXX"/>
                 <outlet property="tournamentNameLabel" destination="iDh-TJ-E6W" id="4Rw-2n-Cdd"/>

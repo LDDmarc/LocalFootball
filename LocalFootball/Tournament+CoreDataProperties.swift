@@ -2,7 +2,7 @@
 //  Tournament+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 12.04.2020.
+//  Created by Дарья Леонова on 15.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -22,11 +22,13 @@ extension Tournament {
     @NSManaged public var info: String?
     @NSManaged public var location: NSObject?
     @NSManaged public var name: String?
+    @NSManaged public var numberOfTournamentMatches: Int16
+    @NSManaged public var numberOfTournamentTeams: Int16
     @NSManaged public var status: Bool
     @NSManaged public var tournamentMatches: NSObject?
     @NSManaged public var tournamentTeams: NSObject?
     @NSManaged public var matches: NSSet?
-    @NSManaged public var teams: NSOrderedSet?
+    @NSManaged public var teams: NSSet?
 
 }
 
@@ -50,24 +52,6 @@ extension Tournament {
 // MARK: Generated accessors for teams
 extension Tournament {
 
-    @objc(insertObject:inTeamsAtIndex:)
-    @NSManaged public func insertIntoTeams(_ value: Team, at idx: Int)
-
-    @objc(removeObjectFromTeamsAtIndex:)
-    @NSManaged public func removeFromTeams(at idx: Int)
-
-    @objc(insertTeams:atIndexes:)
-    @NSManaged public func insertIntoTeams(_ values: [Team], at indexes: NSIndexSet)
-
-    @objc(removeTeamsAtIndexes:)
-    @NSManaged public func removeFromTeams(at indexes: NSIndexSet)
-
-    @objc(replaceObjectInTeamsAtIndex:withObject:)
-    @NSManaged public func replaceTeams(at idx: Int, with value: Team)
-
-    @objc(replaceTeamsAtIndexes:withTeams:)
-    @NSManaged public func replaceTeams(at indexes: NSIndexSet, with values: [Team])
-
     @objc(addTeamsObject:)
     @NSManaged public func addToTeams(_ value: Team)
 
@@ -75,9 +59,16 @@ extension Tournament {
     @NSManaged public func removeFromTeams(_ value: Team)
 
     @objc(addTeams:)
-    @NSManaged public func addToTeams(_ values: NSOrderedSet)
+    @NSManaged public func addToTeams(_ values: NSSet)
 
     @objc(removeTeams:)
-    @NSManaged public func removeFromTeams(_ values: NSOrderedSet)
+    @NSManaged public func removeFromTeams(_ values: NSSet)
 
+}
+
+extension NSSet {
+    func toArray<T>() -> [T] {
+        let array = self.map({ $0 as! T})
+        return array
+    }
 }

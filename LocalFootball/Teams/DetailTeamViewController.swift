@@ -12,7 +12,7 @@ class DetailTeamViewController: UIViewController {
     var team: Team!
 
     @IBOutlet weak var teamNameLabel: UILabel!
-    @IBOutlet weak var teamEmblemaImageView: UIImageView!
+    @IBOutlet weak var teamLogoImageView: UIImageView!
     @IBOutlet weak var colorsLabel: UILabel!
     @IBOutlet weak var yearOfFoundationLabel: UILabel!
     
@@ -30,7 +30,7 @@ class DetailTeamViewController: UIViewController {
 
     private func fillView() {
         teamNameLabel.text = team.name
-        if let imageData = team.emblemaImageData { teamEmblemaImageView.image = UIImage(data: imageData) }
+        if let imageData = team.logoImageData { teamLogoImageView.image = UIImage(data: imageData) }
         
         
         var str = "Цвета: "

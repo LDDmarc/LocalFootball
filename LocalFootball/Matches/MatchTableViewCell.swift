@@ -14,11 +14,11 @@ class MatchTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    @IBOutlet weak var team1EmblemaImageView: UIImageView!
+    @IBOutlet weak var team1LogoImageView: UIImageView!
     @IBOutlet weak var team1NameLabel: UILabel!
     @IBOutlet weak var team1ScoreLabel: UILabel!
     
-    @IBOutlet weak var team2EmblemaImageView: UIImageView!
+    @IBOutlet weak var team2LogoImageView: UIImageView!
     @IBOutlet weak var team2NameLabel: UILabel!
     @IBOutlet weak var team2ScoreLabel: UILabel!
     

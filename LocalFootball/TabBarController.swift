@@ -29,7 +29,13 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let matchesBarItem = UITabBarItem(title: "Матчи", image: .none, tag: 1)
         matchesViewController.tabBarItem = matchesBarItem
         
-        let controllers = [teamsNavigationViewController, matchesViewController]
+        let tournamentsNavigationViewController = TournamentsNavigationViewController()
+        let tournamentsViewController = TournamentsTableViewController()
+        tournamentsNavigationViewController.viewControllers = [tournamentsViewController]
+        let tournamentsBarItem = UITabBarItem(title: "Турниры", image: .none, tag: 2)
+        tournamentsNavigationViewController.tabBarItem = tournamentsBarItem
+        
+        let controllers = [teamsNavigationViewController, matchesViewController, tournamentsNavigationViewController]
         self.viewControllers = controllers
         
     }

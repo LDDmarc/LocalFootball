@@ -12,60 +12,84 @@ import CoreData
 class MatchesTableViewController: UITableViewController {
     
     var context: NSManagedObjectContext = CoreDataManger.instance.persistentContainer.viewContext
+    lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
+        let request: NSFetchRequest = Match.fetchRequest()
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [sort]
+        request.fetchBatchSize = 20
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
+    var matchesPredicate: NSPredicate?
     
     var matches = [Match]()
-    
-    lazy var dateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        return df
-    }()
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
-        
-        //matches = DataProcessing.shared.loadData(from: "matches", withExtension: "json", into: context)
-        
+    
         matches = DataProcessing.shared.getDataFromCoreData(with: context, orFrom: "matches", withExtension: "json")
         
-        print(matches.count)
+        loadData()
+    }
+    
+    private func loadData() {
+        fetchedResultsController.fetchRequest.predicate = matchesPredicate
+        do {
+            try fetchedResultsController.performFetch()
+            tableView.reloadData()
+        } catch {
+            print("Fetch failed")
+        }
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return matches.count
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
         
-        let match = matches[indexPath.row]
+        let match = fetchedResultsController.object(at: indexPath)
         if let tournamentName = match.tournament?.name {
             cell.tournamentNameLabel.text = tournamentName
         }
         if let date = match.date {
-            cell.dateLabel.text = dateFormatter.string(from: date)
+            cell.dateLabel.text = DataProcessing.shared.writtingDateFormatter.string(from: date)
         }
         
-        if let team1 = match.teams?[0] as? Team {
-            cell.team1NameLabel.text = team1.name
-            if let emblema1Data = team1.emblemaImageData {
-                cell.team1EmblemaImageView.image = UIImage(data: emblema1Data)
+        
+        if let team1 = match.teams?.firstObject,
+            let team = team1 as? Team {
+            cell.team1NameLabel.text = team.name
+            if let logoData = team.logoImageData {
+                cell.team1LogoImageView.image = UIImage(data: logoData)
             }
         }
-        if let team2 = match.teams?[1] as? Team {
-            cell.team2NameLabel.text = team2.name
-            if let emblema2Data = team2.emblemaImageData {
-                cell.team2EmblemaImageView.image = UIImage(data: emblema2Data)
+        if let team2 = match.teams?.lastObject,
+            let team = team2 as? Team {
+            cell.team2NameLabel.text = team.name
+            if let logoData = team.logoImageData {
+                cell.team2LogoImageView.image = UIImage(data: logoData)
             }
         }
         
         return cell
     }
+
+}
+
+extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
 
 }
