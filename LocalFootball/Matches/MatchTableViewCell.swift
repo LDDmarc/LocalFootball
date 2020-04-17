@@ -16,12 +16,11 @@ class MatchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var team1LogoImageView: UIImageView!
     @IBOutlet weak var team1NameLabel: UILabel!
-    @IBOutlet weak var team1ScoreLabel: UILabel!
     
     @IBOutlet weak var team2LogoImageView: UIImageView!
     @IBOutlet weak var team2NameLabel: UILabel!
-    @IBOutlet weak var team2ScoreLabel: UILabel!
     
+    @IBOutlet weak var teamScoreLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
