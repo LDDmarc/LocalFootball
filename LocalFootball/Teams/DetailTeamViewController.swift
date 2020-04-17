@@ -25,6 +25,7 @@ class DetailTeamViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.largeTitleDisplayMode = .never
         fillView()
     }
 

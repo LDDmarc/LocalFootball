@@ -4,7 +4,8 @@
         "imageName": "IFLimage",
         "info": "Чудный чемпионат IFL",
         "status": true,
-        "dates": ["2019-01-23T18:25:43", "2020-04-23T18:25:43"],
+        "dateOfTheBeginning": "2019-01-23T18:00:43",
+        "dateOfTheEnd": "2020-04-23T18:00:00",
         "numberOfTournamentTeams": 9,
         "tournamentTeams": ["Wolf", "FCB", "Everton", "FMF", "Romania", "Spartak", "Sydney", "URBSFA", "Millionarios"],
         "numberOfTournamentMatches": 5
@@ -14,7 +15,8 @@
         "imageName": "FIFA2018",
         "info": "Масюсенький чемпионатик для множества перспективных команд с величайшей историей",
         "status": false,
-        "dates": ["2018-03-10T18:25:43", "2018-05-15T18:25:43"],
+        "dateOfTheBeginning": "2018-03-10T18:25:43",
+        "dateOfTheEnd": "2018-05-15T18:25:43",
         "numberOfTournamentTeams": 6,
         "tournamentTeams": ["Wolf", "FCB", "ASM", "FMF", "Spartak", "URBSFA"],
         "numberOfTournamentMatches": 8
@@ -24,7 +26,8 @@
         "imageName": "FIFA2019",
         "info": "Широко известный и популярный чемпионат",
         "status": false,
-        "dates": ["2019-03-10T18:25:43", "2019-05-15T18:25:43"],
+        "dateOfTheBeginning": "2019-03-10T18:25:43",
+        "dateOfTheEnd": "2019-05-15T18:25:43",
         "numberOfTournamentTeams": 11,
         "tournamentTeams": ["FCB", "RealMadrid", "ASM", "Junior", "FMF", "ManchesterUnited", "Spartak", "SuttonColdfield", "URBSFA","WestHamUnited", "CBF"],
         "numberOfTournamentMatches": 10

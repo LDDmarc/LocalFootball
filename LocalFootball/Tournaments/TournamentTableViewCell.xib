@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -9,87 +9,138 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="226" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="535" height="226"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="390" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="608" height="390"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="535" height="226"/>
+                <rect key="frame" x="0.0" y="0.0" width="608" height="390"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название турнира" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZY-hL-qMm">
-                        <rect key="frame" x="150" y="13" width="235" height="34"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="360-iy-kaa">
-                        <rect key="frame" x="8" y="55" width="150" height="150"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="OPR-GM-Zv4"/>
-                            <constraint firstAttribute="height" constant="150" id="hRo-GD-PVy"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.01.2019 - 01.01.2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Js4-VC-S2K">
-                        <rect key="frame" x="176" y="63" width="182" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 команд" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKQ-lt-pZl">
-                        <rect key="frame" x="176" y="99" width="85" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="654-cV-LqY">
-                        <rect key="frame" x="273" y="94.5" width="38" height="30"/>
-                        <state key="normal" title="Show"/>
-                        <connections>
-                            <action selector="showTeams:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LoK-rF-PeW"/>
-                        </connections>
-                    </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация о турнире" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taw-qG-pqf">
-                        <rect key="frame" x="176" y="128" width="190" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завершен" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgd-xp-i9w">
-                        <rect key="frame" x="438" y="184" width="81" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-lj-tqV">
+                        <rect key="frame" x="15" y="11" width="578" height="368"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-np-Q81" userLabel="topView">
+                                <rect key="frame" x="0.0" y="0.0" width="578" height="228.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название турнира" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8d-t4-Obf">
+                                        <rect key="frame" x="204.5" y="4" width="169" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SrG-Fb-8cH">
+                                        <rect key="frame" x="4" y="36" width="281" height="185.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" secondItem="SrG-Fb-8cH" secondAttribute="width" multiplier="0.66" id="WtE-T9-EM3"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Даты" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-pL-7Ie">
+                                        <rect key="frame" x="293" y="36" width="37" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команды" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiX-x3-08d">
+                                        <rect key="frame" x="293" y="118.5" width="73.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завершен" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKc-Zv-nK7">
+                                        <rect key="frame" x="493.5" y="201" width="80.5" height="20.5"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="IKc-Zv-nK7" firstAttribute="bottom" secondItem="SrG-Fb-8cH" secondAttribute="bottom" id="1rf-vU-DCc"/>
+                                    <constraint firstItem="Q8d-t4-Obf" firstAttribute="centerX" secondItem="DjO-np-Q81" secondAttribute="centerX" id="2am-wS-zto"/>
+                                    <constraint firstItem="JiX-x3-08d" firstAttribute="leading" secondItem="qaQ-pL-7Ie" secondAttribute="leading" id="8Ft-Sm-Yg4"/>
+                                    <constraint firstItem="qaQ-pL-7Ie" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="centerX" constant="4" id="CsM-M8-rYn"/>
+                                    <constraint firstItem="qaQ-pL-7Ie" firstAttribute="top" secondItem="SrG-Fb-8cH" secondAttribute="top" id="U5i-nJ-mBf"/>
+                                    <constraint firstItem="SrG-Fb-8cH" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="leading" constant="4" id="XF9-kJ-VOU"/>
+                                    <constraint firstItem="Q8d-t4-Obf" firstAttribute="top" secondItem="DjO-np-Q81" secondAttribute="top" constant="4" id="b44-bk-JZ9"/>
+                                    <constraint firstItem="SrG-Fb-8cH" firstAttribute="top" secondItem="Q8d-t4-Obf" secondAttribute="bottom" constant="8" id="gTg-EO-HWf"/>
+                                    <constraint firstAttribute="centerX" secondItem="SrG-Fb-8cH" secondAttribute="trailing" constant="4" id="plh-Y1-dOI"/>
+                                    <constraint firstAttribute="trailing" secondItem="IKc-Zv-nK7" secondAttribute="trailing" constant="4" id="r03-hs-Qk5"/>
+                                    <constraint firstItem="JiX-x3-08d" firstAttribute="centerY" secondItem="SrG-Fb-8cH" secondAttribute="centerY" id="sQy-Gq-Ar1"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHF-MG-KJj" userLabel="bottomView">
+                                <rect key="frame" x="0.0" y="228.5" width="578" height="139.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-Sd-ouR">
+                                        <rect key="frame" x="8" y="10" width="562" height="119.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwr-Vc-j95">
+                                                <rect key="frame" x="0.0" y="0.0" width="175.5" height="119.5"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Команды">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tournamentTeamsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pKg-HO-8go"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBA-NT-Fvc">
+                                                <rect key="frame" x="193.5" y="0.0" width="175" height="119.5"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Матчи">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tournamentMatchesButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gja-WV-yfl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25p-k7-MMn">
+                                                <rect key="frame" x="386.5" y="0.0" width="175.5" height="119.5"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Результаты">
+                                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tournamentResultsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6KL-mQ-Jah"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="top" secondItem="IHF-MG-KJj" secondAttribute="top" constant="10" id="8LB-cx-DKi"/>
+                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" constant="8" id="el4-Bg-xDU"/>
+                                    <constraint firstAttribute="trailing" secondItem="ksM-Sd-ouR" secondAttribute="trailing" constant="8" id="fLM-TG-EhL"/>
+                                    <constraint firstAttribute="bottom" secondItem="ksM-Sd-ouR" secondAttribute="bottom" constant="10" id="g4E-0Y-BFk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="taw-qG-pqf" firstAttribute="top" secondItem="rKQ-lt-pZl" secondAttribute="bottom" constant="8" id="ByM-iO-yQa"/>
-                    <constraint firstItem="taw-qG-pqf" firstAttribute="leading" secondItem="rKQ-lt-pZl" secondAttribute="leading" id="IV3-lX-l7K"/>
-                    <constraint firstAttribute="trailing" secondItem="Qgd-xp-i9w" secondAttribute="trailing" constant="16" id="KvT-yX-jnm"/>
-                    <constraint firstItem="rKQ-lt-pZl" firstAttribute="top" secondItem="Js4-VC-S2K" secondAttribute="bottom" constant="15" id="MW6-m1-L30"/>
-                    <constraint firstAttribute="bottom" secondItem="360-iy-kaa" secondAttribute="bottom" constant="21" id="Nvd-hg-GmP"/>
-                    <constraint firstItem="rKQ-lt-pZl" firstAttribute="leading" secondItem="Js4-VC-S2K" secondAttribute="leading" id="RWq-Yj-7ug"/>
-                    <constraint firstItem="654-cV-LqY" firstAttribute="leading" secondItem="rKQ-lt-pZl" secondAttribute="trailing" constant="12" id="U9y-So-n7g"/>
-                    <constraint firstItem="360-iy-kaa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="VAz-Ke-JcS"/>
-                    <constraint firstItem="654-cV-LqY" firstAttribute="centerY" secondItem="rKQ-lt-pZl" secondAttribute="centerY" id="WOf-GD-YUK"/>
-                    <constraint firstItem="XZY-hL-qMm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="ZdS-M1-mll"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="taw-qG-pqf" secondAttribute="trailing" constant="16" id="dB0-KE-uJy"/>
-                    <constraint firstItem="360-iy-kaa" firstAttribute="top" secondItem="XZY-hL-qMm" secondAttribute="bottom" constant="8" id="eCX-eW-Tet"/>
-                    <constraint firstItem="Js4-VC-S2K" firstAttribute="top" secondItem="360-iy-kaa" secondAttribute="top" constant="8" id="edn-dp-WoV"/>
-                    <constraint firstItem="Qgd-xp-i9w" firstAttribute="bottom" secondItem="360-iy-kaa" secondAttribute="bottom" id="nbn-J3-D20"/>
-                    <constraint firstItem="XZY-hL-qMm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="v2q-ki-1AH"/>
-                    <constraint firstItem="Js4-VC-S2K" firstAttribute="leading" secondItem="360-iy-kaa" secondAttribute="trailing" constant="18" id="vmy-kn-IJW"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ukn-lj-tqV" secondAttribute="trailing" id="GUF-65-EWt"/>
+                    <constraint firstItem="DjO-np-Q81" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.33" constant="28" id="MI3-5o-MTg"/>
+                    <constraint firstItem="ukn-lj-tqV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="d1b-eH-9qU"/>
+                    <constraint firstItem="ukn-lj-tqV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="vn8-t9-RcF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ukn-lj-tqV" secondAttribute="bottom" id="yDj-om-CDx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="tournamentDatesLabel" destination="Js4-VC-S2K" id="BfT-Sc-Itv"/>
-                <outlet property="tournamentImageView" destination="360-iy-kaa" id="R9o-XL-gCN"/>
-                <outlet property="tournamentInfoLabel" destination="taw-qG-pqf" id="ffg-rF-lce"/>
-                <outlet property="tournamentNameLabel" destination="XZY-hL-qMm" id="j1A-Kh-Igo"/>
-                <outlet property="tournamentTeamsLabel" destination="rKQ-lt-pZl" id="EjJ-TO-2P8"/>
-                <outlet property="tournmentStatusLabel" destination="Qgd-xp-i9w" id="Gdj-1D-8rl"/>
+                <outlet property="bottomView" destination="IHF-MG-KJj" id="o1R-H3-cKR"/>
+                <outlet property="buttonsStackView" destination="ksM-Sd-ouR" id="GPb-vC-HUB"/>
+                <outlet property="stackView" destination="ukn-lj-tqV" id="CAT-ym-YGZ"/>
+                <outlet property="topView" destination="DjO-np-Q81" id="gJr-8Q-Ocr"/>
+                <outlet property="tournamentDatesLabel" destination="qaQ-pL-7Ie" id="DSK-su-3ha"/>
+                <outlet property="tournamentImageView" destination="SrG-Fb-8cH" id="Ba3-Bo-33G"/>
+                <outlet property="tournamentNameLabel" destination="Q8d-t4-Obf" id="MBr-yt-BVz"/>
+                <outlet property="tournamentStatusLabel" destination="IKc-Zv-nK7" id="Ht9-oN-QrZ"/>
+                <outlet property="tournamentTeamsLabel" destination="JiX-x3-08d" id="Kdv-fP-07e"/>
             </connections>
-            <point key="canvasLocation" x="-122.46376811594205" y="155.35714285714286"/>
+            <point key="canvasLocation" x="93.75" y="-128.75"/>
         </tableViewCell>
     </objects>
 </document>

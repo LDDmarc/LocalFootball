@@ -2,7 +2,7 @@
 //  Match+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 15.04.2020.
+//  Created by Дарья Леонова on 17.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -21,6 +21,7 @@ extension Match {
     @NSManaged public var team1Name: String?
     @NSManaged public var team2Name: String?
     @NSManaged public var tournamentName: String?
+    @NSManaged public var status: Bool
     @NSManaged public var matchResults: NSSet?
     @NSManaged public var teams: NSOrderedSet?
     @NSManaged public var tournament: Tournament?

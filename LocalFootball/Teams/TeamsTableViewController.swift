@@ -49,12 +49,16 @@ class TeamsTableViewController: UITableViewController {
         let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
         return searchController.isActive && (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
-    
+    var selectedButton = 0
+    var isScopeBarShown = true
+    var titleText: String?
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.searchController = searchController
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
         
@@ -66,6 +70,15 @@ class TeamsTableViewController: UITableViewController {
             if let name = tournament.name {
                 searchController.searchBar.scopeButtonTitles?.append(name)}
         }
+        searchController.searchBar.selectedScopeButtonIndex = selectedButton
+        
+        searchController.searchBar.showsScopeBar = isScopeBarShown
+        if isScopeBarShown {
+            title = searchController.searchBar.scopeButtonTitles?[selectedButton]
+        } else {
+            title = titleText
+        }
+        
     }
     
     @objc private func filter() {
@@ -113,14 +126,16 @@ extension TeamsTableViewController: UISearchResultsUpdating, UISearchBarDelegate
         }
         filterContentForSearchText()
     }
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
         if selectedScope != 0 {
             if let name = searchBar.scopeButtonTitles?[selectedScope] {
                 teamsByTournamentsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
+                title = name
             }
         } else {
             teamsByTournamentsPredicate = nil
+            title = searchBar.scopeButtonTitles?[selectedScope]
         }
         filterContentForSearchText()
     }
@@ -168,9 +183,11 @@ extension TeamsTableViewController: NSFetchedResultsControllerDelegate {
         fetchedResultsController.fetchRequest.predicate = predicate
         do {
             try fetchedResultsController.performFetch()
+            
             tableView.reloadData()
         } catch {
             print("Fetch failed")
         }
+        
     }
 }

@@ -25,6 +25,7 @@ public class Match: NSManagedObject, Decodable {
         case team2Name = "team2Name"
         case matchResults = "matchResults"
         case tournamentName = "tournamentName"
+        case status = "status"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -44,6 +45,8 @@ public class Match: NSManagedObject, Decodable {
             tournamentName = try values.decode(String?.self, forKey: .tournamentName)
             
             matchResults = try values.decode(Set<MatchResults>.self, forKey: .matchResults) as NSSet
+            
+            status = try values.decode(Bool.self, forKey: .status)
             
         } catch let error as NSError {
             print(error.localizedDescription)

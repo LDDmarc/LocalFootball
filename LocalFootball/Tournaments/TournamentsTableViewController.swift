@@ -25,6 +25,14 @@ class TournamentsTableViewController: UITableViewController {
     
     var tournaments = [Tournament]()
     
+    var expandedIndexSet : IndexSet = []
+    
+    override func loadView() {
+        super.loadView()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +43,6 @@ class TournamentsTableViewController: UITableViewController {
     
     private func loadData() {
         fetchedResultsController.fetchRequest.predicate = tournamentsPredicate
-
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
@@ -63,21 +70,35 @@ class TournamentsTableViewController: UITableViewController {
         
         cell.tournamentNameLabel.text = tournament.name
         if let imageData = tournament.imageData {
-            cell.tournamentImageView?.image = UIImage(data: imageData)
+            cell.tournamentImageView.image = UIImage(data: imageData)
         }
-        cell.tournamentTeamsLabel.text = "Команд: \(tournament.numberOfTournamentTeams)"
-        cell.tournamentInfoLabel.text = tournament.info
-        if tournament.status {
-            cell.tournmentStatusLabel.text = "В процессе"
-        } else {
-            cell.tournmentStatusLabel.text = "Завершен"
+        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.numberOfTournamentTeams)"
+
+        if !tournament.status {
+            cell.tournamentStatusLabel.isHidden = false
+        }
+        if let date1 = tournament.dateOfTheBeginning,
+            let date2 = tournament.dateOfTheEnd {
+            cell.tournamentDatesLabel.text = "🗓 Даты: \(DataProcessing.shared.writtingDateFormatter.string(from: date1)) - \(DataProcessing.shared.writtingDateFormatter.string(from: date2))"
         }
         
         cell.indexPath = indexPath
         cell.delegate = self
         
+        cell.bottomView.isHidden = !expandedIndexSet.contains(indexPath.row)
+        
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if expandedIndexSet.contains(indexPath.row) {
+            expandedIndexSet.remove(indexPath.row)
+        } else {
+            expandedIndexSet.insert(indexPath.row)
+        }
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
 }
 
 extension TournamentsTableViewController: NSFetchedResultsControllerDelegate {
@@ -86,13 +107,29 @@ extension TournamentsTableViewController: NSFetchedResultsControllerDelegate {
 
 extension TournamentsTableViewController: TournamentTableViewCellDelegate {
     func show(indexPath: IndexPath) {
-        
         let tournament = fetchedResultsController.object(at: indexPath)
         let nextVC = TeamsTableViewController()
-        nextVC.teamsPredicate = NSPredicate(format: "name IN %@", tournament.tournamentTeamsNames)
-
-        navigationController?.pushViewController(nextVC, animated: true)
         
+        if let name = tournament.name {
+            nextVC.teamsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
+            nextVC.teamsByTournamentsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
+            nextVC.titleText = name
+        }
+        nextVC.isScopeBarShown = false
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
+}
+
+extension TournamentsTableViewController: ExpandableCellDelegate {
+    func expandableCellLayoutChanged(_ expandableCell: TournamentTableViewCell) {
+        refreshTableAfterCellExpansion()
+    }
+    
+    func refreshTableAfterCellExpansion() {
+        self.tableView.beginUpdates()
+        self.tableView.setNeedsDisplay()
+        self.tableView.endUpdates()
+    }
 }

@@ -2,7 +2,7 @@
 //  Tournament+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 15.04.2020.
+//  Created by Дарья Леонова on 16.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -27,6 +27,8 @@ extension Tournament {
     @NSManaged public var status: Bool
     @NSManaged public var tournamentMatches: NSObject?
     @NSManaged public var tournamentTeams: NSObject?
+    @NSManaged public var dateOfTheBeginning: Date?
+    @NSManaged public var dateOfTheEnd: Date?
     @NSManaged public var matches: NSSet?
     @NSManaged public var teams: NSSet?
 
@@ -64,11 +66,4 @@ extension Tournament {
     @objc(removeTeams:)
     @NSManaged public func removeFromTeams(_ values: NSSet)
 
-}
-
-extension NSSet {
-    func toArray<T>() -> [T] {
-        let array = self.map({ $0 as! T})
-        return array
-    }
 }

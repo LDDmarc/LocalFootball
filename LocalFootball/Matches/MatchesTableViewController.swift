@@ -23,6 +23,20 @@ class MatchesTableViewController: UITableViewController {
     }()
     var matchesPredicate: NSPredicate?
     
+    lazy var searchController: UISearchController = {
+        let sc = UISearchController(searchResultsController: nil)
+        sc.searchResultsUpdater = self
+        sc.obscuresBackgroundDuringPresentation = false
+        sc.searchBar.placeholder = "Введите название команды"
+        sc.searchResultsUpdater = self
+        sc.searchBar.isHidden = false
+        //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
+        definesPresentationContext = true
+        sc.searchBar.scopeButtonTitles = []
+        sc.searchBar.delegate = self
+        return sc
+    }()
+    
     var matches = [Match]()
         
     override func viewDidLoad() {
@@ -92,4 +106,12 @@ class MatchesTableViewController: UITableViewController {
 
 extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
 
+}
+
+extension MatchesTableViewController: UISearchBarDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+    
+  
 }

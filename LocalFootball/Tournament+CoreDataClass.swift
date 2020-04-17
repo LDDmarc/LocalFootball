@@ -23,7 +23,8 @@ public class Tournament: NSManagedObject, Decodable {
         case numberOfTournamentTeams = "numberOfTournamentTeams"
         case tournamentTeams = "tournamentTeams"
         case numberOfTournamentMatches = "numberOfTournamentMatches"
-        case datesStr = "dates"
+        case dateOfTheBeginning = "dateOfTheBeginning"
+        case dateOfTheEnd = "dateOfTheEnd"
     }
     
     lazy var tournamentTeamsNames: [String] = {
@@ -55,7 +56,12 @@ public class Tournament: NSManagedObject, Decodable {
             info = try values.decode(String?.self, forKey: .info)
             status = try values.decode(Bool.self, forKey: .status)
             
-            let dateStr = try values.decode([String]?.self, forKey: .datesStr) as NSObject?
+            if let beginDate = try values.decode(String?.self, forKey: .dateOfTheBeginning) {
+                dateOfTheBeginning = DataProcessing.shared.readingDateFormatter.date(from: beginDate)
+            }
+            if let endDate = try values.decode(String?.self, forKey: .dateOfTheEnd) {
+                dateOfTheEnd = DataProcessing.shared.readingDateFormatter.date(from: endDate)
+            }
             
             numberOfTournamentTeams = try values.decode(Int16.self, forKey: .numberOfTournamentTeams)
             tournamentTeams = try values.decode([String]?.self, forKey: .tournamentTeams) as NSObject?
