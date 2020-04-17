@@ -18,25 +18,32 @@ extension CodingUserInfoKey {
 @objc(Team)
 public class Team: NSManagedObject, Decodable {
     
-    var teamColors: [String] {
-        get {
-            if let myColors = colors as? [String] {
-                return myColors
-            } else {
-                return [""]
-            }
+    lazy var teamColors: [String] = {
+        if let myColors = colors as? [String] {
+            return myColors
+        } else {
+            return []
         }
-    }
+    }()
+    
+    lazy var teamTournamentsNames: [String] = {
+        if let myTournaments = tournamentsNames as? [String] {
+            return myTournaments
+        } else {
+            return []
+        }
+    }()
     
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case yearOfFoundation = "yearOfFoundation"
         case colors = "colors"
-        case emblemaName = "emblemaName"
+        case logoName = "logoName"
         case statistics = "statistics"
         case uuid = "uuid"
         case teamStatistics = "teamStatistics"
+        case tournamentsNames = "tournamentsNames"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -47,20 +54,21 @@ public class Team: NSManagedObject, Decodable {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
-         //   uuid = try values.decode(UUID.self, forKey: .uuid)
+            //uuid = try values.decode(UUID.self, forKey: .uuid)
             name = try values.decode(String?.self, forKey: .name)
             yearOfFoundation = try values.decode(Int16.self, forKey: .yearOfFoundation)
             
             colors = try values.decode([String]?.self, forKey: .colors) as NSObject?
             
-            emblemaName = try values.decode(String?.self, forKey: .emblemaName)
-            if let imageName = emblemaName,
+            logoName = try values.decode(String?.self, forKey: .logoName)
+            if let imageName = logoName,
                 let image = UIImage(named: imageName) {
                 let imageData = image.pngData()
-                emblemaImageData = imageData
+                logoImageData = imageData
             }
             
             teamStatistics = try values.decode(TeamStatistic.self, forKey: .teamStatistics)
+            tournamentsNames = try values.decode([String]?.self, forKey: .tournamentsNames) as NSObject?
             
         } catch let error as NSError {
             print(error.localizedDescription)

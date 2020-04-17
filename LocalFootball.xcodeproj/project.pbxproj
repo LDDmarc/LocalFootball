@@ -11,6 +11,27 @@
 		BC24870224433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2486FC24433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift */; };
 		BC24870524433EBF00454D14 /* TeamStatistic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC24870324433EBF00454D14 /* TeamStatistic+CoreDataClass.swift */; };
 		BC24870624433EBF00454D14 /* TeamStatistic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC24870424433EBF00454D14 /* TeamStatistic+CoreDataProperties.swift */; };
+		BC3A2CA92444B7C60066D821 /* TeamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A2CA82444B7C60066D821 /* TeamsTableViewController.swift */; };
+		BC3A2CAB2444CA110066D821 /* TeamsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A2CAA2444CA110066D821 /* TeamsNavigationViewController.swift */; };
+		BC42A7D12444A4080039A851 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC42A7D02444A4080039A851 /* TabBarController.swift */; };
+		BC42A7D42444B3090039A851 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC42A7D22444B3090039A851 /* TeamTableViewCell.swift */; };
+		BC42A7D52444B3090039A851 /* TeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC42A7D32444B3090039A851 /* TeamTableViewCell.xib */; };
+		BC45CD842446284400C1B580 /* tournaments.json in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD832446284400C1B580 /* tournaments.json */; };
+		BC45CD91244636FC00C1B580 /* Junior.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD85244636FC00C1B580 /* Junior.png */; };
+		BC45CD92244636FC00C1B580 /* CBF.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD86244636FC00C1B580 /* CBF.png */; };
+		BC45CD93244636FC00C1B580 /* Romania.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD87244636FC00C1B580 /* Romania.png */; };
+		BC45CD94244636FC00C1B580 /* Everton.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD88244636FC00C1B580 /* Everton.png */; };
+		BC45CD95244636FC00C1B580 /* FMF.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD89244636FC00C1B580 /* FMF.png */; };
+		BC45CD96244636FC00C1B580 /* WestHamUnited.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8A244636FC00C1B580 /* WestHamUnited.png */; };
+		BC45CD97244636FC00C1B580 /* ASM.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8B244636FC00C1B580 /* ASM.png */; };
+		BC45CD98244636FC00C1B580 /* Spartak.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8C244636FC00C1B580 /* Spartak.png */; };
+		BC45CD99244636FC00C1B580 /* SuttonColdfield.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8D244636FC00C1B580 /* SuttonColdfield.png */; };
+		BC45CD9A244636FC00C1B580 /* URBSFA.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8E244636FC00C1B580 /* URBSFA.png */; };
+		BC45CD9B244636FC00C1B580 /* Sydney.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8F244636FC00C1B580 /* Sydney.png */; };
+		BC45CD9C244636FC00C1B580 /* ManchesterUnited.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD90244636FC00C1B580 /* ManchesterUnited.png */; };
+		BC9CA0D32446061C0017B952 /* TournamentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9CA0D12446061C0017B952 /* TournamentTableViewCell.swift */; };
+		BC9CA0D42446061C0017B952 /* TournamentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC9CA0D22446061C0017B952 /* TournamentTableViewCell.xib */; };
+		BC9CA0D62446063A0017B952 /* TournamentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9CA0D52446063A0017B952 /* TournamentsTableViewController.swift */; };
 		BCA82347244093A700FA67FF /* Statistics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA82341244093A700FA67FF /* Statistics+CoreDataClass.swift */; };
 		BCA82348244093A700FA67FF /* Statistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA82342244093A700FA67FF /* Statistics+CoreDataProperties.swift */; };
 		BCA82349244093A700FA67FF /* Team+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA82343244093A700FA67FF /* Team+CoreDataClass.swift */; };
@@ -22,23 +43,33 @@
 		BCA823562440C6FE00FA67FF /* matches.json in Resources */ = {isa = PBXBuildFile; fileRef = BCA823552440C6FE00FA67FF /* matches.json */; };
 		BCA823592440E3DA00FA67FF /* Tournament+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA823572440E3D900FA67FF /* Tournament+CoreDataClass.swift */; };
 		BCA8235A2440E3DA00FA67FF /* Tournament+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA823582440E3D900FA67FF /* Tournament+CoreDataProperties.swift */; };
+		BCB1ADF1244875F7000E3872 /* IFLimage.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB1ADEE244875F6000E3872 /* IFLimage.png */; };
+		BCB1ADF2244875F7000E3872 /* FIFA2018.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB1ADEF244875F7000E3872 /* FIFA2018.png */; };
+		BCB1ADF3244875F7000E3872 /* FIFA2019.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB1ADF0244875F7000E3872 /* FIFA2019.png */; };
 		BCB85548244067E5004BEA34 /* Millionarios.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB85544244067E5004BEA34 /* Millionarios.png */; };
 		BCB85549244067E5004BEA34 /* RealMadrid.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB85545244067E5004BEA34 /* RealMadrid.png */; };
 		BCB8554A244067E5004BEA34 /* FCB.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB85546244067E5004BEA34 /* FCB.png */; };
 		BCB8554B244067E5004BEA34 /* Wolf.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB85547244067E5004BEA34 /* Wolf.png */; };
+		BCC3C3F12447152E0054AAD6 /* TournamentsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC3C3F02447152E0054AAD6 /* TournamentsNavigationViewController.swift */; };
 		BCC59AC8243F88B20066A870 /* LocalFootball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCC59AC6243F88B10066A870 /* LocalFootball.xcdatamodeld */; };
 		BCE7035124434BE0009D55FC /* teams.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7034F24434BDF009D55FC /* teams.json */; };
 		BCE7035224434BE0009D55FC /* tournamentStatistics.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035024434BDF009D55FC /* tournamentStatistics.json */; };
 		BCE7035424434C0D009D55FC /* statistics.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035324434C0C009D55FC /* statistics.json */; };
 		BCE7035624434CC6009D55FC /* teams1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035524434CC6009D55FC /* teams1.json */; };
-		BCE7035824434E09009D55FC /* statistics1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035724434E09009D55FC /* statistics1.json */; };
+		BCE747D22443684100984011 /* DetailTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747D02443684100984011 /* DetailTeamViewController.swift */; };
+		BCE747D32443684100984011 /* DetailTeamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE747D12443684100984011 /* DetailTeamViewController.xib */; };
+		BCE747D92443852700984011 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747D82443852700984011 /* CoreDataManager.swift */; };
+		BCE747DB2443929E00984011 /* DataProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747DA2443929E00984011 /* DataProcessing.swift */; };
+		BCE747DE2443A63000984011 /* MatchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747DC2443A63000984011 /* MatchesTableViewController.swift */; };
+		BCE747E22443AD1600984011 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747E02443AD1600984011 /* MatchTableViewCell.swift */; };
+		BCE747E32443AD1600984011 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE747E12443AD1600984011 /* MatchTableViewCell.xib */; };
 		BCF5D593243F70D5009E9876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D592243F70D5009E9876 /* AppDelegate.swift */; };
 		BCF5D595243F70D5009E9876 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D594243F70D5009E9876 /* SceneDelegate.swift */; };
 		BCF5D597243F70D5009E9876 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D596243F70D5009E9876 /* ViewController.swift */; };
 		BCF5D59A243F70D5009E9876 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF5D598243F70D5009E9876 /* Main.storyboard */; };
 		BCF5D59F243F70D7009E9876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF5D59E243F70D7009E9876 /* Assets.xcassets */; };
 		BCF5D5A2243F70D7009E9876 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF5D5A0243F70D7009E9876 /* LaunchScreen.storyboard */; };
-		BCF5D5AF243F7913009E9876 /* TeamsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D5AD243F7913009E9876 /* TeamsTableViewController.swift */; };
+		BCF5D5AF243F7913009E9876 /* TeamsTableViewController0.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D5AD243F7913009E9876 /* TeamsTableViewController0.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +77,27 @@
 		BC2486FC24433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TournamentStatistics+CoreDataProperties.swift"; path = "LocalFootball/TournamentStatistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC24870324433EBF00454D14 /* TeamStatistic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TeamStatistic+CoreDataClass.swift"; path = "LocalFootball/TeamStatistic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BC24870424433EBF00454D14 /* TeamStatistic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TeamStatistic+CoreDataProperties.swift"; path = "LocalFootball/TeamStatistic+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BC3A2CA82444B7C60066D821 /* TeamsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsTableViewController.swift; sourceTree = "<group>"; };
+		BC3A2CAA2444CA110066D821 /* TeamsNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TeamsNavigationViewController.swift; path = LocalFootball/Teams/TeamsNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
+		BC42A7D02444A4080039A851 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		BC42A7D22444B3090039A851 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
+		BC42A7D32444B3090039A851 /* TeamTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamTableViewCell.xib; sourceTree = "<group>"; };
+		BC45CD832446284400C1B580 /* tournaments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tournaments.json; sourceTree = "<group>"; };
+		BC45CD85244636FC00C1B580 /* Junior.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Junior.png; sourceTree = "<group>"; };
+		BC45CD86244636FC00C1B580 /* CBF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CBF.png; sourceTree = "<group>"; };
+		BC45CD87244636FC00C1B580 /* Romania.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Romania.png; sourceTree = "<group>"; };
+		BC45CD88244636FC00C1B580 /* Everton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Everton.png; sourceTree = "<group>"; };
+		BC45CD89244636FC00C1B580 /* FMF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FMF.png; sourceTree = "<group>"; };
+		BC45CD8A244636FC00C1B580 /* WestHamUnited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WestHamUnited.png; sourceTree = "<group>"; };
+		BC45CD8B244636FC00C1B580 /* ASM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ASM.png; sourceTree = "<group>"; };
+		BC45CD8C244636FC00C1B580 /* Spartak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spartak.png; sourceTree = "<group>"; };
+		BC45CD8D244636FC00C1B580 /* SuttonColdfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SuttonColdfield.png; sourceTree = "<group>"; };
+		BC45CD8E244636FC00C1B580 /* URBSFA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = URBSFA.png; sourceTree = "<group>"; };
+		BC45CD8F244636FC00C1B580 /* Sydney.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sydney.png; sourceTree = "<group>"; };
+		BC45CD90244636FC00C1B580 /* ManchesterUnited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ManchesterUnited.png; sourceTree = "<group>"; };
+		BC9CA0D12446061C0017B952 /* TournamentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTableViewCell.swift; sourceTree = "<group>"; };
+		BC9CA0D22446061C0017B952 /* TournamentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TournamentTableViewCell.xib; sourceTree = "<group>"; };
+		BC9CA0D52446063A0017B952 /* TournamentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentsTableViewController.swift; sourceTree = "<group>"; };
 		BCA82341244093A700FA67FF /* Statistics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Statistics+CoreDataClass.swift"; path = "LocalFootball/Statistics+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BCA82342244093A700FA67FF /* Statistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Statistics+CoreDataProperties.swift"; path = "LocalFootball/Statistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BCA82343244093A700FA67FF /* Team+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Team+CoreDataClass.swift"; path = "LocalFootball/Team+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -57,16 +109,26 @@
 		BCA823552440C6FE00FA67FF /* matches.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = matches.json; sourceTree = "<group>"; };
 		BCA823572440E3D900FA67FF /* Tournament+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Tournament+CoreDataClass.swift"; path = "LocalFootball/Tournament+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BCA823582440E3D900FA67FF /* Tournament+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Tournament+CoreDataProperties.swift"; path = "LocalFootball/Tournament+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BCB1ADEE244875F6000E3872 /* IFLimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IFLimage.png; sourceTree = "<group>"; };
+		BCB1ADEF244875F7000E3872 /* FIFA2018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FIFA2018.png; sourceTree = "<group>"; };
+		BCB1ADF0244875F7000E3872 /* FIFA2019.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FIFA2019.png; sourceTree = "<group>"; };
 		BCB85544244067E5004BEA34 /* Millionarios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Millionarios.png; sourceTree = "<group>"; };
 		BCB85545244067E5004BEA34 /* RealMadrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RealMadrid.png; sourceTree = "<group>"; };
 		BCB85546244067E5004BEA34 /* FCB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FCB.png; sourceTree = "<group>"; };
 		BCB85547244067E5004BEA34 /* Wolf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wolf.png; sourceTree = "<group>"; };
+		BCC3C3F02447152E0054AAD6 /* TournamentsNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentsNavigationViewController.swift; sourceTree = "<group>"; };
 		BCC59AC7243F88B10066A870 /* LocalFootball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalFootball.xcdatamodel; sourceTree = "<group>"; };
 		BCE7034F24434BDF009D55FC /* teams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams.json; sourceTree = "<group>"; };
 		BCE7035024434BDF009D55FC /* tournamentStatistics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tournamentStatistics.json; sourceTree = "<group>"; };
 		BCE7035324434C0C009D55FC /* statistics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = statistics.json; sourceTree = "<group>"; };
 		BCE7035524434CC6009D55FC /* teams1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams1.json; sourceTree = "<group>"; };
-		BCE7035724434E09009D55FC /* statistics1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = statistics1.json; sourceTree = "<group>"; };
+		BCE747D02443684100984011 /* DetailTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTeamViewController.swift; sourceTree = "<group>"; };
+		BCE747D12443684100984011 /* DetailTeamViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTeamViewController.xib; sourceTree = "<group>"; };
+		BCE747D82443852700984011 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		BCE747DA2443929E00984011 /* DataProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProcessing.swift; sourceTree = "<group>"; };
+		BCE747DC2443A63000984011 /* MatchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTableViewController.swift; sourceTree = "<group>"; };
+		BCE747E02443AD1600984011 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
+		BCE747E12443AD1600984011 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
 		BCF5D58F243F70D5009E9876 /* LocalFootball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalFootball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF5D592243F70D5009E9876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCF5D594243F70D5009E9876 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +137,7 @@
 		BCF5D59E243F70D7009E9876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCF5D5A1243F70D7009E9876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCF5D5A3243F70D7009E9876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCF5D5AD243F7913009E9876 /* TeamsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsTableViewController.swift; sourceTree = "<group>"; };
+		BCF5D5AD243F7913009E9876 /* TeamsTableViewController0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsTableViewController0.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +151,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC42A7D62444B3140039A851 /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				BC3A2CAA2444CA110066D821 /* TeamsNavigationViewController.swift */,
+				BC3A2CA82444B7C60066D821 /* TeamsTableViewController.swift */,
+				BC42A7D22444B3090039A851 /* TeamTableViewCell.swift */,
+				BC42A7D32444B3090039A851 /* TeamTableViewCell.xib */,
+				BCE747D02443684100984011 /* DetailTeamViewController.swift */,
+				BCE747D12443684100984011 /* DetailTeamViewController.xib */,
+			);
+			path = Teams;
+			sourceTree = "<group>";
+		};
+		BC9CA0D7244606490017B952 /* Tournaments */ = {
+			isa = PBXGroup;
+			children = (
+				BCC3C3F02447152E0054AAD6 /* TournamentsNavigationViewController.swift */,
+				BC9CA0D52446063A0017B952 /* TournamentsTableViewController.swift */,
+				BC9CA0D12446061C0017B952 /* TournamentTableViewCell.swift */,
+				BC9CA0D22446061C0017B952 /* TournamentTableViewCell.xib */,
+			);
+			path = Tournaments;
+			sourceTree = "<group>";
+		};
 		BCB8554C244067EB004BEA34 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
-				BCE7035724434E09009D55FC /* statistics1.json */,
+				BCB1ADEF244875F7000E3872 /* FIFA2018.png */,
+				BCB1ADF0244875F7000E3872 /* FIFA2019.png */,
+				BCB1ADEE244875F6000E3872 /* IFLimage.png */,
+				BC45CD8B244636FC00C1B580 /* ASM.png */,
+				BC45CD86244636FC00C1B580 /* CBF.png */,
+				BC45CD88244636FC00C1B580 /* Everton.png */,
+				BC45CD89244636FC00C1B580 /* FMF.png */,
+				BC45CD85244636FC00C1B580 /* Junior.png */,
+				BC45CD90244636FC00C1B580 /* ManchesterUnited.png */,
+				BC45CD87244636FC00C1B580 /* Romania.png */,
+				BC45CD8C244636FC00C1B580 /* Spartak.png */,
+				BC45CD8D244636FC00C1B580 /* SuttonColdfield.png */,
+				BC45CD8F244636FC00C1B580 /* Sydney.png */,
+				BC45CD8E244636FC00C1B580 /* URBSFA.png */,
+				BC45CD8A244636FC00C1B580 /* WestHamUnited.png */,
+				BC45CD832446284400C1B580 /* tournaments.json */,
 				BCE7035524434CC6009D55FC /* teams1.json */,
 				BCE7035324434C0C009D55FC /* statistics.json */,
 				BCE7034F24434BDF009D55FC /* teams.json */,
@@ -104,6 +205,16 @@
 				BCB85547244067E5004BEA34 /* Wolf.png */,
 			);
 			path = Resourses;
+			sourceTree = "<group>";
+		};
+		BCE747E42443AD1F00984011 /* Matches */ = {
+			isa = PBXGroup;
+			children = (
+				BCE747DC2443A63000984011 /* MatchesTableViewController.swift */,
+				BCE747E02443AD1600984011 /* MatchTableViewCell.swift */,
+				BCE747E12443AD1600984011 /* MatchTableViewCell.xib */,
+			);
+			path = Matches;
 			sourceTree = "<group>";
 		};
 		BCF5D586243F70D5009E9876 = {
@@ -139,11 +250,17 @@
 		BCF5D591243F70D5009E9876 /* LocalFootball */ = {
 			isa = PBXGroup;
 			children = (
+				BCF5D598243F70D5009E9876 /* Main.storyboard */,
 				BCF5D592243F70D5009E9876 /* AppDelegate.swift */,
 				BCF5D594243F70D5009E9876 /* SceneDelegate.swift */,
+				BC42A7D02444A4080039A851 /* TabBarController.swift */,
+				BC9CA0D7244606490017B952 /* Tournaments */,
+				BC42A7D62444B3140039A851 /* Teams */,
+				BCE747E42443AD1F00984011 /* Matches */,
+				BCE747D82443852700984011 /* CoreDataManager.swift */,
+				BCE747DA2443929E00984011 /* DataProcessing.swift */,
 				BCF5D596243F70D5009E9876 /* ViewController.swift */,
-				BCF5D598243F70D5009E9876 /* Main.storyboard */,
-				BCF5D5AD243F7913009E9876 /* TeamsTableViewController.swift */,
+				BCF5D5AD243F7913009E9876 /* TeamsTableViewController0.swift */,
 				BCB8554C244067EB004BEA34 /* Resourses */,
 				BCF5D59E243F70D7009E9876 /* Assets.xcassets */,
 				BCF5D5A0243F70D7009E9876 /* LaunchScreen.storyboard */,
@@ -212,18 +329,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE7035124434BE0009D55FC /* teams.json in Resources */,
+				BCB1ADF3244875F7000E3872 /* FIFA2019.png in Resources */,
+				BC9CA0D42446061C0017B952 /* TournamentTableViewCell.xib in Resources */,
+				BC45CD842446284400C1B580 /* tournaments.json in Resources */,
+				BC45CD97244636FC00C1B580 /* ASM.png in Resources */,
 				BCE7035224434BE0009D55FC /* tournamentStatistics.json in Resources */,
 				BCF5D5A2243F70D7009E9876 /* LaunchScreen.storyboard in Resources */,
+				BC42A7D52444B3090039A851 /* TeamTableViewCell.xib in Resources */,
 				BCF5D59F243F70D7009E9876 /* Assets.xcassets in Resources */,
+				BC45CD94244636FC00C1B580 /* Everton.png in Resources */,
+				BC45CD99244636FC00C1B580 /* SuttonColdfield.png in Resources */,
+				BC45CD92244636FC00C1B580 /* CBF.png in Resources */,
+				BC45CD95244636FC00C1B580 /* FMF.png in Resources */,
+				BCB1ADF2244875F7000E3872 /* FIFA2018.png in Resources */,
 				BCB8554B244067E5004BEA34 /* Wolf.png in Resources */,
+				BC45CD9A244636FC00C1B580 /* URBSFA.png in Resources */,
+				BC45CD98244636FC00C1B580 /* Spartak.png in Resources */,
+				BCB1ADF1244875F7000E3872 /* IFLimage.png in Resources */,
+				BC45CD93244636FC00C1B580 /* Romania.png in Resources */,
+				BC45CD9C244636FC00C1B580 /* ManchesterUnited.png in Resources */,
 				BCE7035424434C0D009D55FC /* statistics.json in Resources */,
+				BC45CD9B244636FC00C1B580 /* Sydney.png in Resources */,
 				BCE7035624434CC6009D55FC /* teams1.json in Resources */,
 				BCA823562440C6FE00FA67FF /* matches.json in Resources */,
 				BCF5D59A243F70D5009E9876 /* Main.storyboard in Resources */,
 				BCB85549244067E5004BEA34 /* RealMadrid.png in Resources */,
+				BC45CD96244636FC00C1B580 /* WestHamUnited.png in Resources */,
+				BCE747D32443684100984011 /* DetailTeamViewController.xib in Resources */,
 				BCB85548244067E5004BEA34 /* Millionarios.png in Resources */,
-				BCE7035824434E09009D55FC /* statistics1.json in Resources */,
 				BCB8554A244067E5004BEA34 /* FCB.png in Resources */,
+				BC45CD91244636FC00C1B580 /* Junior.png in Resources */,
+				BCE747E32443AD1600984011 /* MatchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,19 +373,31 @@
 				BCA82347244093A700FA67FF /* Statistics+CoreDataClass.swift in Sources */,
 				BC24870524433EBF00454D14 /* TeamStatistic+CoreDataClass.swift in Sources */,
 				BC24870224433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift in Sources */,
-				BCF5D5AF243F7913009E9876 /* TeamsTableViewController.swift in Sources */,
+				BC3A2CAB2444CA110066D821 /* TeamsNavigationViewController.swift in Sources */,
+				BCF5D5AF243F7913009E9876 /* TeamsTableViewController0.swift in Sources */,
 				BCA823542440AC5200FA67FF /* MatchResults+CoreDataProperties.swift in Sources */,
+				BC3A2CA92444B7C60066D821 /* TeamsTableViewController.swift in Sources */,
 				BCA8234C244093A700FA67FF /* Match+CoreDataProperties.swift in Sources */,
+				BC9CA0D62446063A0017B952 /* TournamentsTableViewController.swift in Sources */,
 				BCC59AC8243F88B20066A870 /* LocalFootball.xcdatamodeld in Sources */,
+				BCE747DE2443A63000984011 /* MatchesTableViewController.swift in Sources */,
+				BC42A7D42444B3090039A851 /* TeamTableViewCell.swift in Sources */,
 				BCA8234A244093A700FA67FF /* Team+CoreDataProperties.swift in Sources */,
+				BCE747DB2443929E00984011 /* DataProcessing.swift in Sources */,
 				BC24870124433D0F00454D14 /* TournamentStatistics+CoreDataClass.swift in Sources */,
 				BCA82348244093A700FA67FF /* Statistics+CoreDataProperties.swift in Sources */,
 				BCA8234B244093A700FA67FF /* Match+CoreDataClass.swift in Sources */,
 				BCF5D597243F70D5009E9876 /* ViewController.swift in Sources */,
+				BCE747D92443852700984011 /* CoreDataManager.swift in Sources */,
 				BC24870624433EBF00454D14 /* TeamStatistic+CoreDataProperties.swift in Sources */,
 				BCA823532440AC5200FA67FF /* MatchResults+CoreDataClass.swift in Sources */,
+				BCE747D22443684100984011 /* DetailTeamViewController.swift in Sources */,
+				BC42A7D12444A4080039A851 /* TabBarController.swift in Sources */,
 				BCF5D593243F70D5009E9876 /* AppDelegate.swift in Sources */,
+				BCE747E22443AD1600984011 /* MatchTableViewCell.swift in Sources */,
 				BCA82349244093A700FA67FF /* Team+CoreDataClass.swift in Sources */,
+				BC9CA0D32446061C0017B952 /* TournamentTableViewCell.swift in Sources */,
+				BCC3C3F12447152E0054AAD6 /* TournamentsNavigationViewController.swift in Sources */,
 				BCA823592440E3DA00FA67FF /* Tournament+CoreDataClass.swift in Sources */,
 				BCF5D595243F70D5009E9876 /* SceneDelegate.swift in Sources */,
 				BCA8235A2440E3DA00FA67FF /* Tournament+CoreDataProperties.swift in Sources */,

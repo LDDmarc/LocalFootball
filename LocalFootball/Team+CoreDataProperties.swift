@@ -2,7 +2,7 @@
 //  Team+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 12.04.2020.
+//  Created by Дарья Леонова on 15.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -18,18 +18,37 @@ extension Team {
     }
 
     @NSManaged public var colors: NSObject?
-    @NSManaged public var emblemaImageData: Data?
-    @NSManaged public var emblemaName: String?
+    @NSManaged public var logoImageData: Data?
+    @NSManaged public var logoName: String?
     @NSManaged public var name: String?
+    @NSManaged public var tournamentsNames: NSObject?
     @NSManaged public var yearOfFoundation: Int16
-    @NSManaged public var matches: NSSet?
-    @NSManaged public var tournament: NSSet?
+    @NSManaged public var matches: NSOrderedSet?
     @NSManaged public var teamStatistics: TeamStatistic?
+    @NSManaged public var tournaments: NSSet?
 
 }
 
 // MARK: Generated accessors for matches
 extension Team {
+
+    @objc(insertObject:inMatchesAtIndex:)
+    @NSManaged public func insertIntoMatches(_ value: Match, at idx: Int)
+
+    @objc(removeObjectFromMatchesAtIndex:)
+    @NSManaged public func removeFromMatches(at idx: Int)
+
+    @objc(insertMatches:atIndexes:)
+    @NSManaged public func insertIntoMatches(_ values: [Match], at indexes: NSIndexSet)
+
+    @objc(removeMatchesAtIndexes:)
+    @NSManaged public func removeFromMatches(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInMatchesAtIndex:withObject:)
+    @NSManaged public func replaceMatches(at idx: Int, with value: Match)
+
+    @objc(replaceMatchesAtIndexes:withMatches:)
+    @NSManaged public func replaceMatches(at indexes: NSIndexSet, with values: [Match])
 
     @objc(addMatchesObject:)
     @NSManaged public func addToMatches(_ value: Match)
@@ -38,26 +57,26 @@ extension Team {
     @NSManaged public func removeFromMatches(_ value: Match)
 
     @objc(addMatches:)
-    @NSManaged public func addToMatches(_ values: NSSet)
+    @NSManaged public func addToMatches(_ values: NSOrderedSet)
 
     @objc(removeMatches:)
-    @NSManaged public func removeFromMatches(_ values: NSSet)
+    @NSManaged public func removeFromMatches(_ values: NSOrderedSet)
 
 }
 
-// MARK: Generated accessors for tournament
+// MARK: Generated accessors for tournaments
 extension Team {
 
-    @objc(addTournamentObject:)
-    @NSManaged public func addToTournament(_ value: Tournament)
+    @objc(addTournamentsObject:)
+    @NSManaged public func addToTournaments(_ value: Tournament)
 
-    @objc(removeTournamentObject:)
-    @NSManaged public func removeFromTournament(_ value: Tournament)
+    @objc(removeTournamentsObject:)
+    @NSManaged public func removeFromTournaments(_ value: Tournament)
 
-    @objc(addTournament:)
-    @NSManaged public func addToTournament(_ values: NSSet)
+    @objc(addTournaments:)
+    @NSManaged public func addToTournaments(_ values: NSSet)
 
-    @objc(removeTournament:)
-    @NSManaged public func removeFromTournament(_ values: NSSet)
+    @objc(removeTournaments:)
+    @NSManaged public func removeFromTournaments(_ values: NSSet)
 
 }

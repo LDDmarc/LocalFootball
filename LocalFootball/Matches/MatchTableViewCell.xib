@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MatchCell" selectionStyle="default" indentationWidth="10" rowHeight="152" id="KGk-i7-Jjw" customClass="MatchTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="485" height="152"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="485" height="152"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fY3-fY-G7F">
+                        <rect key="frame" x="8" y="53" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="atT-uW-4UG"/>
+                            <constraint firstAttribute="height" constant="60" id="bdv-nw-nZ9"/>
+                        </constraints>
+                    </imageView>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EU5-q1-d4x">
+                        <rect key="frame" x="0.0" y="0.0" width="485" height="45"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Дата" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCA-iX-ND0">
+                                <rect key="frame" x="436" y="14" width="41" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Турнир" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDh-TJ-E6W">
+                                <rect key="frame" x="8" y="14" width="413" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jCA-iX-ND0" firstAttribute="centerY" secondItem="EU5-q1-d4x" secondAttribute="centerY" id="1E1-gi-UcK"/>
+                            <constraint firstAttribute="height" constant="45" id="2CM-XM-nP5"/>
+                            <constraint firstItem="iDh-TJ-E6W" firstAttribute="leading" secondItem="EU5-q1-d4x" secondAttribute="leading" constant="8" id="CJF-60-Ptt"/>
+                            <constraint firstAttribute="trailing" secondItem="jCA-iX-ND0" secondAttribute="trailing" constant="8" id="F8d-QZ-l1b"/>
+                            <constraint firstItem="jCA-iX-ND0" firstAttribute="leading" secondItem="iDh-TJ-E6W" secondAttribute="trailing" constant="15" id="HjU-RB-Xve"/>
+                            <constraint firstItem="iDh-TJ-E6W" firstAttribute="centerY" secondItem="EU5-q1-d4x" secondAttribute="centerY" id="UDa-dm-RkI"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cn-KM-WCi">
+                        <rect key="frame" x="216" y="67" width="53.5" height="35.5"/>
+                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="35"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sr6-D7-LM6">
+                        <rect key="frame" x="417" y="53" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="QkJ-jH-OUR"/>
+                            <constraint firstAttribute="height" constant="60" id="uwp-0z-reu"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команда2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU3-1J-lIE">
+                        <rect key="frame" x="371.5" y="118" width="101.5" height="24"/>
+                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команда1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5A-c3-B6i">
+                        <rect key="frame" x="10" y="118" width="101.5" height="24"/>
+                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4cn-KM-WCi" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="5gL-ru-NRj"/>
+                    <constraint firstAttribute="trailing" secondItem="dU3-1J-lIE" secondAttribute="trailing" constant="12" id="C5r-cn-yom"/>
+                    <constraint firstItem="Sr6-D7-LM6" firstAttribute="top" secondItem="EU5-q1-d4x" secondAttribute="bottom" constant="8" id="EDW-rH-7KY"/>
+                    <constraint firstAttribute="bottom" secondItem="dU3-1J-lIE" secondAttribute="bottom" constant="10" id="Gfu-71-M8S"/>
+                    <constraint firstItem="x5A-c3-B6i" firstAttribute="top" secondItem="fY3-fY-G7F" secondAttribute="bottom" constant="5" id="IpV-4w-PTS"/>
+                    <constraint firstItem="fY3-fY-G7F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Kdf-az-za1"/>
+                    <constraint firstItem="4cn-KM-WCi" firstAttribute="top" secondItem="EU5-q1-d4x" secondAttribute="bottom" constant="22" id="Lof-Wh-8YS"/>
+                    <constraint firstItem="fY3-fY-G7F" firstAttribute="top" secondItem="EU5-q1-d4x" secondAttribute="bottom" constant="8" id="MtF-KH-Y2c"/>
+                    <constraint firstItem="x5A-c3-B6i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="X0q-cW-WW4"/>
+                    <constraint firstAttribute="trailing" secondItem="Sr6-D7-LM6" secondAttribute="trailing" constant="8" id="e43-gi-Vwc"/>
+                    <constraint firstItem="EU5-q1-d4x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e6Y-hI-azY"/>
+                    <constraint firstItem="dU3-1J-lIE" firstAttribute="top" secondItem="Sr6-D7-LM6" secondAttribute="bottom" constant="5" id="qwg-P9-JI8"/>
+                    <constraint firstItem="EU5-q1-d4x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ug9-v1-buG"/>
+                    <constraint firstAttribute="bottom" secondItem="x5A-c3-B6i" secondAttribute="bottom" constant="10" id="vUn-yf-iHB"/>
+                    <constraint firstAttribute="trailing" secondItem="EU5-q1-d4x" secondAttribute="trailing" id="xhN-QP-aMS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backGroundView" destination="EU5-q1-d4x" id="Jg6-Zg-2Xn"/>
+                <outlet property="dateLabel" destination="jCA-iX-ND0" id="dqh-Cx-n0S"/>
+                <outlet property="team1LogoImageView" destination="fY3-fY-G7F" id="6Cc-z5-T0E"/>
+                <outlet property="team1NameLabel" destination="x5A-c3-B6i" id="2oQ-s6-blA"/>
+                <outlet property="team2LogoImageView" destination="Sr6-D7-LM6" id="TcM-0v-Sis"/>
+                <outlet property="team2NameLabel" destination="dU3-1J-lIE" id="nxA-nq-0PD"/>
+                <outlet property="teamScoreLabel" destination="4cn-KM-WCi" id="VLu-mJ-ASk"/>
+                <outlet property="tournamentNameLabel" destination="iDh-TJ-E6W" id="4Rw-2n-Cdd"/>
+            </connections>
+            <point key="canvasLocation" x="-365.94202898550725" y="-122.54464285714285"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -24,7 +24,8 @@ public class Match: NSManagedObject, Decodable {
         case team1Name = "team1Name"
         case team2Name = "team2Name"
         case matchResults = "matchResults"
-        
+        case tournamentName = "tournamentName"
+        case status = "status"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -35,11 +36,17 @@ public class Match: NSManagedObject, Decodable {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
-            //  date = try values.decode(Date.self, forKey: .date)
+
+            if let dateStr = try values.decode(String?.self, forKey: .date) {
+                date = DataProcessing.shared.readingDateFormatter.date(from: dateStr)
+            }
             team1Name = try values.decode(String?.self, forKey: .team1Name)
-            team2Name = try values.decode(String?.self, forKey: .team1Name)
+            team2Name = try values.decode(String?.self, forKey: .team2Name)
+            tournamentName = try values.decode(String?.self, forKey: .tournamentName)
             
             matchResults = try values.decode(Set<MatchResults>.self, forKey: .matchResults) as NSSet
+            
+            status = try values.decode(Bool.self, forKey: .status)
             
         } catch let error as NSError {
             print(error.localizedDescription)
