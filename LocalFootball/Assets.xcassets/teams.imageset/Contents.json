@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "teams.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "teams.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
