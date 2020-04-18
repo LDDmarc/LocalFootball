@@ -68,20 +68,8 @@ class TournamentsTableViewController: UITableViewController {
         
         let tournament = fetchedResultsController.object(at: indexPath)
         
-        cell.tournamentNameLabel.text = tournament.name
-        if let imageData = tournament.imageData {
-            cell.tournamentImageView.image = UIImage(data: imageData)
-        }
-        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.numberOfTournamentTeams)"
-
-        if !tournament.status {
-            cell.tournamentStatusLabel.isHidden = false
-        }
-        if let date1 = tournament.dateOfTheBeginning,
-            let date2 = tournament.dateOfTheEnd {
-            cell.tournamentDatesLabel.text = "🗓 Даты: \(DataProcessing.shared.writtingDateFormatter.string(from: date1)) - \(DataProcessing.shared.writtingDateFormatter.string(from: date2))"
-        }
-        
+        CellsConfiguration.shared.configureCell(cell, with: tournament)
+    
         cell.indexPath = indexPath
         cell.delegate = self
         
@@ -106,7 +94,7 @@ extension TournamentsTableViewController: NSFetchedResultsControllerDelegate {
 }
 
 extension TournamentsTableViewController: TournamentTableViewCellDelegate {
-    func show(indexPath: IndexPath) {
+    func showTeams(indexPath: IndexPath) {
         let tournament = fetchedResultsController.object(at: indexPath)
         let nextVC = TeamsTableViewController()
         
@@ -116,6 +104,18 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
             nextVC.titleText = name
         }
         nextVC.isScopeBarShown = false
+        
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    func showMatches(indexPath: IndexPath) {
+        let tournament = fetchedResultsController.object(at: indexPath)
+        let nextVC = MatchesTableViewController()
+        
+        //nextVC.matchesPredicate
+        
+        if let name = tournament.name {
+            nextVC.matchesPredicate = NSPredicate(format: "tournamentName == %@", name)
+        }
         
         navigationController?.pushViewController(nextVC, animated: true)
     }

@@ -23,33 +23,33 @@
                                 <rect key="frame" x="0.0" y="0.0" width="578" height="228.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название турнира" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8d-t4-Obf">
-                                        <rect key="frame" x="204.5" y="4" width="169" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <rect key="frame" x="196" y="4" width="186.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SrG-Fb-8cH">
-                                        <rect key="frame" x="4" y="36" width="281" height="185.5"/>
+                                        <rect key="frame" x="4" y="32.5" width="281" height="185.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" secondItem="SrG-Fb-8cH" secondAttribute="width" multiplier="0.66" id="WtE-T9-EM3"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Даты" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-pL-7Ie">
-                                        <rect key="frame" x="293" y="36" width="37" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="293" y="32.5" width="45.5" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команды" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiX-x3-08d">
-                                        <rect key="frame" x="293" y="118.5" width="73.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="293" y="200.5" width="80.5" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завершен" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKc-Zv-nK7">
-                                        <rect key="frame" x="493.5" y="201" width="80.5" height="20.5"/>
+                                        <rect key="frame" x="488.5" y="200.5" width="85.5" height="17.5"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -59,13 +59,14 @@
                                     <constraint firstItem="Q8d-t4-Obf" firstAttribute="centerX" secondItem="DjO-np-Q81" secondAttribute="centerX" id="2am-wS-zto"/>
                                     <constraint firstItem="JiX-x3-08d" firstAttribute="leading" secondItem="qaQ-pL-7Ie" secondAttribute="leading" id="8Ft-Sm-Yg4"/>
                                     <constraint firstItem="qaQ-pL-7Ie" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="centerX" constant="4" id="CsM-M8-rYn"/>
+                                    <constraint firstItem="JiX-x3-08d" firstAttribute="bottom" secondItem="SrG-Fb-8cH" secondAttribute="bottom" id="Imr-Yg-AKh"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qaQ-pL-7Ie" secondAttribute="trailing" constant="8" id="K4U-cH-Jvq"/>
                                     <constraint firstItem="qaQ-pL-7Ie" firstAttribute="top" secondItem="SrG-Fb-8cH" secondAttribute="top" id="U5i-nJ-mBf"/>
                                     <constraint firstItem="SrG-Fb-8cH" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="leading" constant="4" id="XF9-kJ-VOU"/>
                                     <constraint firstItem="Q8d-t4-Obf" firstAttribute="top" secondItem="DjO-np-Q81" secondAttribute="top" constant="4" id="b44-bk-JZ9"/>
                                     <constraint firstItem="SrG-Fb-8cH" firstAttribute="top" secondItem="Q8d-t4-Obf" secondAttribute="bottom" constant="8" id="gTg-EO-HWf"/>
                                     <constraint firstAttribute="centerX" secondItem="SrG-Fb-8cH" secondAttribute="trailing" constant="4" id="plh-Y1-dOI"/>
                                     <constraint firstAttribute="trailing" secondItem="IKc-Zv-nK7" secondAttribute="trailing" constant="4" id="r03-hs-Qk5"/>
-                                    <constraint firstItem="JiX-x3-08d" firstAttribute="centerY" secondItem="SrG-Fb-8cH" secondAttribute="centerY" id="sQy-Gq-Ar1"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHF-MG-KJj" userLabel="bottomView">
@@ -77,7 +78,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwr-Vc-j95">
                                                 <rect key="frame" x="0.0" y="0.0" width="175.5" height="119.5"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                                                 <state key="normal" title="Команды">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
@@ -88,7 +89,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBA-NT-Fvc">
                                                 <rect key="frame" x="193.5" y="0.0" width="175" height="119.5"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                                                 <state key="normal" title="Матчи">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
@@ -99,7 +100,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25p-k7-MMn">
                                                 <rect key="frame" x="386.5" y="0.0" width="175.5" height="119.5"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                                                 <state key="normal" title="Результаты">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>

@@ -16,13 +16,13 @@ class DataProcessing {
     
     var context: NSManagedObjectContext = CoreDataManger.instance.persistentContainer.viewContext
     
-    lazy var readingDateFormatter: DateFormatter = {
+    var readingDateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return df
     }()
     
-    lazy var writtingDateFormatter: DateFormatter = {
+    var writtingDateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
         df.timeStyle = .short
@@ -146,6 +146,7 @@ class DataProcessing {
         }
     }
     
+  
 }
 
 final class FirstLaunch {

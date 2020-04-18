@@ -2,7 +2,7 @@
 //  MatchResults+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 12.04.2020.
+//  Created by Дарья Леонова on 17.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //

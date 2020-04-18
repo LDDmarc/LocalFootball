@@ -13,12 +13,6 @@ import CoreData
 @objc(Match)
 public class Match: NSManagedObject, Decodable {
     
-    var results: [MatchResults] {
-        get {
-            matchResults.flatMap { $0.allObjects as? [MatchResults] } ?? []
-        }
-    }
-    
     enum CodingKeys: String, CodingKey {
         case date = "date"
         case team1Name = "team1Name"
@@ -44,7 +38,8 @@ public class Match: NSManagedObject, Decodable {
             team2Name = try values.decode(String?.self, forKey: .team2Name)
             tournamentName = try values.decode(String?.self, forKey: .tournamentName)
             
-            matchResults = try values.decode(Set<MatchResults>.self, forKey: .matchResults) as NSSet
+            let matchResults = try values.decode([MatchResults].self, forKey: .matchResults)
+            matchResults.forEach { self.addToMatchResults($0) }
             
             status = try values.decode(Bool.self, forKey: .status)
             

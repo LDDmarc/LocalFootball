@@ -2,7 +2,7 @@
 //  Statistics+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 12.04.2020.
+//  Created by Дарья Леонова on 17.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -23,10 +23,10 @@ extension Statistics {
     @NSManaged public var numberOfGames: Int16
     @NSManaged public var numberOfLesions: Int16
     @NSManaged public var numberOfWins: Int16
-    @NSManaged public var penaltyScored: Int16
     @NSManaged public var penaltyConceded: Int16
-    @NSManaged public var tournamentPartStatistics: NSOrderedSet?
+    @NSManaged public var penaltyScored: Int16
     @NSManaged public var teamStatistics: TeamStatistic?
+    @NSManaged public var tournamentPartStatistics: NSOrderedSet?
 
 }
 

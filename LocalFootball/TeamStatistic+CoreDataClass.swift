@@ -18,12 +18,6 @@ public class TeamStatistic: NSManagedObject, Decodable {
         case tournamentStatistics = "tournamentStatistics"
     }
     
-    var teamTournamentStatistic: [TournamentStatistics] {
-        get {
-            tournamentStatistics.flatMap { $0.allObjects as? [TournamentStatistics] } ?? []
-        }
-    }
-    
     required convenience public init(from decoder: Decoder) throws {
         guard let contexUserInfoKey = CodingUserInfoKey.context,
             let managedObjectContext = decoder.userInfo[contexUserInfoKey] as? NSManagedObjectContext,
@@ -33,7 +27,8 @@ public class TeamStatistic: NSManagedObject, Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
             fullStatistics = try values.decode(Statistics.self, forKey: .fullStatistics)
-            tournamentStatistics = try values.decode(Set<TournamentStatistics>.self, forKey: .tournamentStatistics) as NSSet
+            let tournamentStatistics = try values.decode([TournamentStatistics].self, forKey: .tournamentStatistics)
+            tournamentStatistics.forEach { self.addToTournamentStatistics($0) }
             
         } catch let error as NSError {
             print(error.localizedDescription)

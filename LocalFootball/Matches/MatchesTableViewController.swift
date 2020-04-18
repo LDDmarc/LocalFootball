@@ -76,28 +76,7 @@ class MatchesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
         
         let match = fetchedResultsController.object(at: indexPath)
-        if let tournamentName = match.tournament?.name {
-            cell.tournamentNameLabel.text = tournamentName
-        }
-        if let date = match.date {
-            cell.dateLabel.text = DataProcessing.shared.writtingDateFormatter.string(from: date)
-        }
-        
-        
-        if let team1 = match.teams?.firstObject,
-            let team = team1 as? Team {
-            cell.team1NameLabel.text = team.name
-            if let logoData = team.logoImageData {
-                cell.team1LogoImageView.image = UIImage(data: logoData)
-            }
-        }
-        if let team2 = match.teams?.lastObject,
-            let team = team2 as? Team {
-            cell.team2NameLabel.text = team.name
-            if let logoData = team.logoImageData {
-                cell.team2LogoImageView.image = UIImage(data: logoData)
-            }
-        }
+        CellsConfiguration.shared.configureCell(cell, with: match)
         
         return cell
     }

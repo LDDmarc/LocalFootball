@@ -38,6 +38,7 @@ class TeamsTableViewController: UITableViewController {
         //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
         sc.searchBar.scopeButtonTitles = []
+        sc.searchBar.setScopeBarButtonTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 15)!], for: .normal)
         sc.searchBar.delegate = self
         return sc
     }()
@@ -58,7 +59,6 @@ class TeamsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.searchController = searchController
-        navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
         
@@ -71,14 +71,14 @@ class TeamsTableViewController: UITableViewController {
                 searchController.searchBar.scopeButtonTitles?.append(name)}
         }
         searchController.searchBar.selectedScopeButtonIndex = selectedButton
-        
+                
         searchController.searchBar.showsScopeBar = isScopeBarShown
         if isScopeBarShown {
             title = searchController.searchBar.scopeButtonTitles?[selectedButton]
         } else {
             title = titleText
         }
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
     }
     
     @objc private func filter() {
@@ -108,7 +108,7 @@ class TeamsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = DetailTeamViewController()
+        let nextVC = DetailTeamTableViewController()
         nextVC.team = fetchedResultsController.object(at: indexPath)
         navigationController?.pushViewController(nextVC, animated: true)
     }
