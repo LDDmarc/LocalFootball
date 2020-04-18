@@ -6,7 +6,7 @@
         <attribute name="team1Name" optional="YES" attributeType="String"/>
         <attribute name="team2Name" optional="YES" attributeType="String"/>
         <attribute name="tournamentName" optional="YES" attributeType="String"/>
-        <relationship name="matchResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchResults" inverseName="match" inverseEntity="MatchResults"/>
+        <relationship name="matchResults" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MatchResults" inverseName="match" inverseEntity="MatchResults"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Team" inverseName="matches" inverseEntity="Team"/>
         <relationship name="tournament" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tournament" inverseName="matches" inverseEntity="Tournament"/>
     </entity>
@@ -38,12 +38,12 @@
         <attribute name="yearOfFoundation" optional="YES" attributeType="Integer 16" minValueString="1800" usesScalarValueType="YES"/>
         <relationship name="matches" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Match" inverseName="teams" inverseEntity="Match"/>
         <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="team" inverseEntity="TeamStatistic"/>
-        <relationship name="tournaments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tournament" inverseName="teams" inverseEntity="Tournament"/>
+        <relationship name="tournaments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tournament" inverseName="teams" inverseEntity="Tournament"/>
     </entity>
     <entity name="TeamStatistic" representedClassName="TeamStatistic" syncable="YES">
         <relationship name="fullStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Statistics" inverseName="teamStatistics" inverseEntity="Statistics"/>
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="teamStatistics" inverseEntity="Team"/>
-        <relationship name="tournamentStatistics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TournamentStatistics" inverseName="teamStatistics" inverseEntity="TournamentStatistics"/>
+        <relationship name="tournamentStatistics" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TournamentStatistics" inverseName="teamStatistics" inverseEntity="TournamentStatistics"/>
     </entity>
     <entity name="Temp" representedClassName="Temp" syncable="YES" codeGenerationType="class">
         <attribute name="atr" optional="YES" attributeType="String"/>
@@ -61,8 +61,8 @@
         <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="tournamentMatches" optional="YES" attributeType="Transformable"/>
         <attribute name="tournamentTeams" optional="YES" attributeType="Transformable"/>
-        <relationship name="matches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Match" inverseName="tournament" inverseEntity="Match"/>
-        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="tournaments" inverseEntity="Team"/>
+        <relationship name="matches" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Match" inverseName="tournament" inverseEntity="Match"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Team" inverseName="tournaments" inverseEntity="Team"/>
     </entity>
     <entity name="TournamentStatistics" representedClassName="TournamentStatistics" syncable="YES">
         <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

@@ -35,11 +35,14 @@ class TournamentTableViewCell: UITableViewCell {
     @IBAction func tournamentTeamsButton(_ sender: UIButton) {
         if delegate != nil,
             let indexPath = indexPath {
-            self.delegate?.show(indexPath: indexPath)
+            self.delegate?.showTeams(indexPath: indexPath)
         }
     }
     @IBAction func tournamentMatchesButton(_ sender: UIButton) {
-        
+        if delegate != nil,
+            let indexPath = indexPath {
+            self.delegate?.showMatches(indexPath: indexPath)
+        }
     }
     @IBAction func tournamentResultsButton(_ sender: UIButton) {
         
@@ -68,7 +71,8 @@ class TournamentTableViewCell: UITableViewCell {
 }
 
 protocol TournamentTableViewCellDelegate: AnyObject {
-    func show(indexPath: IndexPath)
+    func showTeams(indexPath: IndexPath)
+    func showMatches(indexPath: IndexPath)
 }
 
 protocol ExpandableCellDelegate: class {

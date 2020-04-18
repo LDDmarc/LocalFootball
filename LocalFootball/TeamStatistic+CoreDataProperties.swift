@@ -2,7 +2,7 @@
 //  TeamStatistic+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 12.04.2020.
+//  Created by Дарья Леонова on 17.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -18,13 +18,31 @@ extension TeamStatistic {
     }
 
     @NSManaged public var fullStatistics: Statistics?
-    @NSManaged public var tournamentStatistics: NSSet?
     @NSManaged public var team: Team?
+    @NSManaged public var tournamentStatistics: NSOrderedSet?
 
 }
 
 // MARK: Generated accessors for tournamentStatistics
 extension TeamStatistic {
+
+    @objc(insertObject:inTournamentStatisticsAtIndex:)
+    @NSManaged public func insertIntoTournamentStatistics(_ value: TournamentStatistics, at idx: Int)
+
+    @objc(removeObjectFromTournamentStatisticsAtIndex:)
+    @NSManaged public func removeFromTournamentStatistics(at idx: Int)
+
+    @objc(insertTournamentStatistics:atIndexes:)
+    @NSManaged public func insertIntoTournamentStatistics(_ values: [TournamentStatistics], at indexes: NSIndexSet)
+
+    @objc(removeTournamentStatisticsAtIndexes:)
+    @NSManaged public func removeFromTournamentStatistics(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInTournamentStatisticsAtIndex:withObject:)
+    @NSManaged public func replaceTournamentStatistics(at idx: Int, with value: TournamentStatistics)
+
+    @objc(replaceTournamentStatisticsAtIndexes:withTournamentStatistics:)
+    @NSManaged public func replaceTournamentStatistics(at indexes: NSIndexSet, with values: [TournamentStatistics])
 
     @objc(addTournamentStatisticsObject:)
     @NSManaged public func addToTournamentStatistics(_ value: TournamentStatistics)
@@ -33,9 +51,9 @@ extension TeamStatistic {
     @NSManaged public func removeFromTournamentStatistics(_ value: TournamentStatistics)
 
     @objc(addTournamentStatistics:)
-    @NSManaged public func addToTournamentStatistics(_ values: NSSet)
+    @NSManaged public func addToTournamentStatistics(_ values: NSOrderedSet)
 
     @objc(removeTournamentStatistics:)
-    @NSManaged public func removeFromTournamentStatistics(_ values: NSSet)
+    @NSManaged public func removeFromTournamentStatistics(_ values: NSOrderedSet)
 
 }

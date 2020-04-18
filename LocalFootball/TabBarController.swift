@@ -14,6 +14,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         delegate = self
        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -22,7 +24,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let teamsNavigationViewController = TeamsNavigationViewController()
         let teamsViewController = TeamsTableViewController()
         teamsNavigationViewController.viewControllers = [teamsViewController]
-        let teamsBarItem = UITabBarItem(title: "Команды", image: .none, tag: 0)
+        let teamsBarItem = UITabBarItem(title: nil, image: .none, tag: 0)
+       // UITabBarItem.init(
         teamsNavigationViewController.tabBarItem = teamsBarItem
         
         let matchesViewController = MatchesTableViewController()
@@ -39,6 +42,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.viewControllers = controllers
         
     }
+    
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         print("Should select viewController: \(viewController.title ?? "") ?")
