@@ -18,11 +18,11 @@ extension Match {
     }
 
     @NSManaged public var date: Date?
+    @NSManaged public var status: Bool
     @NSManaged public var team1Name: String?
     @NSManaged public var team2Name: String?
     @NSManaged public var tournamentName: String?
-    @NSManaged public var status: Bool
-    @NSManaged public var matchResults: NSSet?
+    @NSManaged public var matchResults: NSOrderedSet?
     @NSManaged public var teams: NSOrderedSet?
     @NSManaged public var tournament: Tournament?
 
@@ -31,6 +31,24 @@ extension Match {
 // MARK: Generated accessors for matchResults
 extension Match {
 
+    @objc(insertObject:inMatchResultsAtIndex:)
+    @NSManaged public func insertIntoMatchResults(_ value: MatchResults, at idx: Int)
+
+    @objc(removeObjectFromMatchResultsAtIndex:)
+    @NSManaged public func removeFromMatchResults(at idx: Int)
+
+    @objc(insertMatchResults:atIndexes:)
+    @NSManaged public func insertIntoMatchResults(_ values: [MatchResults], at indexes: NSIndexSet)
+
+    @objc(removeMatchResultsAtIndexes:)
+    @NSManaged public func removeFromMatchResults(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInMatchResultsAtIndex:withObject:)
+    @NSManaged public func replaceMatchResults(at idx: Int, with value: MatchResults)
+
+    @objc(replaceMatchResultsAtIndexes:withMatchResults:)
+    @NSManaged public func replaceMatchResults(at indexes: NSIndexSet, with values: [MatchResults])
+
     @objc(addMatchResultsObject:)
     @NSManaged public func addToMatchResults(_ value: MatchResults)
 
@@ -38,10 +56,10 @@ extension Match {
     @NSManaged public func removeFromMatchResults(_ value: MatchResults)
 
     @objc(addMatchResults:)
-    @NSManaged public func addToMatchResults(_ values: NSSet)
+    @NSManaged public func addToMatchResults(_ values: NSOrderedSet)
 
     @objc(removeMatchResults:)
-    @NSManaged public func removeFromMatchResults(_ values: NSSet)
+    @NSManaged public func removeFromMatchResults(_ values: NSOrderedSet)
 
 }
 

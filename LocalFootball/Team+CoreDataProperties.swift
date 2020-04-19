@@ -2,7 +2,7 @@
 //  Team+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 15.04.2020.
+//  Created by Дарья Леонова on 17.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -25,7 +25,7 @@ extension Team {
     @NSManaged public var yearOfFoundation: Int16
     @NSManaged public var matches: NSOrderedSet?
     @NSManaged public var teamStatistics: TeamStatistic?
-    @NSManaged public var tournaments: NSSet?
+    @NSManaged public var tournaments: NSOrderedSet?
 
 }
 
@@ -67,6 +67,24 @@ extension Team {
 // MARK: Generated accessors for tournaments
 extension Team {
 
+    @objc(insertObject:inTournamentsAtIndex:)
+    @NSManaged public func insertIntoTournaments(_ value: Tournament, at idx: Int)
+
+    @objc(removeObjectFromTournamentsAtIndex:)
+    @NSManaged public func removeFromTournaments(at idx: Int)
+
+    @objc(insertTournaments:atIndexes:)
+    @NSManaged public func insertIntoTournaments(_ values: [Tournament], at indexes: NSIndexSet)
+
+    @objc(removeTournamentsAtIndexes:)
+    @NSManaged public func removeFromTournaments(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInTournamentsAtIndex:withObject:)
+    @NSManaged public func replaceTournaments(at idx: Int, with value: Tournament)
+
+    @objc(replaceTournamentsAtIndexes:withTournaments:)
+    @NSManaged public func replaceTournaments(at indexes: NSIndexSet, with values: [Tournament])
+
     @objc(addTournamentsObject:)
     @NSManaged public func addToTournaments(_ value: Tournament)
 
@@ -74,9 +92,9 @@ extension Team {
     @NSManaged public func removeFromTournaments(_ value: Tournament)
 
     @objc(addTournaments:)
-    @NSManaged public func addToTournaments(_ values: NSSet)
+    @NSManaged public func addToTournaments(_ values: NSOrderedSet)
 
     @objc(removeTournaments:)
-    @NSManaged public func removeFromTournaments(_ values: NSSet)
+    @NSManaged public func removeFromTournaments(_ values: NSOrderedSet)
 
 }
