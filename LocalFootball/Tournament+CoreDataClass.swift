@@ -57,10 +57,10 @@ public class Tournament: NSManagedObject, Decodable {
             status = try values.decode(Bool.self, forKey: .status)
             
             if let beginDate = try values.decode(String?.self, forKey: .dateOfTheBeginning) {
-                dateOfTheBeginning = DataProcessing.shared.readingDateFormatter.date(from: beginDate)
+                dateOfTheBeginning = DataPresentation.shared.readingDateFormatter.date(from: beginDate)
             }
             if let endDate = try values.decode(String?.self, forKey: .dateOfTheEnd) {
-                dateOfTheEnd = DataProcessing.shared.readingDateFormatter.date(from: endDate)
+                dateOfTheEnd = DataPresentation.shared.readingDateFormatter.date(from: endDate)
             }
             
             numberOfTournamentTeams = try values.decode(Int16.self, forKey: .numberOfTournamentTeams)

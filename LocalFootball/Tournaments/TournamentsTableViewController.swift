@@ -11,19 +11,25 @@ import CoreData
 
 class TournamentsTableViewController: UITableViewController {
     
-    var context: NSManagedObjectContext = CoreDataManger.instance.persistentContainer.viewContext
+     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Tournament> = {
         let request: NSFetchRequest = Tournament.fetchRequest()
+        request.predicate = tournamentsPredicate
         let sort = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sort]
-        request.fetchBatchSize = 3
-        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        request.fetchBatchSize = 6
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: nil, cacheName: nil)
+       do {
+           try frc.performFetch()
+       } catch {
+           let nserror = error as NSError
+           fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+       }
         frc.delegate = self
         return frc
     }()
     var tournamentsPredicate: NSPredicate?
-    
-    var tournaments = [Tournament]()
     
     var expandedIndexSet : IndexSet = []
     
@@ -37,20 +43,8 @@ class TournamentsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: TournamentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TournamentTableViewCell.self))
-
-        loadData()
     }
     
-    private func loadData() {
-        fetchedResultsController.fetchRequest.predicate = tournamentsPredicate
-        do {
-            try fetchedResultsController.performFetch()
-            tableView.reloadData()
-        } catch {
-            print("Fetch failed")
-        }
-    }
-
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,7 +84,9 @@ class TournamentsTableViewController: UITableViewController {
 }
 
 extension TournamentsTableViewController: NSFetchedResultsControllerDelegate {
-    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        tableView.reloadData()
+    }
 }
 
 extension TournamentsTableViewController: TournamentTableViewCellDelegate {
@@ -101,7 +97,6 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
         if let name = tournament.name {
             nextVC.teamsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
             nextVC.teamsByTournamentsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
-            nextVC.titleText = name
         }
         nextVC.isScopeBarShown = false
         
@@ -111,13 +106,11 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
         let tournament = fetchedResultsController.object(at: indexPath)
         let nextVC = MatchesTableViewController()
         
-        //nextVC.matchesPredicate
-        
         if let name = tournament.name {
-            nextVC.matchesPredicate = NSPredicate(format: "tournamentName == %@", name)
+            //nextVC.matchesPredicate = NSPredicate(format: "tournamentName == %@", name)
         }
         
-        navigationController?.pushViewController(nextVC, animated: true)
+           navigationController?.pushViewController(nextVC, animated: true)
     }
 
 }

@@ -11,22 +11,26 @@ import CoreData
 
 class TeamsTableViewController: UITableViewController {
     
-    var context: NSManagedObjectContext = CoreDataManger.instance.persistentContainer.viewContext
+    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+  
     lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
+        request.predicate = teamsByTournamentsPredicate
         let sort = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sort]
         request.fetchBatchSize = 20
-        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try frc.performFetch()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
         frc.delegate = self
         return frc
     }()
     var teamsPredicate: NSPredicate?
     var teamsByTournamentsPredicate: NSPredicate?
-    
-    var teams = [Team]()
-    var matches = [Match]()
-    var tournaments = [Tournament]()
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
@@ -37,54 +41,45 @@ class TeamsTableViewController: UITableViewController {
         sc.searchBar.isHidden = false
         //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
-        sc.searchBar.scopeButtonTitles = []
-        sc.searchBar.setScopeBarButtonTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 15)!], for: .normal)
-        sc.searchBar.delegate = self
         return sc
     }()
     
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    var isFiltering: Bool {
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!isSearchBarEmpty || searchBarScopeIsFiltering)
-    }
-    var selectedButton = 0
     var isScopeBarShown = true
-    var titleText: String?
-   
+    
+    let teamsRefreshControl: UIRefreshControl = {
+       let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return rc
+    }()
+    // TODO: не работает((
+    @objc private func refresh() {
+//        dataProvider.fetchData(entityName: "Team", [Team].self, urlString: "teams") { _ in  }
+//        dataProvider.fetchData(entityName: "Match", [Match].self, urlString: "matches") { _ in }
+//        dataProvider.fetchData(entityName: "Tournament", [Tournament].self, urlString: "tournaments") { _ in }
+//        try? fetchedResultsController.performFetch()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+    
+    var titleText: String = "Команды"
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.searchController = searchController
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
+        title = titleText
+        
+        tableView.refreshControl = teamsRefreshControl
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
-        
-        loadData()
-        
-        // <4 - ?
-        searchController.searchBar.scopeButtonTitles?.append("Все")
-        tournaments.forEach { tournament in
-            if let name = tournament.name {
-                searchController.searchBar.scopeButtonTitles?.append(name)}
-        }
-        searchController.searchBar.selectedScopeButtonIndex = selectedButton
-                
-        searchController.searchBar.showsScopeBar = isScopeBarShown
-        if isScopeBarShown {
-            title = searchController.searchBar.scopeButtonTitles?[selectedButton]
-        } else {
-            title = titleText
-        }
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
     }
-    
-    @objc private func filter() {
-        
-    }
-    
     
     // MARK: - Table view data source
     
@@ -112,10 +107,10 @@ class TeamsTableViewController: UITableViewController {
         nextVC.team = fetchedResultsController.object(at: indexPath)
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
 }
 
-extension TeamsTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    // MARK: - UISearchResultsUpdating
+extension TeamsTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
@@ -127,39 +122,8 @@ extension TeamsTableViewController: UISearchResultsUpdating, UISearchBarDelegate
         filterContentForSearchText()
     }
     
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        if selectedScope != 0 {
-            if let name = searchBar.scopeButtonTitles?[selectedScope] {
-                teamsByTournamentsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
-                title = name
-            }
-        } else {
-            teamsByTournamentsPredicate = nil
-            title = searchBar.scopeButtonTitles?[selectedScope]
-        }
-        filterContentForSearchText()
-    }
-}
-
-// MARK: - Data Processing
-
-extension TeamsTableViewController: NSFetchedResultsControllerDelegate {
-    private func loadData() {
-        teams = DataProcessing.shared.getDataFromCoreData(with: context, orFrom: "teams", withExtension: "json")
-        matches = DataProcessing.shared.getDataFromCoreData(with: context, orFrom: "matches", withExtension: "json")
-        tournaments = DataProcessing.shared.getDataFromCoreData(with: context, orFrom: "tournaments", withExtension: "json")
-        
-        // todo
-        let userDefaults = UserDefaults.standard
-        let firstLaunch = FirstLaunch(userDefaults: userDefaults)
-        if firstLaunch.isFirstLaunch {
-            DataProcessing.shared.bindingData(matches: matches, teams: teams, tournaments: tournaments)
-        }
-        
-        updateData(with: teamsPredicate)
-    }
-    
     private func filterContentForSearchText() {
+        
         var predicate: NSPredicate?
         var predicates = [NSPredicate]()
         
@@ -178,16 +142,40 @@ extension TeamsTableViewController: NSFetchedResultsControllerDelegate {
         predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         updateData(with: predicate)
     }
-    
     private func updateData(with predicate: NSPredicate?) {
-        fetchedResultsController.fetchRequest.predicate = predicate
+        if let predicate = predicate {
+            fetchedResultsController.fetchRequest.predicate = predicate
+        }
         do {
             try fetchedResultsController.performFetch()
-            
             tableView.reloadData()
         } catch {
             print("Fetch failed")
         }
-        
     }
+}
+
+// MARK: - NSFetchedResultsController
+
+extension TeamsTableViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        tableView.reloadData()
+    }
+  
+    
+    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+//        case .delete:
+//            tableView.deleteRows(at: [indexPath!], with: .automatic)
+//        case .update:
+//            //???
+//            let cell = tableView.cellForRow(at: indexPath! as IndexPath)
+//        default:
+//            break
+//        }
+//    }
 }

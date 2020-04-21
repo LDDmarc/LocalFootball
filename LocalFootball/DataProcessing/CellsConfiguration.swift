@@ -19,7 +19,7 @@ class CellsConfiguration {
             cell.tournamentNameLabel.text = tournamentName
         }
         if let date = match.date {
-            cell.dateLabel.text = DataProcessing.shared.writtingDateFormatter.string(from: date)
+            cell.dateLabel.text = DataPresentation.shared.writtingDateFormatter.string(from: date)
         }
         
         if let team1 = match.teams?.firstObject,
@@ -81,7 +81,8 @@ class CellsConfiguration {
         if let imageData = tournament.imageData {
             cell.tournamentImageView.image = UIImage(data: imageData)
         }
-        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.numberOfTournamentTeams)"
+       
+        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.teams?.count ?? 0)"
         
 //        if !tournament.status {
 //            cell.tournamentStatusLabel.isHidden = false

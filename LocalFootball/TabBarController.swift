@@ -13,9 +13,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-       
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,9 +36,11 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
        // UITabBarItem.init(
         teamsNavigationViewController.tabBarItem = teamsBarItem
         
+        let matchesNavigationViewController = MatchesNaigationViewController()
         let matchesViewController = MatchesTableViewController()
+        matchesNavigationViewController.viewControllers = [matchesViewController]
         let matchesBarItem = UITabBarItem(title: "Матчи", image: .none, tag: 1)
-        matchesViewController.tabBarItem = matchesBarItem
+        matchesNavigationViewController.tabBarItem = matchesBarItem
         
         let tournamentsNavigationViewController = TournamentsNavigationViewController()
         let tournamentsViewController = TournamentsTableViewController()
@@ -49,7 +48,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let tournamentsBarItem = UITabBarItem(title: "Турниры", image: .none, tag: 2)
         tournamentsNavigationViewController.tabBarItem = tournamentsBarItem
         
-        let controllers = [teamsNavigationViewController, matchesViewController, tournamentsNavigationViewController]
+        let controllers = [teamsNavigationViewController, matchesNavigationViewController, tournamentsNavigationViewController]
         self.viewControllers = controllers
         
     }

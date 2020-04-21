@@ -1,75 +1,116 @@
 //
-//  DataProcessing.swift
+//  DataProvider.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 12.04.2020.
+//  Created by Дарья Леонова on 20.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class DataProcessing {
+let dataErrorDomain = "dataErrorDomain"
+
+enum DataErrorCode: NSInteger {
+    case networkUnavailable = 101
+    case wrongDataFormat = 102
+}
+
+class DataProvider {
     
-    static let shared = DataProcessing()
-    private init() { }
+    private let persistentContainer: NSPersistentContainer
+    private let repository: NetworkManager
     
-    var context: NSManagedObjectContext = CoreDataManger.instance.persistentContainer.viewContext
+    var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
+
+    init(persistentContainer: NSPersistentContainer, repository: NetworkManager) {
+        self.persistentContainer = persistentContainer
+        self.repository = repository
+    }
     
-    var readingDateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        return df
-    }()
-    
-    var writtingDateFormatter: DateFormatter = {
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        df.timeStyle = .short
-        return df
-    }()
-    
-    func loadData<T: Decodable>(from fileName: String, withExtension: String, into context: NSManagedObjectContext) -> [T] {
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: withExtension) else {
-            fatalError("File \(fileName).\(withExtension) not found.")
-        }
-        do {
-            let data = try Data(contentsOf: url)
-            let jsonDecoder = JSONDecoder()
+    func fetchData<T>(entityName: String, _ type: T.Type, urlString: String , completion: @escaping(Error?) -> Void) where T: Decodable {
+        
+        repository.getData(urlString: urlString) { (data, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            guard let data = data else {
+                let error = NSError(domain: dataErrorDomain, code: DataErrorCode.wrongDataFormat.rawValue, userInfo: nil)
+                completion(error)
+                return
+            }
             
-            jsonDecoder.userInfo[CodingUserInfoKey.context!] = context
+            let taskContext = self.persistentContainer.newBackgroundContext()
+            taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            taskContext.undoManager = nil
+            
+            _ = self.updateData(data: data, taskContext: taskContext, entityName: entityName, type)
+            self.bindingData()
+            completion(nil)
+        }
+    }
+    
+    private func updateData<T>(data: Data, taskContext: NSManagedObjectContext, entityName: String, _ type: T.Type) -> Bool where T: Decodable {
+        var successfull = false
+        taskContext.performAndWait {
+            let teamRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: teamRequest)
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            
+            // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
             do {
-                let object = try jsonDecoder.decode([T].self, from: data)
+                let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+                
+                if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+                                                        into: [self.persistentContainer.viewContext])
+                }
+            } catch {
+                print("Error: \(error)\nCould not batch delete existing records.")
+                return
+            }
+            
+            // Create new records.
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.userInfo[CodingUserInfoKey.context!] = taskContext
+            do {
+                _ = try jsonDecoder.decode(type.self, from: data)
                 do {
-                    try context.save()
-                    return object
+                    try taskContext.save()
                 } catch {
                     fatalError("Failed to save")
                 }
             } catch  {
                 fatalError("Failed to decode")
             }
-            
-        } catch {
-            fatalError("Failed to create data")
+            taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
+            successfull = true
         }
+        return successfull
     }
     
-    func getDataFromCoreData<T: NSManagedObject & Decodable>(with context: NSManagedObjectContext, orFrom fileName: String, withExtension: String) -> [T] {
-        guard let fetchRequest = T.fetchRequest() as? NSFetchRequest<T> else { return [] }
+
+    func bindingData() {
+        let teamsRequest: NSFetchRequest = Team.fetchRequest()
+        let matchesRequest: NSFetchRequest = Match.fetchRequest()
+        let tournamentsRequest: NSFetchRequest = Tournament.fetchRequest()
+        
+        var teams = [Team]()
+        var matches = [Match]()
+        var tournaments = [Tournament]()
+        
         do {
-            let results = try context.fetch(fetchRequest)
-            if results.isEmpty {
-                return loadData(from: fileName, withExtension: withExtension, into: context)
-            }
-            return results
-        } catch let error as NSError {
-            print(error.localizedDescription)
+            teams = try context.fetch(teamsRequest)
+            matches = try context.fetch(matchesRequest)
+            tournaments = try context.fetch(tournamentsRequest)
+        } catch {
+            print("Fetch failed")
         }
-        return []
-    }
-    
-    func bindingData(matches: [Match], teams: [Team], tournaments: [Tournament]) {
+        
         var teamsResults = [Team]()
         var tornamentsResults = [Tournament]()
         
@@ -145,8 +186,6 @@ class DataProcessing {
             print(error.localizedDescription)
         }
     }
-    
-  
 }
 
 final class FirstLaunch {

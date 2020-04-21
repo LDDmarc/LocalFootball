@@ -1,5 +1,6 @@
 [
     {
+        "id"
         "name":"Wolf",
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1999,

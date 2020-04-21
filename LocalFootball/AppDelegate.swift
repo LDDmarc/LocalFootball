@@ -11,9 +11,16 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//
+        dataProvider.fetchData(entityName: "Team", [Team].self, urlString: "teams") { _ in  }
+        dataProvider.fetchData(entityName: "Match", [Match].self, urlString: "matches") { _ in }
+        dataProvider.fetchData(entityName: "Tournament", [Tournament].self, urlString: "tournaments") { _ in }
+     
         return true
     }
 

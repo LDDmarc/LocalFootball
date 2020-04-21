@@ -73,7 +73,20 @@ public class Team: NSManagedObject, Decodable {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        
+    }
+    
+    func update(with jsonDictionary: [String: Any]) throws {
+        guard let name = jsonDictionary["name"] as? String,
+            let yearOfFoundation = jsonDictionary["yearOfFoundation"] as? Int16,
+            let logoName = jsonDictionary["logoName"] as? String
+            else {
+                throw NSError(domain: "", code: 100, userInfo: nil)
+        }
+        self.name = name
+        self.yearOfFoundation = yearOfFoundation
+        self.logoName = logoName
+        let image = UIImage(named: logoName)
+        self.logoImageData = image?.pngData()
         
     }
 }
