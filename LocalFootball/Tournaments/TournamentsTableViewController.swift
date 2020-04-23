@@ -98,8 +98,7 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
             nextVC.teamsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
             nextVC.teamsByTournamentsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
         }
-        nextVC.isScopeBarShown = false
-        
+      
         navigationController?.pushViewController(nextVC, animated: true)
     }
     func showMatches(indexPath: IndexPath) {
@@ -107,6 +106,7 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
         let nextVC = MatchesTableViewController()
         
         if let name = tournament.name {
+        // TODO:
             //nextVC.matchesPredicate = NSPredicate(format: "tournamentName == %@", name)
         }
         

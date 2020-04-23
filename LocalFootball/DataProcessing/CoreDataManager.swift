@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 /// CoreDataManager singleton
 class CoreDataManger {
@@ -48,4 +49,9 @@ class CoreDataManger {
         }
     }
     
+}
+
+protocol FootballNSManagedObjectProtocol: Decodable & NSManagedObject {
+    var modified: Int64 { get }
+    func update(with objectJSON: JSON, into context: NSManagedObjectContext)
 }

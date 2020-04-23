@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 class NetworkManager {
     
@@ -17,7 +18,7 @@ class NetworkManager {
     private let baseURL = URL(string: "https://football-ios2020.herokuapp.com/")
     private let urlSession = URLSession.shared
   
-    func getData(urlString: String, completion: @escaping(_ data: Data?, _ error: Error?) -> ()) {
+    func getData(urlString: String, completion: @escaping(_ resultsJSON: JSON?, _ error: Error?) -> ()) {
         
         guard let url = baseURL?.appendingPathComponent(urlString) else { return }
         urlSession.dataTask(with: url) { (data, response, error) in
@@ -33,8 +34,33 @@ class NetworkManager {
                 return
             }
             
-            completion(data, nil)
+            do {
+                let jsonObject = try JSON(data: data)
+                let result = jsonObject["results"]
+                completion(result, nil)
+            } catch {
+                completion(nil, error)
+            }
+            
         }.resume()
     }
-
+    
+    func testGetData(fileName: String, withExtension: String, completion: @escaping(_ jsonDictionary: JSON?, _ error: Error?) -> ()) {
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: withExtension) else {
+            fatalError("File \(fileName).\(withExtension) not found.")
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            do {
+                let jsonObject = try JSON(data: data)
+                let result = jsonObject["results"]
+                completion(result, nil)
+            } catch {
+                completion(nil, error)
+            }
+        } catch let error as NSError{
+            completion(nil, error)
+        }
+    }
+    
 }

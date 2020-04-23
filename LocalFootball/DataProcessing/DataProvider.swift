@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 let dataErrorDomain = "dataErrorDomain"
 
@@ -24,20 +25,19 @@ class DataProvider {
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
-
+    
     init(persistentContainer: NSPersistentContainer, repository: NetworkManager) {
         self.persistentContainer = persistentContainer
         self.repository = repository
     }
     
-    func fetchData<T>(entityName: String, _ type: T.Type, urlString: String , completion: @escaping(Error?) -> Void) where T: Decodable {
-        
-        repository.getData(urlString: urlString) { (data, error) in
+    func fetchData<T>(entityName: String, _ type: T.Type, from fileName: String, withExtension: String, completion: @escaping(Error?) -> Void) where T: FootballNSManagedObjectProtocol {
+        repository.testGetData(fileName: fileName, withExtension: withExtension) { (objectsJSON, error) in
             if let error = error {
                 completion(error)
                 return
             }
-            guard let data = data else {
+            guard let objectsJSON = objectsJSON else {
                 let error = NSError(domain: dataErrorDomain, code: DataErrorCode.wrongDataFormat.rawValue, userInfo: nil)
                 completion(error)
                 return
@@ -46,54 +46,168 @@ class DataProvider {
             let taskContext = self.persistentContainer.newBackgroundContext()
             taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             taskContext.undoManager = nil
-            
-            _ = self.updateData(data: data, taskContext: taskContext, entityName: entityName, type)
-            self.bindingData()
+           
+            _ = self.updateData(objectsJSON: objectsJSON, taskContext: taskContext, entityName: "Team", Team.self)
+
             completion(nil)
         }
     }
     
-    private func updateData<T>(data: Data, taskContext: NSManagedObjectContext, entityName: String, _ type: T.Type) -> Bool where T: Decodable {
+    private func updateData<T>(objectsJSON: JSON, taskContext: NSManagedObjectContext, entityName: String, _ type: T.Type) -> Bool where T: FootballNSManagedObjectProtocol {
         var successfull = false
+        
         taskContext.performAndWait {
-            let teamRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let objectIds = objectsJSON.arrayValue.map { $0["id"].int64 }.compactMap { $0 }
+            request.predicate = NSPredicate(format: "NONE id IN %d", argumentArray: [objectIds])
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
             
-            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: teamRequest)
             batchDeleteRequest.resultType = .resultTypeObjectIDs
             
-            // Execute the request to de batch delete and merge the changes to viewContext, which triggers the UI update
             do {
                 let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
                 
                 if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
                     NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
                                                         into: [self.persistentContainer.viewContext])
+                    print("")
                 }
             } catch {
                 print("Error: \(error)\nCould not batch delete existing records.")
                 return
             }
             
-            // Create new records.
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.userInfo[CodingUserInfoKey.context!] = taskContext
-            do {
-                _ = try jsonDecoder.decode(type.self, from: data)
+            for objectJSON in objectsJSON.arrayValue {
+                
+                guard let id = objectJSON["id"].int64,
+                    let lastModified = objectJSON["modified"].int64 else { return  }
+                
+                let req: NSFetchRequest<NSFetchRequestResult> = T.fetchRequest()
+                let predicate = NSPredicate(format: "id == %d", id)
+                req.predicate = predicate
+                do {
+                    let currentObjects = try taskContext.fetch(req)
+                    if let currentObject = currentObjects.first as? T{
+                        if currentObject.modified < lastModified {
+                            currentObject.update(with: objectJSON, into: taskContext)
+                        }
+                    } else {
+                        guard let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: taskContext) as? T else {
+                            print("Error: Failed to create a new object!")
+                            return
+                        }
+                        newObject.update(with: objectJSON, into: taskContext)
+                    }
+                } catch {
+                    print("Error: \(error)\nCould not find records.")
+                    return
+                }
+            }
+            if taskContext.hasChanges {
                 do {
                     try taskContext.save()
                 } catch {
                     fatalError("Failed to save")
                 }
-            } catch  {
-                fatalError("Failed to decode")
+                taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
             }
-            taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
             successfull = true
         }
         return successfull
     }
     
+    
+    
+    
+    
+    func testFetchData<T>(entityName: String, _ type: T.Type, from fileName: String, withExtension: String, completion: @escaping(Error?) -> Void) where T: Decodable {
+        repository.testGetData(fileName: fileName, withExtension: withExtension) { (teamsJSON, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            guard let teamsJSON = teamsJSON else {
+                let error = NSError(domain: dataErrorDomain, code: DataErrorCode.wrongDataFormat.rawValue, userInfo: nil)
+                completion(error)
+                return
+            }
+            
+            let taskContext = self.persistentContainer.newBackgroundContext()
+            taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            taskContext.undoManager = nil
+           
+            _ = self.testUpdateData(teamsJSON: teamsJSON, taskContext: taskContext, entityName: "Team", Team.self)
 
+            completion(nil)
+        }
+    }
+    
+    private func testUpdateData<T>(teamsJSON: JSON, taskContext: NSManagedObjectContext, entityName: String, _ type: T.Type) -> Bool where T: Decodable {
+        var successfull = false
+        
+        taskContext.performAndWait {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let objectIds = teamsJSON.arrayValue.map { $0["id"].int64 }.compactMap { $0 }
+            request.predicate = NSPredicate(format: "NONE id IN %d", argumentArray: [objectIds])
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+            
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            
+            do {
+                let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
+                
+                if let deletedObjectIDs = batchDeleteResult?.result as? [NSManagedObjectID] {
+                    NSManagedObjectContext.mergeChanges(fromRemoteContextSave: [NSDeletedObjectsKey: deletedObjectIDs],
+                                                        into: [self.persistentContainer.viewContext])
+                    print("")
+                }
+            } catch {
+                print("Error: \(error)\nCould not batch delete existing records.")
+                return
+            }
+            
+            for teamJSON in teamsJSON.arrayValue {
+                
+                guard let id = teamJSON["id"].int64,
+                    let lastModified = teamJSON["modified"].int64 else { return  }
+                
+                let req: NSFetchRequest<Team> = Team.fetchRequest()
+                let predicate = NSPredicate(format: "id == %d", id)
+                req.predicate = predicate
+                do {
+                    let currentObjects = try taskContext.fetch(req)
+                    if let currentObject = currentObjects.first {
+                        if currentObject.modified < lastModified {
+                            currentObject.update(with: teamJSON, into: taskContext)
+                        }
+                    } else {
+                        guard let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: taskContext) as? Team else {
+                            print("Error: Failed to create a new object!")
+                            return
+                        }
+                        newObject.update(with: teamJSON, into: taskContext)
+                    }
+                } catch {
+                    print("Error: \(error)\nCould not find records.")
+                    return
+                }
+                
+            }
+            if taskContext.hasChanges {
+                do {
+                    try taskContext.save()
+                } catch {
+                    fatalError("Failed to save")
+                }
+                taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
+            }
+            
+            successfull = true
+        }
+       
+        return successfull
+    }
+    
     func bindingData() {
         let teamsRequest: NSFetchRequest = Team.fetchRequest()
         let matchesRequest: NSFetchRequest = Match.fetchRequest()
@@ -186,6 +300,8 @@ class DataProvider {
             print(error.localizedDescription)
         }
     }
+    
+    
 }
 
 final class FirstLaunch {

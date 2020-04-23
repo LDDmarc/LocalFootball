@@ -38,7 +38,7 @@ class TeamsTableViewController: UITableViewController {
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.placeholder = "Введите название команды"
         sc.searchResultsUpdater = self
-        sc.searchBar.isHidden = false
+        //sc.searchBar.isHidden = false
         //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
         return sc
@@ -47,27 +47,35 @@ class TeamsTableViewController: UITableViewController {
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    var isScopeBarShown = true
+    //var isScopeBarShown = true
     
-    let teamsRefreshControl: UIRefreshControl = {
-       let rc = UIRefreshControl()
+    lazy var teamsRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
         rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return rc
     }()
-    // TODO: не работает((
     @objc private func refresh() {
-//        dataProvider.fetchData(entityName: "Team", [Team].self, urlString: "teams") { _ in  }
-//        dataProvider.fetchData(entityName: "Match", [Match].self, urlString: "matches") { _ in }
-//        dataProvider.fetchData(entityName: "Tournament", [Tournament].self, urlString: "tournaments") { _ in }
-//        try? fetchedResultsController.performFetch()
-        DispatchQueue.main.async {
-            self.tableView.refreshControl?.endRefreshing()
+        let files = ["teams2", "teams3", "teams4"]
+        
+        if counter < 3 {
+            dataProvider.fetchData(entityName: "Team", Team.self, from: files[counter], withExtension: "json") { (error) in
+                guard error == nil else { return }
+                DispatchQueue.main.async {
+                    self.tableView.refreshControl?.endRefreshing()
+                }
+                self.counter += 1
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+            }
         }
+        
     }
-    
+
+    var counter = 0
+   
     var titleText: String = "Команды"
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +87,7 @@ class TeamsTableViewController: UITableViewController {
         tableView.refreshControl = teamsRefreshControl
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
+    
     }
     
     // MARK: - Table view data source
@@ -159,23 +168,48 @@ extension TeamsTableViewController: UISearchResultsUpdating {
 
 extension TeamsTableViewController: NSFetchedResultsControllerDelegate {
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        tableView.reloadData()
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
     }
-  
     
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
     
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        switch type {
-//        case .insert:
-//            tableView.insertRows(at: [newIndexPath!], with: .automatic)
-//        case .delete:
-//            tableView.deleteRows(at: [indexPath!], with: .automatic)
-//        case .update:
-//            //???
-//            let cell = tableView.cellForRow(at: indexPath! as IndexPath)
-//        default:
-//            break
-//        }
-//    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .move:
+            tableView.reloadData()
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
+    }
+    
 }

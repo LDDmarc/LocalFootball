@@ -86,9 +86,5 @@ class DetailTeamTableViewController: UITableViewController {
             
             return cell
         }
-        
     }
-    
-    
-    
 }

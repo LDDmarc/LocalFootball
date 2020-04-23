@@ -1,0 +1,6 @@
+framework module Pods_LocalFootball {
+  umbrella header "Pods-LocalFootball-umbrella.h"
+
+  export *
+  module * { export * }
+}

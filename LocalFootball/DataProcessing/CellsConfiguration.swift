@@ -63,7 +63,7 @@ class CellsConfiguration {
             cell.gamesLabel.text = "Игр: \(fullstatistics.numberOfGames)"
             cell.winsLabel.text = "Побед: \(fullstatistics.numberOfWins)"
             cell.goalsLabel.text = "Голов: \(fullstatistics.goalsScored)"
-            if let tournamentsCount = statistics.tournamentStatistics?.count {
+            if let tournamentsCount = statistics.tournamentsStatistics?.count {
                 cell.tournamentsLabel.text = "Турниров: \(tournamentsCount)"
             }
         }

@@ -10,13 +10,14 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftyJSON
 
 extension CodingUserInfoKey {
     static let context = CodingUserInfoKey(rawValue: "context")
 }
 
 @objc(Team)
-public class Team: NSManagedObject, Decodable {
+public class Team: NSManagedObject, FootballNSManagedObjectProtocol {
     
     lazy var teamColors: [String] = {
         if let myColors = colors as? [String] {
@@ -36,6 +37,8 @@ public class Team: NSManagedObject, Decodable {
     
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case modified = "modified"
         case name = "name"
         case yearOfFoundation = "yearOfFoundation"
         case colors = "colors"
@@ -54,7 +57,10 @@ public class Team: NSManagedObject, Decodable {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
-            //uuid = try values.decode(UUID.self, forKey: .uuid)
+            
+            id = try values.decode(Int64.self, forKey: .id)
+            modified = try values.decode(Int64.self, forKey: .modified)
+            
             name = try values.decode(String?.self, forKey: .name)
             yearOfFoundation = try values.decode(Int16.self, forKey: .yearOfFoundation)
             
@@ -75,18 +81,57 @@ public class Team: NSManagedObject, Decodable {
         }
     }
     
-    func update(with jsonDictionary: [String: Any]) throws {
-        guard let name = jsonDictionary["name"] as? String,
-            let yearOfFoundation = jsonDictionary["yearOfFoundation"] as? Int16,
-            let logoName = jsonDictionary["logoName"] as? String
-            else {
-                throw NSError(domain: "", code: 100, userInfo: nil)
+    func update(with teamJSON: JSON, into context: NSManagedObjectContext) {
+
+        self.id = teamJSON["id"].int64Value
+        self.modified = teamJSON["modified"].int64Value
+        self.name = teamJSON["name"].string
+        self.yearOfFoundation = teamJSON["yearOfFoundation"].int16Value
+        self.logoName = teamJSON["logoName"].string
+        if let imageName = self.logoName {
+            let image = UIImage(named: imageName)
+            self.logoImageData = image?.pngData()
         }
-        self.name = name
-        self.yearOfFoundation = yearOfFoundation
-        self.logoName = logoName
-        let image = UIImage(named: logoName)
-        self.logoImageData = image?.pngData()
         
+        self.colors = teamJSON["colors"].arrayObject! as NSObject
+        self.tournamentsNames = teamJSON["tournamentsNames"].arrayObject! as NSObject
+        
+        if self.teamStatistics == nil {
+            guard let teamStatistics = NSEntityDescription.insertNewObject(forEntityName: "TeamStatistic", into: context) as? TeamStatistic else {
+                print("Error: Failed to create a new object!")
+                return
+            }
+            self.teamStatistics = teamStatistics
+        }
+        if self.teamStatistics?.fullStatistics == nil {
+            guard let fullStatistics = NSEntityDescription.insertNewObject(forEntityName: "Statistics", into: context) as? Statistics else {
+                print("Error: Failed to create a new object!")
+                return
+            }
+            self.teamStatistics?.fullStatistics = fullStatistics
+        }
+        
+        if self.teamStatistics?.tournamentsStatistics?.count != self.teamTournamentsNames.count {
+            if let currentCount = self.teamStatistics?.tournamentsStatistics?.count {
+                for i in 0..<currentCount {
+                    context.delete((self.teamStatistics?.tournamentsStatistics![i])! as! NSManagedObject)
+                }
+            }
+           
+            let tournamentsStatisticsSet = NSMutableOrderedSet()
+            
+            for _ in 0..<self.teamTournamentsNames.count {
+                guard let tournamentStatistics = NSEntityDescription.insertNewObject(forEntityName: "TournamentStatistics", into: context) as? TournamentStatistics else {
+                    print("Error: Failed to create a new object!")
+                    return
+                }
+                tournamentsStatisticsSet.add(tournamentStatistics)
+                self.teamStatistics?.tournamentsStatistics = tournamentsStatisticsSet
+                
+            }
+        }
+
+        self.teamStatistics?.update(with: teamJSON["teamStatistics"])
+    
     }
 }

@@ -1,10 +1,10 @@
 {
-    "results":
-    [
+"results":
+[
     {
         "modified": 1587546037,
         "id": 101,
-        "name": "Wolf",
+        "name":"Wolf",
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1999,
         "logoName": "Wolf",
@@ -274,6 +274,122 @@
                 }
             ]
         }
+    },
+    {
+        "modified": 1587546039,
+        "id": 106,
+        "name":"Everton",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 2000,
+        "logoName": "Everton",
+        "tournamentsNames": ["Чемпионат IFL"],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 75,
+                "numberOfWins": 75,
+                "numberOfLesions": 0,
+                "numberOfDraws": 0,
+                "goalsScored": 100,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Чемпионат IFL",
+                    "score": 15,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546039,
+        "id": 107,
+        "name":"FMF",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1992,
+        "logoName": "FMF",
+        "tournamentsNames": ["Чемпионат IFL", "FIFA 2018", "FIFA 2019"],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 12,
+                "numberOfWins": 6,
+                "numberOfLesions": 7,
+                "numberOfDraws": 1,
+                "goalsScored": 1,
+                "goalsConceded": 3,
+                "penaltyScored": 3,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Чемпионат IFL",
+                    "score": 3,
+                    "position": 12,
+                    "statistics":
+                    {
+                        "numberOfGames": 1,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 3,
+                        "numberOfDraws": 1,
+                        "goalsScored": 10,
+                        "goalsConceded": 4,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2018",
+                    "score": 34,
+                    "position": 1,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 3,
+                    "position": 9,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
     }
-    ]
+]
 }
