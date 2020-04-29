@@ -33,13 +33,7 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var tournamentInfoLabel: UILabel!
     @IBOutlet weak var buttonsStackView: UIStackView!
-    
-    
-    @IBOutlet weak var tournamentTeamsOutlet: UIButton!
-    @IBOutlet weak var tournamentMatchesOutlet: UIButton!
-    @IBOutlet weak var tournamentResultOutlet: UIButton!
-    
-    @IBAction func tournamentTeamsButton(_ sender: UIButton) {
+    @IBAction func tournamentTeamsButtonTap(_ sender: UIButton) {
         if delegate != nil,
             let indexPath = indexPath {
             self.delegate?.showTeams(indexPath: indexPath)
@@ -66,10 +60,6 @@ class TournamentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        tournamentTeamsOutlet.layer.cornerRadius = 5
-        tournamentMatchesOutlet.layer.cornerRadius = 5
-        tournamentResultOutlet.layer.cornerRadius = 5
-        
         selectionStyle = .none
         
         tournamentStatusLabel.isHidden = true
