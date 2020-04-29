@@ -99,20 +99,14 @@ class TeamsTableViewController: UITableViewController {
             self.activityIndicatorView.startAnimating()
             self.tableView.separatorStyle = .none
         }
-        dataProvider.fetchAllData { (error) in
+        dataProvider.fetchAllData { (error) i
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
                 self.tableView.separatorStyle = .singleLine
+                self.teamsRefreshControl.endRefreshing()
             }
         }
-        //        dataProvider.fetchData(entity: .team) { (error) in
-        //            guard error == nil else { return }
-        //            DispatchQueue.main.async {
-        //                self.activityIndicatorView.stopAnimating()
-        //                self.tableView.separatorStyle = .singleLine
-        //            }
-        //        }
     }
     
     // MARK: - Table view data source

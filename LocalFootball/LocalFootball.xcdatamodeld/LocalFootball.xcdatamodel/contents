@@ -72,21 +72,24 @@
         <attribute name="teamsIds" optional="YES" attributeType="Transformable"/>
         <relationship name="matches" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Match" inverseName="tournament" inverseEntity="Match"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Team" inverseName="tournaments" inverseEntity="Team"/>
+        <relationship name="teamsTournamentStatistics" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TournamentStatistics" inverseName="tournament" inverseEntity="TournamentStatistics"/>
     </entity>
     <entity name="TournamentStatistics" representedClassName="TournamentStatistics" syncable="YES">
         <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tournamentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="statistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Statistics" inverseName="tournamentPartStatistics" inverseEntity="Statistics"/>
         <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="tournamentsStatistics" inverseEntity="TeamStatistic"/>
+        <relationship name="tournament" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tournament" inverseName="teamsTournamentStatistics" inverseEntity="Tournament"/>
     </entity>
     <elements>
-        <element name="Match" positionX="-496.94140625" positionY="-577.578125" width="128" height="283"/>
+        <element name="Match" positionX="-517.3125" positionY="-797.984375" width="128" height="283"/>
         <element name="MatchResults" positionX="-707.15625" positionY="-483.80078125" width="128" height="118"/>
         <element name="Statistics" positionX="-47.578125" positionY="-334.3515625" width="128" height="193"/>
         <element name="Team" positionX="-184.6640625" positionY="-817.66015625" width="128" height="223"/>
-        <element name="TeamStatistic" positionX="-305.2265625" positionY="-391.4140625" width="128" height="88"/>
-        <element name="Tournament" positionX="112.05078125" positionY="-666.15625" width="128" height="268"/>
-        <element name="TournamentStatistics" positionX="-471.421875" positionY="-239.96875" width="128" height="118"/>
+        <element name="TeamStatistic" positionX="-449.296875" positionY="-403.1328125" width="128" height="88"/>
+        <element name="Tournament" positionX="26.390625" positionY="-750.9453125" width="128" height="283"/>
+        <element name="TournamentStatistics" positionX="265.13671875" positionY="-541.12109375" width="128" height="148"/>
     </elements>
 </model>

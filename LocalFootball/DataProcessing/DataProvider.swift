@@ -84,7 +84,7 @@ class DataProvider {
                 _ = self.updateData(objectsJSON: matchesJSON, taskContext: taskContext, entityName: Entities.match.entityName())
                 
                 self.bindingTeamsAndMatchesData(taskContext: taskContext)
-
+                completion(nil)
             }
         }
     }
