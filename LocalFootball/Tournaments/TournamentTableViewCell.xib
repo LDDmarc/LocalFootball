@@ -9,15 +9,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="390" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="608" height="390"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="392" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="608" height="392"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="608" height="390"/>
+                <rect key="frame" x="0.0" y="0.0" width="608" height="392"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-lj-tqV">
-                        <rect key="frame" x="15" y="11" width="578" height="368"/>
+                        <rect key="frame" x="15" y="11" width="578" height="306"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-np-Q81" userLabel="topView">
                                 <rect key="frame" x="0.0" y="0.0" width="578" height="228.5"/>
@@ -70,52 +70,64 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHF-MG-KJj" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="228.5" width="578" height="139.5"/>
+                                <rect key="frame" x="0.0" y="228.5" width="578" height="77.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-Sd-ouR">
-                                        <rect key="frame" x="8" y="10" width="562" height="119.5"/>
+                                        <rect key="frame" x="0.0" y="29.5" width="578" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwr-Vc-j95">
-                                                <rect key="frame" x="0.0" y="0.0" width="175.5" height="119.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="180.5" height="48"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                                                 <state key="normal" title="Команды">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tournamentTeamsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pKg-HO-8go"/>
+                                                    <action selector="tournamentTeamsButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pKg-HO-8go"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBA-NT-Fvc">
-                                                <rect key="frame" x="193.5" y="0.0" width="175" height="119.5"/>
+                                                <rect key="frame" x="198.5" y="0.0" width="181" height="48"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                                                 <state key="normal" title="Матчи">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tournamentMatchesButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gja-WV-yfl"/>
+                                                    <action selector="tournamentMatchesButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gja-WV-yfl"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25p-k7-MMn">
-                                                <rect key="frame" x="386.5" y="0.0" width="175.5" height="119.5"/>
+                                                <rect key="frame" x="397.5" y="0.0" width="180.5" height="48"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                                                 <state key="normal" title="Результаты">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tournamentResultsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6KL-mQ-Jah"/>
+                                                    <action selector="tournamentResultsButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6KL-mQ-Jah"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="XNB-WG-VAP"/>
+                                        </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Описание турнира" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQf-Tp-wPZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="578" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="top" secondItem="IHF-MG-KJj" secondAttribute="top" constant="10" id="8LB-cx-DKi"/>
-                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" constant="8" id="el4-Bg-xDU"/>
-                                    <constraint firstAttribute="trailing" secondItem="ksM-Sd-ouR" secondAttribute="trailing" constant="8" id="fLM-TG-EhL"/>
-                                    <constraint firstAttribute="bottom" secondItem="ksM-Sd-ouR" secondAttribute="bottom" constant="10" id="g4E-0Y-BFk"/>
+                                    <constraint firstAttribute="trailing" secondItem="ksM-Sd-ouR" secondAttribute="trailing" id="IXi-My-bQp"/>
+                                    <constraint firstAttribute="trailing" secondItem="EQf-Tp-wPZ" secondAttribute="trailing" id="KXy-SR-H7d"/>
+                                    <constraint firstItem="EQf-Tp-wPZ" firstAttribute="top" secondItem="IHF-MG-KJj" secondAttribute="top" id="P0T-8G-zBT"/>
+                                    <constraint firstItem="EQf-Tp-wPZ" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" id="Tbh-hH-rhT"/>
+                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="top" secondItem="EQf-Tp-wPZ" secondAttribute="bottom" constant="12" id="Xlc-w1-RCz"/>
+                                    <constraint firstAttribute="bottom" secondItem="ksM-Sd-ouR" secondAttribute="bottom" id="dHZ-7G-RUv"/>
+                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" id="kVK-0X-OvA"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -126,7 +138,7 @@
                     <constraint firstItem="DjO-np-Q81" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.33" constant="28" id="MI3-5o-MTg"/>
                     <constraint firstItem="ukn-lj-tqV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="d1b-eH-9qU"/>
                     <constraint firstItem="ukn-lj-tqV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="vn8-t9-RcF"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ukn-lj-tqV" secondAttribute="bottom" id="yDj-om-CDx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ukn-lj-tqV" secondAttribute="bottom" priority="750" id="yDj-om-CDx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -137,11 +149,15 @@
                 <outlet property="topView" destination="DjO-np-Q81" id="gJr-8Q-Ocr"/>
                 <outlet property="tournamentDatesLabel" destination="qaQ-pL-7Ie" id="DSK-su-3ha"/>
                 <outlet property="tournamentImageView" destination="SrG-Fb-8cH" id="Ba3-Bo-33G"/>
+                <outlet property="tournamentInfoLabel" destination="EQf-Tp-wPZ" id="lMO-gB-sJT"/>
+                <outlet property="tournamentMatchesButton" destination="xBA-NT-Fvc" id="Xid-dJ-dRF"/>
                 <outlet property="tournamentNameLabel" destination="Q8d-t4-Obf" id="MBr-yt-BVz"/>
+                <outlet property="tournamentResultsButton" destination="25p-k7-MMn" id="6hU-LQ-H0W"/>
                 <outlet property="tournamentStatusLabel" destination="IKc-Zv-nK7" id="Ht9-oN-QrZ"/>
+                <outlet property="tournamentTeamsButton" destination="Jwr-Vc-j95" id="BM5-O1-YcZ"/>
                 <outlet property="tournamentTeamsLabel" destination="JiX-x3-08d" id="Kdv-fP-07e"/>
             </connections>
-            <point key="canvasLocation" x="93.75" y="-128.75"/>
+            <point key="canvasLocation" x="-5.625" y="-57.5"/>
         </tableViewCell>
     </objects>
 </document>

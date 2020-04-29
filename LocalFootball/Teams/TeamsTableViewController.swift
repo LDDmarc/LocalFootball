@@ -30,7 +30,7 @@ class TeamsTableViewController: UITableViewController {
         return frc
     }()
     var teamsPredicate: NSPredicate?
-    var teamsByTournamentsPredicate: NSPredicate?
+    var teamsByTournamentsPredicate: NSPredicate? 
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
@@ -38,56 +38,81 @@ class TeamsTableViewController: UITableViewController {
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.placeholder = "Введите название команды"
         sc.searchResultsUpdater = self
-        //sc.searchBar.isHidden = false
         //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
         return sc
     }()
-    
-    var isSearchBarEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    //var isScopeBarShown = true
     
     lazy var teamsRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
         rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return rc
     }()
-    @objc private func refresh() {
-        let files = ["teams2", "teams3", "teams4"]
-        
-        if counter < 3 {
-            dataProvider.fetchData(entityName: "Team", Team.self, from: files[counter], withExtension: "json") { (error) in
-                guard error == nil else { return }
-                DispatchQueue.main.async {
-                    self.tableView.refreshControl?.endRefreshing()
-                }
-                self.counter += 1
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-            }
-        }
-        
-    }
-
-    var counter = 0
-   
-    var titleText: String = "Команды"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @objc private func refresh() {
+        fetchTeams()
+//        let files = ["teams2", "teams3", "teams4"]
+//        if counter < 3 {
+//            dataProvider.fetchData(entity: .team) { (error) in
+//                guard error == nil else { return }
+//                DispatchQueue.main.async {
+//                    self.tableView.refreshControl?.endRefreshing()
+//                }
+//                self.counter += 1
+//            }
+//        } else {
+//            DispatchQueue.main.async {
+//                self.tableView.refreshControl?.endRefreshing()
+//            }
+//        }
+    }
+    var counter = 0
+    
+    var activityIndicatorView: UIActivityIndicatorView!
+    
+    override func loadView() {
+        super.loadView()
+        
+        activityIndicatorView = UIActivityIndicatorView(style: .large)
+        tableView.backgroundView = activityIndicatorView
         
         navigationItem.searchController = searchController
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
-        title = titleText
         
         tableView.refreshControl = teamsRefreshControl
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
+        
+    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+      //  navigationController?.tabBarItem.image = UIImage(named: "teams")
+    
+        fetchTeams()
+        
+    }
+    
+    private func fetchTeams() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+            self.tableView.separatorStyle = .none
+        }
+        dataProvider.fetchAllData { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.separatorStyle = .singleLine
+            }
+        }
+        //        dataProvider.fetchData(entity: .team) { (error) in
+        //            guard error == nil else { return }
+        //            DispatchQueue.main.async {
+        //                self.activityIndicatorView.stopAnimating()
+        //                self.tableView.separatorStyle = .singleLine
+        //            }
+        //        }
     }
     
     // MARK: - Table view data source
@@ -104,10 +129,15 @@ class TeamsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TeamTableViewCell.self)) as! TeamTableViewCell
         let team = fetchedResultsController.object(at: indexPath)
+        
         cell.teamNameLabel.text = team.name
         if let imageData = team.logoImageData {
             cell.teamLogoImageView.image = UIImage(data: imageData)
         }
+        
+        let tornamentSt = team.teamStatistics?.tournamentsStatistics?.array.first as? TournamentStatistics
+        cell.detailTextLabel?.text = "\(tornamentSt?.position)"
+        
         return cell
     }
     
@@ -122,39 +152,29 @@ class TeamsTableViewController: UITableViewController {
 extension TeamsTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-        if !isSearchBarEmpty {
-            teamsPredicate = NSPredicate(format: "name CONTAINS[cd] %@",  text)
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            teamsPredicate = NSPredicate(format: "name CONTAINS[cd] %@",  searchText)
         } else {
             teamsPredicate = nil
         }
-        filterContentForSearchText()
+        filterContent()
     }
     
-    private func filterContentForSearchText() {
-        
-        var predicate: NSPredicate?
+    private func filterContent() {
         var predicates = [NSPredicate]()
         
-        if isSearchBarEmpty {
-            if let pr = teamsByTournamentsPredicate {
-                predicates.append(pr)
-            }
-        } else {
-            if let pr1 = teamsByTournamentsPredicate {
-                predicates.append(pr1)
-            }
-            if let pr2 = teamsPredicate {
-                predicates.append(pr2)
-            }
+        if let teamsByTournamentsPredicate = teamsByTournamentsPredicate {
+            predicates.append(teamsByTournamentsPredicate)
         }
-        predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        updateData(with: predicate)
+        if let teamsPredicate = teamsPredicate {
+            predicates.append(teamsPredicate)
+        }
+        
+        updateData(with: NSCompoundPredicate(andPredicateWithSubpredicates: predicates))
     }
-    private func updateData(with predicate: NSPredicate?) {
-        if let predicate = predicate {
-            fetchedResultsController.fetchRequest.predicate = predicate
-        }
+    
+    private func updateData(with predicate: NSPredicate) {
+        fetchedResultsController.fetchRequest.predicate = predicate
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()

@@ -18,7 +18,7 @@ class DetailTeamTableViewController: UITableViewController {
             }
         }
     }
-    
+
     var rightBarButtonItemImageView: UIImageView = {
         let view = UIImageView()
         NSLayoutConstraint.activate([
@@ -67,7 +67,6 @@ class DetailTeamTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return (team.matches?.count ?? 0) + 1
     }
     
@@ -80,11 +79,11 @@ class DetailTeamTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
-            let match = team.matches![indexPath.row - 1] as! Match
-            
-            CellsConfiguration.shared.configureCell(cell, with: match)
-            
+            if let match = team.matches![indexPath.row - 1] as? Match {
+                CellsConfiguration.shared.configureCell(cell, with: match)
+            }
             return cell
         }
     }
 }
+

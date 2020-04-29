@@ -51,7 +51,9 @@ class CoreDataManger {
     
 }
 
-protocol FootballNSManagedObjectProtocol: Decodable & NSManagedObject {
+
+protocol UpdatableManagedObject: Decodable & NSManagedObject {
     var modified: Int64 { get }
     func update(with objectJSON: JSON, into context: NSManagedObjectContext)
 }
+

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class CellsConfiguration {
     
@@ -15,9 +16,11 @@ class CellsConfiguration {
     private init() { }
     
     func configureCell(_ cell: MatchTableViewCell, with match: Match) {
-        if let tournamentName = match.tournament?.name {
+        
+        if let tournamentName = match.tournamentName {
             cell.tournamentNameLabel.text = tournamentName
         }
+        
         if let date = match.date {
             cell.dateLabel.text = DataPresentation.shared.writtingDateFormatter.string(from: date)
         }
@@ -29,11 +32,13 @@ class CellsConfiguration {
                 cell.team1LogoImageView.image = UIImage(data: logoData)
             }
         }
-        if let arrayResults = match.matchResults?.array,
-            let results = arrayResults as? [MatchResults],
-            let r1 = results.first?.goalsScored,
-            let r2 = results.last?.goalsScored {
-            cell.teamScoreLabel.text = "\(r1):\(r2)"
+        
+        if match.status {
+            cell.teamScoreLabel.textColor = .black
+            cell.teamScoreLabel.text = "\(match.team1Score):\(match.team2Score)"
+        } else {
+            cell.teamScoreLabel.textColor = .red
+            cell.teamScoreLabel.text = "❓:❓"
         }
         
         if let team2 = match.teams?.lastObject,
@@ -44,6 +49,7 @@ class CellsConfiguration {
             }
         }
     }
+    
     func configureCell(_ cell: DetailTeamTableViewCell, with team: Team) {
         cell.teamNameLabel.text = team.name
         
@@ -82,11 +88,13 @@ class CellsConfiguration {
             cell.tournamentImageView.image = UIImage(data: imageData)
         }
        
-        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.teams?.count ?? 0)"
+        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.numberOfTeams)"
         
 //        if !tournament.status {
 //            cell.tournamentStatusLabel.isHidden = false
 //        }
+        
+        cell.tournamentInfoLabel.text = tournament.info
         
         if let date1 = tournament.dateOfTheBeginning,
             let date2 = tournament.dateOfTheEnd {

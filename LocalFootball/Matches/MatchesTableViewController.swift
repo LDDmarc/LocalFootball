@@ -15,7 +15,11 @@ class MatchesTableViewController: UITableViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
-        request.predicate = matchesByStatusPredicate
+        if let matchesByTournamentPredicate = matchesByTournamentPredicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [matchesByTournamentPredicate, matchesByStatusPredicate])
+        } else {
+            request.predicate = matchesByStatusPredicate
+        }
         let sort = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sort]
         request.fetchBatchSize = 20
@@ -30,7 +34,9 @@ class MatchesTableViewController: UITableViewController {
         return frc
     }()
     var matchesByTeamsPredicate: NSPredicate?
-    var matchesByStatusPredicate: NSPredicate? = NSPredicate(format: "status == %@", false)
+    var matchesByTournamentPredicate: NSPredicate?
+    var matchesByStatusPredicate: NSPredicate = NSPredicate(format: "status != NO")
+    
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
@@ -43,7 +49,7 @@ class MatchesTableViewController: UITableViewController {
         definesPresentationContext = true
         sc.searchBar.scopeButtonTitles = ["Прошедшие", "Предстоящие"]
         // TODO: change to true when we get status for match
-        sc.searchBar.showsScopeBar = false
+        sc.searchBar.showsScopeBar = true
         sc.searchBar.delegate = self
         return sc
     }()
@@ -101,37 +107,37 @@ extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
 extension MatchesTableViewController: UISearchBarDelegate, UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-        if !isSearchBarEmpty {
-            matchesByTeamsPredicate = NSPredicate(format: "ANY teams.name CONTAINS[cd] %@",  text)
+        if let searchText = searchController.searchBar.text,
+            !searchText.isEmpty {
+            matchesByTeamsPredicate = NSPredicate(format: "ANY teams.name CONTAINS[cd] %@",  searchText)
         } else {
             matchesByTeamsPredicate = nil
         }
-        filterContentForSearchText()
+        filterContent()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         if selectedScope == 0 {
-            matchesByStatusPredicate = NSPredicate(format: "status == %@", true)
+            matchesByStatusPredicate = NSPredicate(format: "status == YES")
         } else {
-            matchesByStatusPredicate = NSPredicate(format: "status == %@", false)
+            matchesByStatusPredicate = NSPredicate(format: "status == NO")
         }
-        filterContentForSearchText()
+        filterContent()
     }
     
-    private func filterContentForSearchText() {
+    private func filterContent() {
         var predicate: NSPredicate?
         var predicates = [NSPredicate]()
         
-        if let pr1 = matchesByStatusPredicate {
-            predicates.append(pr1)
+        predicates.append(matchesByStatusPredicate)
+        
+        if let matchesByTeamsPredicate = matchesByTeamsPredicate {
+            predicates.append(matchesByTeamsPredicate)
+        }
+        if let matchesByTournamentPredicate = matchesByTournamentPredicate {
+            predicates.append(matchesByTournamentPredicate)
         }
         
-        if !isSearchBarEmpty {
-            if let pr2 = matchesByTeamsPredicate {
-                predicates.append(pr2)
-            }
-        }
         predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         updateData(with: predicate)
     }

@@ -45,15 +45,16 @@ class NetworkManager {
         }.resume()
     }
     
-    func testGetData(fileName: String, withExtension: String, completion: @escaping(_ jsonDictionary: JSON?, _ error: Error?) -> ()) {
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: withExtension) else {
-            fatalError("File \(fileName).\(withExtension) not found.")
+    func testGetData(entityName: String, withExtension: String = "json", completion: @escaping(_ resulsJSON: JSON?, _ error: Error?) -> ()) {
+        
+        guard let url = Bundle.main.url(forResource: "fullRequest1", withExtension: withExtension) else {
+            fatalError("File fullRequest1.\(withExtension) not found.")
         }
         do {
             let data = try Data(contentsOf: url)
             do {
                 let jsonObject = try JSON(data: data)
-                let result = jsonObject["results"]
+                let result = jsonObject[entityName]
                 completion(result, nil)
             } catch {
                 completion(nil, error)
@@ -63,4 +64,24 @@ class NetworkManager {
         }
     }
     
+    func testGetData(completion: @escaping(_ teamsJSON: JSON?, _ tournamentsJSON: JSON?, _ matchesJSON: JSON?, _ error: Error?) -> ()) {
+    
+        guard let url = Bundle.main.url(forResource: "fullRequest1", withExtension: "json") else {
+            fatalError("File fullRequest1.json not found.")
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            do {
+                let jsonObject = try JSON(data: data)
+                let teamsJSON = jsonObject[Entities.team.entityURLPathComponent()]
+                let tournamentsJSON = jsonObject[Entities.tournament.entityURLPathComponent()]
+                let matchesJSON = jsonObject[Entities.match.entityURLPathComponent()]
+                completion(teamsJSON, tournamentsJSON, matchesJSON, nil)
+            } catch {
+                completion(nil, nil, nil, error)
+            }
+        } catch let error as NSError{
+            completion(nil, nil, nil, error)
+        }
+    }
 }

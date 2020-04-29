@@ -15,13 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        dataProvider.fetchAllData { error in
-//            guard error == nil else { return }
-//        }
-        dataProvider.fetchData(entityName: "Team", Team.self, from: "teams1", withExtension: "json") { (error) in
-            print(error?.localizedDescription)
-        }
+
         return true
     }
    
