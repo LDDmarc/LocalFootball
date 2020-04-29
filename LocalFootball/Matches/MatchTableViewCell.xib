@@ -63,14 +63,14 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команда2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU3-1J-lIE">
-                        <rect key="frame" x="371.5" y="118" width="101.5" height="24"/>
-                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
+                        <rect key="frame" x="397" y="118" width="76" height="24"/>
+                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команда1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5A-c3-B6i">
-                        <rect key="frame" x="10" y="118" width="101.5" height="24"/>
-                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
+                        <rect key="frame" x="10" y="118" width="76" height="24"/>
+                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>

@@ -1,6 +1,7 @@
 [
     {
         "date": "2012-04-23T18:25:43",
+        "status": true,
         "team1Name": "FCB",
         "team2Name": "RealMadrid",
         "tournamentName": "FIFA 2018",
@@ -22,6 +23,7 @@
     },
     {
         "date": "2016-04-23T19:20:00",
+        "status": true,
         "team1Name": "RealMadrid",
         "team2Name": "Sydney",
         "tournamentName": "FIFA 2018",
@@ -43,6 +45,7 @@
     },
     {
         "date": "2019-02-21T19:00:43",
+        "status": true,
         "team1Name": "ASM",
         "team2Name": "CBF",
         "tournamentName": "FIFA 2019",
@@ -64,6 +67,7 @@
     },
     {
         "date": "2019-11-11T19:20:00",
+        "status": false,
         "team1Name": "Junior",
         "team2Name": "Romania",
         "tournamentName": "FIFA 2019",
@@ -85,6 +89,7 @@
     },
     {
         "date": "2019-07-08T18:25:43",
+        "status": false,
         "team1Name": "WestHamUnited",
         "team2Name": "RealMadrid",
         "tournamentName": "Чемпионат IFL",
@@ -106,6 +111,7 @@
     },
     {
         "date": "2017-05-21T18:00:00",
+        "status": false,
         "team1Name": "Everton",
         "team2Name": "Spartak",
         "tournamentName": "FIFA 2018",
@@ -127,6 +133,7 @@
     },
     {
         "date": "2011-02-21T15:00:43",
+        "status": false,
         "team1Name": "URBSFA",
         "team2Name": "ManchesterUnited",
         "tournamentName": "FIFA 2019",
@@ -148,6 +155,7 @@
     },
     {
         "date": "2015-01-11T20:20:00",
+        "status": true,
         "team1Name": "SuttonColdfield",
         "team2Name": "Millionarios",
         "tournamentName": "FIFA 2019",
@@ -169,6 +177,7 @@
     },
     {
            "date": "2019-04-23T18:25:43",
+           "status": true,
            "team1Name": "FCB",
            "team2Name": "Millionarios",
            "tournamentName": "FIFA 2018",
@@ -190,6 +199,7 @@
        },
        {
            "date": "2016-04-23T19:20:00",
+           "status": true,
            "team1Name": "RealMadrid",
            "team2Name": "FCB",
            "tournamentName": "FIFA 2018",
@@ -211,6 +221,7 @@
        },
        {
            "date": "2019-02-21T19:00:43",
+           "status": false,
            "team1Name": "ASM",
            "team2Name": "FCB",
            "tournamentName": "FIFA 2019",
@@ -232,6 +243,7 @@
        },
        {
            "date": "2019-11-11T19:20:00",
+           "status": false,
            "team1Name": "Sydney",
            "team2Name": "Romania",
            "tournamentName": "FIFA 2019",
@@ -253,6 +265,7 @@
        },
        {
            "date": "2019-07-08T18:25:43",
+           "status": false,
            "team1Name": "WestHamUnited",
            "team2Name": "FMF",
            "tournamentName": "Чемпионат IFL",
@@ -274,6 +287,7 @@
        },
        {
            "date": "2017-05-21T18:00:00",
+           "status": true,
            "team1Name": "Romania",
            "team2Name": "Spartak",
            "tournamentName": "FIFA 2018",
@@ -295,6 +309,7 @@
        },
        {
            "date": "2011-02-21T15:00:43",
+           "status": false,
            "team1Name": "Spartak",
            "team2Name": "ManchesterUnited",
            "tournamentName": "FIFA 2019",
@@ -316,6 +331,7 @@
        },
        {
            "date": "2015-01-11T20:20:00",
+           "status": false,
            "team1Name": "SuttonColdfield",
            "team2Name": "WestHamUnited",
            "tournamentName": "FIFA 2019",

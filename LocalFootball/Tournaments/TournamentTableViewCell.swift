@@ -31,6 +31,7 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentTeamsLabel: UILabel!
     
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var tournamentInfoLabel: UILabel!
     @IBOutlet weak var buttonsStackView: UIStackView!
     
     
@@ -44,16 +45,19 @@ class TournamentTableViewCell: UITableViewCell {
             self.delegate?.showTeams(indexPath: indexPath)
         }
     }
-    @IBAction func tournamentMatchesButton(_ sender: UIButton) {
+    @IBAction func tournamentMatchesButtonTap(_ sender: UIButton) {
         if delegate != nil,
             let indexPath = indexPath {
             self.delegate?.showMatches(indexPath: indexPath)
         }
     }
-    @IBAction func tournamentResultsButton(_ sender: UIButton) {
+    @IBAction func tournamentResultsButtonTap(_ sender: UIButton) {
         
     }
-   
+    
+    @IBOutlet weak var tournamentTeamsButton: UIButton!
+    @IBOutlet weak var tournamentMatchesButton: UIButton!
+    @IBOutlet weak var tournamentResultsButton: UIButton!
     
     var indexPath: IndexPath?
     
@@ -70,6 +74,11 @@ class TournamentTableViewCell: UITableViewCell {
         
         tournamentStatusLabel.isHidden = true
         bottomView.isHidden = true
+        
+        for button in [tournamentTeamsButton, tournamentMatchesButton, tournamentResultsButton] {
+            button?.layer.cornerRadius = 2 * .pi
+            button?.clipsToBounds = true
+        }
  
     }
 

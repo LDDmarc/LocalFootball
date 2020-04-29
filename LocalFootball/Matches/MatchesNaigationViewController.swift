@@ -1,19 +1,19 @@
 //
-//  TeamsNavigationViewController.swift
+//  MatchesNaigationViewController.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 13.04.2020.
+//  Created by Дарья Леонова on 21.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 
 import UIKit
 
-class TeamsNavigationViewController: UINavigationController {
+class MatchesNaigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-   
+
+        // Do any additional setup after loading the view.
     }
     
 

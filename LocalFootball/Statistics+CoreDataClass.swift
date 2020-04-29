@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 @objc(Statistics)
 public class Statistics: NSManagedObject, Decodable {
@@ -36,6 +37,7 @@ public class Statistics: NSManagedObject, Decodable {
             numberOfWins = try values.decode(Int16.self, forKey: .numberOfWins)
             numberOfLesions = try values.decode(Int16.self, forKey: .numberOfLesions)
             numberOfDraws = try values.decode(Int16.self, forKey: .numberOfDraws)
+            
             goalsScored = try values.decode(Int16.self, forKey: .goalsScored)
             goalsConceded = try values.decode(Int16.self, forKey: .goalsConceded)
             penaltyScored = try values.decode(Int16.self, forKey: .penaltyScored)
@@ -44,5 +46,17 @@ public class Statistics: NSManagedObject, Decodable {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+    }
+    
+    func update(with jsonDictionary: JSON) {
+        self.numberOfGames = jsonDictionary["numberOfGames"].int16Value
+        self.numberOfWins = jsonDictionary["numberOfWins"].int16Value
+        self.numberOfLesions = jsonDictionary["numberOfLesions"].int16Value
+        self.numberOfDraws = jsonDictionary["numberOfDraws"].int16Value
+        
+        self.goalsScored = jsonDictionary["goalsScored"].int16Value
+        self.goalsConceded = jsonDictionary["goalsConceded"].int16Value
+        self.penaltyScored = jsonDictionary["penaltyScored"].int16Value
+        self.penaltyConceded = jsonDictionary["penaltyConceded"].int16Value
     }
 }

@@ -32,7 +32,7 @@ public class Match: NSManagedObject, Decodable {
         do {
 
             if let dateStr = try values.decode(String?.self, forKey: .date) {
-                date = DataProcessing.shared.readingDateFormatter.date(from: dateStr)
+                date = DataPresentation.shared.readingDateFormatter.date(from: dateStr)
             }
             team1Name = try values.decode(String?.self, forKey: .team1Name)
             team2Name = try values.decode(String?.self, forKey: .team2Name)

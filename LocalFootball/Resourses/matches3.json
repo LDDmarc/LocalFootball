@@ -1,0 +1,124 @@
+"matches":
+[
+    {
+        "modified": 1587546037,
+        "id": 1200,
+        "date": "2009-04-23T18:25:43",
+        "status": true,
+        "team1Id": 111,
+        "team2Id": 100,
+        "tournamentId": 1102,
+        "team1Score": 0,
+        "team2Score": 5
+    },
+    {
+        "modified": 1587546037,
+        "id": 1201,
+        "date": "2009-04-23T18:25:43",
+        "status": true,
+        "team1Id": 109,
+        "team2Id": 107,
+        "tournamentId": 1100,
+        "team1Score": 1,
+        "team2Score": 1
+    },
+    {
+        "modified": 1587546037,
+        "id": 1206,
+        "date": "2009-05-10T18:25:43",
+        "status": true,
+        "team1Id": 110,
+        "team2Id": 104,
+        "tournamentId": 1102,
+        "team1Score": 2,
+        "team2Score": 3
+    },
+    {
+        "modified": 1587546037,
+        "id": 1207,
+        "date": "2009-04-23T18:25:43",
+        "status": true,
+        "team1Id": 108,
+        "team2Id": 111,
+        "tournamentId": 1100,
+        "team1Score": 0,
+        "team2Score": 3
+    },
+    {
+        "modified": 1587546037,
+        "id": 1208,
+        "date": "2009-04-23T18:25:43",
+        "status": true,
+        "team1Id": 111,
+        "team2Id": 100,
+        "tournamentId": 1100,
+        "team1Score": 4,
+        "team2Score": 1
+    },
+    {
+        "modified": 1587546037,
+        "id": 1209,
+        "date": "2009-12-2T18:25:43",
+        "status": true,
+        "team1Id": 100,
+        "team2Id": 101,
+        "tournamentId": 1102,
+        "team1Score": 2,
+        "team2Score": 1
+    },
+    {
+        "modified": 1587546037,
+        "id": 1210,
+        "date": "2005-04-23T18:25:43",
+        "status": true,
+        "team1Id": 108,
+        "team2Id": 111,
+        "tournamentId": 1100,
+        "team1Score": 2,
+        "team2Score": 7
+    },
+    {
+        "modified": 1587546037,
+        "id": 1211,
+        "date": "2008-12-2T18:25:43",
+        "status": true,
+        "team1Id": 101,
+        "team2Id": 102,
+        "tournamentId": 1102,
+        "team1Score": 2,
+        "team2Score": 1
+    },
+    {
+        "modified": 1587546037,
+        "id": 1214,
+        "date": "2009-05-10T18:25:43",
+        "status": true,
+        "team1Id": 105,
+        "team2Id": 108,
+        "tournamentId": 1101,
+        "team1Score": 2,
+        "team2Score": 4
+    },
+    {
+        "modified": 1587546037,
+        "id": 1217,
+        "date": "2009-05-10T18:25:43",
+        "status": true,
+        "team1Id": 102,
+        "team2Id": 108,
+        "tournamentId": 1100,
+        "team1Score": 2,
+        "team2Score": 3
+    },
+    {
+        "modified": 1587546037,
+        "id": 1219,
+        "date": "2009-05-10T18:25:43",
+        "status": true,
+        "team1Id": 102,
+        "team2Id": 110,
+        "tournamentId": 1102,
+        "team1Score": 1,
+        "team2Score": 3
+    }
+]

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 /// CoreDataManager singleton
 class CoreDataManger {
@@ -25,6 +26,12 @@ class CoreDataManger {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.undoManager = nil
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
         return container
     }()
 
@@ -43,3 +50,10 @@ class CoreDataManger {
     }
     
 }
+
+
+protocol UpdatableManagedObject: Decodable & NSManagedObject {
+    var modified: Int64 { get }
+    func update(with objectJSON: JSON, into context: NSManagedObjectContext)
+}
+
