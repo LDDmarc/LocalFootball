@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F19CD2F79AEF04BD964B784 /* libPods-LocalFootball.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66BEFCFA7DB1469E378FCB07 /* libPods-LocalFootball.a */; };
 		BC24870124433D0F00454D14 /* TournamentStatistics+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2486FB24433D0F00454D14 /* TournamentStatistics+CoreDataClass.swift */; };
 		BC24870224433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2486FC24433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift */; };
 		BC24870524433EBF00454D14 /* TeamStatistic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC24870324433EBF00454D14 /* TeamStatistic+CoreDataClass.swift */; };
@@ -73,6 +74,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5127F1B5403F9DA71A9E4472 /* Pods-LocalFootball.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalFootball.release.xcconfig"; path = "Target Support Files/Pods-LocalFootball/Pods-LocalFootball.release.xcconfig"; sourceTree = "<group>"; };
+		66BEFCFA7DB1469E378FCB07 /* libPods-LocalFootball.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LocalFootball.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74131943EA9ED7E6A49B78A0 /* Pods-LocalFootball.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalFootball.debug.xcconfig"; path = "Target Support Files/Pods-LocalFootball/Pods-LocalFootball.debug.xcconfig"; sourceTree = "<group>"; };
 		BC2486FB24433D0F00454D14 /* TournamentStatistics+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TournamentStatistics+CoreDataClass.swift"; path = "LocalFootball/TournamentStatistics+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BC2486FC24433D0F00454D14 /* TournamentStatistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TournamentStatistics+CoreDataProperties.swift"; path = "LocalFootball/TournamentStatistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC24870324433EBF00454D14 /* TeamStatistic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TeamStatistic+CoreDataClass.swift"; path = "LocalFootball/TeamStatistic+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -145,12 +149,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F19CD2F79AEF04BD964B784 /* libPods-LocalFootball.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		930F3071C6EBAA0D48D6C9AA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74131943EA9ED7E6A49B78A0 /* Pods-LocalFootball.debug.xcconfig */,
+				5127F1B5403F9DA71A9E4472 /* Pods-LocalFootball.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BC42A7D62444B3140039A851 /* Teams */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +262,8 @@
 				BCA823522440AC5200FA67FF /* MatchResults+CoreDataProperties.swift */,
 				BCF5D591243F70D5009E9876 /* LocalFootball */,
 				BCF5D590243F70D5009E9876 /* Products */,
+				930F3071C6EBAA0D48D6C9AA /* Pods */,
+				D8591E80A450EB3B54E32CB8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,6 +295,14 @@
 			path = LocalFootball;
 			sourceTree = "<group>";
 		};
+		D8591E80A450EB3B54E32CB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66BEFCFA7DB1469E378FCB07 /* libPods-LocalFootball.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,6 +310,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCF5D5A6243F70D7009E9876 /* Build configuration list for PBXNativeTarget "LocalFootball" */;
 			buildPhases = (
+				B3F28D9D600A2FD3B2118D45 /* [CP] Check Pods Manifest.lock */,
 				BCF5D58B243F70D5009E9876 /* Sources */,
 				BCF5D58C243F70D5009E9876 /* Frameworks */,
 				BCF5D58D243F70D5009E9876 /* Resources */,
@@ -372,6 +398,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B3F28D9D600A2FD3B2118D45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LocalFootball-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BCF5D58B243F70D5009E9876 /* Sources */ = {
@@ -550,6 +601,7 @@
 		};
 		BCF5D5A7243F70D7009E9876 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74131943EA9ED7E6A49B78A0 /* Pods-LocalFootball.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -568,6 +620,7 @@
 		};
 		BCF5D5A8243F70D7009E9876 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5127F1B5403F9DA71A9E4472 /* Pods-LocalFootball.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
