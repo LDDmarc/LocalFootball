@@ -740,7 +740,11 @@
             "dateOfTheBeginning": "2019-01-23T18:00:43",
             "dateOfTheEnd": "2020-04-23T18:00:00",
             "numberOfTeams": 10,
-            "numberOfMatches": 8
+            "numberOfMatches": 8,
+            "teamsTournamentStatistics":
+            [
+                
+            ]
         },
         {
             "modified": 1587546037,

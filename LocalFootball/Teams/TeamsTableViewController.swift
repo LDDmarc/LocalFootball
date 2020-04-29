@@ -99,7 +99,7 @@ class TeamsTableViewController: UITableViewController {
             self.activityIndicatorView.startAnimating()
             self.tableView.separatorStyle = .none
         }
-        dataProvider.fetchAllData { (error) i
+        dataProvider.fetchAllData { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
