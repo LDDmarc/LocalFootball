@@ -1032,3 +1032,438 @@
         }
     ]
 }
+
+"teamsTournamentStatistics":
+[
+    {
+        "teamId": 100,
+        "tournamentId": 1102,
+        "score": 10,
+        "position": 1,
+        "statistics":
+        {
+            "numberOfGames": 10,
+            "numberOfWins": 7,
+            "numberOfLesions": 4,
+            "numberOfDraws": 3,
+            "goalsScored": 19,
+            "goalsConceded": 9,
+            "penaltyScored": 4,
+            "penaltyConceded": 1
+        }
+    },
+    {
+        "teamId": 102,
+        "tournamentId": 1102,
+        "score": 34,
+        "position": 2,
+        "statistics":
+        {
+            "numberOfGames": 3,
+            "numberOfWins": 1,
+            "numberOfLesions": 4,
+            "numberOfDraws": 3,
+            "goalsScored": 1,
+            "goalsConceded": 7,
+            "penaltyScored": 4,
+            "penaltyConceded": 1
+        }
+    },
+    {
+        "teamId": 107,
+        "tournamentId": 1102,
+        "score": 102,
+        "position": 3,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 101,
+        "tournamentId": 1102,
+        "score": 100,
+        "position": 4,
+        "statistics":
+        {
+            "numberOfGames": 2,
+            "numberOfWins": 7,
+            "numberOfLesions": 2,
+            "numberOfDraws": 3,
+            "goalsScored": 30,
+            "goalsConceded": 9,
+            "penaltyScored": 4,
+            "penaltyConceded": 1
+        }
+    },
+    {
+        "teamId": 104,
+        "tournamentId": 1102,
+        "score": 35,
+        "position": 5,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 103,
+        "tournamentId": 1102,
+        "score": 15,
+        "position": 6,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 105,
+        "tournamentId": 1102,
+        "score": 15,
+        "position": 7,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 106,
+        "tournamentId": 1102,
+        "score": 10,
+        "position": 8,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 108,
+        "tournamentId": 1102,
+        "score": 15,
+        "position": 9,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 109,
+        "tournamentId": 1102,
+        "score": 15,
+        "position": 10,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 110,
+        "tournamentId": 1102,
+        "score": 15,
+        "position": 11,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    }
+]
+"teamsTournamentStatistics":
+[
+    {
+        "teamId": 100,
+        "tournamentId": 1101,
+        "score": 10,
+        "position": 1,
+        "statistics":
+        {
+            "numberOfGames": 10,
+            "numberOfWins": 7,
+            "numberOfLesions": 4,
+            "numberOfDraws": 3,
+            "goalsScored": 19,
+            "goalsConceded": 9,
+            "penaltyScored": 4,
+            "penaltyConceded": 1
+        }
+    },
+    {
+        "teamId": 104,
+        "tournamentId": 1101,
+        "score": 15,
+        "position": 5,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 103,
+        "tournamentId": 1101,
+        "score": 15,
+        "position": 6,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 108,
+        "tournamentId": 1101,
+        "score": 15,
+        "position": 9,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    }
+]
+"teamsTournamentStatistics":
+[
+    {
+        "teamId": 100,
+        "tournamentId": 1100,
+        "score": 5,
+        "position": 1,
+        "statistics":
+        {
+            "numberOfGames": 5,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 1,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 0
+        }
+    },
+    {
+        "teamId": 102,
+        "tournamentId": 1100,
+        "score": 3,
+        "position": 2,
+        "statistics":
+        {
+            "numberOfGames": 1,
+            "numberOfWins": 3,
+            "numberOfLesions": 3,
+            "numberOfDraws": 1,
+            "goalsScored": 10,
+            "goalsConceded": 4,
+            "penaltyScored": 3,
+            "penaltyConceded": 1
+        }
+    },
+    {
+        "teamId": 107,
+        "tournamentId": 1100,
+        "score": 105,
+        "position": 3,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 101,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 4,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 103,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 6,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 106,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 8,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 108,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 9,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 109,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 10,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 110,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 11,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    },
+    {
+        "teamId": 111,
+        "tournamentId": 1100,
+        "score": 15,
+        "position": 12,
+        "statistics":
+        {
+            "numberOfGames": 6,
+            "numberOfWins": 3,
+            "numberOfLesions": 1,
+            "numberOfDraws": 6,
+            "goalsScored": 10,
+            "goalsConceded": 5,
+            "penaltyScored": 3,
+            "penaltyConceded": 9
+        }
+    }
+]

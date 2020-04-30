@@ -51,6 +51,7 @@ class TeamsTableViewController: UITableViewController {
     
     @objc private func refresh() {
         fetchTeams()
+        
 //        let files = ["teams2", "teams3", "teams4"]
 //        if counter < 3 {
 //            dataProvider.fetchData(entity: .team) { (error) in
@@ -77,9 +78,12 @@ class TeamsTableViewController: UITableViewController {
         tableView.backgroundView = activityIndicatorView
         
         navigationItem.searchController = searchController
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
+        navigationController?.navigationBar.prefersLargeTitles = true
+        //navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
         
         tableView.refreshControl = teamsRefreshControl
+        
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
         
@@ -87,11 +91,8 @@ class TeamsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      //  navigationController?.tabBarItem.image = UIImage(named: "teams")
     
         fetchTeams()
-        
     }
     
     private func fetchTeams() {
@@ -104,7 +105,7 @@ class TeamsTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
                 self.tableView.separatorStyle = .singleLine
-                self.teamsRefreshControl.endRefreshing()
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -128,9 +129,6 @@ class TeamsTableViewController: UITableViewController {
         if let imageData = team.logoImageData {
             cell.teamLogoImageView.image = UIImage(data: imageData)
         }
-        
-        let tornamentSt = team.teamStatistics?.tournamentsStatistics?.array.first as? TournamentStatistics
-        cell.detailTextLabel?.text = "\(tornamentSt?.position)"
         
         return cell
     }

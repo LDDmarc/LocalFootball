@@ -72,6 +72,8 @@
 		BCE747DE2443A63000984011 /* MatchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747DC2443A63000984011 /* MatchesTableViewController.swift */; };
 		BCE747E22443AD1600984011 /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747E02443AD1600984011 /* MatchTableViewCell.swift */; };
 		BCE747E32443AD1600984011 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE747E12443AD1600984011 /* MatchTableViewCell.xib */; };
+		BCE79CB72459EF4F003B6767 /* ResultsTableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE79CB52459EF4F003B6767 /* ResultsTableTableViewCell.swift */; };
+		BCE79CB82459EF4F003B6767 /* ResultsTableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE79CB62459EF4F003B6767 /* ResultsTableTableViewCell.xib */; };
 		BCF018B7244DA6D800EBD578 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF018B6244DA6D800EBD578 /* DataProvider.swift */; };
 		BCF0C5EA2450B5D50024DB18 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0C5E92450B5D50024DB18 /* SceneDelegate.swift */; };
 		BCF5D593243F70D5009E9876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF5D592243F70D5009E9876 /* AppDelegate.swift */; };
@@ -148,6 +150,8 @@
 		BCE747DC2443A63000984011 /* MatchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTableViewController.swift; sourceTree = "<group>"; };
 		BCE747E02443AD1600984011 /* MatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		BCE747E12443AD1600984011 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
+		BCE79CB52459EF4F003B6767 /* ResultsTableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableTableViewCell.swift; sourceTree = "<group>"; };
+		BCE79CB62459EF4F003B6767 /* ResultsTableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsTableTableViewCell.xib; sourceTree = "<group>"; };
 		BCF018B6244DA6D800EBD578 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		BCF0C5E92450B5D50024DB18 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BCF5D58F243F70D5009E9876 /* LocalFootball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalFootball.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				BCAC0D6F2459A40900B1EFA6 /* ResultsTableViewController.swift */,
+				BCE79CB52459EF4F003B6767 /* ResultsTableTableViewCell.swift */,
+				BCE79CB62459EF4F003B6767 /* ResultsTableTableViewCell.xib */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 				BCF5D5A2243F70D7009E9876 /* LaunchScreen.storyboard in Resources */,
 				BCD8DCB524584E050053D930 /* fullRequest2.json in Resources */,
 				BC42A7D52444B3090039A851 /* TeamTableViewCell.xib in Resources */,
+				BCE79CB82459EF4F003B6767 /* ResultsTableTableViewCell.xib in Resources */,
 				BCF5D59F243F70D7009E9876 /* Assets.xcassets in Resources */,
 				BC45CD94244636FC00C1B580 /* Everton.png in Resources */,
 				BC45CD99244636FC00C1B580 /* SuttonColdfield.png in Resources */,
@@ -522,6 +529,7 @@
 				BC210E17245329E10056DDE3 /* TeamStatistic+CoreDataProperties.swift in Sources */,
 				BC210E1F245329E10056DDE3 /* TournamentStatistics+CoreDataProperties.swift in Sources */,
 				BC9CA0D32446061C0017B952 /* TournamentTableViewCell.swift in Sources */,
+				BCE79CB72459EF4F003B6767 /* ResultsTableTableViewCell.swift in Sources */,
 				BCF018B7244DA6D800EBD578 /* DataProvider.swift in Sources */,
 				BC812085244B3B7900E0B5A2 /* CellsConfiguration.swift in Sources */,
 				BCA823592440E3DA00FA67FF /* Tournament+CoreDataClass.swift in Sources */,

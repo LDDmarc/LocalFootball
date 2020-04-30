@@ -29,6 +29,7 @@ public class Tournament: NSManagedObject, UpdatableManagedObject {
         case dateOfTheEnd = "dateOfTheEnd"
         case teamsIds = "teamsIds"
         case matchesIds = "matchesIds"
+        case teamsTournamentStatistics = "teamsTournamentStatistics"
     }
     
     lazy var tournamentTeamsIds: [Int64] = {
@@ -107,5 +108,4 @@ public class Tournament: NSManagedObject, UpdatableManagedObject {
             self.matchesIds = matchesIds as NSObject
         }
     }
-    
 }

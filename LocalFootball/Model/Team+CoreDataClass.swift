@@ -141,10 +141,14 @@ public class Team: NSManagedObject, UpdatableManagedObject {
                     print("Error: Failed to create a new object!")
                     return
                 }
+                guard let statistics = NSEntityDescription.insertNewObject(forEntityName: "Statistics", into: context) as? Statistics else {
+                    print("Error: Failed to create a new object!")
+                    return
+                }
+                tournamentStatistics.statistics = statistics
                 tournamentsStatisticsSet.add(tournamentStatistics)
-                teamStatistics?.tournamentsStatistics = tournamentsStatisticsSet
-                
             }
+            teamStatistics?.tournamentsStatistics = tournamentsStatisticsSet
         }
         teamStatistics?.update(with: teamJSON[CodingKeys.teamStatistics.rawValue])
     }

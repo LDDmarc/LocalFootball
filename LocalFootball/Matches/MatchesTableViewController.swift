@@ -21,9 +21,10 @@ class MatchesTableViewController: UITableViewController {
             request.predicate = matchesByStatusPredicate
         }
         let sort = NSSortDescriptor(key: "date", ascending: false)
-        request.sortDescriptors = [sort]
+        let sort2 = NSSortDescriptor(key: "tournamentName", ascending: false)
+        request.sortDescriptors = [sort, sort2]
         request.fetchBatchSize = 20
-        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: nil, cacheName: nil)
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: "tournamentName", cacheName: nil)
         do {
             try frc.performFetch()
         } catch {
@@ -35,8 +36,7 @@ class MatchesTableViewController: UITableViewController {
     }()
     var matchesByTeamsPredicate: NSPredicate?
     var matchesByTournamentPredicate: NSPredicate?
-    var matchesByStatusPredicate: NSPredicate = NSPredicate(format: "status != NO")
-    
+    var matchesByStatusPredicate: NSPredicate = NSPredicate(format: "status == YES")
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
@@ -47,10 +47,14 @@ class MatchesTableViewController: UITableViewController {
         sc.searchBar.isHidden = false
         //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
-        sc.searchBar.scopeButtonTitles = ["Прошедшие", "Предстоящие"]
-        // TODO: change to true when we get status for match
-        sc.searchBar.showsScopeBar = true
-        sc.searchBar.delegate = self
+        return sc
+    }()
+    
+    lazy var segmentedControl: UISegmentedControl = {
+        let items = ["Прошедшие", "Предстоящие"]
+        let sc = UISegmentedControl(items: items)
+        sc.addTarget(self, action: #selector(segmentedControlTap(sender:)), for: .valueChanged)
+        sc.selectedSegmentIndex = 0
         return sc
     }()
     
@@ -62,12 +66,17 @@ class MatchesTableViewController: UITableViewController {
         return searchController.isActive && (!isSearchBarEmpty || searchBarScopeIsFiltering)
     }
     var selectedButton = 0
-    var isScopeBarShown = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
+        navigationItem.titleView = segmentedControl
+        
+        tableView.sectionHeaderHeight = CGFloat(40)
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
     }
@@ -77,13 +86,17 @@ class MatchesTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
-    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController.sections else { return nil }
+        
+        //[NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
+        return sections[section].name
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let sections = fetchedResultsController.sections else { return 0 }
         return sections[section].numberOfObjects
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
@@ -98,13 +111,58 @@ class MatchesTableViewController: UITableViewController {
 
 // MARK: - NSFetchedResultsController
 extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        tableView.reloadData()
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .move:
+            tableView.reloadData()
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
+        return sectionName
     }
 }
 
 // MARK: - UISearchResultsUpdating
-extension MatchesTableViewController: UISearchBarDelegate, UISearchResultsUpdating {
+extension MatchesTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text,
@@ -116,11 +174,14 @@ extension MatchesTableViewController: UISearchBarDelegate, UISearchResultsUpdati
         filterContent()
     }
     
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        if selectedScope == 0 {
+    @objc func segmentedControlTap(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
             matchesByStatusPredicate = NSPredicate(format: "status == YES")
-        } else {
+        case 1:
             matchesByStatusPredicate = NSPredicate(format: "status == NO")
+        default:
+            matchesByStatusPredicate = NSPredicate(format: "status == YES")
         }
         filterContent()
     }

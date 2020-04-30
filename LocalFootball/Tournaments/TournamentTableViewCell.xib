@@ -157,7 +157,7 @@
                 <outlet property="tournamentTeamsButton" destination="Jwr-Vc-j95" id="BM5-O1-YcZ"/>
                 <outlet property="tournamentTeamsLabel" destination="JiX-x3-08d" id="Kdv-fP-07e"/>
             </connections>
-            <point key="canvasLocation" x="-5.625" y="-57.5"/>
+            <point key="canvasLocation" x="-836" y="-188"/>
         </tableViewCell>
     </objects>
 </document>

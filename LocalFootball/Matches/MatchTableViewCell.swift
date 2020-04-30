@@ -10,21 +10,16 @@ import UIKit
 
 class MatchTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var backGroundView: UIView!
-    @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
     @IBOutlet weak var team1LogoImageView: UIImageView!
-    @IBOutlet weak var team1NameLabel: UILabel!
-    
     @IBOutlet weak var team2LogoImageView: UIImageView!
-    @IBOutlet weak var team2NameLabel: UILabel!
     
-    @IBOutlet weak var teamScoreLabel: UILabel!
+    @IBOutlet weak var teamsNamesLabel: UILabel!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         selectionStyle = .none
     }
     

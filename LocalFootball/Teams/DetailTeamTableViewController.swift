@@ -33,10 +33,8 @@ class DetailTeamTableViewController: UITableViewController {
     var isViewTitleHidden: Bool = true {
         didSet {
             if !isViewTitleHidden {
-                title = team.name
                 rightBarButtonItemImageView.isHidden = false
             } else {
-                title = nil
                 rightBarButtonItemImageView.isHidden = true
             }
         }
@@ -46,6 +44,11 @@ class DetailTeamTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButtonItemImageView)
+        
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.title = team.name ?? "??"
+        
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
         tableView.register(UINib(nibName: String(describing: DetailTeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: DetailTeamTableViewCell.self))

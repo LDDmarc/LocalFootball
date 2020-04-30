@@ -28,7 +28,12 @@ class TabBarController: UITabBarController {
         let tournamentsNavigationViewController = UINavigationController(rootViewController: tournamentsTableViewController)
         tournamentsNavigationViewController.tabBarItem.image = UIImage(named: "tournaments")
         
-        let controllers = [teamsNavigationViewController, matchesNavigationViewController, tournamentsNavigationViewController]
+        let resultsTableViewController = ResultsTableViewController()
+        resultsTableViewController.title = "Результаты"
+        let resultsNavigationViewController = UINavigationController(rootViewController: resultsTableViewController)
+        resultsNavigationViewController.tabBarItem.image = UIImage(named: "results")
+        
+        let controllers = [teamsNavigationViewController, matchesNavigationViewController, tournamentsNavigationViewController, resultsNavigationViewController]
         self.viewControllers = controllers
         
     }

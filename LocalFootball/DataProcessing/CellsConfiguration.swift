@@ -16,43 +16,35 @@ class CellsConfiguration {
     private init() { }
     
     func configureCell(_ cell: MatchTableViewCell, with match: Match) {
-        
-        if let tournamentName = match.tournamentName {
-            cell.tournamentNameLabel.text = tournamentName
-        }
-        
+    
         if let date = match.date {
             cell.dateLabel.text = DataPresentation.shared.writtingDateFormatter.string(from: date)
         }
-        
-        if let team1 = match.teams?.firstObject,
-            let team = team1 as? Team {
-            cell.team1NameLabel.text = team.name
-            if let logoData = team.logoImageData {
-                cell.team1LogoImageView.image = UIImage(data: logoData)
+        if let team1Obj = match.teams?.firstObject,
+            let team2Obj = match.teams?.lastObject,
+            let team1 = team1Obj as? Team,
+            let team2 = team2Obj as? Team {
+            cell.teamsNamesLabel.text = "\(team1.name!) - \(team2.name!)"
+            if let team1LogoData = team1.logoImageData {
+                cell.team1LogoImageView.image = UIImage(data: team1LogoData)
+            }
+            if let team2LogoData = team2.logoImageData {
+                cell.team2LogoImageView.image = UIImage(data: team2LogoData)
             }
         }
-        
+    
         if match.status {
-            cell.teamScoreLabel.textColor = .black
-            cell.teamScoreLabel.text = "\(match.team1Score):\(match.team2Score)"
+            cell.scoreLabel.textColor = .black
+            cell.scoreLabel.text = "\(match.team1Score):\(match.team2Score)"
         } else {
-            cell.teamScoreLabel.textColor = .red
-            cell.teamScoreLabel.text = "❓:❓"
+            cell.scoreLabel.textColor = .red
+            cell.scoreLabel.text = "❓:❓"
         }
-        
-        if let team2 = match.teams?.lastObject,
-            let team = team2 as? Team {
-            cell.team2NameLabel.text = team.name
-            if let logoData = team.logoImageData {
-                cell.team2LogoImageView.image = UIImage(data: logoData)
-            }
-        }
+    
     }
     
     func configureCell(_ cell: DetailTeamTableViewCell, with team: Team) {
-        cell.teamNameLabel.text = team.name
-        
+    
         if let data = team.logoImageData {
             cell.teamLogoImageView.image = UIImage(data: data)
         }
@@ -66,14 +58,37 @@ class CellsConfiguration {
         cell.yearOfFoundationLabel.text = "Год основания: \(team.yearOfFoundation)"
         if let statistics = team.teamStatistics,
             let fullstatistics = statistics.fullStatistics {
-            cell.gamesLabel.text = "Игр: \(fullstatistics.numberOfGames)"
-            cell.winsLabel.text = "Побед: \(fullstatistics.numberOfWins)"
-            cell.goalsLabel.text = "Голов: \(fullstatistics.goalsScored)"
+            cell.gamesLabel.text = "\(fullstatistics.numberOfGames)"
+            cell.winsLabel.text = "\(fullstatistics.numberOfWins)"
+            cell.goalsLabel.text = "\(fullstatistics.goalsScored)"
             if let tournamentsCount = statistics.tournamentsStatistics?.count {
-                cell.tournamentsLabel.text = "Турниров: \(tournamentsCount)"
+                cell.tournamentsLabel.text = "\(tournamentsCount)"
             }
         }
-        
+        // TODO:
+        let match = team.matches?.array.first as? Match
+        if match!.team1Score > match!.team2Score {
+            cell.match1Label.backgroundColor = .green
+        } else {
+            if match!.team1Score == match!.team2Score {
+                cell.match1Label.backgroundColor = .gray
+            } else {
+                cell.match1Label.backgroundColor = .red
+            }
+        }
+    
+    }
+    
+    func configureCell(_ cell: ResultsTableTableViewCell, with tournamentStatistics: TournamentStatistics) {
+        cell.positionLabel.text = "\(tournamentStatistics.position)"
+        if let teamStatistics = tournamentStatistics.teamStatistics,
+            let team = teamStatistics.team,
+            let imageData = team.logoImageData {
+            cell.teamLogoImageView.image = UIImage(data: imageData)
+            cell.teamNameLabel.text = team.name
+        }
+        cell.numberOfGamesLabel.text = "\(tournamentStatistics.statistics?.numberOfGames ?? 0)"
+        cell.numberOfWinsLabel.text = "\(tournamentStatistics.statistics?.numberOfWins ?? 0)"
     }
     
     var dateFormatter: DateFormatter = {
