@@ -67,6 +67,8 @@
 		BCD8DCB624584E050053D930 /* matches2.json in Resources */ = {isa = PBXBuildFile; fileRef = BCD8DCB124584E050053D930 /* matches2.json */; };
 		BCD8DCB724584E050053D930 /* matches3.json in Resources */ = {isa = PBXBuildFile; fileRef = BCD8DCB224584E050053D930 /* matches3.json */; };
 		BCD8DCB824584E050053D930 /* fullRequest3.json in Resources */ = {isa = PBXBuildFile; fileRef = BCD8DCB324584E050053D930 /* fullRequest3.json */; };
+		BCE60A03245C8B6F001B7197 /* ResultsFormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE60A01245C8B6F001B7197 /* ResultsFormTableViewCell.swift */; };
+		BCE60A04245C8B6F001B7197 /* ResultsFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE60A02245C8B6F001B7197 /* ResultsFormTableViewCell.xib */; };
 		BCE7035124434BE0009D55FC /* teams.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7034F24434BDF009D55FC /* teams.json */; };
 		BCE7035624434CC6009D55FC /* teams1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCE7035524434CC6009D55FC /* teams1.json */; };
 		BCE747D92443852700984011 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE747D82443852700984011 /* CoreDataManager.swift */; };
@@ -146,6 +148,8 @@
 		BCD8DCB124584E050053D930 /* matches2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = matches2.json; sourceTree = "<group>"; };
 		BCD8DCB224584E050053D930 /* matches3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = matches3.json; sourceTree = "<group>"; };
 		BCD8DCB324584E050053D930 /* fullRequest3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fullRequest3.json; sourceTree = "<group>"; };
+		BCE60A01245C8B6F001B7197 /* ResultsFormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsFormTableViewCell.swift; sourceTree = "<group>"; };
+		BCE60A02245C8B6F001B7197 /* ResultsFormTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsFormTableViewCell.xib; sourceTree = "<group>"; };
 		BCE7034F24434BDF009D55FC /* teams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams.json; sourceTree = "<group>"; };
 		BCE7035524434CC6009D55FC /* teams1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams1.json; sourceTree = "<group>"; };
 		BCE747D82443852700984011 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				BC73BEA2245C552E00700A04 /* ResultsTableSectionHeader.xib */,
 				BCE79CB52459EF4F003B6767 /* ResultsTableTableViewCell.swift */,
 				BCE79CB62459EF4F003B6767 /* ResultsTableTableViewCell.xib */,
+				BCE60A01245C8B6F001B7197 /* ResultsFormTableViewCell.swift */,
+				BCE60A02245C8B6F001B7197 /* ResultsFormTableViewCell.xib */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				BCF5D59A243F70D5009E9876 /* Main.storyboard in Resources */,
 				BCB85549244067E5004BEA34 /* RealMadrid.png in Resources */,
 				BC45CD96244636FC00C1B580 /* WestHamUnited.png in Resources */,
+				BCE60A04245C8B6F001B7197 /* ResultsFormTableViewCell.xib in Resources */,
 				BCB85548244067E5004BEA34 /* Millionarios.png in Resources */,
 				BCD8DCB424584E050053D930 /* matches1.json in Resources */,
 				BCB8554A244067E5004BEA34 /* FCB.png in Resources */,
@@ -530,6 +537,7 @@
 				BCF5D593243F70D5009E9876 /* AppDelegate.swift in Sources */,
 				BCE747E22443AD1600984011 /* MatchTableViewCell.swift in Sources */,
 				BCA82349244093A700FA67FF /* Team+CoreDataClass.swift in Sources */,
+				BCE60A03245C8B6F001B7197 /* ResultsFormTableViewCell.swift in Sources */,
 				BC210E17245329E10056DDE3 /* TeamStatistic+CoreDataProperties.swift in Sources */,
 				BC210E1F245329E10056DDE3 /* TournamentStatistics+CoreDataProperties.swift in Sources */,
 				BC9CA0D32446061C0017B952 /* TournamentTableViewCell.swift in Sources */,

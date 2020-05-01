@@ -123,6 +123,61 @@ class CellsConfiguration {
         cell.scoreLabel.text = "\(tournamentStatistics.score)"
     }
     
+    func configureCell(_ cell: ResultsFormTableViewCell, with tournamentStatistics: TournamentStatistics) {
+        cell.positionLabel.text = "\(tournamentStatistics.position)"
+        
+        guard let teamStatistics = tournamentStatistics.teamStatistics,
+            let team = teamStatistics.team else { return }
+        
+        if let imageData = team.logoImageData {
+            cell.teamLogoImageView.image = UIImage(data: imageData)
+            cell.teamNameLabel.text = team.name
+        }
+        
+        var matches = [Match]()
+        guard let teamMatches = team.matches else { return }
+        
+        var sortedMatches = teamMatches.compactMap { $0 as? Match }
+        sortedMatches.sort(by: { (match1, match2) -> Bool in
+            match1.date!.compare(match2.date!) == .orderedDescending
+        })
+        matches = sortedMatches.filter {$0.status == true} 
+        
+        for (label, view) in [(cell.match1Label, cell.match1View), (cell.match2Label, cell.match2View), (cell.match3Label, cell.match3View), (cell.match4Label, cell.match4View), (cell.match5Label, cell.match5View), (cell.match6Label, cell.match6View)] {
+            if !matches.isEmpty {
+                let match = matches.removeFirst()
+                if match.team1Score > match.team2Score {
+                    if match.team1Id == team.id {
+                        view?.backgroundColor = .systemGreen
+                        label?.text = "В"
+                        label?.isHidden = false
+                    } else {
+                        view?.backgroundColor = .systemRed
+                        label?.text = "П"
+                        label?.isHidden = false
+                    }
+                } else if match.team1Score < match.team2Score {
+                    if match.team1Id == team.id {
+                        view?.backgroundColor = .systemRed
+                        label?.text = "П"
+                        label?.isHidden = false
+                    } else {
+                        view?.backgroundColor = .systemGreen
+                        label?.text = "В"
+                        label?.isHidden = false
+                    }
+                } else if match.team1Score == match.team2Score {
+                    view?.backgroundColor = .systemGray
+                    label?.text = "Н"
+                    label?.isHidden = false
+                }
+            } else {
+                view?.backgroundColor = .systemGray6
+                label?.isHidden = true
+            }
+        }
+    }
+    
     var dateFormatter: DateFormatter = {
            let df = DateFormatter()
            df.dateStyle = .medium

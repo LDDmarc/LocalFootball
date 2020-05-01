@@ -51,21 +51,6 @@ class TeamsTableViewController: UITableViewController {
     
     @objc private func refresh() {
         fetchData()
-        
-//        let files = ["teams2", "teams3", "teams4"]
-//        if counter < 3 {
-//            dataProvider.fetchData(entity: .team) { (error) in
-//                guard error == nil else { return }
-//                DispatchQueue.main.async {
-//                    self.tableView.refreshControl?.endRefreshing()
-//                }
-//                self.counter += 1
-//            }
-//        } else {
-//            DispatchQueue.main.async {
-//                self.tableView.refreshControl?.endRefreshing()
-//            }
-//        }
     }
     var counter = 0
     
@@ -85,7 +70,6 @@ class TeamsTableViewController: UITableViewController {
         tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
         
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
-        
     }
     
     override func viewDidLoad() {
