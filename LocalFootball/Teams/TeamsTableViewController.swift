@@ -50,7 +50,7 @@ class TeamsTableViewController: UITableViewController {
     }()
     
     @objc private func refresh() {
-        fetchTeams()
+        fetchData()
         
 //        let files = ["teams2", "teams3", "teams4"]
 //        if counter < 3 {
@@ -79,7 +79,6 @@ class TeamsTableViewController: UITableViewController {
         
         navigationItem.searchController = searchController
         navigationController?.navigationBar.prefersLargeTitles = true
-        //navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
         
         tableView.refreshControl = teamsRefreshControl
         
@@ -92,10 +91,10 @@ class TeamsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        fetchTeams()
+        fetchData()
     }
     
-    private func fetchTeams() {
+    private func fetchData() {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
             self.tableView.separatorStyle = .none

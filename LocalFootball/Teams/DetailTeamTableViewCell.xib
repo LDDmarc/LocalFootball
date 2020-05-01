@@ -29,7 +29,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kl-Gi-PVJ">
                                 <rect key="frame" x="0.0" y="0.0" width="79.5" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICS-HS-n61">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICS-HS-n61">
                                         <rect key="frame" x="34.5" y="5" width="11" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,7 +45,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZH-2A-mP3">
                                 <rect key="frame" x="87.5" y="0.0" width="79.5" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iZ-01-YPh">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iZ-01-YPh">
                                         <rect key="frame" x="34.5" y="5" width="11" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,7 +61,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHY-64-8nm">
                                 <rect key="frame" x="175" y="0.0" width="80" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Н" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9y-QV-eog">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Н" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9y-QV-eog">
                                         <rect key="frame" x="34" y="5" width="12.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -77,7 +77,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rY1-eW-RcL">
                                 <rect key="frame" x="263" y="0.0" width="79.5" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="П" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2W8-ol-9sy">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="П" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2W8-ol-9sy">
                                         <rect key="frame" x="33.5" y="5" width="12.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,7 +93,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SN0-Xd-Z7D">
                                 <rect key="frame" x="350.5" y="0.0" width="79.5" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Н" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoo-UY-QWx">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Н" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoo-UY-QWx">
                                         <rect key="frame" x="33.5" y="5" width="12.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -227,11 +227,16 @@
                 <outlet property="gamesLabel" destination="hqt-Om-8fv" id="nYt-2U-kPg"/>
                 <outlet property="goalsLabel" destination="Ece-nM-OAr" id="TaZ-hi-5h3"/>
                 <outlet property="lastMatchesStackView" destination="fIL-uH-Xh1" id="dqC-KK-IaP"/>
-                <outlet property="match1Label" destination="2Kl-Gi-PVJ" id="j7J-dk-tLf"/>
-                <outlet property="match2Label" destination="IZH-2A-mP3" id="CHd-hc-RRf"/>
-                <outlet property="match3Label" destination="QHY-64-8nm" id="VIp-In-Ghj"/>
-                <outlet property="match4Label" destination="rY1-eW-RcL" id="Xjs-W1-qxe"/>
-                <outlet property="match5Label" destination="SN0-Xd-Z7D" id="Zef-le-suo"/>
+                <outlet property="match1Label" destination="ICS-HS-n61" id="ffA-sv-gRV"/>
+                <outlet property="match1View" destination="2Kl-Gi-PVJ" id="j7J-dk-tLf"/>
+                <outlet property="match2Label" destination="9iZ-01-YPh" id="Qci-d5-gX9"/>
+                <outlet property="match2View" destination="IZH-2A-mP3" id="JbD-0p-SBO"/>
+                <outlet property="match3Label" destination="o9y-QV-eog" id="4AL-1J-gpd"/>
+                <outlet property="match3View" destination="QHY-64-8nm" id="VIp-In-Ghj"/>
+                <outlet property="match4Label" destination="2W8-ol-9sy" id="O5v-Nd-xet"/>
+                <outlet property="match4View" destination="rY1-eW-RcL" id="Xjs-W1-qxe"/>
+                <outlet property="match5Label" destination="hoo-UY-QWx" id="PWN-Ns-NIT"/>
+                <outlet property="match5View" destination="SN0-Xd-Z7D" id="Zef-le-suo"/>
                 <outlet property="teamLogoImageView" destination="cNN-tk-RP9" id="6d1-RV-GAB"/>
                 <outlet property="tournamentsLabel" destination="u0Z-LQ-E4D" id="Rql-WX-hPs"/>
                 <outlet property="winsLabel" destination="QE0-uF-Jtf" id="0vE-9i-nLR"/>

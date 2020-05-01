@@ -7,17 +7,27 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
 class DetailTeamTableViewController: UITableViewController {
-    
+
     var team: Team! {
         didSet {
             if let data = team.logoImageData {
                 rightBarButtonItemImageView.image = UIImage(data: data)
             }
+            if let teamMatches = team.matches {
+                var sortedMatches = teamMatches.compactMap { $0 as? Match }
+                sortedMatches.sort(by: { (match1, match2) -> Bool in
+                    match1.date!.compare(match2.date!) == .orderedDescending
+                })
+                matches = sortedMatches
+                lastMatches = sortedMatches.filter( {$0.status == true} )
+            }
         }
     }
+    var matches = [Match]()
+    var lastMatches = [Match]()
 
     var rightBarButtonItemImageView: UIImageView = {
         let view = UIImageView()
@@ -68,23 +78,20 @@ class DetailTeamTableViewController: UITableViewController {
             isViewTitleHidden = true
         }
     }
-    
+  
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (team.matches?.count ?? 0) + 1
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailTeamTableViewCell.self)) as! DetailTeamTableViewCell
-            CellsConfiguration.shared.configureCell(cell, with: team)
+            CellsConfiguration.shared.configureCell(cell, with: team, with: lastMatches)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
-            if let match = team.matches![indexPath.row - 1] as? Match {
-                CellsConfiguration.shared.configureCell(cell, with: match)
-            }
+            let match = matches[indexPath.row - 1]
+            CellsConfiguration.shared.configureCell(cell, with: match)
             return cell
         }
     }

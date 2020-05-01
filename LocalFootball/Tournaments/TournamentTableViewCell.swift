@@ -20,15 +20,13 @@ class TournamentTableViewCell: UITableViewCell {
         static let oneThird: CGFloat = 0.33
     }
 
-    
     @IBOutlet weak var stackView: UIStackView!
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var tournamentImageView: UIImageView!
     @IBOutlet weak var tournamentDatesLabel: UILabel!
-    @IBOutlet weak var tournamentStatusLabel: UILabel!
-    @IBOutlet weak var tournamentTeamsLabel: UILabel!
+ 
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var tournamentInfoLabel: UILabel!
@@ -62,14 +60,12 @@ class TournamentTableViewCell: UITableViewCell {
 
         selectionStyle = .none
         
-        tournamentStatusLabel.isHidden = true
         bottomView.isHidden = true
         
         for button in [tournamentTeamsButton, tournamentMatchesButton, tournamentResultsButton] {
-            button?.layer.cornerRadius = 2 * .pi
+            button?.layer.cornerRadius = .pi
             button?.clipsToBounds = true
         }
- 
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

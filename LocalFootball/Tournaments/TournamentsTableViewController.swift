@@ -16,7 +16,7 @@ class TournamentsTableViewController: UITableViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Tournament> = {
         let request: NSFetchRequest = Tournament.fetchRequest()
         request.predicate = tournamentsPredicate
-        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let sort = NSSortDescriptor(key: "dateOfTheEnd", ascending: false)
         request.sortDescriptors = [sort]
         request.fetchBatchSize = 6
         let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: nil, cacheName: nil)
@@ -40,6 +40,10 @@ class TournamentsTableViewController: UITableViewController {
         activityIndicatorView = UIActivityIndicatorView(style: .large)
         tableView.backgroundView = activityIndicatorView
         
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+        
         tableView.rowHeight = UITableView.automaticDimension
         
         tableView.register(UINib(nibName: String(describing: TournamentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TournamentTableViewCell.self))
@@ -48,17 +52,7 @@ class TournamentsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-            self.tableView.separatorStyle = .none
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.tableView.separatorStyle = .singleLine
-            }
-        }
+        
     }
     
     // MARK: - Table view data source

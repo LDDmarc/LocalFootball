@@ -88,8 +88,6 @@ class MatchesTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let sections = fetchedResultsController.sections else { return nil }
-        
-        //[NSAttributedString.Key.font: UIFont(name: "Copperplate", size: 30)!]
         return sections[section].name
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

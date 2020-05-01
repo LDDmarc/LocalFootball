@@ -21,25 +21,28 @@ class DetailTeamTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lastMatchesStackView: UIStackView!
     
-    @IBOutlet weak var match1Label: UIView!
-    @IBOutlet weak var match2Label: UIView!
-    @IBOutlet weak var match3Label: UIView!
-    @IBOutlet weak var match4Label: UIView!
-    @IBOutlet weak var match5Label: UIView!
+    @IBOutlet weak var match1View: UIView!
+    @IBOutlet weak var match2View: UIView!
+    @IBOutlet weak var match3View: UIView!
+    @IBOutlet weak var match4View: UIView!
+    @IBOutlet weak var match5View: UIView!
+    
+    @IBOutlet weak var match1Label: UILabel!
+    @IBOutlet weak var match2Label: UILabel!
+    @IBOutlet weak var match3Label: UILabel!
+    @IBOutlet weak var match4Label: UILabel!
+    @IBOutlet weak var match5Label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        for matchLabel in [match1Label, match2Label, match3Label, match4Label, match5Label] {
-            matchLabel?.layer.cornerRadius = 2 * .pi
-            matchLabel?.clipsToBounds = true
+        selectionStyle = .none
+        
+        for matchView in [match1View, match2View, match3View, match4View, match5View] {
+            matchView?.layer.cornerRadius = 2 * .pi
+            matchView?.clipsToBounds = true
+            matchView?.backgroundColor = .label
         }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

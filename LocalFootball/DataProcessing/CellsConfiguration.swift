@@ -31,20 +31,26 @@ class CellsConfiguration {
             if let team2LogoData = team2.logoImageData {
                 cell.team2LogoImageView.image = UIImage(data: team2LogoData)
             }
+            
+            if match.status {
+                cell.scoreLabel.textColor = .label
+                if match.team1Id != team1.id {
+                  cell.scoreLabel.text = "\(match.team2Score):\(match.team1Score)"
+                } else {
+                    cell.scoreLabel.text = "\(match.team1Score):\(match.team2Score)"
+                }
+            } else {
+                cell.scoreLabel.textColor = .systemRed
+                cell.scoreLabel.text = "❓:❓"
+            }
+            
         }
-    
-        if match.status {
-            cell.scoreLabel.textColor = .black
-            cell.scoreLabel.text = "\(match.team1Score):\(match.team2Score)"
-        } else {
-            cell.scoreLabel.textColor = .red
-            cell.scoreLabel.text = "❓:❓"
-        }
-    
     }
     
-    func configureCell(_ cell: DetailTeamTableViewCell, with team: Team) {
-    
+    func configureCell(_ cell: DetailTeamTableViewCell, with team: Team, with lastMatches: [Match]) {
+        
+        var matches = lastMatches
+        
         if let data = team.logoImageData {
             cell.teamLogoImageView.image = UIImage(data: data)
         }
@@ -65,18 +71,40 @@ class CellsConfiguration {
                 cell.tournamentsLabel.text = "\(tournamentsCount)"
             }
         }
-        // TODO:
-        let match = team.matches?.array.first as? Match
-        if match!.team1Score > match!.team2Score {
-            cell.match1Label.backgroundColor = .green
-        } else {
-            if match!.team1Score == match!.team2Score {
-                cell.match1Label.backgroundColor = .gray
+        
+        for (label, view) in [(cell.match1Label, cell.match1View), (cell.match2Label, cell.match2View), (cell.match3Label, cell.match3View), (cell.match4Label, cell.match4View), (cell.match5Label, cell.match5View)] {
+            if !matches.isEmpty {
+                let match = matches.removeFirst()
+                if match.team1Score > match.team2Score {
+                    if match.team1Id == team.id {
+                        view?.backgroundColor = .systemGreen
+                        label?.text = "В"
+                        label?.isHidden = false
+                    } else {
+                        view?.backgroundColor = .systemRed
+                        label?.text = "П"
+                        label?.isHidden = false
+                    }
+                } else if match.team1Score < match.team2Score {
+                    if match.team1Id == team.id {
+                        view?.backgroundColor = .systemRed
+                        label?.text = "П"
+                        label?.isHidden = false
+                    } else {
+                        view?.backgroundColor = .systemGreen
+                        label?.text = "В"
+                        label?.isHidden = false
+                    }
+                } else if match.team1Score == match.team2Score {
+                    view?.backgroundColor = .systemGray
+                    label?.text = "Н"
+                    label?.isHidden = false
+                }
             } else {
-                cell.match1Label.backgroundColor = .red
+                view?.backgroundColor = .systemGray6
+                label?.isHidden = true
             }
         }
-    
     }
     
     func configureCell(_ cell: ResultsTableTableViewCell, with tournamentStatistics: TournamentStatistics) {
@@ -89,6 +117,10 @@ class CellsConfiguration {
         }
         cell.numberOfGamesLabel.text = "\(tournamentStatistics.statistics?.numberOfGames ?? 0)"
         cell.numberOfWinsLabel.text = "\(tournamentStatistics.statistics?.numberOfWins ?? 0)"
+        cell.numberOfDrawsLabel.text = "\(tournamentStatistics.statistics?.numberOfDraws ?? 0)"
+        cell.numberOfLesionsLabel.text = "\(tournamentStatistics.statistics?.numberOfLesions ?? 0)"
+        cell.numberOfGoalsAndMissedLabel.text = "\(tournamentStatistics.statistics?.goalsScored ?? 0) - \(tournamentStatistics.statistics?.goalsConceded ?? 0)"
+        cell.scoreLabel.text = "\(tournamentStatistics.score)"
     }
     
     var dateFormatter: DateFormatter = {
@@ -103,17 +135,11 @@ class CellsConfiguration {
             cell.tournamentImageView.image = UIImage(data: imageData)
         }
        
-        cell.tournamentTeamsLabel.text = "🥅 Команд: \(tournament.numberOfTeams)"
-        
-//        if !tournament.status {
-//            cell.tournamentStatusLabel.isHidden = false
-//        }
-        
         cell.tournamentInfoLabel.text = tournament.info
         
         if let date1 = tournament.dateOfTheBeginning,
             let date2 = tournament.dateOfTheEnd {
-            cell.tournamentDatesLabel.text = "🗓 Даты: \(dateFormatter.string(from: date1)) - \(dateFormatter.string(from: date2))"
+            cell.tournamentDatesLabel.text = "\(dateFormatter.string(from: date1)) - \(dateFormatter.string(from: date2))"
         }
         
         
