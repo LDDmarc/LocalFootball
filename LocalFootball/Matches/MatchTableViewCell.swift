@@ -18,9 +18,22 @@ class MatchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBAction func favoriteStarButton(_ sender: UIButton) {
+        if delegate != nil,
+            let indexPath = indexPath {
+            self.delegate?.favoriteStarTap(sender)
+        }
+    }
+    var indexPath: IndexPath?
+    weak var delegate: MatchTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
     }
     
+}
+
+protocol MatchTableViewCellDelegate: class {
+    func favoriteStarTap(_ sender: UIButton)
 }

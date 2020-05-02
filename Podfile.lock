@@ -1,20 +1,16 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.5.0)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
-    - ActionSheetPicker-3.0
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: 6d79f6f3b98e2b21d218dd65a39f634ff37a27e5
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 213bc7f0eb93b74f9689401fd4b47807d544811f
+PODFILE CHECKSUM: 06060b0541ddf5e44ebea688020b2ed6edfd865b
 
 COCOAPODS: 1.9.1

@@ -74,14 +74,15 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Последние матчи" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDl-oa-S7X">
-                    <rect key="frame" x="244" y="15" width="128" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <rect key="frame" x="219" y="16" width="112.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="dDl-oa-S7X" firstAttribute="leading" secondItem="ZGY-aR-Bge" secondAttribute="leading" id="2JR-sG-2QX"/>
                 <constraint firstItem="dDl-oa-S7X" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="51S-cw-pr4"/>
                 <constraint firstItem="u8M-4h-dww" firstAttribute="leading" secondItem="a0j-5d-2Q7" secondAttribute="trailing" constant="2" id="54L-to-9eg"/>
                 <constraint firstItem="y3g-Hy-pDG" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="AkK-2m-Yah"/>
@@ -96,7 +97,6 @@
                 <constraint firstItem="VDJ-Vn-q6U" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="eXQ-aK-fOX"/>
                 <constraint firstItem="MAk-7J-Xh9" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="i0E-mZ-gFH"/>
                 <constraint firstItem="y3g-Hy-pDG" firstAttribute="top" secondItem="I8h-RN-R99" secondAttribute="top" constant="14" id="lyV-oe-05Y"/>
-                <constraint firstItem="I8h-RN-R99" firstAttribute="trailing" secondItem="dDl-oa-S7X" secondAttribute="trailing" constant="4" id="rIQ-ec-Ahf"/>
                 <constraint firstItem="u8M-4h-dww" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="spw-vj-m5w"/>
                 <constraint firstItem="VDJ-Vn-q6U" firstAttribute="leading" secondItem="pgh-ds-YTR" secondAttribute="trailing" constant="2" id="toV-S5-yWN"/>
                 <constraint firstItem="ZGY-aR-Bge" firstAttribute="leading" secondItem="y3g-Hy-pDG" secondAttribute="trailing" constant="12" id="vd0-4z-Tnm"/>

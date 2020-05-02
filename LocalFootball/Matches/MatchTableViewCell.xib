@@ -46,9 +46,22 @@
                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" alpha="0.25" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAF-7e-Vu2">
+                        <rect key="frame" x="445" y="12" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="Pdc-6x-52S"/>
+                            <constraint firstAttribute="height" constant="25" id="hL1-zK-O9S"/>
+                        </constraints>
+                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="Button" image="star" catalog="system"/>
+                        <connections>
+                            <action selector="favoriteStarButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="viO-bO-1n9"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="MQg-hG-Ghj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="3za-4E-IvK"/>
+                    <constraint firstAttribute="trailing" secondItem="nAF-7e-Vu2" secondAttribute="trailing" constant="15" id="7uI-hG-j3R"/>
                     <constraint firstItem="lea-22-XO1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Hc1-re-SaD"/>
                     <constraint firstItem="aDo-1a-yAk" firstAttribute="leading" secondItem="fY3-fY-G7F" secondAttribute="trailing" constant="12" id="I0j-Fj-1KI"/>
                     <constraint firstItem="Sr6-D7-LM6" firstAttribute="leading" secondItem="aDo-1a-yAk" secondAttribute="trailing" constant="12" id="Mx9-BO-jyd"/>
@@ -56,6 +69,7 @@
                     <constraint firstItem="fY3-fY-G7F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="csX-lj-OrJ"/>
                     <constraint firstItem="MQg-hG-Ghj" firstAttribute="top" secondItem="Sr6-D7-LM6" secondAttribute="bottom" constant="2" id="dRS-WE-Rb2"/>
                     <constraint firstItem="lea-22-XO1" firstAttribute="top" secondItem="MQg-hG-Ghj" secondAttribute="bottom" constant="6" id="duX-lp-2Nz"/>
+                    <constraint firstItem="nAF-7e-Vu2" firstAttribute="top" secondItem="Sr6-D7-LM6" secondAttribute="top" id="gWd-Cf-1bn"/>
                     <constraint firstItem="aDo-1a-yAk" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gbb-DS-GFH"/>
                     <constraint firstItem="fY3-fY-G7F" firstAttribute="centerY" secondItem="aDo-1a-yAk" secondAttribute="centerY" id="seS-DQ-OGc"/>
                     <constraint firstItem="Sr6-D7-LM6" firstAttribute="centerY" secondItem="aDo-1a-yAk" secondAttribute="centerY" id="xYW-Tb-4Dh"/>
@@ -72,4 +86,7 @@
             <point key="canvasLocation" x="-365.94202898550725" y="-133.59375"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="star" catalog="system" width="128" height="116"/>
+    </resources>
 </document>

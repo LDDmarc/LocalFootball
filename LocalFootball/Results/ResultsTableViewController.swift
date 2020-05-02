@@ -62,8 +62,37 @@ class ResultsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    lazy var resultsRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return rc
+    }()
+    @objc private func refresh() {
+        fetchData()
+    }
+    var activityIndicatorView: UIActivityIndicatorView!
+    
+    private func fetchData() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+            self.tableView.separatorStyle = .none
+        }
+        dataProvider.fetchAllData { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.separatorStyle = .singleLine
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
     override func loadView() {
         super.loadView()
+        
+        activityIndicatorView = UIActivityIndicatorView(style: .large)
+        tableView.backgroundView = activityIndicatorView
+        tableView.refreshControl = resultsRefreshControl
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = segmentedControl
@@ -81,17 +110,18 @@ class ResultsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            try fetchedTournamentsResultsController.performFetch()
-        } catch let error as NSError {
-            print(error.localizedDescription)
+        if tournamentPredicate == nil {
+            do {
+                try fetchedTournamentsResultsController.performFetch()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+            curentTournamentId = fetchedTournamentsResultsController.fetchedObjects?.first?.id
+            currentTournamentName = fetchedTournamentsResultsController.fetchedObjects?.first?.name
+            if let curentTournamentId = curentTournamentId {
+                tournamentPredicate = NSPredicate(format: "tournamentId == %i", curentTournamentId)
+            }
         }
-        curentTournamentId = fetchedTournamentsResultsController.fetchedObjects?.first?.id
-        currentTournamentName = fetchedTournamentsResultsController.fetchedObjects?.first?.name
-        if let curentTournamentId = curentTournamentId {
-            tournamentPredicate = NSPredicate(format: "tournamentId == %i", curentTournamentId)
-        }
-        
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {

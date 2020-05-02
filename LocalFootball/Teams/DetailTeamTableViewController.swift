@@ -7,10 +7,10 @@
 //
 
 import UIKit
-//import CoreData
+import CoreData
 
 class DetailTeamTableViewController: UITableViewController {
-
+    
     var team: Team! {
         didSet {
             if let data = team.logoImageData {
@@ -49,6 +49,7 @@ class DetailTeamTableViewController: UITableViewController {
             }
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -48,12 +48,10 @@ class TeamsTableViewController: UITableViewController {
         rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return rc
     }()
-    
     @objc private func refresh() {
         fetchData()
     }
     var counter = 0
-    
     var activityIndicatorView: UIActivityIndicatorView!
     
     override func loadView() {

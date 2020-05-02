@@ -67,9 +67,37 @@ class MatchesTableViewController: UITableViewController {
     }
     var selectedButton = 0
     
+    lazy var matchesRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return rc
+    }()
+    
+    var activityIndicatorView: UIActivityIndicatorView!
+    @objc private func refresh() {
+        fetchData()
+    }
+    private func fetchData() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+            self.tableView.separatorStyle = .none
+        }
+        dataProvider.fetchAllData { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.separatorStyle = .singleLine
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicatorView = UIActivityIndicatorView(style: .large)
+        tableView.backgroundView = activityIndicatorView
+        tableView.refreshControl = matchesRefreshControl
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
@@ -211,5 +239,11 @@ extension MatchesTableViewController: UISearchResultsUpdating {
         } catch {
             print("Fetch failed")
         }
+    }
+}
+
+extension MatchesTableViewController: MatchTableViewCellDelegate {
+    func favoriteStarTap(_ sender: UIButton) {
+        sender.setImage(UIImage(systemName: "fillStar"), for: .normal)
     }
 }

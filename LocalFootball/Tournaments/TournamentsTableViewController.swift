@@ -35,10 +35,36 @@ class TournamentsTableViewController: UITableViewController {
     
     var activityIndicatorView: UIActivityIndicatorView!
     
+    lazy var tournamentsRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return rc
+    }()
+    
+    @objc private func refresh() {
+        fetchData()
+    }
+    private func fetchData() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+            self.tableView.separatorStyle = .none
+        }
+        dataProvider.fetchAllData { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.separatorStyle = .singleLine
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
     override func loadView() {
         super.loadView()
         activityIndicatorView = UIActivityIndicatorView(style: .large)
         tableView.backgroundView = activityIndicatorView
+        
+        tableView.refreshControl = tournamentsRefreshControl
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -100,7 +126,7 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
     func showTeams(indexPath: IndexPath) {
         let tournament = fetchedResultsController.object(at: indexPath)
         let teamsTableViewController = TeamsTableViewController()
-        
+        teamsTableViewController.title = tournament.name
         teamsTableViewController.teamsByTournamentsPredicate = NSPredicate(format: "id IN %@", tournament.tournamentTeamsIds)
         
         navigationController?.pushViewController(teamsTableViewController, animated: true)
@@ -109,10 +135,19 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
     func showMatches(indexPath: IndexPath) {
         let tournament = fetchedResultsController.object(at: indexPath)
         let matchesTableViewController = MatchesTableViewController()
-        
+        matchesTableViewController.title = tournament.name
         matchesTableViewController.matchesByTournamentPredicate = NSPredicate(format: "id IN %@", tournament.tournamentMatchesIds)
         
         navigationController?.pushViewController(matchesTableViewController, animated: true)
+    }
+    
+    func showResults(indexPath: IndexPath) {
+        let tournament = fetchedResultsController.object(at: indexPath)
+        let resultsTableViewController = ResultsTableViewController()
+        resultsTableViewController.title = tournament.name
+        resultsTableViewController.tournamentPredicate = NSPredicate(format: "tournamentId == %i", tournament.id)
+        
+        navigationController?.pushViewController(resultsTableViewController, animated: true)
     }
     
 }

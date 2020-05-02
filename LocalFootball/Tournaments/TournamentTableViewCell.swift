@@ -31,6 +31,7 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var tournamentInfoLabel: UILabel!
     @IBOutlet weak var buttonsStackView: UIStackView!
+    
     @IBAction func tournamentTeamsButtonTap(_ sender: UIButton) {
         if delegate != nil,
             let indexPath = indexPath {
@@ -44,7 +45,10 @@ class TournamentTableViewCell: UITableViewCell {
         }
     }
     @IBAction func tournamentResultsButtonTap(_ sender: UIButton) {
-        
+        if delegate != nil,
+            let indexPath = indexPath {
+            self.delegate?.showResults(indexPath: indexPath)
+        }
     }
     
     @IBOutlet weak var tournamentTeamsButton: UIButton!
@@ -78,6 +82,7 @@ class TournamentTableViewCell: UITableViewCell {
 protocol TournamentTableViewCellDelegate: AnyObject {
     func showTeams(indexPath: IndexPath)
     func showMatches(indexPath: IndexPath)
+    func showResults(indexPath: IndexPath)
 }
 
 protocol ExpandableCellDelegate: class {
