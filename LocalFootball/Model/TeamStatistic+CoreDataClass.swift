@@ -38,14 +38,11 @@ public class TeamStatistic: NSManagedObject, Decodable {
     
     func update(with teamStatisticsJSON: JSON) {
         fullStatistics?.update(with: teamStatisticsJSON[CodingKeys.fullStatistics.rawValue])
-        var i = 0
         if let tournamentsStatistics = tournamentsStatistics {
-            for tournamentStatistics in tournamentsStatistics {
-                (tournamentStatistics as? TournamentStatistics)?.update(with: teamStatisticsJSON[CodingKeys.tournamentsStatistics.rawValue].arrayValue[i])
-                i += 1
+            for (index, tournamentStatistics) in tournamentsStatistics.enumerated() {
+                (tournamentStatistics as? TournamentStatistics)?.update(with: teamStatisticsJSON[CodingKeys.tournamentsStatistics.rawValue].arrayValue[index])
             }
         }
-        
     }
-    
+
 }

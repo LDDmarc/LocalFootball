@@ -22,7 +22,6 @@ public class Match: NSManagedObject, UpdatableManagedObject {
         case team2Id = "team2Id"
         case team1Name = "team1Name"
         case team2Name = "team2Name"
-        case matchResults = "matchResults"
         case tournamentName = "tournamentName"
         case status = "status"
         case tournamentId = "tournamentId"
@@ -44,28 +43,23 @@ public class Match: NSManagedObject, UpdatableManagedObject {
             team2Id = try values.decode(Int64.self, forKey: .team2Id)
             
             if let dateStr = try values.decode(String?.self, forKey: .date) {
-                date = DataPresentation.shared.readingDateFormatter.date(from: dateStr)
+                date = DateFormatter.readingDateFormatter().date(from: dateStr)
             }
             team1Name = try values.decode(String?.self, forKey: .team1Name)
             team2Name = try values.decode(String?.self, forKey: .team2Name)
             tournamentName = try values.decode(String?.self, forKey: .tournamentName)
-            
-            let matchResults = try values.decode([MatchResults].self, forKey: .matchResults)
-            matchResults.forEach { self.addToMatchResults($0) }
             
             status = try values.decode(Bool.self, forKey: .status)
             
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        
-        
     }
 
     func update(with matchJSON: JSON, into context: NSManagedObjectContext) {
         id = matchJSON[CodingKeys.id.rawValue].int64Value
         modified = matchJSON[CodingKeys.modified.rawValue].int64Value
-        date = DataPresentation.shared.readingDateFormatter.date(from: matchJSON[CodingKeys.date.rawValue].stringValue)
+        date = DateFormatter.readingDateFormatter().date(from: matchJSON[CodingKeys.date.rawValue].stringValue)
         status = matchJSON[CodingKeys.status.rawValue].boolValue
         
         team1Id = matchJSON[CodingKeys.team1Id.rawValue].int64Value
@@ -77,6 +71,5 @@ public class Match: NSManagedObject, UpdatableManagedObject {
         
         tournamentId = matchJSON[CodingKeys.tournamentId.rawValue].int64Value
         tournamentName = matchJSON[CodingKeys.tournamentName.rawValue].stringValue
-    
     }
 }

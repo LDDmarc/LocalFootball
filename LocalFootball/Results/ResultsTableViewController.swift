@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreData
-import ActionSheetPicker_3_0
 
 class ResultsTableViewController: UITableViewController {
+    
+    // MARK: - CoreData & FetchedResultsController
     
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
     
@@ -30,7 +31,18 @@ class ResultsTableViewController: UITableViewController {
         frc.delegate = self
         return frc
     }()
-    var tournamentPredicate: NSPredicate?
+    
+    var tournamentPredicate: NSPredicate? {
+        didSet {
+            fetchedResultsController.fetchRequest.predicate = tournamentPredicate
+            do {
+                try fetchedResultsController.performFetch()
+                tableView?.reloadData()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     var curentTournamentId: Int64?
     var currentTournamentName: String?
@@ -51,6 +63,8 @@ class ResultsTableViewController: UITableViewController {
         return frc
     }()
     
+    // MARK: - UI
+    
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Таблица", "Форма"]
         let sc = UISegmentedControl(items: items)
@@ -58,57 +72,38 @@ class ResultsTableViewController: UITableViewController {
         sc.selectedSegmentIndex = 0
         return sc
     }()
+    
     @objc func segmentedControlTap(sender: UISegmentedControl) {
         tableView.reloadData()
     }
     
     lazy var resultsRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         return rc
     }()
-    @objc private func refresh() {
-        fetchData()
-    }
-    var activityIndicatorView: UIActivityIndicatorView!
-    
-    private func fetchData() {
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-            self.tableView.separatorStyle = .none
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.tableView.separatorStyle = .singleLine
-                self.tableView.refreshControl?.endRefreshing()
-            }
-        }
-    }
-    
+
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
+
     override func loadView() {
         super.loadView()
-        
-        activityIndicatorView = UIActivityIndicatorView(style: .large)
-        tableView.backgroundView = activityIndicatorView
-        tableView.refreshControl = resultsRefreshControl
-        
+    
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.titleView = segmentedControl
         
-        let chooseTournamentButton = UIButton(type: .custom)
-        chooseTournamentButton.setImage(UIImage(named: "tournaments"), for: .normal)
-        chooseTournamentButton.addTarget(self, action: #selector(chooseTournament), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: chooseTournamentButton)
+        tableView.backgroundView = activityIndicatorView
+        tableView.refreshControl = resultsRefreshControl
         
-        tableView.register(UINib(nibName: "ResultsTableSectionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: ResultsTableSectionHeader.reuseIdentifier)
-        tableView.register(UINib(nibName: String(describing: ResultsTableTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ResultsTableTableViewCell.self))
-        tableView.register(UINib(nibName: String(describing: ResultsFormTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ResultsFormTableViewCell.self))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: "ResultsTableSectionHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: ResultsTableSectionHeader.reuseIdentifier)
+        tableView.register(UINib(nibName: String(describing: ResultsTableTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ResultsTableTableViewCell.self))
+        tableView.register(UINib(nibName: String(describing: ResultsFormTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: ResultsFormTableViewCell.self))
+        
+        tableView.tableFooterView = UIView()
         
         if tournamentPredicate == nil {
             do {
@@ -121,14 +116,27 @@ class ResultsTableViewController: UITableViewController {
             if let curentTournamentId = curentTournamentId {
                 tournamentPredicate = NSPredicate(format: "tournamentId == %i", curentTournamentId)
             }
-        }
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print(error.localizedDescription)
+            
+            let chooseTournamentButton = UIButton(type: .custom)
+            chooseTournamentButton.setImage(UIImage(named: "tournaments"), for: .normal)
+            chooseTournamentButton.addTarget(self, action: #selector(chooseTournament), for: .touchUpInside)
+            navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: chooseTournamentButton)
         }
     }
-  
+    
+    @objc private func fetchData() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+        }
+        dataProvider.fetchAllData { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
     @objc func chooseTournament(sender: UIButton) {
         var tournaments = [Tournament]()
         do {
@@ -146,21 +154,20 @@ class ResultsTableViewController: UITableViewController {
             ac.addAction(UIAlertAction(title: tournament.name, style: .default, handler: { _ in
                 self.tournamentPredicate = NSPredicate(format: "tournamentId == %i", tournament.id)
                 self.fetchedResultsController.fetchRequest.predicate = self.tournamentPredicate
-                do {
-                    try self.fetchedResultsController.performFetch()
-                    self.currentTournamentName = tournament.name
-                    self.tableView.reloadData()
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
+                self.currentTournamentName = tournament.name
             }))
         }
         present(ac, animated: true)
     }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -180,11 +187,6 @@ class ResultsTableViewController: UITableViewController {
             headerView.lastMatchesLabel.isHidden = false
         }
         return headerView
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
     }
     
     
@@ -271,11 +273,3 @@ class ResultsTableSectionHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var lastMatchesLabel: UILabel!
 }
 
-class CustomAlertController: UIAlertController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let table = UITableView()
-        
-        self.setValue(table, forKey: "contentViewController")
-    }
-}

@@ -32,21 +32,17 @@ public class Tournament: NSManagedObject, UpdatableManagedObject {
         case teamsTournamentStatistics = "teamsTournamentStatistics"
     }
     
-    lazy var tournamentTeamsIds: [Int64] = {
-        if let myTournamentTeamsNames = teamsIds as? [Int64] {
-            return myTournamentTeamsNames
-        } else {
-            return []
+    var tournamentTeamsIds: [Int64] {
+        get {
+            return teamsIds as? [Int64] ?? []
         }
-    }()
-    lazy var tournamentMatchesIds: [Int64] = {
-        if let myTournamentMatchesIds = matchesIds as? [Int64] {
-            return myTournamentMatchesIds
-        } else {
-            return []
-        }
-    }()
+    }
     
+    var tournamentMatchesIds: [Int64] {
+        get {
+            return matchesIds as? [Int64] ?? []
+        }
+    }
     
     required convenience public init(from decoder: Decoder) throws {
         guard let contexUserInfoKey = CodingUserInfoKey.context,
@@ -69,10 +65,10 @@ public class Tournament: NSManagedObject, UpdatableManagedObject {
             status = try values.decode(Bool.self, forKey: .status)
             
             if let beginDate = try values.decode(String?.self, forKey: .dateOfTheBeginning) {
-                dateOfTheBeginning = DataPresentation.shared.readingDateFormatter.date(from: beginDate)
+                dateOfTheBeginning = DateFormatter.readingDateFormatter().date(from: beginDate)
             }
             if let endDate = try values.decode(String?.self, forKey: .dateOfTheEnd) {
-                dateOfTheEnd = DataPresentation.shared.readingDateFormatter.date(from: endDate)
+                dateOfTheEnd = DateFormatter.readingDateFormatter().date(from: endDate)
             }
             
             numberOfTeams = try values.decode(Int16.self, forKey: .numberOfTeams)
@@ -91,8 +87,8 @@ public class Tournament: NSManagedObject, UpdatableManagedObject {
         modified = tournamentJSON[CodingKeys.modified.rawValue].int64Value
         name = tournamentJSON[CodingKeys.name.rawValue].string
         info = tournamentJSON[CodingKeys.info.rawValue].string
-        dateOfTheBeginning = DataPresentation.shared.readingDateFormatter.date(from: tournamentJSON[CodingKeys.dateOfTheBeginning.rawValue].stringValue)
-        dateOfTheEnd = DataPresentation.shared.readingDateFormatter.date(from: tournamentJSON[CodingKeys.dateOfTheEnd.rawValue].stringValue)
+        dateOfTheBeginning = DateFormatter.readingDateFormatter().date(from: tournamentJSON[CodingKeys.dateOfTheBeginning.rawValue].stringValue)
+        dateOfTheEnd = DateFormatter.readingDateFormatter().date(from: tournamentJSON[CodingKeys.dateOfTheEnd.rawValue].stringValue)
         imageName = tournamentJSON[CodingKeys.imageName.rawValue].stringValue
         if let imageName = imageName {
             let image = UIImage(named: imageName)

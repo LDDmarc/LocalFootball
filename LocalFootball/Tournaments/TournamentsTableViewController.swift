@@ -11,11 +11,12 @@ import CoreData
 
 class TournamentsTableViewController: UITableViewController {
     
+    // MARK: - CoreData & FetchedResultsController
+    
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
     
     lazy var fetchedResultsController: NSFetchedResultsController<Tournament> = {
         let request: NSFetchRequest = Tournament.fetchRequest()
-        request.predicate = tournamentsPredicate
         let sort = NSSortDescriptor(key: "dateOfTheEnd", ascending: false)
         request.sortDescriptors = [sort]
         request.fetchBatchSize = 6
@@ -29,22 +30,37 @@ class TournamentsTableViewController: UITableViewController {
         frc.delegate = self
         return frc
     }()
-    var tournamentsPredicate: NSPredicate?
     
-    var expandedIndexSet : IndexSet = []
+    // MARK: - UI
     
-    var activityIndicatorView: UIActivityIndicatorView!
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
     
     lazy var tournamentsRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         return rc
     }()
     
-    @objc private func refresh() {
-        fetchData()
+    var expandedIndexSet : IndexSet = []
+    
+    override func loadView() {
+        super.loadView()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.backgroundView = activityIndicatorView
+        tableView.refreshControl = tournamentsRefreshControl
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+   //    tableView.rowHeight = UITableView.automaticDimension
     }
-    private func fetchData() {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(UINib(nibName: String(describing: TournamentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TournamentTableViewCell.self))
+    }
+    
+    @objc private func fetchData() {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
             self.tableView.separatorStyle = .none
@@ -59,28 +75,6 @@ class TournamentsTableViewController: UITableViewController {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-        activityIndicatorView = UIActivityIndicatorView(style: .large)
-        tableView.backgroundView = activityIndicatorView
-        
-        tableView.refreshControl = tournamentsRefreshControl
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        
-        tableView.register(UINib(nibName: String(describing: TournamentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TournamentTableViewCell.self))
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,10 +82,8 @@ class TournamentsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TournamentTableViewCell.self)) as! TournamentTableViewCell
@@ -146,7 +138,7 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
         let resultsTableViewController = ResultsTableViewController()
         resultsTableViewController.title = tournament.name
         resultsTableViewController.tournamentPredicate = NSPredicate(format: "tournamentId == %i", tournament.id)
-        
+       
         navigationController?.pushViewController(resultsTableViewController, animated: true)
     }
     

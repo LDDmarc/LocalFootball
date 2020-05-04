@@ -19,30 +19,23 @@ extension CodingUserInfoKey {
 @objc(Team)
 public class Team: NSManagedObject, UpdatableManagedObject {
     
-    lazy var teamColors: [String] = {
-        if let myColors = colors as? [String] {
-            return myColors
-        } else {
-            return []
+    var teamColors: [String] {
+        get {
+            return colors as? [String] ?? []
         }
-    }()
+    }
     
-    lazy var teamTournamentsIds: [Int64] = {
-        if let myTournaments = tournamentsIds as? [Int64] {
-            return myTournaments
-        } else {
-            return []
+    var teamTournamentsIds: [Int64] {
+        get {
+            return tournamentsIds as? [Int64] ?? []
         }
-    }()
+    }
     
-    lazy var teamMatchesIds: [Int64] = {
-        if let myMatches = matchesIds as? [Int64] {
-            return myMatches
-        } else {
-            return []
+    var teamMatchesIds: [Int64] {
+        get {
+            return matchesIds as? [Int64] ?? []
         }
-    }()
-    
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -152,5 +145,4 @@ public class Team: NSManagedObject, UpdatableManagedObject {
         }
         teamStatistics?.update(with: teamJSON[CodingKeys.teamStatistics.rawValue])
     }
-    
 }

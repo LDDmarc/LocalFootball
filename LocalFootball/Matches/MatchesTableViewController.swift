@@ -11,6 +11,8 @@ import CoreData
 
 class MatchesTableViewController: UITableViewController {
     
+    // MARK: - CoreData & FetchedResultsController
+    
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
     
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
@@ -34,9 +36,24 @@ class MatchesTableViewController: UITableViewController {
         frc.delegate = self
         return frc
     }()
-    var matchesByTeamsPredicate: NSPredicate?
-    var matchesByTournamentPredicate: NSPredicate?
-    var matchesByStatusPredicate: NSPredicate = NSPredicate(format: "status == YES")
+    
+    var matchesByStatusPredicate: NSPredicate = NSPredicate(format: "status == YES") {
+        didSet {
+            filterContent()
+        }
+    }
+    var matchesByTeamsPredicate: NSPredicate? {
+        didSet {
+            filterContent()
+        }
+    }
+    var matchesByTournamentPredicate: NSPredicate? {
+        didSet {
+            filterContent()
+        }
+    }
+    
+    // MARK: - UI
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
@@ -45,7 +62,6 @@ class MatchesTableViewController: UITableViewController {
         sc.searchBar.placeholder = "Введите название команды"
         sc.searchResultsUpdater = self
         sc.searchBar.isHidden = false
-        //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
         return sc
     }()
@@ -61,39 +77,20 @@ class MatchesTableViewController: UITableViewController {
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    var isFiltering: Bool {
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!isSearchBarEmpty || searchBarScopeIsFiltering)
-    }
-    var selectedButton = 0
     
     lazy var matchesRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         return rc
     }()
     
     var activityIndicatorView: UIActivityIndicatorView!
-    @objc private func refresh() {
-        fetchData()
-    }
-    private func fetchData() {
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-            self.tableView.separatorStyle = .none
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.tableView.separatorStyle = .singleLine
-                self.tableView.refreshControl?.endRefreshing()
-            }
-        }
-    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    // MARK: - Loading View
+    
+    override func loadView() {
+        super.loadView()
         
         activityIndicatorView = UIActivityIndicatorView(style: .large)
         tableView.backgroundView = activityIndicatorView
@@ -104,9 +101,27 @@ class MatchesTableViewController: UITableViewController {
         navigationItem.titleView = segmentedControl
         
         tableView.sectionHeaderHeight = CGFloat(40)
-        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.tableFooterView = UIView()
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
+    }
+
+    @objc private func fetchData() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+        }
+        dataProvider.fetchAllData { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -114,14 +129,14 @@ class MatchesTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let sections = fetchedResultsController.sections else { return nil }
         return sections[section].name
-    }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        guard let sections = fetchedResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -197,7 +212,6 @@ extension MatchesTableViewController: UISearchResultsUpdating {
         } else {
             matchesByTeamsPredicate = nil
         }
-        filterContent()
     }
     
     @objc func segmentedControlTap(sender: UISegmentedControl) {
@@ -209,11 +223,9 @@ extension MatchesTableViewController: UISearchResultsUpdating {
         default:
             matchesByStatusPredicate = NSPredicate(format: "status == YES")
         }
-        filterContent()
     }
     
     private func filterContent() {
-        var predicate: NSPredicate?
         var predicates = [NSPredicate]()
         
         predicates.append(matchesByStatusPredicate)
@@ -225,14 +237,7 @@ extension MatchesTableViewController: UISearchResultsUpdating {
             predicates.append(matchesByTournamentPredicate)
         }
         
-        predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        updateData(with: predicate)
-    }
-    
-    private func updateData(with predicate: NSPredicate?) {
-        if let predicate = predicate {
-            fetchedResultsController.fetchRequest.predicate = predicate
-        }
+        fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         do {
             try fetchedResultsController.performFetch()
             tableView.reloadData()
@@ -240,7 +245,10 @@ extension MatchesTableViewController: UISearchResultsUpdating {
             print("Fetch failed")
         }
     }
+    
 }
+
+// TODO:
 
 extension MatchesTableViewController: MatchTableViewCellDelegate {
     func favoriteStarTap(_ sender: UIButton) {

@@ -71,12 +71,6 @@ class TournamentTableViewCell: UITableViewCell {
             button?.clipsToBounds = true
         }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-    
 }
 
 protocol TournamentTableViewCellDelegate: AnyObject {

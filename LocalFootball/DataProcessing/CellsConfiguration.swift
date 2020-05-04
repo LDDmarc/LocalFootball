@@ -16,9 +16,9 @@ class CellsConfiguration {
     private init() { }
     
     func configureCell(_ cell: MatchTableViewCell, with match: Match) {
-    
+        
         if let date = match.date {
-            cell.dateLabel.text = DataPresentation.shared.writtingDateFormatter.string(from: date)
+            cell.dateLabel.text = DateFormatter.writtingDateFormatter().string(from: date)
         }
         if let team1Obj = match.teams?.firstObject,
             let team2Obj = match.teams?.lastObject,
@@ -35,7 +35,7 @@ class CellsConfiguration {
             if match.status {
                 cell.scoreLabel.textColor = .label
                 if match.team1Id != team1.id {
-                  cell.scoreLabel.text = "\(match.team2Score):\(match.team1Score)"
+                    cell.scoreLabel.text = "\(match.team2Score):\(match.team1Score)"
                 } else {
                     cell.scoreLabel.text = "\(match.team1Score):\(match.team2Score)"
                 }
@@ -179,24 +179,22 @@ class CellsConfiguration {
     }
     
     var dateFormatter: DateFormatter = {
-           let df = DateFormatter()
-           df.dateStyle = .medium
-           df.timeStyle = .none
-           return df
-       }()
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        df.timeStyle = .none
+        return df
+    }()
     func configureCell(_ cell: TournamentTableViewCell, with tournament: Tournament) {
         cell.tournamentNameLabel.text = tournament.name
         if let imageData = tournament.imageData {
             cell.tournamentImageView.image = UIImage(data: imageData)
         }
-       
+        
         cell.tournamentInfoLabel.text = tournament.info
         
         if let date1 = tournament.dateOfTheBeginning,
             let date2 = tournament.dateOfTheEnd {
             cell.tournamentDatesLabel.text = "\(dateFormatter.string(from: date1)) - \(dateFormatter.string(from: date2))"
         }
-        
-        
     }
 }

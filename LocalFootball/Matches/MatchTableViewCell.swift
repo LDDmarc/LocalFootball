@@ -20,7 +20,7 @@ class MatchTableViewCell: UITableViewCell {
     
     @IBAction func favoriteStarButton(_ sender: UIButton) {
         if delegate != nil,
-            let indexPath = indexPath {
+            let _ = indexPath {
             self.delegate?.favoriteStarTap(sender)
         }
     }

@@ -11,8 +11,10 @@ import CoreData
 
 class TeamsTableViewController: UITableViewController {
     
+    // MARK: - CoreData & FetchedResultsController
+    
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
-  
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
         request.predicate = teamsByTournamentsPredicate
@@ -29,8 +31,19 @@ class TeamsTableViewController: UITableViewController {
         frc.delegate = self
         return frc
     }()
-    var teamsPredicate: NSPredicate?
-    var teamsByTournamentsPredicate: NSPredicate? 
+    
+    var teamsPredicate: NSPredicate? {
+        didSet {
+            filterContent()
+        }
+    }
+    var teamsByTournamentsPredicate: NSPredicate? {
+        didSet {
+            filterContent()
+        }
+    }
+    
+    // MARK: - UI
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
@@ -43,49 +56,42 @@ class TeamsTableViewController: UITableViewController {
         return sc
     }()
     
-    lazy var teamsRefreshControl: UIRefreshControl = {
-        let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return rc
-    }()
-    @objc private func refresh() {
-        fetchData()
-    }
-    var counter = 0
-    var activityIndicatorView: UIActivityIndicatorView!
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
+    
+    // MARK: - Loading View
     
     override func loadView() {
         super.loadView()
         
-        activityIndicatorView = UIActivityIndicatorView(style: .large)
-        tableView.backgroundView = activityIndicatorView
-        
         navigationItem.searchController = searchController
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        tableView.refreshControl = teamsRefreshControl
+        tableView.backgroundView = activityIndicatorView
+
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
         
-        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
         
-        tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
+        tableView.tableFooterView = UIView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        fetchData()
+        tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
+        
+        loadData()
     }
     
-    private func fetchData() {
+    @objc private func loadData() {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
-            self.tableView.separatorStyle = .none
         }
         dataProvider.fetchAllData { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
-                self.tableView.separatorStyle = .singleLine
                 self.tableView.refreshControl?.endRefreshing()
             }
         }
@@ -98,8 +104,7 @@ class TeamsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,13 +120,14 @@ class TeamsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = DetailTeamTableViewController()
-        nextVC.team = fetchedResultsController.object(at: indexPath)
-        navigationController?.pushViewController(nextVC, animated: true)
+        let detailTeamTableViewController = DetailTeamTableViewController()
+        detailTeamTableViewController.team = fetchedResultsController.object(at: indexPath)
+        navigationController?.pushViewController(detailTeamTableViewController, animated: true)
     }
 }
 
-    // MARK: - UISearchResultsUpdating
+// MARK: - UISearchResultsUpdating
+
 extension TeamsTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -130,7 +136,6 @@ extension TeamsTableViewController: UISearchResultsUpdating {
         } else {
             teamsPredicate = nil
         }
-        filterContent()
     }
     
     private func filterContent() {
@@ -143,14 +148,10 @@ extension TeamsTableViewController: UISearchResultsUpdating {
             predicates.append(teamsPredicate)
         }
         
-        updateData(with: NSCompoundPredicate(andPredicateWithSubpredicates: predicates))
-    }
-    
-    private func updateData(with predicate: NSPredicate) {
-        fetchedResultsController.fetchRequest.predicate = predicate
+        fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         do {
             try fetchedResultsController.performFetch()
-            tableView.reloadData()
+            tableView?.reloadData()
         } catch {
             print("Fetch failed")
         }

@@ -9,9 +9,9 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         let teamsTableViewController = TeamsTableViewController()
         teamsTableViewController.title = "Команды"
@@ -34,8 +34,7 @@ class TabBarController: UITabBarController {
         resultsNavigationViewController.tabBarItem.image = UIImage(named: "results")
         
         let controllers = [teamsNavigationViewController, matchesNavigationViewController, tournamentsNavigationViewController, resultsNavigationViewController]
-        self.viewControllers = controllers
-        
+        viewControllers = controllers
     }
     
 }
