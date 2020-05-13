@@ -138,7 +138,15 @@ class DataProvider {
                 taskContext.undoManager = nil
                 
                 taskContext.performAndWait {
-                    for (objectsJSON, entityName) in [(teamsJSON, EntityType.team.name()), (tournamentsJSON, EntityType.tournament.name()), (matchesJSON, EntityType.match.name())] {
+                    // because of relationships cannot usebatchDelete for Team
+                    do {
+                        try self.updateDataWithoutBatchDelete(objectsJSON: teamsJSON, taskContext: taskContext, entityName: EntityType.team.name())
+                    } catch let error as NSError {
+                        completion(error)
+                        return
+                    }
+                    
+                    for (objectsJSON, entityName) in [(tournamentsJSON, EntityType.tournament.name()), (matchesJSON, EntityType.match.name())] {
                         do {
                             try self.updateData(objectsJSON: objectsJSON, taskContext: taskContext, entityName: entityName)
                         } catch let error as NSError {
@@ -146,6 +154,7 @@ class DataProvider {
                             return
                         }
                     }
+                    
                     if taskContext.hasChanges {
                         self.bindingTeamsAndMatchesData(taskContext: taskContext)
                         do {
@@ -214,12 +223,49 @@ class DataProvider {
         }
     }
     
+    private func updateDataWithoutBatchDelete(objectsJSON: JSON, taskContext: NSManagedObjectContext, entityName: String) throws {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let objectIds = objectsJSON.arrayValue.map { $0["id"].int64 }.compactMap { $0 }
+        request.predicate = NSPredicate(format: "NONE id IN %d", argumentArray: [objectIds])
+        
+        let deletedObjects = try taskContext.fetch(request) as? [NSManagedObject]
+        if let deletedObjects = deletedObjects {
+            for deletedObject in deletedObjects {
+                taskContext.delete(deletedObject)
+            }
+        }
+        for objectJSON in objectsJSON.arrayValue {
+            guard let id = objectJSON["id"].int64,
+                let lastModified = objectJSON["modified"].int64 else {
+                    throw NSError(domain: dataErrorDomain, code: DataErrorCode.wrongDataFormat.rawValue, userInfo: nil)
+            }
+            
+            let req = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let predicate = NSPredicate(format: "id == %d", id)
+            req.predicate = predicate
+            
+            let currentObjects = try taskContext.fetch(req)
+            if let currentObject = currentObjects.first as? UpdatableManagedObject {
+                if currentObject.modified < lastModified {
+                    currentObject.update(with: objectJSON, into: taskContext)
+                }
+            } else {
+                guard let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: taskContext) as? UpdatableManagedObject else {
+                    print("Error: Failed to create a new object!")
+                    return
+                }
+                newObject.update(with: objectJSON, into: taskContext)
+            }
+        }
+    }
+    
     private func updateData(objectsJSON: JSON, taskContext: NSManagedObjectContext, entityName: String) throws {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let objectIds = objectsJSON.arrayValue.map { $0["id"].int64 }.compactMap { $0 }
         request.predicate = NSPredicate(format: "NONE id IN %d", argumentArray: [objectIds])
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
         
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+
         batchDeleteRequest.resultType = .resultTypeObjectIDs
         
         let batchDeleteResult = try taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult
@@ -279,6 +325,7 @@ class DataProvider {
             }
         }
     }
+  
     func bindingTeamsAndMatchesData(taskContext: NSManagedObjectContext) {
         taskContext.performAndWait {
             let teamsRequest: NSFetchRequest = Team.fetchRequest()
@@ -323,6 +370,7 @@ class DataProvider {
             }
         }
     }
+    
 }
 
 extension DateFormatter {

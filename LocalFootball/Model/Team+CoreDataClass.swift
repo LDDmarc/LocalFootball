@@ -127,7 +127,7 @@ public class Team: NSManagedObject, UpdatableManagedObject {
                 }
             }
            
-            let tournamentsStatisticsSet = NSMutableOrderedSet()
+       //     let tournamentsStatisticsSet = NSMutableOrderedSet()
             
             for _ in 0..<teamTournamentsIds.count {
                 guard let tournamentStatistics = NSEntityDescription.insertNewObject(forEntityName: "TournamentStatistics", into: context) as? TournamentStatistics else {
@@ -139,9 +139,11 @@ public class Team: NSManagedObject, UpdatableManagedObject {
                     return
                 }
                 tournamentStatistics.statistics = statistics
-                tournamentsStatisticsSet.add(tournamentStatistics)
+                teamStatistics?.addToTournamentsStatistics(tournamentStatistics)
+              //  tournamentsStatisticsSet.add(tournamentStatistics)
             }
-            teamStatistics?.tournamentsStatistics = tournamentsStatisticsSet
+            
+        //    teamStatistics?.tournamentsStatistics = tournamentsStatisticsSet
         }
         teamStatistics?.update(with: teamJSON[CodingKeys.teamStatistics.rawValue])
     }

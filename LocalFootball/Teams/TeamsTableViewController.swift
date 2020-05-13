@@ -14,7 +14,7 @@ class TeamsTableViewController: UITableViewController {
     // MARK: - CoreData & FetchedResultsController
     
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
-    
+  
     lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
         request.predicate = teamsByTournamentsPredicate

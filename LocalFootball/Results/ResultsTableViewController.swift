@@ -14,7 +14,7 @@ class ResultsTableViewController: UITableViewController {
     // MARK: - CoreData & FetchedResultsController
     
     let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
-    
+ 
     lazy var fetchedResultsController: NSFetchedResultsController<TournamentStatistics> = {
         let request: NSFetchRequest = TournamentStatistics.fetchRequest()
         request.predicate = tournamentPredicate
