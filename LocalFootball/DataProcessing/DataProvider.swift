@@ -246,7 +246,7 @@ class DataProvider {
             
             let currentObjects = try taskContext.fetch(req)
             if let currentObject = currentObjects.first as? UpdatableManagedObject {
-                if currentObject.modified < lastModified {
+                if currentObject.modified != lastModified {
                     currentObject.update(with: objectJSON, into: taskContext)
                 }
             } else {
@@ -287,7 +287,7 @@ class DataProvider {
             
             let currentObjects = try taskContext.fetch(req)
             if let currentObject = currentObjects.first as? UpdatableManagedObject {
-                if currentObject.modified < lastModified {
+                if currentObject.modified != lastModified {
                     currentObject.update(with: objectJSON, into: taskContext)
                 }
             } else {
@@ -313,7 +313,7 @@ class DataProvider {
             
             let currentObjects = try taskContext.fetch(req)
             if let currentObject = currentObjects.first as? UpdatableManagedObject {
-                if currentObject.modified < lastModified {
+                if currentObject.modified != lastModified {
                     currentObject.update(with: objectJSON, into: taskContext)
                 }
             } else {

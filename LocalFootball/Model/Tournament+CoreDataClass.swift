@@ -90,10 +90,10 @@ public class Tournament: NSManagedObject, UpdatableManagedObject {
         dateOfTheBeginning = DateFormatter.readingDateFormatter().date(from: tournamentJSON[CodingKeys.dateOfTheBeginning.rawValue].stringValue)
         dateOfTheEnd = DateFormatter.readingDateFormatter().date(from: tournamentJSON[CodingKeys.dateOfTheEnd.rawValue].stringValue)
         imageName = tournamentJSON[CodingKeys.imageName.rawValue].stringValue
-        if let imageName = imageName {
-            let image = UIImage(named: imageName)
-            imageData = image?.pngData()
-        }
+//        if let imageName = imageName {
+//            let image = UIImage(named: imageName)
+//            imageData = image?.pngData()
+//        }
         numberOfTeams = tournamentJSON[CodingKeys.numberOfTeams.rawValue].int16Value
         numberOfMatches = tournamentJSON[CodingKeys.numberOfMatches.rawValue].int16Value
         status = tournamentJSON[CodingKeys.status.rawValue].boolValue

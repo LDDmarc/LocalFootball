@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import SDWebImage
 
 class CellsConfiguration {
     
@@ -156,10 +157,11 @@ class CellsConfiguration {
     }()
     func configureCell(_ cell: TournamentTableViewCell, with tournament: Tournament) {
         cell.tournamentNameLabel.text = tournament.name
-        if let imageData = tournament.imageData {
-            cell.tournamentImageView.image = UIImage(data: imageData)
+    
+        if let imageURL = tournament.imageName {
+           print(imageURL)
+            cell.tournamentImageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: "IFLimage"), options: .highPriority, progress: nil, completed: nil)
         }
-        
         cell.tournamentInfoLabel.text = tournament.info
         
         if let date1 = tournament.dateOfTheBeginning,

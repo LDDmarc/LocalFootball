@@ -64,7 +64,7 @@ class TournamentsTableViewController: UITableViewController {
             self.activityIndicatorView.startAnimating()
             self.tableView.separatorStyle = .none
         }
-        dataProvider.fetchAllData { (error) in
+        dataProvider.testFetchAllData(from: "fullRequest3") { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()

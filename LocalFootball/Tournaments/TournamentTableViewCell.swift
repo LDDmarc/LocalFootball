@@ -54,7 +54,7 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentTeamsButton: UIButton!
     @IBOutlet weak var tournamentMatchesButton: UIButton!
     @IBOutlet weak var tournamentResultsButton: UIButton!
-    
+
     var indexPath: IndexPath?
     
     weak var delegate: TournamentTableViewCellDelegate?

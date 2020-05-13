@@ -3,4 +3,5 @@ use_frameworks!
 
 target 'LocalFootball' do
   pod 'SwiftyJSON'
+  pod 'SDWebImage'
 end
