@@ -14,11 +14,18 @@ import SwiftyJSON
 @objc(TournamentStatistics)
 public class TournamentStatistics: NSManagedObject, Decodable {
     
+    var resultsOfLastMatches: [Int] {
+           get {
+               return lastMatches as? [Int] ?? []
+           }
+       }
+    
     enum CodingKeys: String, CodingKey {
         case tournamentId = "tournamentId"
         case score = "score"
         case position = "position"
         case statistics = "statistics"
+        case lastMatches = "lastMatches"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -43,6 +50,10 @@ public class TournamentStatistics: NSManagedObject, Decodable {
         tournamentId = tournamentStatisticsJSON[CodingKeys.tournamentId.rawValue].int64Value
         score = tournamentStatisticsJSON[CodingKeys.score.rawValue].int16Value
         position = tournamentStatisticsJSON[CodingKeys.position.rawValue].int16Value
+        
+        if let lastMatches = tournamentStatisticsJSON[CodingKeys.lastMatches.rawValue].arrayObject {
+            self.lastMatches = lastMatches as NSObject
+        }
         
         statistics?.update(with: tournamentStatisticsJSON[CodingKeys.statistics.rawValue])
     }

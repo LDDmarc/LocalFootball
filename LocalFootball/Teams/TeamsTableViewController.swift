@@ -69,7 +69,7 @@ class TeamsTableViewController: UITableViewController {
         tableView.backgroundView = activityIndicatorView
 
         tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
         tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
         
@@ -88,7 +88,8 @@ class TeamsTableViewController: UITableViewController {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
         }
-        dataProvider.fetchAllData { (error) in
+        dataProvider.testFetchAllData(from: "fullRequest2") { (error) in 
+//        dataProvider.fetchAllData { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
@@ -96,6 +97,19 @@ class TeamsTableViewController: UITableViewController {
             }
         }
     }
+    @objc private func refreshData() {
+            if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+                self.activityIndicatorView.startAnimating()
+            }
+            dataProvider.testFetchAllData(from: "fullRequest3") { (error) in
+    //        dataProvider.fetchAllData { (error) in
+                guard error == nil else { return }
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.tableView.refreshControl?.endRefreshing()
+                }
+            }
+        }
     
     // MARK: - Table view data source
     

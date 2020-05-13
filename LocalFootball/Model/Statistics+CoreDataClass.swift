@@ -14,6 +14,12 @@ import SwiftyJSON
 @objc(Statistics)
 public class Statistics: NSManagedObject, Decodable {
     
+    var resultsOfLastMatches: [Int] {
+        get {
+            return lastMatches as? [Int] ?? []
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case numberOfGames = "numberOfGames"
         case numberOfWins = "numberOfWins"
@@ -23,6 +29,7 @@ public class Statistics: NSManagedObject, Decodable {
         case goalsConceded = "goalsConceded"
         case penaltyScored = "penaltyScored"
         case penaltyConceded = "penaltyConceded"
+        case lastMatches = "lastMatches"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -58,5 +65,9 @@ public class Statistics: NSManagedObject, Decodable {
         goalsConceded = jsonDictionary[CodingKeys.goalsConceded.rawValue].int16Value
         penaltyScored = jsonDictionary[CodingKeys.penaltyScored.rawValue].int16Value
         penaltyConceded = jsonDictionary[CodingKeys.penaltyConceded.rawValue].int16Value
+        
+        if let lastMatches = jsonDictionary[CodingKeys.lastMatches.rawValue].arrayObject {
+            self.lastMatches = lastMatches as NSObject
+        }
     }
 }

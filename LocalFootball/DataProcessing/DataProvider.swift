@@ -60,9 +60,9 @@ class DataProvider {
         self.repository = repository
     }
     
-    func fetchAllData(completion: @escaping(Error?) -> Void) {
+    func testFetchAllData(from fileName: String, completion: @escaping(Error?) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // for testing
-            self.repository.testGetData { (data, error) in
+            self.repository.testGetData(from: fileName) { (data, error) in
                 if let error = error {
                     completion(error)
                     return
@@ -93,6 +93,107 @@ class DataProvider {
                                 completion(error)
                                 return
                             }
+                        }
+                        if taskContext.hasChanges {
+                            self.bindingTeamsAndMatchesData(taskContext: taskContext)
+                            do {
+                                try taskContext.save()
+                            } catch {
+                                fatalError("Failed to save")
+                            }
+                            taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
+                        }
+                    }
+                    completion(nil)
+                } catch let error as NSError {
+                    completion(error)
+                    return
+                }
+            }
+        }
+    }
+    
+    func fetchAllData(completion: @escaping(Error?) -> Void) {
+        repository.getData { (data, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            guard let data = data else {
+                let error = NSError(domain: dataErrorDomain, code: DataErrorCode.noData.rawValue, userInfo: nil)
+                completion(error)
+                return
+            }
+            
+            do {
+                let jsonObject = try JSON(data: data)
+                
+                let teamsJSON = jsonObject[EntityType.team.urlPathComponent()]
+                let tournamentsJSON = jsonObject[EntityType.tournament.urlPathComponent()]
+                let matchesJSON = jsonObject[EntityType.match.urlPathComponent()]
+                
+                let taskContext = self.persistentContainer.newBackgroundContext()
+                taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+                taskContext.undoManager = nil
+                
+                taskContext.performAndWait {
+                    for (objectsJSON, entityName) in [(teamsJSON, EntityType.team.name()), (tournamentsJSON, EntityType.tournament.name()), (matchesJSON, EntityType.match.name())] {
+                        do {
+                            try self.updateData(objectsJSON: objectsJSON, taskContext: taskContext, entityName: entityName)
+                        } catch let error as NSError {
+                            completion(error)
+                            return
+                        }
+                    }
+                    if taskContext.hasChanges {
+                        self.bindingTeamsAndMatchesData(taskContext: taskContext)
+                        do {
+                            try taskContext.save()
+                        } catch {
+                            fatalError("Failed to save")
+                        }
+                        taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
+                    }
+                }
+                completion(nil)
+            } catch let error as NSError {
+                completion(error)
+                return
+            }
+        }
+        
+    }
+    
+    func fetchMatchesData(pastMatches: Bool, beginningFrom date: Date?, completion: @escaping(Error?) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // for testing
+            self.repository.testGetMatchesData(pastMatches: pastMatches, beginningFrom: date) { (data, error) in
+                if let error = error {
+                    completion(error)
+                    return
+                }
+                
+                guard let data = data else {
+                    let error = NSError(domain: dataErrorDomain, code: DataErrorCode.noData.rawValue, userInfo: nil)
+                    completion(error)
+                    return
+                }
+                
+                do {
+                    let jsonObject = try JSON(data: data)
+                    
+                    let matchesJSON = jsonObject[EntityType.match.urlPathComponent()]
+                    
+                    let taskContext = self.persistentContainer.newBackgroundContext()
+                    taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+                    taskContext.undoManager = nil
+                    
+                    taskContext.performAndWait {
+                        do {
+                            try self.updateMatchesData(objectsJSON: matchesJSON, taskContext: taskContext, entityName: EntityType.match.name())
+                        } catch let error as NSError {
+                            completion(error)
+                            return
                         }
                         if taskContext.hasChanges {
                             self.bindingTeamsAndMatchesData(taskContext: taskContext)
@@ -153,6 +254,31 @@ class DataProvider {
         }
     }
     
+    private func updateMatchesData(objectsJSON: JSON, taskContext: NSManagedObjectContext, entityName: String) throws {
+        for objectJSON in objectsJSON.arrayValue {
+            guard let id = objectJSON["id"].int64,
+                let lastModified = objectJSON["modified"].int64 else {
+                    throw NSError(domain: dataErrorDomain, code: DataErrorCode.wrongDataFormat.rawValue, userInfo: nil)
+            }
+            
+            let req = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            let predicate = NSPredicate(format: "id == %d", id)
+            req.predicate = predicate
+            
+            let currentObjects = try taskContext.fetch(req)
+            if let currentObject = currentObjects.first as? UpdatableManagedObject {
+                if currentObject.modified < lastModified {
+                    currentObject.update(with: objectJSON, into: taskContext)
+                }
+            } else {
+                guard let newObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: taskContext) as? UpdatableManagedObject else {
+                    print("Error: Failed to create a new object!")
+                    return
+                }
+                newObject.update(with: objectJSON, into: taskContext)
+            }
+        }
+    }
     func bindingTeamsAndMatchesData(taskContext: NSManagedObjectContext) {
         taskContext.performAndWait {
             let teamsRequest: NSFetchRequest = Team.fetchRequest()
@@ -209,6 +335,7 @@ extension DateFormatter {
     
     static func writtingDateFormatter() -> DateFormatter {
         let df = DateFormatter()
+        df.locale = Locale(identifier: "ru_RU")
         df.dateStyle = .medium
         df.timeStyle = .short
         return df

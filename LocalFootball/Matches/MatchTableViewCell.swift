@@ -11,6 +11,7 @@ import UIKit
 class MatchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var team1LogoImageView: UIImageView!
     @IBOutlet weak var team2LogoImageView: UIImageView!
     

@@ -19,6 +19,7 @@
     <entity name="Statistics" representedClassName="Statistics" syncable="YES">
         <attribute name="goalsConceded" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="goalsScored" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastMatches" optional="YES" attributeType="Transformable"/>
         <attribute name="numberOfDraws" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="numberOfGames" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="numberOfLesions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -62,6 +63,7 @@
         <attribute name="teamsIds" optional="YES" attributeType="Transformable"/>
     </entity>
     <entity name="TournamentStatistics" representedClassName="TournamentStatistics" syncable="YES">
+        <attribute name="lastMatches" optional="YES" attributeType="Transformable"/>
         <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teamId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -71,10 +73,10 @@
     </entity>
     <elements>
         <element name="Match" positionX="-458.53125" positionY="-811.76171875" width="128" height="253"/>
-        <element name="Statistics" positionX="-165.67578125" positionY="-450.51171875" width="128" height="193"/>
+        <element name="Statistics" positionX="-165.67578125" positionY="-450.51171875" width="128" height="208"/>
         <element name="Team" positionX="-184.6640625" positionY="-817.66015625" width="128" height="208"/>
         <element name="TeamStatistic" positionX="-355.40625" positionY="-550.84765625" width="128" height="88"/>
         <element name="Tournament" positionX="-770.7265625" positionY="-658.8828125" width="128" height="238"/>
-        <element name="TournamentStatistics" positionX="-580.9765625" positionY="-498.4609375" width="128" height="133"/>
+        <element name="TournamentStatistics" positionX="-580.9765625" positionY="-498.4609375" width="128" height="148"/>
     </elements>
 </model>

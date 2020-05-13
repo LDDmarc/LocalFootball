@@ -20,6 +20,7 @@ class CellsConfiguration {
         if let date = match.date {
             cell.dateLabel.text = DateFormatter.writtingDateFormatter().string(from: date)
         }
+        cell.tournamentNameLabel.text = match.tournamentName
         if let team1Obj = match.teams?.firstObject,
             let team2Obj = match.teams?.lastObject,
             let team1 = team1Obj as? Team,
@@ -47,10 +48,7 @@ class CellsConfiguration {
         }
     }
     
-    func configureCell(_ cell: DetailTeamTableViewCell, with team: Team, with lastMatches: [Match]) {
-        
-        var matches = lastMatches
-        
+    func configureCell(_ cell: DetailTeamTableViewCell, with team: Team) {
         if let data = team.logoImageData {
             cell.teamLogoImageView.image = UIImage(data: data)
         }
@@ -72,37 +70,27 @@ class CellsConfiguration {
             }
         }
         
-        for (label, view) in [(cell.match1Label, cell.match1View), (cell.match2Label, cell.match2View), (cell.match3Label, cell.match3View), (cell.match4Label, cell.match4View), (cell.match5Label, cell.match5View)] {
-            if !matches.isEmpty {
-                let match = matches.removeFirst()
-                if match.team1Score > match.team2Score {
-                    if match.team1Id == team.id {
+        if var resultsOfLastMatches = team.teamStatistics?.fullStatistics?.resultsOfLastMatches {
+            for (label, view) in [(cell.match1Label, cell.match1View), (cell.match2Label, cell.match2View), (cell.match3Label, cell.match3View), (cell.match4Label, cell.match4View), (cell.match5Label, cell.match5View)] {
+                if !resultsOfLastMatches.isEmpty {
+                    let result = resultsOfLastMatches.removeFirst()
+                    if result == 1 {
                         view?.backgroundColor = .systemGreen
                         label?.text = "В"
                         label?.isHidden = false
-                    } else {
+                    } else if result == 0 {
+                        view?.backgroundColor = .systemGray
+                        label?.text = "Н"
+                        label?.isHidden = false
+                    } else if result == -1 {
                         view?.backgroundColor = .systemRed
                         label?.text = "П"
                         label?.isHidden = false
                     }
-                } else if match.team1Score < match.team2Score {
-                    if match.team1Id == team.id {
-                        view?.backgroundColor = .systemRed
-                        label?.text = "П"
-                        label?.isHidden = false
-                    } else {
-                        view?.backgroundColor = .systemGreen
-                        label?.text = "В"
-                        label?.isHidden = false
-                    }
-                } else if match.team1Score == match.team2Score {
-                    view?.backgroundColor = .systemGray
-                    label?.text = "Н"
-                    label?.isHidden = false
+                } else {
+                    view?.backgroundColor = .systemGray6
+                    label?.isHidden = true
                 }
-            } else {
-                view?.backgroundColor = .systemGray6
-                label?.isHidden = true
             }
         }
     }
@@ -134,41 +122,21 @@ class CellsConfiguration {
             cell.teamNameLabel.text = team.name
         }
         
-        var matches = [Match]()
-        guard let teamMatches = team.matches else { return }
-        
-        var sortedMatches = teamMatches.compactMap { $0 as? Match }
-        sortedMatches.sort(by: { (match1, match2) -> Bool in
-            match1.date!.compare(match2.date!) == .orderedDescending
-        })
-        matches = sortedMatches.filter {$0.status == true} 
-        
+        var resultsOfLastMatches = tournamentStatistics.resultsOfLastMatches
         for (label, view) in [(cell.match1Label, cell.match1View), (cell.match2Label, cell.match2View), (cell.match3Label, cell.match3View), (cell.match4Label, cell.match4View), (cell.match5Label, cell.match5View), (cell.match6Label, cell.match6View)] {
-            if !matches.isEmpty {
-                let match = matches.removeFirst()
-                if match.team1Score > match.team2Score {
-                    if match.team1Id == team.id {
-                        view?.backgroundColor = .systemGreen
-                        label?.text = "В"
-                        label?.isHidden = false
-                    } else {
-                        view?.backgroundColor = .systemRed
-                        label?.text = "П"
-                        label?.isHidden = false
-                    }
-                } else if match.team1Score < match.team2Score {
-                    if match.team1Id == team.id {
-                        view?.backgroundColor = .systemRed
-                        label?.text = "П"
-                        label?.isHidden = false
-                    } else {
-                        view?.backgroundColor = .systemGreen
-                        label?.text = "В"
-                        label?.isHidden = false
-                    }
-                } else if match.team1Score == match.team2Score {
+            if !resultsOfLastMatches.isEmpty {
+                let result = resultsOfLastMatches.removeFirst()
+                if result == 1 {
+                    view?.backgroundColor = .systemGreen
+                    label?.text = "В"
+                    label?.isHidden = false
+                } else if result == 0 {
                     view?.backgroundColor = .systemGray
                     label?.text = "Н"
+                    label?.isHidden = false
+                } else if result == -1 {
+                    view?.backgroundColor = .systemRed
+                    label?.text = "П"
                     label?.isHidden = false
                 }
             } else {
@@ -176,10 +144,12 @@ class CellsConfiguration {
                 label?.isHidden = true
             }
         }
+        
     }
     
     var dateFormatter: DateFormatter = {
         let df = DateFormatter()
+        df.locale = Locale(identifier: "ru_Ru")
         df.dateStyle = .medium
         df.timeStyle = .none
         return df

@@ -2,7 +2,7 @@
 //  TournamentStatistics+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 04.05.2020.
+//  Created by Дарья Леонова on 12.05.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -21,8 +21,8 @@ extension TournamentStatistics {
     @NSManaged public var score: Int16
     @NSManaged public var teamId: Int64
     @NSManaged public var tournamentId: Int64
-    @NSManaged public var tournament: Tournament?
-    @NSManaged public var teamStatistics: TeamStatistic?
+    @NSManaged public var lastMatches: NSObject?
     @NSManaged public var statistics: Statistics?
+    @NSManaged public var teamStatistics: TeamStatistic?
 
 }

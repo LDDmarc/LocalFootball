@@ -24,12 +24,10 @@ class DetailTeamTableViewController: UITableViewController {
                     match1.date!.compare(match2.date!) == .orderedDescending
                 })
                 matches = sortedMatches
-                lastMatches = sortedMatches.filter( {$0.status == true} )
             }
         }
     }
     var matches = [Match]()
-    var lastMatches = [Match]()
 
     // MARK: - UI
     
@@ -93,7 +91,7 @@ class DetailTeamTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailTeamTableViewCell.self)) as! DetailTeamTableViewCell
-            CellsConfiguration.shared.configureCell(cell, with: team, with: lastMatches)
+            CellsConfiguration.shared.configureCell(cell, with: team)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell

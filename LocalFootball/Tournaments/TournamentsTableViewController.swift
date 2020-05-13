@@ -51,7 +51,6 @@ class TournamentsTableViewController: UITableViewController {
         tableView.backgroundView = activityIndicatorView
         tableView.refreshControl = tournamentsRefreshControl
         tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-   //    tableView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewDidLoad() {
