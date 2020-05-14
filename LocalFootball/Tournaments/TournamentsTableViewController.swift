@@ -11,57 +11,78 @@ import CoreData
 
 class TournamentsTableViewController: UITableViewController {
     
-    var context: NSManagedObjectContext = CoreDataManger.instance.persistentContainer.viewContext
+    // MARK: - CoreData & FetchedResultsController
+    
+    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Tournament> = {
         let request: NSFetchRequest = Tournament.fetchRequest()
-        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let sort = NSSortDescriptor(key: "dateOfTheEnd", ascending: false)
         request.sortDescriptors = [sort]
-        request.fetchBatchSize = 3
-        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        request.fetchBatchSize = 6
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try frc.performFetch()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
         frc.delegate = self
         return frc
     }()
-    var tournamentsPredicate: NSPredicate?
     
-    var tournaments = [Tournament]()
+    // MARK: - UI
+    
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
+    
+    lazy var tournamentsRefreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        return rc
+    }()
     
     var expandedIndexSet : IndexSet = []
     
     override func loadView() {
         super.loadView()
         
-        tableView.rowHeight = UITableView.automaticDimension
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        tableView.backgroundView = activityIndicatorView
+        tableView.refreshControl = tournamentsRefreshControl
+        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: TournamentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TournamentTableViewCell.self))
-
-        loadData()
     }
     
-    private func loadData() {
-        fetchedResultsController.fetchRequest.predicate = tournamentsPredicate
-        do {
-            try fetchedResultsController.performFetch()
-            tableView.reloadData()
-        } catch {
-            print("Fetch failed")
+    @objc private func fetchData() {
+        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
+            self.activityIndicatorView.startAnimating()
+            self.tableView.separatorStyle = .none
+        }
+        dataProvider.testFetchAllData(from: "fullRequest3") { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.tableView.separatorStyle = .singleLine
+                self.tableView.refreshControl?.endRefreshing()
+            }
         }
     }
-
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TournamentTableViewCell.self)) as! TournamentTableViewCell
@@ -69,7 +90,7 @@ class TournamentsTableViewController: UITableViewController {
         let tournament = fetchedResultsController.object(at: indexPath)
         
         CellsConfiguration.shared.configureCell(cell, with: tournament)
-    
+        
         cell.indexPath = indexPath
         cell.delegate = self
         
@@ -89,37 +110,37 @@ class TournamentsTableViewController: UITableViewController {
     
 }
 
-extension TournamentsTableViewController: NSFetchedResultsControllerDelegate {
-    
-}
+// MARK: - TournamentTableViewCellDelegate
 
 extension TournamentsTableViewController: TournamentTableViewCellDelegate {
+    
     func showTeams(indexPath: IndexPath) {
         let tournament = fetchedResultsController.object(at: indexPath)
-        let nextVC = TeamsTableViewController()
+        let teamsTableViewController = TeamsTableViewController()
+        teamsTableViewController.title = tournament.name
+        teamsTableViewController.teamsByTournamentsPredicate = NSPredicate(format: "id IN %@", tournament.tournamentTeamsIds)
         
-        if let name = tournament.name {
-            nextVC.teamsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
-            nextVC.teamsByTournamentsPredicate = NSPredicate(format: "ANY tournaments.name == %@", name)
-            nextVC.titleText = name
-        }
-        nextVC.isScopeBarShown = false
-        
-        navigationController?.pushViewController(nextVC, animated: true)
+        navigationController?.pushViewController(teamsTableViewController, animated: true)
     }
+    
     func showMatches(indexPath: IndexPath) {
         let tournament = fetchedResultsController.object(at: indexPath)
-        let nextVC = MatchesTableViewController()
+        let matchesTableViewController = MatchesTableViewController()
+        matchesTableViewController.title = tournament.name
+        matchesTableViewController.matchesByTournamentPredicate = NSPredicate(format: "id IN %@", tournament.tournamentMatchesIds)
         
-        //nextVC.matchesPredicate
-        
-        if let name = tournament.name {
-            nextVC.matchesPredicate = NSPredicate(format: "tournamentName == %@", name)
-        }
-        
-        navigationController?.pushViewController(nextVC, animated: true)
+        navigationController?.pushViewController(matchesTableViewController, animated: true)
     }
-
+    
+    func showResults(indexPath: IndexPath) {
+        let tournament = fetchedResultsController.object(at: indexPath)
+        let resultsTableViewController = ResultsTableViewController()
+        resultsTableViewController.title = tournament.name
+        resultsTableViewController.tournamentPredicate = NSPredicate(format: "tournamentId == %i", tournament.id)
+       
+        navigationController?.pushViewController(resultsTableViewController, animated: true)
+    }
+    
 }
 
 extension TournamentsTableViewController: ExpandableCellDelegate {
@@ -131,5 +152,53 @@ extension TournamentsTableViewController: ExpandableCellDelegate {
         self.tableView.beginUpdates()
         self.tableView.setNeedsDisplay()
         self.tableView.endUpdates()
+    }
+}
+
+// MARK: - NSFetchedResultsController
+
+extension TournamentsTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .move:
+            tableView.reloadData()
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
     }
 }

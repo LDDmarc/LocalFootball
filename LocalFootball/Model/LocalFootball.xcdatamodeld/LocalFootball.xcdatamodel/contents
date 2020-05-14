@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Match" representedClassName="Match" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="modified" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="team1Id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="team1Name" optional="YES" attributeType="String"/>
+        <attribute name="team1Score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="team2Id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="team2Name" optional="YES" attributeType="String"/>
+        <attribute name="team2Score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tournamentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tournamentName" optional="YES" attributeType="String"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Team" inverseName="matches" inverseEntity="Team"/>
+    </entity>
+    <entity name="Statistics" representedClassName="Statistics" syncable="YES">
+        <attribute name="goalsConceded" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goalsScored" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastMatches" optional="YES" attributeType="Transformable"/>
+        <attribute name="numberOfDraws" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberOfGames" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberOfLesions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberOfWins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="penaltyConceded" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="penaltyScored" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="fullStatistics" inverseEntity="TeamStatistic"/>
+        <relationship name="tournamentPartStatistics" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TournamentStatistics" inverseName="statistics" inverseEntity="TournamentStatistics"/>
+    </entity>
+    <entity name="Team" representedClassName="Team" syncable="YES">
+        <attribute name="colors" optional="YES" attributeType="Transformable"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="logoImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="logoName" optional="YES" attributeType="String"/>
+        <attribute name="matchesIds" optional="YES" attributeType="Transformable"/>
+        <attribute name="modified" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="tournamentsIds" optional="YES" attributeType="Transformable"/>
+        <attribute name="yearOfFoundation" optional="YES" attributeType="Integer 16" minValueString="1800" usesScalarValueType="YES"/>
+        <relationship name="matches" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Match" inverseName="teams" inverseEntity="Match"/>
+        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TeamStatistic" inverseName="team" inverseEntity="TeamStatistic"/>
+    </entity>
+    <entity name="TeamStatistic" representedClassName="TeamStatistic" syncable="YES">
+        <relationship name="fullStatistics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Statistics" inverseName="teamStatistics" inverseEntity="Statistics"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="teamStatistics" inverseEntity="Team"/>
+        <relationship name="tournamentsStatistics" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TournamentStatistics" inverseName="teamStatistics" inverseEntity="TournamentStatistics"/>
+    </entity>
+    <entity name="Tournament" representedClassName="Tournament" syncable="YES">
+        <attribute name="dateOfTheBeginning" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateOfTheEnd" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="imageName" optional="YES" attributeType="String"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
+        <attribute name="matchesIds" optional="YES" attributeType="Transformable"/>
+        <attribute name="modified" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="numberOfMatches" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberOfTeams" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="teamsIds" optional="YES" attributeType="Transformable"/>
+    </entity>
+    <entity name="TournamentStatistics" representedClassName="TournamentStatistics" syncable="YES">
+        <attribute name="lastMatches" optional="YES" attributeType="Transformable"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tournamentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="statistics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Statistics" inverseName="tournamentPartStatistics" inverseEntity="Statistics"/>
+        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="tournamentsStatistics" inverseEntity="TeamStatistic"/>
+    </entity>
+    <elements>
+        <element name="Match" positionX="-662.71484375" positionY="-906.65625" width="128" height="253"/>
+        <element name="Statistics" positionX="-165.67578125" positionY="-450.51171875" width="128" height="208"/>
+        <element name="Team" positionX="-184.6640625" positionY="-817.66015625" width="128" height="208"/>
+        <element name="TeamStatistic" positionX="-355.40625" positionY="-550.84765625" width="128" height="88"/>
+        <element name="Tournament" positionX="-770.7265625" positionY="-658.8828125" width="128" height="238"/>
+        <element name="TournamentStatistics" positionX="-580.9765625" positionY="-498.4609375" width="128" height="148"/>
+    </elements>
+</model>

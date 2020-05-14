@@ -4,7 +4,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1999,
         "logoName": "Wolf",
-        "tournamentsNames": ["Чемпионат IFL", "FIFA 2018"],
+        "tournamemtsIds": [1100, 1101],
         "teamStatistics":
         {
             "fullStatistics":
@@ -60,7 +60,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1974,
         "logoName": "FCB",
-        "tournamentsNames": ["Чемпионат IFL", "FIFA 2018", "FIFA 2019"],
+        "tournamemtsIds": [1100, 1101, 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -132,7 +132,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2000,
         "logoName": "RealMadrid",
-        "tournamentsNames": ["FIFA 2019"],
+        "tournamemtsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -172,7 +172,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2000,
         "logoName": "ASM",
-        "tournamentsNames": ["FIFA 2018", "FIFA2019"],
+        "tournamemtsIds": ["FIFA 2018", 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -228,7 +228,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2001,
         "logoName": "Junior",
-        "tournamentsNames": ["FIFA2019"],
+        "tournamemtsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -268,7 +268,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2000,
         "logoName": "Everton",
-        "tournamentsNames": ["Чемпионат IFL"],
+        "tournamemtsIds": [1100],
         "teamStatistics":
         {
             "fullStatistics":
@@ -308,7 +308,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1992,
         "logoName": "FMF",
-        "tournamentsNames": ["Чемпионат IFL", "FIFA 2018", "FIFA 2019"],
+        "tournamemtsIds": [1100, 1101, 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -380,7 +380,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1892,
         "logoName": "ManchesterUnited",
-        "tournamentsNames": ["FIFA2019"],
+        "tournamemtsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -420,7 +420,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2010,
         "logoName": "Romania",
-        "tournamentsNames": ["Чемпионат IFL"],
+        "tournamemtsIds": [1100],
         "teamStatistics":
         {
             "fullStatistics":
@@ -460,7 +460,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2008,
         "logoName": "Spartak",
-        "tournamentsNames": ["Чемпионат IFL", "FIFA 2018", "FIFA 2019"],
+        "tournamemtsIds": [1100, 1101, 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -532,7 +532,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2011,
         "logoName": "SuttonColdfield",
-        "tournamentsNames": ["FIFA2019"],
+        "tournamemtsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -572,7 +572,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2015,
         "logoName": "Sydney",
-        "tournamentsNames": ["Чемпионат IFL"],
+        "tournamemtsIds": [1100],
         "teamStatistics":
         {
             "fullStatistics":
@@ -612,7 +612,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1888,
         "logoName": "URBSFA",
-        "tournamentsNames": ["Чемпионат IFL", "FIFA 2018", "FIFA 2019"],
+        "tournamemtsIds": [1100, 1101, 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -684,7 +684,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2003,
         "logoName": "WestHamUnited",
-        "tournamentsNames": ["FIFA2019"],
+        "tournamemtsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -724,7 +724,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2013,
         "logoName": "CBF",
-        "tournamentsNames": ["FIFA2019"],
+        "tournamemtsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -764,7 +764,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2017,
         "logoName": "Millionarios",
-        "tournamentsNames": ["Чемпионат IFL"],
+        "tournamemtsIds": [1100],
         "teamStatistics":
         {
             "fullStatistics":

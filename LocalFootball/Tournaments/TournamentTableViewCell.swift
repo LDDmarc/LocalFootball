@@ -20,35 +20,41 @@ class TournamentTableViewCell: UITableViewCell {
         static let oneThird: CGFloat = 0.33
     }
 
-    
     @IBOutlet weak var stackView: UIStackView!
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var tournamentImageView: UIImageView!
     @IBOutlet weak var tournamentDatesLabel: UILabel!
-    @IBOutlet weak var tournamentStatusLabel: UILabel!
-    @IBOutlet weak var tournamentTeamsLabel: UILabel!
+ 
     
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var tournamentInfoLabel: UILabel!
     @IBOutlet weak var buttonsStackView: UIStackView!
-    @IBAction func tournamentTeamsButton(_ sender: UIButton) {
+    
+    @IBAction func tournamentTeamsButtonTap(_ sender: UIButton) {
         if delegate != nil,
             let indexPath = indexPath {
             self.delegate?.showTeams(indexPath: indexPath)
         }
     }
-    @IBAction func tournamentMatchesButton(_ sender: UIButton) {
+    @IBAction func tournamentMatchesButtonTap(_ sender: UIButton) {
         if delegate != nil,
             let indexPath = indexPath {
             self.delegate?.showMatches(indexPath: indexPath)
         }
     }
-    @IBAction func tournamentResultsButton(_ sender: UIButton) {
-        
+    @IBAction func tournamentResultsButtonTap(_ sender: UIButton) {
+        if delegate != nil,
+            let indexPath = indexPath {
+            self.delegate?.showResults(indexPath: indexPath)
+        }
     }
-   
     
+    @IBOutlet weak var tournamentTeamsButton: UIButton!
+    @IBOutlet weak var tournamentMatchesButton: UIButton!
+    @IBOutlet weak var tournamentResultsButton: UIButton!
+
     var indexPath: IndexPath?
     
     weak var delegate: TournamentTableViewCellDelegate?
@@ -58,21 +64,19 @@ class TournamentTableViewCell: UITableViewCell {
 
         selectionStyle = .none
         
-        tournamentStatusLabel.isHidden = true
         bottomView.isHidden = true
- 
+        
+        for button in [tournamentTeamsButton, tournamentMatchesButton, tournamentResultsButton] {
+            button?.layer.cornerRadius = .pi
+            button?.clipsToBounds = true
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-    
 }
 
 protocol TournamentTableViewCellDelegate: AnyObject {
     func showTeams(indexPath: IndexPath)
     func showMatches(indexPath: IndexPath)
+    func showResults(indexPath: IndexPath)
 }
 
 protocol ExpandableCellDelegate: class {

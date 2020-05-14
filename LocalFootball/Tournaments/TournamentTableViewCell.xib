@@ -9,113 +9,107 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="390" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="608" height="390"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="684" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="804" height="684"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="608" height="390"/>
+                <rect key="frame" x="0.0" y="0.0" width="804" height="684"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-lj-tqV">
-                        <rect key="frame" x="15" y="11" width="578" height="368"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-lj-tqV">
+                        <rect key="frame" x="15" y="11" width="774" height="602"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-np-Q81" userLabel="topView">
-                                <rect key="frame" x="0.0" y="0.0" width="578" height="228.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="774" height="518.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название турнира" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8d-t4-Obf">
-                                        <rect key="frame" x="196" y="4" width="186.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
+                                        <rect key="frame" x="0.0" y="449.5" width="190.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SrG-Fb-8cH">
-                                        <rect key="frame" x="4" y="32.5" width="281" height="185.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SrG-Fb-8cH">
+                                        <rect key="frame" x="0.0" y="8" width="774" height="433.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" secondItem="SrG-Fb-8cH" secondAttribute="width" multiplier="0.66" id="WtE-T9-EM3"/>
+                                            <constraint firstAttribute="height" secondItem="SrG-Fb-8cH" secondAttribute="width" multiplier="0.56" id="aye-wm-9s4"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Даты" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-pL-7Ie">
-                                        <rect key="frame" x="293" y="32.5" width="45.5" height="17.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команды" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiX-x3-08d">
-                                        <rect key="frame" x="293" y="200.5" width="80.5" height="17.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Завершен" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKc-Zv-nK7">
-                                        <rect key="frame" x="488.5" y="200.5" width="85.5" height="17.5"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="0.0" y="481" width="37" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="IKc-Zv-nK7" firstAttribute="bottom" secondItem="SrG-Fb-8cH" secondAttribute="bottom" id="1rf-vU-DCc"/>
-                                    <constraint firstItem="Q8d-t4-Obf" firstAttribute="centerX" secondItem="DjO-np-Q81" secondAttribute="centerX" id="2am-wS-zto"/>
-                                    <constraint firstItem="JiX-x3-08d" firstAttribute="leading" secondItem="qaQ-pL-7Ie" secondAttribute="leading" id="8Ft-Sm-Yg4"/>
-                                    <constraint firstItem="qaQ-pL-7Ie" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="centerX" constant="4" id="CsM-M8-rYn"/>
-                                    <constraint firstItem="JiX-x3-08d" firstAttribute="bottom" secondItem="SrG-Fb-8cH" secondAttribute="bottom" id="Imr-Yg-AKh"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qaQ-pL-7Ie" secondAttribute="trailing" constant="8" id="K4U-cH-Jvq"/>
-                                    <constraint firstItem="qaQ-pL-7Ie" firstAttribute="top" secondItem="SrG-Fb-8cH" secondAttribute="top" id="U5i-nJ-mBf"/>
-                                    <constraint firstItem="SrG-Fb-8cH" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="leading" constant="4" id="XF9-kJ-VOU"/>
-                                    <constraint firstItem="Q8d-t4-Obf" firstAttribute="top" secondItem="DjO-np-Q81" secondAttribute="top" constant="4" id="b44-bk-JZ9"/>
-                                    <constraint firstItem="SrG-Fb-8cH" firstAttribute="top" secondItem="Q8d-t4-Obf" secondAttribute="bottom" constant="8" id="gTg-EO-HWf"/>
-                                    <constraint firstAttribute="centerX" secondItem="SrG-Fb-8cH" secondAttribute="trailing" constant="4" id="plh-Y1-dOI"/>
-                                    <constraint firstAttribute="trailing" secondItem="IKc-Zv-nK7" secondAttribute="trailing" constant="4" id="r03-hs-Qk5"/>
+                                    <constraint firstItem="SrG-Fb-8cH" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="leading" id="TKm-Me-WAb"/>
+                                    <constraint firstItem="Q8d-t4-Obf" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="leading" id="TnL-cp-XVX"/>
+                                    <constraint firstItem="Q8d-t4-Obf" firstAttribute="top" secondItem="SrG-Fb-8cH" secondAttribute="bottom" constant="8" id="fDz-Pu-Gnu"/>
+                                    <constraint firstAttribute="trailing" secondItem="SrG-Fb-8cH" secondAttribute="trailing" id="khC-5p-i9m"/>
+                                    <constraint firstItem="qaQ-pL-7Ie" firstAttribute="top" secondItem="Q8d-t4-Obf" secondAttribute="bottom" constant="5" id="lTa-xK-0v5"/>
+                                    <constraint firstItem="qaQ-pL-7Ie" firstAttribute="leading" secondItem="DjO-np-Q81" secondAttribute="leading" id="xaD-2a-Mlh"/>
+                                    <constraint firstItem="SrG-Fb-8cH" firstAttribute="top" secondItem="DjO-np-Q81" secondAttribute="top" constant="8" id="xgL-UF-kDZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHF-MG-KJj" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="228.5" width="578" height="139.5"/>
+                                <rect key="frame" x="0.0" y="520.5" width="774" height="81.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-Sd-ouR">
-                                        <rect key="frame" x="8" y="10" width="562" height="119.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-Sd-ouR">
+                                        <rect key="frame" x="0.0" y="37.5" width="774" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwr-Vc-j95">
-                                                <rect key="frame" x="0.0" y="0.0" width="175.5" height="119.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="248" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Команды">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tournamentTeamsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pKg-HO-8go"/>
+                                                    <action selector="tournamentTeamsButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pKg-HO-8go"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBA-NT-Fvc">
-                                                <rect key="frame" x="193.5" y="0.0" width="175" height="119.5"/>
+                                                <rect key="frame" x="263" y="0.0" width="248" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Матчи">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tournamentMatchesButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gja-WV-yfl"/>
+                                                    <action selector="tournamentMatchesButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gja-WV-yfl"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25p-k7-MMn">
-                                                <rect key="frame" x="386.5" y="0.0" width="175.5" height="119.5"/>
+                                                <rect key="frame" x="526" y="0.0" width="248" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Результаты">
                                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tournamentResultsButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6KL-mQ-Jah"/>
+                                                    <action selector="tournamentResultsButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6KL-mQ-Jah"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="XNB-WG-VAP"/>
+                                        </constraints>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Описание турнира" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQf-Tp-wPZ">
+                                        <rect key="frame" x="0.0" y="5" width="774" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="top" secondItem="IHF-MG-KJj" secondAttribute="top" constant="10" id="8LB-cx-DKi"/>
-                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" constant="8" id="el4-Bg-xDU"/>
-                                    <constraint firstAttribute="trailing" secondItem="ksM-Sd-ouR" secondAttribute="trailing" constant="8" id="fLM-TG-EhL"/>
-                                    <constraint firstAttribute="bottom" secondItem="ksM-Sd-ouR" secondAttribute="bottom" constant="10" id="g4E-0Y-BFk"/>
+                                    <constraint firstAttribute="trailing" secondItem="ksM-Sd-ouR" secondAttribute="trailing" id="IXi-My-bQp"/>
+                                    <constraint firstAttribute="trailing" secondItem="EQf-Tp-wPZ" secondAttribute="trailing" id="KXy-SR-H7d"/>
+                                    <constraint firstItem="EQf-Tp-wPZ" firstAttribute="top" secondItem="IHF-MG-KJj" secondAttribute="top" constant="5" id="P0T-8G-zBT"/>
+                                    <constraint firstItem="EQf-Tp-wPZ" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" id="Tbh-hH-rhT"/>
+                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="top" secondItem="EQf-Tp-wPZ" secondAttribute="bottom" constant="12" id="Xlc-w1-RCz"/>
+                                    <constraint firstAttribute="bottom" secondItem="ksM-Sd-ouR" secondAttribute="bottom" constant="4" id="dHZ-7G-RUv"/>
+                                    <constraint firstItem="ksM-Sd-ouR" firstAttribute="leading" secondItem="IHF-MG-KJj" secondAttribute="leading" id="kVK-0X-OvA"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -123,10 +117,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="ukn-lj-tqV" secondAttribute="trailing" id="GUF-65-EWt"/>
-                    <constraint firstItem="DjO-np-Q81" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.33" constant="28" id="MI3-5o-MTg"/>
+                    <constraint firstItem="DjO-np-Q81" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.61" constant="28" id="MI3-5o-MTg"/>
                     <constraint firstItem="ukn-lj-tqV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="d1b-eH-9qU"/>
                     <constraint firstItem="ukn-lj-tqV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="vn8-t9-RcF"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ukn-lj-tqV" secondAttribute="bottom" id="yDj-om-CDx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ukn-lj-tqV" secondAttribute="bottom" priority="750" id="yDj-om-CDx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -137,11 +131,13 @@
                 <outlet property="topView" destination="DjO-np-Q81" id="gJr-8Q-Ocr"/>
                 <outlet property="tournamentDatesLabel" destination="qaQ-pL-7Ie" id="DSK-su-3ha"/>
                 <outlet property="tournamentImageView" destination="SrG-Fb-8cH" id="Ba3-Bo-33G"/>
+                <outlet property="tournamentInfoLabel" destination="EQf-Tp-wPZ" id="lMO-gB-sJT"/>
+                <outlet property="tournamentMatchesButton" destination="xBA-NT-Fvc" id="Xid-dJ-dRF"/>
                 <outlet property="tournamentNameLabel" destination="Q8d-t4-Obf" id="MBr-yt-BVz"/>
-                <outlet property="tournamentStatusLabel" destination="IKc-Zv-nK7" id="Ht9-oN-QrZ"/>
-                <outlet property="tournamentTeamsLabel" destination="JiX-x3-08d" id="Kdv-fP-07e"/>
+                <outlet property="tournamentResultsButton" destination="25p-k7-MMn" id="6hU-LQ-H0W"/>
+                <outlet property="tournamentTeamsButton" destination="Jwr-Vc-j95" id="BM5-O1-YcZ"/>
             </connections>
-            <point key="canvasLocation" x="93.75" y="-128.75"/>
+            <point key="canvasLocation" x="-810" y="-63.75"/>
         </tableViewCell>
     </objects>
 </document>

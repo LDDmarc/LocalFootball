@@ -1,0 +1,437 @@
+{
+"results":
+[
+    {
+        "modified": 1587546037,
+        "id": 101,
+        "name":"Wolf",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1999,
+        "logoName": "Wolf",
+        "tournamemtsIds": [1100, 1101],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 5,
+                "numberOfWins": 3,
+                "numberOfLesions": 1,
+                "numberOfDraws": 1,
+                "goalsScored": 10,
+                "goalsConceded": 5,
+                "penaltyScored": 3,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Чемпионат IF",
+                    "score": 5,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 5,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 1,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 0
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2018",
+                    "score": 10,
+                    "position": 1,
+                    "statistics":
+                    {
+                        "numberOfGames": 10,
+                        "numberOfWins": 7,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 19,
+                        "goalsConceded": 9,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546037,
+        "id": 103,
+        "name":"RealMadrid",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 2000,
+        "logoName": "RealMadrid",
+        "tournamemtsIds": [1102],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 75,
+                "numberOfWins": 75,
+                "numberOfLesions": 0,
+                "numberOfDraws": 0,
+                "goalsScored": 100,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 105,
+                    "position": 7,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546140,
+        "id": 104,
+        "name":"ASM",
+        "colors": ["red", "blue"],
+        "yearOfFoundation": 2000,
+        "logoName": "ASM",
+        "tournamemtsIds": [1101, 1102],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 75,
+                "numberOfWins": 75,
+                "numberOfLesions": 0,
+                "numberOfDraws": 0,
+                "goalsScored": 100,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "FIFA 2018",
+                    "score": 15,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 100,
+                    "position": 5,
+                    "statistics":
+                    {
+                        "numberOfGames": 2,
+                        "numberOfWins": 7,
+                        "numberOfLesions": 2,
+                        "numberOfDraws": 3,
+                        "goalsScored": 30,
+                        "goalsConceded": 9,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546037,
+        "id": 105,
+        "name":"Junior",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 2001,
+        "logoName": "Junior",
+        "tournamemtsIds": [1102],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 75,
+                "numberOfWins": 75,
+                "numberOfLesions": 0,
+                "numberOfDraws": 0,
+                "goalsScored": 100,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 15,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546039,
+        "id": 107,
+        "name":"FMF",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1992,
+        "logoName": "FMF",
+        "tournamemtsIds": [1100, 1101, 1102],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 12,
+                "numberOfWins": 6,
+                "numberOfLesions": 7,
+                "numberOfDraws": 1,
+                "goalsScored": 1,
+                "goalsConceded": 3,
+                "penaltyScored": 3,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Чемпионат IFL",
+                    "score": 3,
+                    "position": 12,
+                    "statistics":
+                    {
+                        "numberOfGames": 1,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 3,
+                        "numberOfDraws": 1,
+                        "goalsScored": 10,
+                        "goalsConceded": 4,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2018",
+                    "score": 34,
+                    "position": 1,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 3,
+                    "position": 9,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546037,
+        "id": 108,
+        "name":"ManchesterUnited",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 1892,
+        "logoName": "ManchesterUnited",
+        "tournamemtsIds": [1102],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 5,
+                "numberOfWins": 2,
+                "numberOfLesions": 0,
+                "numberOfDraws": 0,
+                "goalsScored": 1,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 15,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546037,
+        "id": 109,
+        "name":"Romania",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 2010,
+        "logoName": "Romania",
+        "tournamemtsIds": [1100],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 9,
+                "numberOfWins": 12,
+                "numberOfLesions": 7,
+                "numberOfDraws": 1,
+                "goalsScored": 1,
+                "goalsConceded": 10,
+                "penaltyScored": 1,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Чемпионат IFL",
+                    "score": 15,
+                    "position": 2,
+                    "statistics":
+                    {
+                        "numberOfGames": 6,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 1,
+                        "numberOfDraws": 6,
+                        "goalsScored": 10,
+                        "goalsConceded": 5,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 9
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "modified": 1587546037,
+        "id": 110,
+        "name":"Spartak",
+        "colors": ["red", "blue", "green"],
+        "yearOfFoundation": 2008,
+        "logoName": "Spartak",
+        "tournamemtsIds": [1100, 1101, 1102],
+        "teamStatistics":
+        {
+            "fullStatistics":
+            {
+                "numberOfGames": 11,
+                "numberOfWins": 3,
+                "numberOfLesions": 2,
+                "numberOfDraws": 1,
+                "goalsScored": 1,
+                "goalsConceded": 3,
+                "penaltyScored": 3,
+                "penaltyConceded": 0
+            },
+            "tournamentStatistics":
+            [
+                {
+                    "tournamentName": "Чемпионат IFL",
+                    "score": 3,
+                    "position": 12,
+                    "statistics":
+                    {
+                        "numberOfGames": 1,
+                        "numberOfWins": 3,
+                        "numberOfLesions": 3,
+                        "numberOfDraws": 1,
+                        "goalsScored": 10,
+                        "goalsConceded": 4,
+                        "penaltyScored": 3,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2018",
+                    "score": 34,
+                    "position": 1,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                },
+                {
+                    "tournamentName": "FIFA 2019",
+                    "score": 3,
+                    "position": 9,
+                    "statistics":
+                    {
+                        "numberOfGames": 3,
+                        "numberOfWins": 1,
+                        "numberOfLesions": 4,
+                        "numberOfDraws": 3,
+                        "goalsScored": 1,
+                        "goalsConceded": 7,
+                        "penaltyScored": 4,
+                        "penaltyConceded": 1
+                    }
+                }
+            ]
+        }
+    }
+]
+}

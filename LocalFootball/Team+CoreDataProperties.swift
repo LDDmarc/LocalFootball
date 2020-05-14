@@ -2,7 +2,7 @@
 //  Team+CoreDataProperties.swift
 //  LocalFootball
 //
-//  Created by Дарья Леонова on 17.04.2020.
+//  Created by Дарья Леонова on 22.04.2020.
 //  Copyright © 2020 Дарья Леонова. All rights reserved.
 //
 //
@@ -23,6 +23,8 @@ extension Team {
     @NSManaged public var name: String?
     @NSManaged public var tournamentsNames: NSObject?
     @NSManaged public var yearOfFoundation: Int16
+    @NSManaged public var id: Int64
+    @NSManaged public var modified: Int64
     @NSManaged public var matches: NSOrderedSet?
     @NSManaged public var teamStatistics: TeamStatistic?
     @NSManaged public var tournaments: NSOrderedSet?

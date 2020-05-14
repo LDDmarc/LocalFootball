@@ -9,13 +9,14 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 @objc(TeamStatistic)
 public class TeamStatistic: NSManagedObject, Decodable {
     
     enum CodingKeys: String, CodingKey {
         case fullStatistics = "fullStatistics"
-        case tournamentStatistics = "tournamentStatistics"
+        case tournamentsStatistics = "tournamentsStatistics"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -27,11 +28,20 @@ public class TeamStatistic: NSManagedObject, Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
             fullStatistics = try values.decode(Statistics.self, forKey: .fullStatistics)
-            let tournamentStatistics = try values.decode([TournamentStatistics].self, forKey: .tournamentStatistics)
+            let tournamentStatistics = try values.decode([TournamentStatistics].self, forKey: .tournamentsStatistics)
             tournamentStatistics.forEach { self.addToTournamentStatistics($0) }
             
         } catch let error as NSError {
             print(error.localizedDescription)
+        }
+    }
+    
+    func update(with teamStatisticsJSON: JSON) {
+        self.fullStatistics?.update(with: teamStatisticsJSON["fullStatistics"])
+        var i = 0
+        for tournamentStatistics in self.tournamentsStatistics! {
+            (tournamentStatistics as? TournamentStatistics)?.update(with: teamStatisticsJSON["tournamentStatistics"].arrayValue[i])
+            i += 1
         }
     }
     

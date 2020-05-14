@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 @objc(TournamentStatistics)
 public class TournamentStatistics: NSManagedObject, Decodable {
@@ -36,5 +37,13 @@ public class TournamentStatistics: NSManagedObject, Decodable {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+    }
+    
+    func update(with tournamentStatisticsJSON: JSON) {
+        self.tournamentName = tournamentStatisticsJSON["tournamentName"].string
+        self.score = tournamentStatisticsJSON["score"].int16Value
+        self.position = tournamentStatisticsJSON["position"].int16Value
+        
+        self.statistics?.update(with: tournamentStatisticsJSON["statistics"])
     }
 }

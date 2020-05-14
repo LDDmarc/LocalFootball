@@ -19,11 +19,11 @@ extension TeamStatistic {
 
     @NSManaged public var fullStatistics: Statistics?
     @NSManaged public var team: Team?
-    @NSManaged public var tournamentStatistics: NSOrderedSet?
+    @NSManaged public var tournamentsStatistics: NSOrderedSet?
 
 }
 
-// MARK: Generated accessors for tournamentStatistics
+// MARK: Generated accessors for tournamentsStatistics
 extension TeamStatistic {
 
     @objc(insertObject:inTournamentStatisticsAtIndex:)
