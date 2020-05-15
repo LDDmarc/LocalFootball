@@ -119,7 +119,7 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
         let teamsTableViewController = TeamsTableViewController()
         teamsTableViewController.title = tournament.name
         teamsTableViewController.teamsByTournamentsPredicate = NSPredicate(format: "id IN %@", tournament.tournamentTeamsIds)
-        
+      
         navigationController?.pushViewController(teamsTableViewController, animated: true)
     }
     
@@ -140,7 +140,6 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
        
         navigationController?.pushViewController(resultsTableViewController, animated: true)
     }
-    
 }
 
 extension TournamentsTableViewController: ExpandableCellDelegate {

@@ -21,12 +21,27 @@ class CellsConfiguration {
         if let date = match.date {
             cell.dateLabel.text = DateFormatter.writtingDateFormatter().string(from: date)
         }
+        
+        cell.calendarButton.isHidden = match.status
+        if match.calendarId != nil {
+            cell.calendarButton.tintColor = .red
+            //cell.calendarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            cell.calendarButton.tintColor = .gray
+        //    cell.calendarButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
+        
         cell.tournamentNameLabel.text = match.tournamentName
         if let team1Obj = match.teams?.firstObject,
             let team2Obj = match.teams?.lastObject,
             let team1 = team1Obj as? Team,
             let team2 = team2Obj as? Team {
-            cell.teamsNamesLabel.text = "\(team1.name!) - \(team2.name!)"
+        
+            if let team1Name = team1.name,
+                let team2Name = team2.name {
+                cell.teamsNamesLabel.text = "\(team1Name) - \(team2Name)"
+            }
+            
             if let team1LogoData = team1.logoImageData {
                 cell.team1LogoImageView.image = UIImage(data: team1LogoData)
             }
@@ -145,7 +160,6 @@ class CellsConfiguration {
                 label?.isHidden = true
             }
         }
-        
     }
     
     var dateFormatter: DateFormatter = {

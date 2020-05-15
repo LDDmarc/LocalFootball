@@ -61,6 +61,7 @@
 		BCB8554B244067E5004BEA34 /* Wolf.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB85547244067E5004BEA34 /* Wolf.png */; };
 		BCBDFB1F24583B1E003C4EA5 /* fullRequest1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCBDFB1E24583B1E003C4EA5 /* fullRequest1.json */; };
 		BCC59AC8243F88B20066A870 /* LocalFootball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCC59AC6243F88B10066A870 /* LocalFootball.xcdatamodeld */; };
+		BCC79C21246D67C000197E57 /* EventsCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC79C20246D67C000197E57 /* EventsCalendarManager.swift */; };
 		BCD8DCB424584E050053D930 /* matches1.json in Resources */ = {isa = PBXBuildFile; fileRef = BCD8DCAF24584E050053D930 /* matches1.json */; };
 		BCD8DCB524584E050053D930 /* fullRequest2.json in Resources */ = {isa = PBXBuildFile; fileRef = BCD8DCB024584E050053D930 /* fullRequest2.json */; };
 		BCD8DCB624584E050053D930 /* matches2.json in Resources */ = {isa = PBXBuildFile; fileRef = BCD8DCB124584E050053D930 /* matches2.json */; };
@@ -141,6 +142,7 @@
 		BCB85547244067E5004BEA34 /* Wolf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wolf.png; sourceTree = "<group>"; };
 		BCBDFB1E24583B1E003C4EA5 /* fullRequest1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fullRequest1.json; sourceTree = "<group>"; };
 		BCC59AC7243F88B10066A870 /* LocalFootball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalFootball.xcdatamodel; sourceTree = "<group>"; };
+		BCC79C20246D67C000197E57 /* EventsCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsCalendarManager.swift; sourceTree = "<group>"; };
 		BCD8DCAF24584E050053D930 /* matches1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = matches1.json; sourceTree = "<group>"; };
 		BCD8DCB024584E050053D930 /* fullRequest2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fullRequest2.json; sourceTree = "<group>"; };
 		BCD8DCB124584E050053D930 /* matches2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = matches2.json; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		BC812086244B72EB00E0B5A2 /* DataProcessing */ = {
 			isa = PBXGroup;
 			children = (
+				BCC79C20246D67C000197E57 /* EventsCalendarManager.swift */,
 				BCE747D82443852700984011 /* CoreDataManager.swift */,
 				BCF018B6244DA6D800EBD578 /* DataProvider.swift */,
 				BCFDA388244C81E200158C9C /* NetworkManager.swift */,
@@ -393,10 +396,10 @@
 			};
 			buildConfigurationList = BCF5D58A243F70D5009E9876 /* Build configuration list for PBXProject "LocalFootball" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				ru,
 				Base,
 			);
 			mainGroup = BCF5D586243F70D5009E9876;
@@ -510,6 +513,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCC79C21246D67C000197E57 /* EventsCalendarManager.swift in Sources */,
 				BC210E15245329E10056DDE3 /* Statistics+CoreDataProperties.swift in Sources */,
 				BCA82347244093A700FA67FF /* Statistics+CoreDataClass.swift in Sources */,
 				BC24870524433EBF00454D14 /* TeamStatistic+CoreDataClass.swift in Sources */,

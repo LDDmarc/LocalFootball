@@ -19,10 +19,12 @@ class MatchTableViewCell: UITableViewCell {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
-    @IBAction func favoriteStarButton(_ sender: UIButton) {
+    @IBOutlet weak var calendarButton: UIButton!
+    
+    @IBAction func calendarButtonTap(_ sender: UIButton) {
         if delegate != nil,
-            let _ = indexPath {
-            self.delegate?.favoriteStarTap(sender)
+            let indexPath = indexPath {
+            self.delegate?.favoriteStarTap(sender, cellForRowAt: indexPath)
         }
     }
     var indexPath: IndexPath?
@@ -36,5 +38,5 @@ class MatchTableViewCell: UITableViewCell {
 }
 
 protocol MatchTableViewCellDelegate: class {
-    func favoriteStarTap(_ sender: UIButton)
+    func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath)
 }

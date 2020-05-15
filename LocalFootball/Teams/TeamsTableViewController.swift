@@ -73,6 +73,7 @@ class TeamsTableViewController: UITableViewController {
         
         tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
         
+        tableView.estimatedRowHeight = 58.0
         tableView.tableFooterView = UIView()
     }
     
@@ -88,8 +89,8 @@ class TeamsTableViewController: UITableViewController {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
         }
-        dataProvider.testFetchAllData(from: "fullRequest2") { (error) in 
-//        dataProvider.fetchAllData { (error) in
+  //      dataProvider.testFetchAllData(from: "fullRequest2") { (error) in
+        dataProvider.fetchAllData { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()

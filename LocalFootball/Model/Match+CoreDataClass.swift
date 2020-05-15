@@ -71,5 +71,13 @@ public class Match: NSManagedObject, UpdatableManagedObject {
         
         tournamentId = matchJSON[CodingKeys.tournamentId.rawValue].int64Value
         tournamentName = matchJSON[CodingKeys.tournamentName.rawValue].stringValue
+        
+        if calendarId != nil {
+            if let startDate = date,
+                let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
+                    EventsCalendarManager(presentingViewController: nil).updateEvent(withIdentifier: calendarId!, by: startDate, by: endDate)
+            }
+        }
+       
     }
 }

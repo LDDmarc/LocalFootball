@@ -94,6 +94,7 @@ class ResultsTableViewController: UITableViewController {
         tableView.backgroundView = activityIndicatorView
         tableView.refreshControl = resultsRefreshControl
         
+        tableView.estimatedRowHeight = 48.0
     }
     
     override func viewDidLoad() {

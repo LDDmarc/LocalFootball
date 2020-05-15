@@ -21,7 +21,7 @@ class TabBarController: UITabBarController {
         let matchesTableViewController = MatchesTableViewController()
         matchesTableViewController.title = "Матчи"
         let matchesNavigationViewController = UINavigationController(rootViewController: matchesTableViewController)
-        matchesNavigationViewController.tabBarItem.image = UIImage(named: "calendar")
+        matchesNavigationViewController.tabBarItem.image = UIImage(named: "matches")
         
         let tournamentsTableViewController = TournamentsTableViewController()
         tournamentsTableViewController.title = "Турниры"

@@ -8,8 +8,12 @@
 
 import UIKit
 import CoreData
+import EventKit
+import EventKitUI
 
 class MatchesTableViewController: UITableViewController {
+    
+    lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
     
     // MARK: - CoreData & FetchedResultsController
     
@@ -100,7 +104,7 @@ class MatchesTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         navigationItem.titleView = segmentedControl
         
-        tableView.estimatedRowHeight = 135.5
+        tableView.estimatedRowHeight = 139.5
         
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         customView.backgroundColor = UIColor.clear
@@ -108,7 +112,7 @@ class MatchesTableViewController: UITableViewController {
         loadMoreActivityIndicatorView.center = CGPoint(x: customView.center.x, y: customView.center.y + 8)
         customView.addSubview(loadMoreActivityIndicatorView)
         tableView.tableFooterView = customView
-      
+        
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
     }
     
@@ -135,17 +139,17 @@ class MatchesTableViewController: UITableViewController {
     @objc private func loadMatches() {
         let date = fetchedResultsController.fetchedObjects?.last?.date
         let isPastMatches = segmentedControl.selectedSegmentIndex == 0
-           DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+    //    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.dataProvider.fetchMatchesData(pastMatches: isPastMatches, beginningFrom: date) { (error) in
-                   guard error == nil else { return }
-                   DispatchQueue.main.async {
-                       self.activityIndicatorView.stopAnimating()
-                       self.loadMoreActivityIndicatorView.stopAnimating()
-                       self.tableView.refreshControl?.endRefreshing()
-                   }
-               }
-           }
-       }
+                guard error == nil else { return }
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.loadMoreActivityIndicatorView.stopAnimating()
+                    self.tableView.refreshControl?.endRefreshing()
+                }
+            }
+//        }
+    }
     
     // MARK: - Table view data source
     
@@ -164,15 +168,23 @@ class MatchesTableViewController: UITableViewController {
         let match = fetchedResultsController.object(at: indexPath)
         CellsConfiguration.shared.configureCell(cell, with: match)
         
+        cell.delegate = self
+        cell.indexPath = indexPath
+    
+        // TODO:
+        if indexPath.row > 8 {
+            cell.calendarButton.isHidden = true
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            if indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 1) - 1 {
-                loadMoreActivityIndicatorView.startAnimating()
-                loadMatches()
-            }
+        if indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 1) - 1 {
+            loadMoreActivityIndicatorView.startAnimating()
+            loadMatches()
         }
+    }
 }
 
 
@@ -284,10 +296,71 @@ extension MatchesTableViewController: UISearchResultsUpdating {
     
 }
 
-// TODO:
 
 extension MatchesTableViewController: MatchTableViewCellDelegate {
-    func favoriteStarTap(_ sender: UIButton) {
-        sender.setImage(UIImage(systemName: "fillStar"), for: .normal)
+    
+    func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath) {
+        let match = fetchedResultsController.object(at: indexPath)
+        eventsCalendarManager.match = match
+        guard let team1 = match.teams?.firstObject as? Team,
+            let team2 = match.teams?.lastObject as? Team,
+            let team1Name = team1.name,
+            let team2Name = team2.name else { return }
+        
+        if match.calendarId == nil {
+            if let startDate = match.date,
+                let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
+                let event = Event(name: "Матч \(team1Name) - \(team2Name)", startDate: startDate, endDate: endDate)
+                
+                  eventsCalendarManager.presentCalendarModalToAddEvent(event: event) { (result) in
+                      DispatchQueue.main.async {
+                          switch result {
+                          case .failure(let error):
+                              switch error {
+                              case .calendarAccessDeniedOrRestricted:
+                                  self.showAlert(title: "Нет доступа к календарю", message: "Разрешите доступ к календарю в системных настройках")
+                              case .eventNotAddedToCalendar:
+                                  self.showAlert(title: "Ошибка", message: "Данного события нет в Вашем календаре")
+                              default: ()
+                              }
+                          case .success(_):
+                              ()
+                          }
+                      }
+                  }
+            }
+        } else {
+            let event = eventsCalendarManager.eventStore.event(withIdentifier: match.calendarId!)
+            eventsCalendarManager.deleteEventFromCalendar(event: event) { (result) in
+                switch result {
+                case .success:
+                    self.showAlert(title: "Удалено", message: "Матч \(team1Name) - \(team2Name) удален из Вашего календаря")
+                case .failure(let error):
+                    switch error {
+                    case .calendarAccessDeniedOrRestricted:
+                        self.showAlert(title: "Нет доступа к календарю", message: "Разрешите доступ к календарб в системных настройках")
+                    case .eventNotAddedToCalendar:
+                        self.showAlert(title: "Ошибка", message: "Данного события нет в Вашем календаре")
+                    default: ()
+                    }
+                }
+            }
+            match.calendarId = nil
+            do {
+                try dataProvider.context.save()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+// MARK: - Alerts
+extension MatchesTableViewController {
+    
+    func showAlert(title: String?, message: String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ок", style: .cancel))
+        present(ac, animated: true, completion: nil)
     }
 }
