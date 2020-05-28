@@ -375,14 +375,10 @@ class DataProvider {
     
     func bindingTeamsAndMatchesData(taskContext: NSManagedObjectContext) {
         taskContext.performAndWait {
-            let teamsRequest: NSFetchRequest = Team.fetchRequest()
             let matchesRequest: NSFetchRequest = Match.fetchRequest()
-            
-            var teams = [Team]()
             var matches = [Match]()
             
             do {
-                teams = try taskContext.fetch(teamsRequest)
                 matches = try taskContext.fetch(matchesRequest)
             } catch {
                 print("Fetch failed")
@@ -391,33 +387,22 @@ class DataProvider {
             var teamsResults = [Team]()
             
             matches.forEach { match in
-                // adding teams to match
-                let team1Id = match.team1Id
-                let team2Id = match.team2Id
-                
-                let fr: NSFetchRequest = Team.fetchRequest()
-                fr.predicate = NSPredicate(format: "(id == %i) || (id == %i)", team1Id, team2Id)
-                do {
-                    teamsResults = try taskContext.fetch(fr)
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
-                
-                teamsResults.forEach{ match.addToTeams($0) }
-                
-                // adding match to teams
-                if let firstTeamResult = teamsResults.first,
-                    let teamIndex = teams.firstIndex(of: firstTeamResult) {
-                    teams[teamIndex].addToMatches(match)
-                }
-                if let secondTeamResult = teamsResults.last,
-                    let teamIndex = teams.firstIndex(of: secondTeamResult) {
-                    teams[teamIndex].addToMatches(match)
+                let teamsIds = [match.team1Id, match.team2Id]
+                teamsIds.forEach { teamId in
+                    let fr: NSFetchRequest = Team.fetchRequest()
+                    fr.predicate = NSPredicate(format: "id == %i ", teamId)
+                    do {
+                        teamsResults = try taskContext.fetch(fr)
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                    teamsResults.forEach{ match.addToTeams($0) }
+                    // adding match to teams
+                    teamsResults.first?.addToMatches(match)
                 }
             }
         }
     }
-    
 }
 
 extension DateFormatter {
@@ -425,7 +410,7 @@ extension DateFormatter {
     static func readingDateFormatter() -> DateFormatter {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-     //   df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        //   df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return df
     }
     
