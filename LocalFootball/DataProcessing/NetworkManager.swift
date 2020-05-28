@@ -13,7 +13,8 @@ class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
     
-    private let baseURL = URL(string: "https://football-ios2020.herokuapp.com/fullRequest2")
+  // private let baseURL = URL(string: "https://football-ios2020.herokuapp.com/fullRequest2")
+    private let baseURL = URL(string: "https://bmstu-ios.herokuapp.com/main_info")
     private let urlSession = URLSession.shared
     
     func getData(completion: @escaping(_ data: Data?, _ error: Error?) -> ()) {

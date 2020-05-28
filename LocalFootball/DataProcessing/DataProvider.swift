@@ -138,7 +138,7 @@ class DataProvider {
                 taskContext.undoManager = nil
                 
                 taskContext.performAndWait {
-                    // because of relationships cannot usebatchDelete for Team
+                    // because of relationships cannot use batchDelete for Team
                     do {
                         try self.updateDataWithoutBatchDelete(objectsJSON: teamsJSON, taskContext: taskContext, entityName: EntityType.team.name())
                     } catch let error as NSError {
@@ -396,7 +396,7 @@ class DataProvider {
                 let team2Id = match.team2Id
                 
                 let fr: NSFetchRequest = Team.fetchRequest()
-                fr.predicate = NSPredicate(format: "(id == %d) || (id == %d)", team1Id, team2Id)
+                fr.predicate = NSPredicate(format: "(id == %i) || (id == %i)", team1Id, team2Id)
                 do {
                     teamsResults = try taskContext.fetch(fr)
                 } catch let error as NSError {
@@ -425,6 +425,7 @@ extension DateFormatter {
     static func readingDateFormatter() -> DateFormatter {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+     //   df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return df
     }
     

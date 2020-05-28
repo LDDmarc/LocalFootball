@@ -50,7 +50,10 @@ class TournamentsTableViewController: UITableViewController {
         
         tableView.backgroundView = activityIndicatorView
         tableView.refreshControl = tournamentsRefreshControl
-        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+       // tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.separatorStyle = .none
+        
+      //  tableView.estimatedRowHeight = view.bounds.width*0.56 + 54.5
     }
     
     override func viewDidLoad() {
@@ -93,21 +96,29 @@ class TournamentsTableViewController: UITableViewController {
         
         cell.indexPath = indexPath
         cell.delegate = self
-        
         cell.bottomView.isHidden = !expandedIndexSet.contains(indexPath.row)
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if expandedIndexSet.contains(indexPath.row) {
+            return 0.61 * view.bounds.width + 81.5
+        } else {
+            return 0.61 * view.bounds.width
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if expandedIndexSet.contains(indexPath.row) {
             expandedIndexSet.remove(indexPath.row)
+            tableView.reloadRows(at: [indexPath], with: .none)
         } else {
             expandedIndexSet.insert(indexPath.row)
+            tableView.reloadRows(at: [indexPath], with: .none)
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
-        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-    
 }
 
 // MARK: - TournamentTableViewCellDelegate
@@ -139,18 +150,6 @@ extension TournamentsTableViewController: TournamentTableViewCellDelegate {
         resultsTableViewController.tournamentPredicate = NSPredicate(format: "tournamentId == %i", tournament.id)
        
         navigationController?.pushViewController(resultsTableViewController, animated: true)
-    }
-}
-
-extension TournamentsTableViewController: ExpandableCellDelegate {
-    func expandableCellLayoutChanged(_ expandableCell: TournamentTableViewCell) {
-        refreshTableAfterCellExpansion()
-    }
-    
-    func refreshTableAfterCellExpansion() {
-        self.tableView.beginUpdates()
-        self.tableView.setNeedsDisplay()
-        self.tableView.endUpdates()
     }
 }
 

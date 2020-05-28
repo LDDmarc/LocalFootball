@@ -54,6 +54,8 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentTeamsButton: UIButton!
     @IBOutlet weak var tournamentMatchesButton: UIButton!
     @IBOutlet weak var tournamentResultsButton: UIButton!
+    
+    let separator = UIView()
 
     var indexPath: IndexPath?
     
@@ -63,6 +65,17 @@ class TournamentTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         selectionStyle = .none
+        
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(separator)
+        NSLayoutConstraint.activate([
+            separator.topAnchor.constraint(equalTo: topAnchor),
+            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            separator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            separator.heightAnchor.constraint(equalToConstant:  1 / UIScreen.main.scale)
+        ])
+        separator.backgroundColor = .separator
+        
         
         bottomView.isHidden = true
         
@@ -79,6 +92,3 @@ protocol TournamentTableViewCellDelegate: AnyObject {
     func showResults(indexPath: IndexPath)
 }
 
-protocol ExpandableCellDelegate: class {
-    func expandableCellLayoutChanged(_ expandableCell: TournamentTableViewCell)
-}

@@ -89,8 +89,8 @@ class TeamsTableViewController: UITableViewController {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
         }
-  //      dataProvider.testFetchAllData(from: "fullRequest2") { (error) in
-        dataProvider.fetchAllData { (error) in
+        dataProvider.testFetchAllData(from: "fullRequest2") { (error) in
+    //    dataProvider.fetchAllData { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
@@ -136,7 +136,10 @@ class TeamsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailTeamTableViewController = DetailTeamTableViewController()
-        detailTeamTableViewController.team = fetchedResultsController.object(at: indexPath)
+        let team = fetchedResultsController.object(at: indexPath)
+        detailTeamTableViewController.teamPredicate = NSPredicate(format: "id == %i", team.id)
+        detailTeamTableViewController.matchesPredicate = NSPredicate(format: "(team1Id == %i) OR (team2Id == %i)", team.id, team.id)
+        detailTeamTableViewController.title = team.name
         navigationController?.pushViewController(detailTeamTableViewController, animated: true)
     }
 }

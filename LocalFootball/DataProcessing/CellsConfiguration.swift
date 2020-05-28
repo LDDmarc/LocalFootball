@@ -23,12 +23,12 @@ class CellsConfiguration {
         }
         
         cell.calendarButton.isHidden = match.status
+        
         if match.calendarId != nil {
+            
             cell.calendarButton.tintColor = .red
-            //cell.calendarButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             cell.calendarButton.tintColor = .gray
-        //    cell.calendarButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
         
         cell.tournamentNameLabel.text = match.tournamentName

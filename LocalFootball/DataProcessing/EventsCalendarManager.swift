@@ -120,6 +120,13 @@ class EventsCalendarManager: NSObject {
         }
     }
     
+    func isExistEvent(with identifier: String) -> Bool {
+        if eventStore.event(withIdentifier: identifier) == nil {
+            return false
+        }
+        return true
+    }
+    
     func deleteEventFromCalendar(event: EKEvent?, completion: @escaping EventsCalendarManagerResponse) {
         let authorizationStatus = getAuthorizationStatus()
         

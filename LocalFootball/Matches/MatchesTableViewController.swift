@@ -91,6 +91,8 @@ class MatchesTableViewController: UITableViewController {
     var activityIndicatorView: UIActivityIndicatorView!
     var loadMoreActivityIndicatorView: UIActivityIndicatorView!
     
+    let notificationCenter = NotificationCenter.default
+    
     // MARK: - Loading View
     
     override func loadView() {
@@ -122,6 +124,12 @@ class MatchesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
+        
+        notificationCenter.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc func reloadTableData() {
+        tableView.reloadData()
     }
     
     @objc private func fetchData() {
@@ -166,16 +174,23 @@ class MatchesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
         
         let match = fetchedResultsController.object(at: indexPath)
+        
+        if let calendarId = match.calendarId {
+            if !eventsCalendarManager.isExistEvent(with: calendarId) {
+                match.calendarId = nil
+                do {
+                    try dataProvider.context.save()
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
         CellsConfiguration.shared.configureCell(cell, with: match)
         
         cell.delegate = self
         cell.indexPath = indexPath
     
-        // TODO:
-        if indexPath.row > 8 {
-            cell.calendarButton.isHidden = true
-        }
-        
         return cell
     }
     
@@ -296,6 +311,7 @@ extension MatchesTableViewController: UISearchResultsUpdating {
     
 }
 
+// MARK: - EventKit CalendarWorking
 
 extension MatchesTableViewController: MatchTableViewCellDelegate {
     
@@ -353,14 +369,10 @@ extension MatchesTableViewController: MatchTableViewCellDelegate {
             }
         }
     }
-}
-
-// MARK: - Alerts
-extension MatchesTableViewController {
-    
     func showAlert(title: String?, message: String) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Ок", style: .cancel))
         present(ac, animated: true, completion: nil)
     }
 }
+
