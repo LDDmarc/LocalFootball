@@ -34,6 +34,8 @@
 		BC559A4224543E44007028F5 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC559A4024543E44007028F5 /* Team+CoreDataProperties.swift */; };
 		BC559A4324543E44007028F5 /* Tournament+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC559A4124543E44007028F5 /* Tournament+CoreDataProperties.swift */; };
 		BC73BEA3245C552E00700A04 /* ResultsTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC73BEA2245C552E00700A04 /* ResultsTableSectionHeader.xib */; };
+		BC7BA27C24812A2E00753A1E /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7BA27B24812A2E00753A1E /* DataManagerProtocol.swift */; };
+		BC7BA27E24812E2100753A1E /* TestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7BA27D24812E2100753A1E /* TestDataManager.swift */; };
 		BC7F30B6245050900021BB0B /* teams3.json in Resources */ = {isa = PBXBuildFile; fileRef = BC7F30B3245050900021BB0B /* teams3.json */; };
 		BC7F30B7245050900021BB0B /* teams2.json in Resources */ = {isa = PBXBuildFile; fileRef = BC7F30B4245050900021BB0B /* teams2.json */; };
 		BC7F30B8245050900021BB0B /* teams4.json in Resources */ = {isa = PBXBuildFile; fileRef = BC7F30B5245050900021BB0B /* teams4.json */; };
@@ -115,6 +117,8 @@
 		BC559A4024543E44007028F5 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC559A4124543E44007028F5 /* Tournament+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tournament+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC73BEA2245C552E00700A04 /* ResultsTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsTableSectionHeader.xib; sourceTree = "<group>"; };
+		BC7BA27B24812A2E00753A1E /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
+		BC7BA27D24812E2100753A1E /* TestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataManager.swift; sourceTree = "<group>"; };
 		BC7F30B3245050900021BB0B /* teams3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams3.json; sourceTree = "<group>"; };
 		BC7F30B4245050900021BB0B /* teams2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams2.json; sourceTree = "<group>"; };
 		BC7F30B5245050900021BB0B /* teams4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teams4.json; sourceTree = "<group>"; };
@@ -230,7 +234,9 @@
 				BCC79C20246D67C000197E57 /* EventsCalendarManager.swift */,
 				BCE747D82443852700984011 /* CoreDataManager.swift */,
 				BCF018B6244DA6D800EBD578 /* DataProvider.swift */,
+				BC7BA27B24812A2E00753A1E /* DataManagerProtocol.swift */,
 				BCFDA388244C81E200158C9C /* NetworkManager.swift */,
+				BC7BA27D24812E2100753A1E /* TestDataManager.swift */,
 				BC812084244B3B7900E0B5A2 /* CellsConfiguration.swift */,
 			);
 			path = DataProcessing;
@@ -527,6 +533,7 @@
 				BC9CA0D62446063A0017B952 /* TournamentsTableViewController.swift in Sources */,
 				BCC59AC8243F88B20066A870 /* LocalFootball.xcdatamodeld in Sources */,
 				BCE747DE2443A63000984011 /* MatchesTableViewController.swift in Sources */,
+				BC7BA27C24812A2E00753A1E /* DataManagerProtocol.swift in Sources */,
 				BC42A7D42444B3090039A851 /* TeamTableViewCell.swift in Sources */,
 				BC24870124433D0F00454D14 /* TournamentStatistics+CoreDataClass.swift in Sources */,
 				BCA8234B244093A700FA67FF /* Match+CoreDataClass.swift in Sources */,
@@ -539,6 +546,7 @@
 				BCA82349244093A700FA67FF /* Team+CoreDataClass.swift in Sources */,
 				BCE60A03245C8B6F001B7197 /* ResultsFormTableViewCell.swift in Sources */,
 				BC210E17245329E10056DDE3 /* TeamStatistic+CoreDataProperties.swift in Sources */,
+				BC7BA27E24812E2100753A1E /* TestDataManager.swift in Sources */,
 				BC210E1F245329E10056DDE3 /* TournamentStatistics+CoreDataProperties.swift in Sources */,
 				BC9CA0D32446061C0017B952 /* TournamentTableViewCell.swift in Sources */,
 				BCE79CB72459EF4F003B6767 /* ResultsTableTableViewCell.swift in Sources */,

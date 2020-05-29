@@ -8,7 +8,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1999,
         "logoName": "Wolf",
-        "tournamemtsIds": [1100, 1101],
+        "tournamentsIds": [1100, 1101],
         "teamStatistics":
         {
             "fullStatistics":
@@ -66,7 +66,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 1974,
         "logoName": "FCB",
-        "tournamemtsIds": [1100, 1101, 1102],
+        "tournamentsIds": [1100, 1101, 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -140,7 +140,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2000,
         "logoName": "RealMadrid",
-        "tournamemtsIds": [1102],
+        "tournamentsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -182,7 +182,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2000,
         "logoName": "ASM",
-        "tournamemtsIds": [1101, 1102],
+        "tournamentsIds": [1101, 1102],
         "teamStatistics":
         {
             "fullStatistics":
@@ -240,7 +240,7 @@
         "colors": ["red", "blue", "green"],
         "yearOfFoundation": 2001,
         "logoName": "Junior",
-        "tournamemtsIds": [1102],
+        "tournamentsIds": [1102],
         "teamStatistics":
         {
             "fullStatistics":

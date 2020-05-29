@@ -13,11 +13,10 @@ import EventKitUI
 
 class MatchesTableViewController: UITableViewController {
     
-    lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
-    
     // MARK: - CoreData & FetchedResultsController
     
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    var dataProvider: DataProvider!
+    lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
     
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
@@ -84,14 +83,12 @@ class MatchesTableViewController: UITableViewController {
     
     lazy var matchesRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        rc.addTarget(self, action: #selector(loadData), for: .valueChanged)
         return rc
     }()
     
     var activityIndicatorView: UIActivityIndicatorView!
     var loadMoreActivityIndicatorView: UIActivityIndicatorView!
-    
-    let notificationCenter = NotificationCenter.default
     
     // MARK: - Loading View
     
@@ -115,7 +112,7 @@ class MatchesTableViewController: UITableViewController {
         customView.addSubview(loadMoreActivityIndicatorView)
         tableView.tableFooterView = customView
         
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     
@@ -125,14 +122,14 @@ class MatchesTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
         
-        notificationCenter.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     @objc func reloadTableData() {
         tableView.reloadData()
     }
     
-    @objc private func fetchData() {
+    @objc private func loadData() {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
         }
@@ -146,17 +143,15 @@ class MatchesTableViewController: UITableViewController {
     }
     @objc private func loadMatches() {
         let date = fetchedResultsController.fetchedObjects?.last?.date
-        let isPastMatches = segmentedControl.selectedSegmentIndex == 0
-    //    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.dataProvider.fetchMatchesData(pastMatches: isPastMatches, beginningFrom: date) { (error) in
-                guard error == nil else { return }
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                    self.loadMoreActivityIndicatorView.stopAnimating()
-                    self.tableView.refreshControl?.endRefreshing()
-                }
+        let matchesStatus = (segmentedControl.selectedSegmentIndex == 0) ? MatchesStatus.past : MatchesStatus.future
+        dataProvider.fetchMatchesData(matchesStatus: matchesStatus, from: date) { (error) in
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.loadMoreActivityIndicatorView.stopAnimating()
+                self.tableView.refreshControl?.endRefreshing()
             }
-//        }
+        }
     }
     
     // MARK: - Table view data source

@@ -12,8 +12,10 @@ import CoreData
 class TeamsTableViewController: UITableViewController {
     
     // MARK: - CoreData & FetchedResultsController
+//    var dataManager: DataManagerProtocol!
+//    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, dataManager: dataManager)
     
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    var dataProvider: DataProvider!
   
     lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
@@ -71,7 +73,7 @@ class TeamsTableViewController: UITableViewController {
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
-        tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
+        tableView.separatorStyle = .none
         
         tableView.estimatedRowHeight = 58.0
         tableView.tableFooterView = UIView()
@@ -89,8 +91,7 @@ class TeamsTableViewController: UITableViewController {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
         }
-        dataProvider.testFetchAllData(from: "fullRequest2") { (error) in
-    //    dataProvider.fetchAllData { (error) in
+        dataProvider.fetchAllData { (error) in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
@@ -102,8 +103,7 @@ class TeamsTableViewController: UITableViewController {
             if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
                 self.activityIndicatorView.startAnimating()
             }
-            dataProvider.testFetchAllData(from: "fullRequest3") { (error) in
-    //        dataProvider.fetchAllData { (error) in
+            dataProvider.fetchAllData { (error) in
                 guard error == nil else { return }
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
@@ -123,6 +123,7 @@ class TeamsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TeamTableViewCell.self)) as! TeamTableViewCell
         let team = fetchedResultsController.object(at: indexPath)
         
@@ -131,6 +132,9 @@ class TeamsTableViewController: UITableViewController {
             cell.teamLogoImageView.image = UIImage(data: imageData)
         }
         
+        if indexPath.row == 0 {
+            //cell.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
+        }
         return cell
     }
     
@@ -140,6 +144,7 @@ class TeamsTableViewController: UITableViewController {
         detailTeamTableViewController.teamPredicate = NSPredicate(format: "id == %i", team.id)
         detailTeamTableViewController.matchesPredicate = NSPredicate(format: "(team1Id == %i) OR (team2Id == %i)", team.id, team.id)
         detailTeamTableViewController.title = team.name
+        detailTeamTableViewController.dataProvider = dataProvider
         navigationController?.pushViewController(detailTeamTableViewController, animated: true)
     }
 }

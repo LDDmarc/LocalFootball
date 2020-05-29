@@ -13,7 +13,7 @@ class TournamentsTableViewController: UITableViewController {
     
     // MARK: - CoreData & FetchedResultsController
     
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    var dataProvider: DataProvider!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Tournament> = {
         let request: NSFetchRequest = Tournament.fetchRequest()
@@ -37,7 +37,7 @@ class TournamentsTableViewController: UITableViewController {
     
     lazy var tournamentsRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        rc.addTarget(self, action: #selector(loadData), for: .valueChanged)
         return rc
     }()
     
@@ -50,10 +50,9 @@ class TournamentsTableViewController: UITableViewController {
         
         tableView.backgroundView = activityIndicatorView
         tableView.refreshControl = tournamentsRefreshControl
-       // tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
+       
         tableView.separatorStyle = .none
         
-      //  tableView.estimatedRowHeight = view.bounds.width*0.56 + 54.5
     }
     
     override func viewDidLoad() {
@@ -62,12 +61,12 @@ class TournamentsTableViewController: UITableViewController {
         tableView.register(UINib(nibName: String(describing: TournamentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TournamentTableViewCell.self))
     }
     
-    @objc private func fetchData() {
+    @objc private func loadData() {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
             self.tableView.separatorStyle = .none
         }
-        dataProvider.testFetchAllData(from: "fullRequest3") { (error) in
+        dataProvider.fetchAllData { error in
             guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
@@ -103,9 +102,9 @@ class TournamentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         if expandedIndexSet.contains(indexPath.row) {
-            return 0.61 * view.bounds.width + 81.5
+            return 0.52 * view.bounds.width + 81.5
         } else {
-            return 0.61 * view.bounds.width
+            return 0.52 * view.bounds.width
         }
     }
     

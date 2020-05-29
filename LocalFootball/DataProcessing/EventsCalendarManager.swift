@@ -39,8 +39,7 @@ class EventsCalendarManager: NSObject {
     }
     
     var match: Match!
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
-    
+
     let presentingViewController: UIViewController?
     
     private func requestAccess(completion: @escaping EKEventStoreRequestAccessCompletionHandler) {
@@ -225,7 +224,7 @@ extension EventsCalendarManager: EKEventEditViewDelegate {
         controller.dismiss(animated: true) {
             self.match.calendarId = controller.event?.eventIdentifier
             do {
-                try self.dataProvider.context.save()
+                try CoreDataManger.instance.persistentContainer.viewContext.save()
             } catch let error as NSError {
                 print(error.localizedDescription)
             }

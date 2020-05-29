@@ -11,8 +11,9 @@ import CoreData
 
 class DetailTeamTableViewController: UITableViewController {
     
+    var dataProvider: DataProvider!
     lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    
     
     lazy var fetchedResultsControllerTeam: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
@@ -82,7 +83,7 @@ class DetailTeamTableViewController: UITableViewController {
         navigationItem.largeTitleDisplayMode = .never
 //        navigationItem.title = team.name ?? "??"
         
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

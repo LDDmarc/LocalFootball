@@ -47,7 +47,7 @@ public class Team: NSManagedObject, UpdatableManagedObject {
         case statistics = "statistics"
         case uuid = "uuid"
         case teamStatistics = "teamStatistics"
-        case tournamemtsIds = "tournamemtsIds"
+        case tournamentsIds = "tournamentsIds"
         case matchesIds = "matchesIds"
     }
     
@@ -76,7 +76,7 @@ public class Team: NSManagedObject, UpdatableManagedObject {
             }
             
             teamStatistics = try values.decode(TeamStatistic.self, forKey: .teamStatistics)
-            tournamentsIds = try values.decode([Int64]?.self, forKey: .tournamemtsIds) as NSObject?
+            tournamentsIds = try values.decode([Int64]?.self, forKey: .tournamentsIds) as NSObject?
             
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -97,7 +97,7 @@ public class Team: NSManagedObject, UpdatableManagedObject {
         if let colors = teamJSON[CodingKeys.colors.rawValue].arrayObject {
             self.colors = colors as NSObject
         }
-        if let tournamentsIds = teamJSON[CodingKeys.tournamemtsIds.rawValue].arrayObject {
+        if let tournamentsIds = teamJSON[CodingKeys.tournamentsIds.rawValue].arrayObject {
             self.tournamentsIds = tournamentsIds as NSObject
         }
         if let matchesIds = teamJSON[CodingKeys.matchesIds.rawValue].arrayObject {

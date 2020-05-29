@@ -13,7 +13,7 @@ class ResultsTableViewController: UITableViewController {
     
     // MARK: - CoreData & FetchedResultsController
     
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    var dataProvider: DataProvider!
  
     lazy var fetchedResultsController: NSFetchedResultsController<TournamentStatistics> = {
         let request: NSFetchRequest = TournamentStatistics.fetchRequest()
@@ -79,7 +79,7 @@ class ResultsTableViewController: UITableViewController {
     
     lazy var resultsRefreshControl: UIRefreshControl = {
         let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        rc.addTarget(self, action: #selector(loadData), for: .valueChanged)
         return rc
     }()
 
@@ -93,6 +93,7 @@ class ResultsTableViewController: UITableViewController {
         
         tableView.backgroundView = activityIndicatorView
         tableView.refreshControl = resultsRefreshControl
+        tableView.separatorStyle = .none
         
         tableView.estimatedRowHeight = 48.0
     }
@@ -125,7 +126,7 @@ class ResultsTableViewController: UITableViewController {
         }
     }
     
-    @objc private func fetchData() {
+    @objc private func loadData() {
         if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
             self.activityIndicatorView.startAnimating()
         }
@@ -174,7 +175,7 @@ class ResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ResultsTableSectionHeader") as! ResultsTableSectionHeader
         headerView.tournamentNameLabel.text = currentTournamentName
-        headerView.contentView.backgroundColor = UIColor.systemGray5
+        headerView.contentView.backgroundColor = .systemGray6
         
         if segmentedControl.selectedSegmentIndex == 0 {
             for label in [headerView.gamesLabel, headerView.winsLabel, headerView.drawsLabel, headerView.lesionsNameLabel, headerView.goalsNameLabel,  headerView.scoreNameLabel] {
@@ -197,14 +198,30 @@ class ResultsTableViewController: UITableViewController {
             let result = fetchedResultsController.object(at: indexPath)
             CellsConfiguration.shared.configureCell(cell, with: result)
             
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = .systemBackground
+            } else {
+                cell.backgroundColor = .secondarySystemBackground
+            }
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ResultsFormTableViewCell.self)) as! ResultsFormTableViewCell
             let result = fetchedResultsController.object(at: indexPath)
-            CellsConfiguration.shared.configureCell(cell, with: result)
+            CellsConfiguration.shared.configureCell(cell, with: result, indexPath.row % 2 == 0)
+            
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = .systemBackground
+            } else {
+                cell.backgroundColor = .secondarySystemBackground
+            }
             
             return cell
         }
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        segmentedControl.selectedSegmentIndex = segmentedControl.selectedSegmentIndex == 0 ? 1 : 0
+        tableView.reloadData()
     }
 }
 // MARK: - NSFetchedResultsController

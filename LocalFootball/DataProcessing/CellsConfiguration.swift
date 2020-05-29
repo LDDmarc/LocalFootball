@@ -127,7 +127,7 @@ class CellsConfiguration {
         cell.scoreLabel.text = "\(tournamentStatistics.score)"
     }
     
-    func configureCell(_ cell: ResultsFormTableViewCell, with tournamentStatistics: TournamentStatistics) {
+    func configureCell(_ cell: ResultsFormTableViewCell, with tournamentStatistics: TournamentStatistics,  _ isEven: Bool) {
         cell.positionLabel.text = "\(tournamentStatistics.position)"
         
         guard let teamStatistics = tournamentStatistics.teamStatistics,
@@ -137,6 +137,8 @@ class CellsConfiguration {
             cell.teamLogoImageView.image = UIImage(data: imageData)
             cell.teamNameLabel.text = team.name
         }
+        
+        let emptyColor: UIColor = isEven ? .systemBackground : .secondarySystemBackground
         
         var resultsOfLastMatches = tournamentStatistics.resultsOfLastMatches
         for (label, view) in [(cell.match1Label, cell.match1View), (cell.match2Label, cell.match2View), (cell.match3Label, cell.match3View), (cell.match4Label, cell.match4View), (cell.match5Label, cell.match5View), (cell.match6Label, cell.match6View)] {
@@ -156,7 +158,7 @@ class CellsConfiguration {
                     label?.isHidden = false
                 }
             } else {
-                view?.backgroundColor = .systemGray6
+                view?.backgroundColor = emptyColor
                 label?.isHidden = true
             }
         }

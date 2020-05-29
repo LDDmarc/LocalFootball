@@ -10,14 +10,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="105" id="KGk-i7-Jjw" customClass="ResultsFormTableViewCell" customModule="LocalFootball" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="682" height="48"/>
+            <rect key="frame" x="0.0" y="0.0" width="381" height="48"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="682" height="48"/>
+                <rect key="frame" x="0.0" y="0.0" width="381" height="48"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUo-Pc-8dG">
-                        <rect key="frame" x="15" y="15" width="20" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="12." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUo-Pc-8dG">
+                        <rect key="frame" x="16" y="15" width="20" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="pPk-bB-80t"/>
                         </constraints>
@@ -26,26 +26,26 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yMb-h3-iJp">
-                        <rect key="frame" x="39" y="7" width="34" height="34"/>
+                        <rect key="frame" x="40" y="7" width="34" height="34"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="34" id="gC0-mX-rw0"/>
                             <constraint firstAttribute="width" constant="34" id="iVP-cA-82x"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Имя команды" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7C-r7-oX5">
-                        <rect key="frame" x="77" y="16.5" width="302.5" height="15.5"/>
+                        <rect key="frame" x="78" y="16.5" width="127" height="15.5"/>
                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="J3n-cs-PVs">
-                        <rect key="frame" x="391.5" y="12" width="286.5" height="24"/>
+                        <rect key="frame" x="217" y="12" width="160" height="24"/>
                         <subviews>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qgh-lL-EP9">
-                                <rect key="frame" x="0.0" y="0.0" width="44.5" height="24"/>
+                                <rect key="frame" x="0.0" y="0.0" width="23.5" height="24"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="В" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDc-zu-5i5">
-                                        <rect key="frame" x="18" y="4" width="9" height="16"/>
+                                        <rect key="frame" x="7" y="4" width="9" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -58,10 +58,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mtZ-ah-Lac">
-                                <rect key="frame" x="48.5" y="0.0" width="44.5" height="24"/>
+                                <rect key="frame" x="27.5" y="0.0" width="23" height="24"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="В" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM2-Kt-cY9">
-                                        <rect key="frame" x="17.5" y="4" width="9" height="16"/>
+                                        <rect key="frame" x="7" y="4" width="9" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -74,10 +74,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="cvl-6C-ZYD">
-                                <rect key="frame" x="97" y="0.0" width="44.5" height="24"/>
+                                <rect key="frame" x="54.5" y="0.0" width="23.5" height="24"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Н" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTj-wX-C6F">
-                                        <rect key="frame" x="17" y="4" width="10" height="16"/>
+                                        <rect key="frame" x="7" y="4" width="10" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -90,10 +90,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="vLU-fE-4Vh">
-                                <rect key="frame" x="145.5" y="0.0" width="44" height="24"/>
+                                <rect key="frame" x="82" y="0.0" width="23.5" height="24"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="П" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piU-il-KOJ">
-                                        <rect key="frame" x="17" y="4" width="10" height="16"/>
+                                        <rect key="frame" x="6.5" y="4" width="10" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -106,10 +106,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="YfG-ii-qUX">
-                                <rect key="frame" x="193.5" y="0.0" width="44.5" height="24"/>
+                                <rect key="frame" x="109.5" y="0.0" width="23" height="24"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="П" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yn3-xk-Jeu">
-                                        <rect key="frame" x="17.5" y="4" width="10" height="16"/>
+                                        <rect key="frame" x="6.5" y="4" width="10" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -122,10 +122,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="te3-Ae-uJY">
-                                <rect key="frame" x="242" y="0.0" width="44.5" height="24"/>
+                                <rect key="frame" x="136.5" y="0.0" width="23.5" height="24"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Н" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nr1-47-sEh">
-                                        <rect key="frame" x="17.5" y="4" width="10" height="16"/>
+                                        <rect key="frame" x="7" y="4" width="10" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -148,13 +148,13 @@
                     <constraint firstAttribute="bottom" secondItem="yMb-h3-iJp" secondAttribute="bottom" constant="7" id="1KW-rZ-n5U"/>
                     <constraint firstItem="J3n-cs-PVs" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.42" id="8as-SE-2LH"/>
                     <constraint firstItem="mUo-Pc-8dG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BJh-41-oHj"/>
-                    <constraint firstItem="mUo-Pc-8dG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="CXS-LZ-xq2"/>
+                    <constraint firstItem="mUo-Pc-8dG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="CXS-LZ-xq2"/>
                     <constraint firstItem="yMb-h3-iJp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="GsH-BN-MaG"/>
+                    <constraint firstItem="yMb-h3-iJp" firstAttribute="leading" secondItem="mUo-Pc-8dG" secondAttribute="trailing" constant="4" id="IWF-Ub-dSM"/>
                     <constraint firstAttribute="trailing" secondItem="J3n-cs-PVs" secondAttribute="trailing" constant="4" id="JWh-EU-roK"/>
                     <constraint firstItem="N7C-r7-oX5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RvM-xC-oZI"/>
                     <constraint firstItem="J3n-cs-PVs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YOG-kk-eIY"/>
                     <constraint firstItem="N7C-r7-oX5" firstAttribute="leading" secondItem="yMb-h3-iJp" secondAttribute="trailing" constant="4" id="cWW-mI-yji"/>
-                    <constraint firstItem="yMb-h3-iJp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="39" id="cjz-sQ-RTx"/>
                     <constraint firstItem="yMb-h3-iJp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mUm-1Y-0iE"/>
                     <constraint firstItem="yMb-h3-iJp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="okG-ZT-aWH"/>
                     <constraint firstItem="J3n-cs-PVs" firstAttribute="leading" secondItem="N7C-r7-oX5" secondAttribute="trailing" constant="12" id="uEP-uz-UHK"/>
@@ -179,7 +179,7 @@
                 <outlet property="teamLogoImageView" destination="yMb-h3-iJp" id="1aP-eu-XLB"/>
                 <outlet property="teamNameLabel" destination="N7C-r7-oX5" id="uze-Z7-Bys"/>
             </connections>
-            <point key="canvasLocation" x="-159.42028985507247" y="-45.535714285714285"/>
+            <point key="canvasLocation" x="-361.59420289855075" y="-45.535714285714285"/>
         </tableViewCell>
     </objects>
 </document>

@@ -70,12 +70,11 @@ class TournamentTableViewCell: UITableViewCell {
         addSubview(separator)
         NSLayoutConstraint.activate([
             separator.topAnchor.constraint(equalTo: topAnchor),
-            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            separator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            separator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             separator.heightAnchor.constraint(equalToConstant:  1 / UIScreen.main.scale)
         ])
         separator.backgroundColor = .separator
-        
         
         bottomView.isHidden = true
         
