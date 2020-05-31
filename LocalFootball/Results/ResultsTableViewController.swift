@@ -9,12 +9,10 @@
 import UIKit
 import CoreData
 
-class ResultsTableViewController: UITableViewController {
+class ResultsTableViewController: TableViewControllerWithFRC {
     
-    // MARK: - CoreData & FetchedResultsController
+    // MARK: - FetchedResultsController
     
-    var dataProvider: DataProvider!
- 
     lazy var fetchedResultsController: NSFetchedResultsController<TournamentStatistics> = {
         let request: NSFetchRequest = TournamentStatistics.fetchRequest()
         request.predicate = tournamentPredicate
@@ -28,9 +26,11 @@ class ResultsTableViewController: UITableViewController {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        frc.delegate = self
+        frc.delegate = fetchedResultsControllerDelegate
         return frc
     }()
+    
+    lazy var fetchedResultsControllerDelegate = DefaultFetchedResultsControllerDelegate(tableView: tableView)
     
     var tournamentPredicate: NSPredicate? {
         didSet {
@@ -44,26 +44,10 @@ class ResultsTableViewController: UITableViewController {
         }
     }
     
-    var curentTournamentId: Int64?
+    var currentTournamentId: Int64?
     var currentTournamentName: String?
     
-    lazy var fetchedTournamentsResultsController: NSFetchedResultsController<Tournament> = {
-        let request: NSFetchRequest = Tournament.fetchRequest()
-        let sort = NSSortDescriptor(key: "dateOfTheEnd", ascending: false)
-        request.sortDescriptors = [sort]
-        request.fetchBatchSize = 8
-        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: dataProvider.context, sectionNameKeyPath: nil, cacheName: nil)
-        do {
-            try frc.performFetch()
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        frc.delegate = self
-        return frc
-    }()
-    
-    // MARK: - UI
+    // MARK: - UISegmentedControl
     
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Таблица", "Форма"]
@@ -77,22 +61,10 @@ class ResultsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    lazy var resultsRefreshControl: UIRefreshControl = {
-        let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(loadData), for: .valueChanged)
-        return rc
-    }()
-
-    let activityIndicatorView = UIActivityIndicatorView(style: .large)
-
     override func loadView() {
         super.loadView()
-    
-        navigationController?.navigationBar.prefersLargeTitles = true
+
         navigationItem.titleView = segmentedControl
-        
-        tableView.backgroundView = activityIndicatorView
-        tableView.refreshControl = resultsRefreshControl
         tableView.separatorStyle = .none
         
         tableView.estimatedRowHeight = 48.0
@@ -108,14 +80,16 @@ class ResultsTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         if tournamentPredicate == nil {
+            let tournamentsRequest: NSFetchRequest = Tournament.fetchRequest()
+            var tournaments = [Tournament]()
             do {
-                try fetchedTournamentsResultsController.performFetch()
+                tournaments = try dataProvider.context.fetch(tournamentsRequest)
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-            curentTournamentId = fetchedTournamentsResultsController.fetchedObjects?.first?.id
-            currentTournamentName = fetchedTournamentsResultsController.fetchedObjects?.first?.name
-            if let curentTournamentId = curentTournamentId {
+            currentTournamentId = tournaments.first?.id
+            currentTournamentName = tournaments.first?.name
+            if let curentTournamentId = currentTournamentId {
                 tournamentPredicate = NSPredicate(format: "tournamentId == %i", curentTournamentId)
             }
             
@@ -126,26 +100,11 @@ class ResultsTableViewController: UITableViewController {
         }
     }
     
-    @objc private func loadData() {
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.tableView.refreshControl?.endRefreshing()
-            }
-        }
-    }
-    
     @objc func chooseTournament(sender: UIButton) {
         var tournaments = [Tournament]()
+        let tournamentsRequest: NSFetchRequest = Tournament.fetchRequest()
         do {
-            try fetchedTournamentsResultsController.performFetch()
-            if let fetchedTournaments = fetchedTournamentsResultsController.fetchedObjects {
-                tournaments = fetchedTournaments
-            }
+            tournaments = try dataProvider.context.fetch(tournamentsRequest)
         } catch let error as NSError {
             print(error.localizedDescription)
             return
@@ -196,8 +155,8 @@ class ResultsTableViewController: UITableViewController {
         if segmentedControl.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ResultsTableTableViewCell.self)) as! ResultsTableTableViewCell
             let result = fetchedResultsController.object(at: indexPath)
-            CellsConfiguration.shared.configureCell(cell, with: result)
-            
+            ResultsTableTableViewCellConfigurator().configureCell(cell, with: result)
+           
             if indexPath.row % 2 == 0 {
                 cell.backgroundColor = .systemBackground
             } else {
@@ -208,7 +167,7 @@ class ResultsTableViewController: UITableViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ResultsFormTableViewCell.self)) as! ResultsFormTableViewCell
             let result = fetchedResultsController.object(at: indexPath)
-            CellsConfiguration.shared.configureCell(cell, with: result, indexPath.row % 2 == 0)
+            ResultsFormTableViewCellConfigurator().configureCell(cell, with: result, indexPath.row % 2 == 0)
             
             if indexPath.row % 2 == 0 {
                 cell.backgroundColor = .systemBackground
@@ -223,71 +182,5 @@ class ResultsTableViewController: UITableViewController {
         segmentedControl.selectedSegmentIndex = segmentedControl.selectedSegmentIndex == 0 ? 1 : 0
         tableView.reloadData()
     }
-}
-// MARK: - NSFetchedResultsController
-
-extension ResultsTableViewController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-        case .delete:
-            guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        case .move:
-            tableView.reloadData()
-        case .update:
-            guard let indexPath = indexPath else { return }
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        @unknown default:
-            tableView.reloadData()
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-                    atSectionIndex sectionIndex: Int,
-                    for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-        default:
-            break
-        }
-    }
-    
-}
-
-// MARK: - UITableViewHeaderFooterView
-
-class ResultsTableSectionHeader: UITableViewHeaderFooterView {
-    static let reuseIdentifier = "ResultsTableSectionHeader"
-    
-    @IBOutlet weak var tournamentNameLabel: UILabel!
-    
-    @IBOutlet weak var gamesLabel: UILabel!
-    @IBOutlet weak var winsLabel: UILabel!
-    @IBOutlet weak var drawsLabel: UILabel!
-    @IBOutlet weak var lesionsNameLabel: UILabel!
-    @IBOutlet weak var goalsNameLabel: UILabel!
-    @IBOutlet weak var scoreNameLabel: UILabel!
-    
-    @IBOutlet weak var lastMatchesLabel: UILabel!
 }
 

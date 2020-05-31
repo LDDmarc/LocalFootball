@@ -91,7 +91,7 @@
                 <outlet property="teamsNamesLabel" destination="MQg-hG-Ghj" id="rqR-Rd-Jjs"/>
                 <outlet property="tournamentNameLabel" destination="U3s-PC-H07" id="3jF-PT-xQx"/>
             </connections>
-            <point key="canvasLocation" x="-410.14492753623193" y="-66.629464285714278"/>
+            <point key="canvasLocation" x="-16" y="33"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -9,11 +9,9 @@
 import UIKit
 import CoreData
 
-class DetailTeamTableViewController: UITableViewController {
+class DetailTeamTableViewController: TableViewControllerWithFRC {
     
-    var dataProvider: DataProvider!
-    lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
-    
+    // MARK: - FetchedResultsController
     
     lazy var fetchedResultsControllerTeam: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
@@ -28,10 +26,12 @@ class DetailTeamTableViewController: UITableViewController {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        frc.delegate = self
+        frc.delegate = fetchedResultsControllerDelegate
         return frc
     }()
     var teamPredicate: NSPredicate!
+    
+    lazy var fetchedResultsControllerDelegate = DefaultFetchedResultsControllerDelegate(tableView: tableView)
     
     lazy var fetchedResultsControllerMatches: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
@@ -50,8 +50,8 @@ class DetailTeamTableViewController: UITableViewController {
         return frc
     }()
     var matchesPredicate: NSPredicate!
-
-    // MARK: - UI
+    
+    // MARK: - UI rightBarButtonItemImageView
     
     var rightBarButtonItemImageView: UIImageView = {
         let view = UIImageView()
@@ -81,15 +81,21 @@ class DetailTeamTableViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButtonItemImageView)
         navigationItem.largeTitleDisplayMode = .never
-//        navigationItem.title = team.name ?? "??"
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
         tableView.register(UINib(nibName: String(describing: DetailTeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: DetailTeamTableViewCell.self))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc func reloadTableData() {
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -122,7 +128,8 @@ class DetailTeamTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailTeamTableViewCell.self)) as! DetailTeamTableViewCell
             let team = fetchedResultsControllerTeam.object(at: indexPath)
-            CellsConfiguration.shared.configureCell(cell, with: team)
+           
+            DetailTeamTableViewCellConfigurator().configureCell(cell, with: team)
             
             return cell
         } else {
@@ -130,7 +137,19 @@ class DetailTeamTableViewController: UITableViewController {
             cell.delegate = self
             cell.indexPath = indexPath
             let match = fetchedResultsControllerMatches.object(at: IndexPath(row: indexPath.row, section: 0))
-            CellsConfiguration.shared.configureCell(cell, with: match)
+            
+            if let calendarId = match.calendarId {
+                if !eventsCalendarManager.isExistEvent(with: calendarId) {
+                    match.calendarId = nil
+                    do {
+                        try dataProvider.context.save()
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            
+            MatchTableViewCellConfigurator().configureCell(cell, with: match)
             
             return cell
         }
@@ -155,35 +174,20 @@ extension DetailTeamTableViewController: NSFetchedResultsControllerDelegate {
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
         
-        var indexPathFixed: IndexPath?
-        var newIndexPathFixed: IndexPath?
-        
-        if controller == fetchedResultsControllerTeam {
-            indexPathFixed = indexPath
-            newIndexPathFixed = newIndexPath
-        } else {
-            if let indexPath = indexPath {
-                indexPathFixed = IndexPath(row: indexPath.row, section: indexPath.section + 1)
-            }
-            if let newIndexPath = newIndexPath {
-                newIndexPathFixed = IndexPath(row: newIndexPath.row, section: newIndexPath.section + 1)
-            }
-        }
-        
         switch type {
-          case .insert:
-              guard let newIndexPathFixed = newIndexPathFixed else { return }
-              tableView.insertRows(at: [newIndexPathFixed], with: .automatic)
-          case .delete:
-              guard let indexPathFixed = indexPathFixed else { return }
-              tableView.deleteRows(at: [indexPathFixed], with: .automatic)
-          case .move:
-              tableView.reloadData()
-          case .update:
-              guard let indexPathFixed = indexPathFixed else { return }
-              tableView.reloadRows(at: [indexPathFixed], with: .automatic)
-          @unknown default:
-              tableView.reloadData()
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [IndexPath(row: newIndexPath.row, section: newIndexPath.section + 1)], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: indexPath.section + 1)], with: .automatic)
+        case .move:
+            tableView.reloadData()
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: indexPath.section + 1)], with: .automatic)
+        @unknown default:
+            tableView.reloadData()
         }
     }
     
@@ -191,80 +195,15 @@ extension DetailTeamTableViewController: NSFetchedResultsControllerDelegate {
                     didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int,
                     for type: NSFetchedResultsChangeType) {
-//        switch type {
-//        case .delete:
-//            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-//        case .insert:
-//            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-//        default:
-//            break
-//        }
+        switch type {
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
+        default:
+            break
+        }
     }
     
 }
 
-// MARK: - EventKit CalendarWorking
-
-extension DetailTeamTableViewController: MatchTableViewCellDelegate {
-
-    func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath) {
-        let match = fetchedResultsControllerMatches.object(at: IndexPath(row: indexPath.row, section: indexPath.section - 1))
-        eventsCalendarManager.match = match
-           guard let team1 = match.teams?.firstObject as? Team,
-               let team2 = match.teams?.lastObject as? Team,
-               let team1Name = team1.name,
-               let team2Name = team2.name else { return }
-           
-           if match.calendarId == nil {
-               if let startDate = match.date,
-                   let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
-                   let event = Event(name: "Матч \(team1Name) - \(team2Name)", startDate: startDate, endDate: endDate)
-                   
-                     eventsCalendarManager.presentCalendarModalToAddEvent(event: event) { (result) in
-                         DispatchQueue.main.async {
-                             switch result {
-                             case .failure(let error):
-                                 switch error {
-                                 case .calendarAccessDeniedOrRestricted:
-                                     self.showAlert(title: "Нет доступа к календарю", message: "Разрешите доступ к календарю в системных настройках")
-                                 case .eventNotAddedToCalendar:
-                                     self.showAlert(title: "Ошибка", message: "Данного события нет в Вашем календаре")
-                                 default: ()
-                                 }
-                             case .success(_):
-                                 ()
-                             }
-                         }
-                     }
-               }
-           } else {
-               let event = eventsCalendarManager.eventStore.event(withIdentifier: match.calendarId!)
-               eventsCalendarManager.deleteEventFromCalendar(event: event) { (result) in
-                   switch result {
-                   case .success:
-                       self.showAlert(title: "Удалено", message: "Матч \(team1Name) - \(team2Name) удален из Вашего календаря")
-                   case .failure(let error):
-                       switch error {
-                       case .calendarAccessDeniedOrRestricted:
-                           self.showAlert(title: "Нет доступа к календарю", message: "Разрешите доступ к календарб в системных настройках")
-                       case .eventNotAddedToCalendar:
-                           self.showAlert(title: "Ошибка", message: "Данного события нет в Вашем календаре")
-                       default: ()
-                       }
-                   }
-               }
-               match.calendarId = nil
-               do {
-                   try dataProvider.context.save()
-               } catch let error as NSError {
-                   print(error.localizedDescription)
-               }
-           }
-       }
-    
-    func showAlert(title: String?, message: String) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Ок", style: .cancel))
-        present(ac, animated: true, completion: nil)
-    }
-}

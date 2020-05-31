@@ -10,10 +10,10 @@ import Foundation
 
 class NetworkManager: DataManagerProtocol {
     
-    var baseURL: String = "https://bmstu-ios.herokuapp.com/main_info"
+    var baseURL: String = "https://bmstu-ios.herokuapp.com/"
     
     func getAllData(completion: @escaping (Data?, DataManagerError?) -> ()) {
-        guard let url = URL(string: baseURL) else {
+        guard let url = URL(string: baseURL + "main_info") else {
             completion(nil, DataManagerError.wrongURL)
             return
         }
@@ -33,12 +33,16 @@ class NetworkManager: DataManagerProtocol {
             return
         }
         
+        let df = DateFormatter()
+        DateFormatter().dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let formatDate = df.string(from: date)
+        
         var urlString: String
         switch matchesStatus {
         case .past:
-            urlString = baseURL + "/matches?order=asc&after=\(date)"
+            urlString = baseURL + "matches?order=asc&before=\(formatDate)"
         case .future:
-            urlString = baseURL + "/matches?order=dsc&before=\(date)"
+            urlString = baseURL + "matches?order=dsc&after=\(formatDate)"
         }
         
         guard let url = URL(string: urlString) else {

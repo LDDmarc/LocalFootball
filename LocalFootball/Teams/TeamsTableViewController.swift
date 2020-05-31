@@ -9,14 +9,10 @@
 import UIKit
 import CoreData
 
-class TeamsTableViewController: UITableViewController {
+class TeamsTableViewController: TableViewControllerWithFRC {
     
-    // MARK: - CoreData & FetchedResultsController
-//    var dataManager: DataManagerProtocol!
-//    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, dataManager: dataManager)
+    // MARK: - FetchedResultsController
     
-    var dataProvider: DataProvider!
-  
     lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
         request.predicate = teamsByTournamentsPredicate
@@ -30,9 +26,11 @@ class TeamsTableViewController: UITableViewController {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        frc.delegate = self
+        frc.delegate = fetchedResultsControllerDelegate
         return frc
     }()
+    
+    lazy var fetchedResultsControllerDelegate = DefaultFetchedResultsControllerDelegate(tableView: tableView)
     
     var teamsPredicate: NSPredicate? {
         didSet {
@@ -45,20 +43,16 @@ class TeamsTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - UI
+    // MARK: - UISearchController
     
     lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
         sc.searchResultsUpdater = self
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.placeholder = "Введите название команды"
-        sc.searchResultsUpdater = self
-        //  the search bar doesn’t remain on the screen if the user navigates to another view controller while the UISearchController is active.
         definesPresentationContext = true
         return sc
     }()
-    
-    let activityIndicatorView = UIActivityIndicatorView(style: .large)
     
     // MARK: - Loading View
     
@@ -66,51 +60,16 @@ class TeamsTableViewController: UITableViewController {
         super.loadView()
         
         navigationItem.searchController = searchController
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        tableView.backgroundView = activityIndicatorView
-
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
         tableView.separatorStyle = .none
-        
         tableView.estimatedRowHeight = 58.0
-        tableView.tableFooterView = UIView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
         
-        loadData()
+        tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
     }
-    
-    @objc private func loadData() {
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.tableView.refreshControl?.endRefreshing()
-            }
-        }
-    }
-    @objc private func refreshData() {
-            if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-                self.activityIndicatorView.startAnimating()
-            }
-            dataProvider.fetchAllData { (error) in
-                guard error == nil else { return }
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                    self.tableView.refreshControl?.endRefreshing()
-                }
-            }
-        }
     
     // MARK: - Table view data source
     
@@ -123,7 +82,7 @@ class TeamsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TeamTableViewCell.self)) as! TeamTableViewCell
         let team = fetchedResultsController.object(at: indexPath)
         
@@ -132,19 +91,15 @@ class TeamsTableViewController: UITableViewController {
             cell.teamLogoImageView.image = UIImage(data: imageData)
         }
         
-        if indexPath.row == 0 {
-            //cell.separatorInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)
-        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailTeamTableViewController = DetailTeamTableViewController()
+        let detailTeamTableViewController = DetailTeamTableViewController(dataProvider: dataProvider)
         let team = fetchedResultsController.object(at: indexPath)
         detailTeamTableViewController.teamPredicate = NSPredicate(format: "id == %i", team.id)
         detailTeamTableViewController.matchesPredicate = NSPredicate(format: "(team1Id == %i) OR (team2Id == %i)", team.id, team.id)
         detailTeamTableViewController.title = team.name
-        detailTeamTableViewController.dataProvider = dataProvider
         navigationController?.pushViewController(detailTeamTableViewController, animated: true)
     }
 }
@@ -181,52 +136,3 @@ extension TeamsTableViewController: UISearchResultsUpdating {
     }
 }
 
-// MARK: - NSFetchedResultsController
-
-extension TeamsTableViewController: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            guard let newIndexPath = newIndexPath else { return }
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-        case .delete:
-            guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        case .move:
-            tableView.reloadData()
-        case .update:
-            guard let indexPath = indexPath else { return }
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        @unknown default:
-            tableView.reloadData()
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-                    atSectionIndex sectionIndex: Int,
-                    for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-        default:
-            break
-        }
-    }
-    
-}

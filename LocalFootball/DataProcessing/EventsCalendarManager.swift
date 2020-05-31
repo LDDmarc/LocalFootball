@@ -23,6 +23,7 @@ enum CustomError: Error {
     case eventAlreadyExistsInCalendar
     case eventCouldntBeDeleted
     case eventDoesntExist
+    case wrongNameFormat
 }
 
 typealias EventsCalendarManagerResponse = (_ result: Result<Bool, CustomError>) -> Void

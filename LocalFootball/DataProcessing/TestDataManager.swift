@@ -30,19 +30,17 @@ class TestDataManager: DataManagerProtocol {
     
     func getMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping (Data?, DataManagerError?) -> ()) {
         
-        guard let date = date else {
+        guard let _ = date else {
             completion(nil, DataManagerError.wrongDateFormat)
             return
         }
-        
+       
         var urlString: String
         switch matchesStatus {
         case .past:
             urlString = pastMatchesURL
-            print("matches?order=asc&after=\(date)")
         case .future:
             urlString = futureMatchesURL
-            print("matches?order=dsc&before=\(date)")
         }
         
         guard let url = Bundle.main.url(forResource: urlString, withExtension: "json") else {

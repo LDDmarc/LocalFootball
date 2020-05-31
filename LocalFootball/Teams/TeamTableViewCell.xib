@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TeamCell" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="TeamTableViewCell" customModule="LocalFootball" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="425" height="60"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TeamCell" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="TeamTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="434" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="425" height="60"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="434" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Msh-jE-Wg1">
@@ -23,8 +23,8 @@
                             <constraint firstAttribute="height" constant="50" id="97T-sb-F9H"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Команда" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cI-3Z-Ka7">
-                        <rect key="frame" x="80" y="22.5" width="76" height="17.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cI-3Z-Ka7">
+                        <rect key="frame" x="81" y="22" width="337" height="18"/>
                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,8 +32,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="3cI-3Z-Ka7" firstAttribute="centerY" secondItem="Msh-jE-Wg1" secondAttribute="centerY" id="8Od-mU-jX7"/>
-                    <constraint firstItem="3cI-3Z-Ka7" firstAttribute="leading" secondItem="Msh-jE-Wg1" secondAttribute="trailing" constant="15" id="Rix-8U-GIn"/>
-                    <constraint firstAttribute="bottom" secondItem="Msh-jE-Wg1" secondAttribute="bottom" constant="6" id="V1f-Xj-eHi"/>
+                    <constraint firstAttribute="trailing" secondItem="3cI-3Z-Ka7" secondAttribute="trailing" constant="16" id="Ml6-25-kTy"/>
+                    <constraint firstItem="3cI-3Z-Ka7" firstAttribute="leading" secondItem="Msh-jE-Wg1" secondAttribute="trailing" constant="16" id="Rix-8U-GIn"/>
+                    <constraint firstAttribute="bottom" secondItem="Msh-jE-Wg1" secondAttribute="bottom" priority="750" constant="6" id="V1f-Xj-eHi"/>
                     <constraint firstItem="Msh-jE-Wg1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="dFK-xF-S9J"/>
                     <constraint firstItem="Msh-jE-Wg1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="hcd-Xz-JZO"/>
                 </constraints>
@@ -43,7 +44,7 @@
                 <outlet property="teamLogoImageView" destination="Msh-jE-Wg1" id="eGl-TY-F8m"/>
                 <outlet property="teamNameLabel" destination="3cI-3Z-Ka7" id="yzA-Xh-yLY"/>
             </connections>
-            <point key="canvasLocation" x="-259" y="61"/>
+            <point key="canvasLocation" x="-253.62318840579712" y="62.276785714285708"/>
         </tableViewCell>
     </objects>
 </document>

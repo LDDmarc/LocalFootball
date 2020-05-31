@@ -8,15 +8,10 @@
 
 import UIKit
 import CoreData
-import EventKit
-import EventKitUI
 
-class MatchesTableViewController: UITableViewController {
+class MatchesTableViewController: TableViewControllerWithFRC {
     
-    // MARK: - CoreData & FetchedResultsController
-    
-    var dataProvider: DataProvider!
-    lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
+    // MARK: - FetchedResultsController
     
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
@@ -56,6 +51,7 @@ class MatchesTableViewController: UITableViewController {
         }
     }
     
+  
     // MARK: - UI
     
     lazy var searchController: UISearchController = {
@@ -81,25 +77,11 @@ class MatchesTableViewController: UITableViewController {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    lazy var matchesRefreshControl: UIRefreshControl = {
-        let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(loadData), for: .valueChanged)
-        return rc
-    }()
-    
-    var activityIndicatorView: UIActivityIndicatorView!
     var loadMoreActivityIndicatorView: UIActivityIndicatorView!
-    
-    // MARK: - Loading View
     
     override func loadView() {
         super.loadView()
         
-        activityIndicatorView = UIActivityIndicatorView(style: .large)
-        tableView.backgroundView = activityIndicatorView
-        tableView.refreshControl = matchesRefreshControl
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
         navigationItem.titleView = segmentedControl
         
@@ -115,8 +97,6 @@ class MatchesTableViewController: UITableViewController {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,33 +109,23 @@ class MatchesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    @objc private func loadData() {
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                self.activityIndicatorView.stopAnimating()
-                self.tableView.refreshControl?.endRefreshing()
-            }
-        }
-    }
     @objc private func loadMatches() {
         let date = fetchedResultsController.fetchedObjects?.last?.date
         let matchesStatus = (segmentedControl.selectedSegmentIndex == 0) ? MatchesStatus.past : MatchesStatus.future
+        
         dataProvider.fetchMatchesData(matchesStatus: matchesStatus, from: date) { (error) in
-            guard error == nil else { return }
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
                 self.loadMoreActivityIndicatorView.stopAnimating()
                 self.tableView.refreshControl?.endRefreshing()
+                if let error = error {
+                    
+                }
             }
         }
     }
     
     // MARK: - Table view data source
-    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
@@ -167,6 +137,8 @@ class MatchesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
         
         let match = fetchedResultsController.object(at: indexPath)
         
@@ -181,11 +153,8 @@ class MatchesTableViewController: UITableViewController {
             }
         }
         
-        CellsConfiguration.shared.configureCell(cell, with: match)
+        MatchTableViewCellConfigurator().configureCell(cell, with: match)
         
-        cell.delegate = self
-        cell.indexPath = indexPath
-    
         return cell
     }
     
@@ -197,62 +166,12 @@ class MatchesTableViewController: UITableViewController {
     }
 }
 
-
 // MARK: - NSFetchedResultsController
+
 extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
-    
-    //    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    //        tableView.beginUpdates()
-    //    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
-        //        tableView.endUpdates()
-    }
-    
-    //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-    //                    didChange anObject: Any,
-    //                    at indexPath: IndexPath?,
-    //                    for type: NSFetchedResultsChangeType,
-    //                    newIndexPath: IndexPath?) {
-    //
-    //        switch type {
-    //        case .insert:
-    //            guard let newIndexPath = newIndexPath else { return }
-    //            tableView.insertRows(at: [newIndexPath], with: .fade)
-    //        case .delete:
-    //            guard let indexPath = indexPath else { return }
-    //            tableView.deleteRows(at: [indexPath], with: .automatic)
-    //        case .move:
-    //           // tableView.reloadData()
-    //            print("move")
-    //        case .update:
-    //            guard let indexPath = indexPath else { return }
-    //            tableView.reloadRows(at: [indexPath], with: .automatic)
-    //        @unknown default:
-    //            tableView.reloadData()
-    //        }
-    //    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-                    atSectionIndex sectionIndex: Int,
-                    for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .move:
-            tableView.reloadData()
-        default:
-            break
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
-        print(sectionName)
-        return sectionName
     }
 }
 
@@ -302,72 +221,6 @@ extension MatchesTableViewController: UISearchResultsUpdating {
         } catch {
             print("Fetch failed")
         }
-    }
-    
-}
-
-// MARK: - EventKit CalendarWorking
-
-extension MatchesTableViewController: MatchTableViewCellDelegate {
-    
-    func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath) {
-        let match = fetchedResultsController.object(at: indexPath)
-        eventsCalendarManager.match = match
-        guard let team1 = match.teams?.firstObject as? Team,
-            let team2 = match.teams?.lastObject as? Team,
-            let team1Name = team1.name,
-            let team2Name = team2.name else { return }
-        
-        if match.calendarId == nil {
-            if let startDate = match.date,
-                let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
-                let event = Event(name: "Матч \(team1Name) - \(team2Name)", startDate: startDate, endDate: endDate)
-                
-                  eventsCalendarManager.presentCalendarModalToAddEvent(event: event) { (result) in
-                      DispatchQueue.main.async {
-                          switch result {
-                          case .failure(let error):
-                              switch error {
-                              case .calendarAccessDeniedOrRestricted:
-                                  self.showAlert(title: "Нет доступа к календарю", message: "Разрешите доступ к календарю в системных настройках")
-                              case .eventNotAddedToCalendar:
-                                  self.showAlert(title: "Ошибка", message: "Данного события нет в Вашем календаре")
-                              default: ()
-                              }
-                          case .success(_):
-                              ()
-                          }
-                      }
-                  }
-            }
-        } else {
-            let event = eventsCalendarManager.eventStore.event(withIdentifier: match.calendarId!)
-            eventsCalendarManager.deleteEventFromCalendar(event: event) { (result) in
-                switch result {
-                case .success:
-                    self.showAlert(title: "Удалено", message: "Матч \(team1Name) - \(team2Name) удален из Вашего календаря")
-                case .failure(let error):
-                    switch error {
-                    case .calendarAccessDeniedOrRestricted:
-                        self.showAlert(title: "Нет доступа к календарю", message: "Разрешите доступ к календарб в системных настройках")
-                    case .eventNotAddedToCalendar:
-                        self.showAlert(title: "Ошибка", message: "Данного события нет в Вашем календаре")
-                    default: ()
-                    }
-                }
-            }
-            match.calendarId = nil
-            do {
-                try dataProvider.context.save()
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    func showAlert(title: String?, message: String) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Ок", style: .cancel))
-        present(ac, animated: true, completion: nil)
     }
 }
 

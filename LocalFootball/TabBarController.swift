@@ -13,34 +13,31 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dataManager: DataManagerProtocol = TestDataManager()
+        let dataManager: DataManagerProtocol = NetworkManager()
         let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, dataManager: dataManager)
         
-        let teamsTableViewController = TeamsTableViewController()
+        let teamsTableViewController = TeamsTableViewController(dataProvider: dataProvider)
         teamsTableViewController.title = "Команды"
-        teamsTableViewController.dataProvider = dataProvider
         let teamsNavigationViewController = UINavigationController(rootViewController: teamsTableViewController)
         teamsNavigationViewController.tabBarItem.image = UIImage(named: "teams")
         
-        let matchesTableViewController = MatchesTableViewController()
+        let matchesTableViewController = MatchesTableViewController(dataProvider: dataProvider)
         matchesTableViewController.title = "Матчи"
-        matchesTableViewController.dataProvider = dataProvider
         let matchesNavigationViewController = UINavigationController(rootViewController: matchesTableViewController)
         matchesNavigationViewController.tabBarItem.image = UIImage(named: "matches")
         
-        let tournamentsTableViewController = TournamentsTableViewController()
+        let tournamentsTableViewController = TournamentsTableViewController(dataProvider: dataProvider)
         tournamentsTableViewController.title = "Турниры"
-        tournamentsTableViewController.dataProvider = dataProvider
         let tournamentsNavigationViewController = UINavigationController(rootViewController: tournamentsTableViewController)
         tournamentsNavigationViewController.tabBarItem.image = UIImage(named: "tournaments")
         
-        let resultsTableViewController = ResultsTableViewController()
+        let resultsTableViewController = ResultsTableViewController(dataProvider: dataProvider)
         resultsTableViewController.title = "Результаты"
-        resultsTableViewController.dataProvider = dataProvider
         let resultsNavigationViewController = UINavigationController(rootViewController: resultsTableViewController)
         resultsNavigationViewController.tabBarItem.image = UIImage(named: "results")
         
         let controllers = [teamsNavigationViewController, matchesNavigationViewController, tournamentsNavigationViewController, resultsNavigationViewController]
+        controllers.forEach { $0.navigationBar.prefersLargeTitles = true }
         viewControllers = controllers
     }
     
