@@ -63,6 +63,8 @@ class TeamsTableViewController: TableViewControllerWithFRC {
         
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 58.0
+        
+        
     }
     
     override func viewDidLoad() {

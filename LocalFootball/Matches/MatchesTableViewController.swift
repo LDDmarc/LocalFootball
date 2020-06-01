@@ -11,6 +11,11 @@ import CoreData
 
 class MatchesTableViewController: TableViewControllerWithFRC {
     
+    override var backgroundImageName: String {
+        get {
+            return "ball"
+        }
+    }
     // MARK: - FetchedResultsController
     
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
@@ -85,14 +90,7 @@ class MatchesTableViewController: TableViewControllerWithFRC {
         navigationItem.searchController = searchController
         navigationItem.titleView = segmentedControl
         
-        tableView.estimatedRowHeight = 139.5
-        
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
-        customView.backgroundColor = UIColor.clear
-        loadMoreActivityIndicatorView = UIActivityIndicatorView(style: .medium)
-        loadMoreActivityIndicatorView.center = CGPoint(x: customView.center.x, y: customView.center.y + 8)
-        customView.addSubview(loadMoreActivityIndicatorView)
-        tableView.tableFooterView = customView
+        tableView.estimatedRowHeight = 133.5
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
@@ -118,9 +116,15 @@ class MatchesTableViewController: TableViewControllerWithFRC {
                 self.activityIndicatorView.stopAnimating()
                 self.loadMoreActivityIndicatorView.stopAnimating()
                 self.tableView.refreshControl?.endRefreshing()
-                if let error = error {
-                    
-                }
+                
+                self.tableView.tableFooterView = UIView()
+                self.tableView.beginUpdates()
+                self.tableView.setNeedsLayout()
+                self.tableView.endUpdates()
+                
+//                if let error = error {
+//
+//                }
             }
         }
     }
@@ -160,6 +164,12 @@ class MatchesTableViewController: TableViewControllerWithFRC {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 1) - 1 {
+            let customView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+            customView.backgroundColor = UIColor.clear
+            loadMoreActivityIndicatorView = UIActivityIndicatorView(style: .medium)
+            loadMoreActivityIndicatorView.center = CGPoint(x: customView.center.x, y: customView.center.y + 8)
+            customView.addSubview(loadMoreActivityIndicatorView)
+            tableView.tableFooterView = customView
             loadMoreActivityIndicatorView.startAnimating()
             loadMatches()
         }

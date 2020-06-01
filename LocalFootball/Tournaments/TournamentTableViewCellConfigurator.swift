@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class TournamentTableViewCellConfigurator {
     var dateFormatter: DateFormatter = {
@@ -21,7 +22,6 @@ class TournamentTableViewCellConfigurator {
         cell.tournamentName = tournament.name
         
         if let imageURL = tournament.imageName {
-    
             cell.tournamentImageView.sd_setImage(with: URL(string: imageURL), placeholderImage: UIImage(named: "IFLimage"), options: .highPriority, progress: nil, completed: nil)
         }
         cell.info = tournament.info

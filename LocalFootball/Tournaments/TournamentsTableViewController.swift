@@ -11,6 +11,12 @@ import CoreData
 
 class TournamentsTableViewController: TableViewControllerWithFRC {
     
+    override var backgroundImageName: String {
+        get {
+            return "cup"
+        }
+    }
+    
     // MARK: - FetchedResultsController
     
     lazy var fetchedResultsController: NSFetchedResultsController<Tournament> = {

@@ -13,7 +13,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dataManager: DataManagerProtocol = NetworkManager()
+        let dataManager: DataManagerProtocol = TestDataManager()
         let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, dataManager: dataManager)
         
         let teamsTableViewController = TeamsTableViewController(dataProvider: dataProvider)

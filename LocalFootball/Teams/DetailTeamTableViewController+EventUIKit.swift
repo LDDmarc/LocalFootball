@@ -65,10 +65,4 @@ extension DetailTeamTableViewController: MatchTableViewCellDelegate {
             }
         }
     }
-    
-    func showAlert(title: String?, message: String) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Ок", style: .cancel))
-        present(ac, animated: true, completion: nil)
-    }
 }

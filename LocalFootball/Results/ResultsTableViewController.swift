@@ -11,6 +11,12 @@ import CoreData
 
 class ResultsTableViewController: TableViewControllerWithFRC {
     
+    override var backgroundImageName: String {
+        get {
+            return "man"
+        }
+    }
+    
     // MARK: - FetchedResultsController
     
     lazy var fetchedResultsController: NSFetchedResultsController<TournamentStatistics> = {

@@ -21,6 +21,7 @@ enum DataManagerError {
     case wrongDateFormat
     case coreDataError
     case failedToSaveToCoreData
+    case isAlreadyLoading
 }
 
 protocol DataManagerProtocol {

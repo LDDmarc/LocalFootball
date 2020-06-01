@@ -11,7 +11,6 @@ import CoreData
 import SwiftyJSON
 
 let dataErrorDomain = "dataErrorDomain"
-
 enum DataErrorCode: NSInteger {
     case networkUnavailable = 101
     case wrongDataFormat = 102
@@ -60,15 +59,24 @@ class DataProvider {
         self.dataManager = dataManager
     }
     
+    var isLoadingAllData: Bool = false
+    var isLoadingMatches: Bool = false
+    
     func fetchAllData(completion: @escaping(DataManagerError?) -> Void) {
+        guard !isLoadingAllData else {
+            completion(DataManagerError.isAlreadyLoading)
+            return
+        }
         self.dataManager.getAllData { (data, dataManagerError) in
-            
+            self.isLoadingAllData = !self.isLoadingAllData
             if let dataManagerError = dataManagerError {
+                self.isLoadingAllData = !self.isLoadingAllData
                 completion(dataManagerError)
                 return
             }
             
             guard let data = data else {
+                self.isLoadingAllData = !self.isLoadingAllData
                 completion(DataManagerError.noData)
                 return
             }
@@ -89,6 +97,7 @@ class DataProvider {
                     do {
                         try self.updateDataWithoutBatchDelete(objectsJSON: teamsJSON, taskContext: taskContext, entityName: EntityType.team.name())
                     } catch {
+                        self.isLoadingAllData = !self.isLoadingAllData
                         completion(DataManagerError.coreDataError)
                         return
                     }
@@ -97,6 +106,7 @@ class DataProvider {
                         do {
                             try self.updateData(objectsJSON: objectsJSON, taskContext: taskContext, entityName: entityName)
                         } catch {
+                            self.isLoadingAllData = !self.isLoadingAllData
                             completion(DataManagerError.coreDataError)
                             return
                         }
@@ -107,14 +117,17 @@ class DataProvider {
                         do {
                             try taskContext.save()
                         } catch {
+                            self.isLoadingAllData = !self.isLoadingAllData
                             completion(DataManagerError.failedToSaveToCoreData)
                             return
                         }
                         taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
                     }
                 }
+                self.isLoadingAllData = !self.isLoadingAllData
                 completion(nil)
             } catch {
+                self.isLoadingAllData = !self.isLoadingAllData
                 completion(DataManagerError.coreDataError)
                 return
             }
@@ -122,14 +135,21 @@ class DataProvider {
     }
     
     func fetchMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping(DataManagerError?) -> Void) {
+        guard !isLoadingMatches else {
+            completion(DataManagerError.isAlreadyLoading)
+            return
+        }
         self.dataManager.getMatchesData(matchesStatus: matchesStatus, from: date) { (data, dataManagerError) in
+            self.isLoadingMatches = !self.isLoadingMatches
             
             if let dataManagerError = dataManagerError {
+                self.isLoadingMatches = !self.isLoadingMatches
                 completion(dataManagerError)
                 return
             }
             
             guard let data = data else {
+                self.isLoadingMatches = !self.isLoadingMatches
                 completion(DataManagerError.noData)
                 return
             }
@@ -147,6 +167,7 @@ class DataProvider {
                     do {
                         try self.updateMatchesData(objectsJSON: matchesJSON, taskContext: taskContext, entityName: EntityType.match.name())
                     } catch {
+                        self.isLoadingMatches = !self.isLoadingMatches
                         completion(DataManagerError.coreDataError)
                         return
                     }
@@ -155,14 +176,17 @@ class DataProvider {
                         do {
                             try taskContext.save()
                         } catch {
+                            self.isLoadingMatches = !self.isLoadingMatches
                             completion(DataManagerError.failedToSaveToCoreData)
                             return
                         }
                         taskContext.reset() // Reset the context to clean up the cache and low the memory footprint.
                     }
                 }
+                self.isLoadingMatches = !self.isLoadingMatches
                 completion(nil)
             } catch {
+                self.isLoadingMatches = !self.isLoadingMatches
                 completion(DataManagerError.coreDataError)
                 return
             }
@@ -308,7 +332,6 @@ extension DateFormatter {
     
     static func readingDateFormatter() -> DateFormatter {
         let df = DateFormatter()
- //       df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return df
     }
