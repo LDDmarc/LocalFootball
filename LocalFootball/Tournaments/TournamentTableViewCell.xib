@@ -9,33 +9,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="684" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="804" height="684"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="TournamentCell" selectionStyle="default" indentationWidth="10" rowHeight="630" id="KGk-i7-Jjw" customClass="TournamentTableViewCell" customModule="LocalFootball" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="804" height="630"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="804" height="684"/>
+                <rect key="frame" x="0.0" y="0.0" width="804" height="630"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ukn-lj-tqV">
-                        <rect key="frame" x="15" y="11" width="774" height="602"/>
+                        <rect key="frame" x="15" y="11" width="774" height="529.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjO-np-Q81" userLabel="topView">
-                                <rect key="frame" x="0.0" y="0.0" width="774" height="518.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="774" height="446"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название турнира" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8d-t4-Obf">
-                                        <rect key="frame" x="0.0" y="449.5" width="190.5" height="26.5"/>
+                                        <rect key="frame" x="0.0" y="387.5" width="190.5" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SrG-Fb-8cH">
-                                        <rect key="frame" x="0.0" y="8" width="774" height="433.5"/>
+                                        <rect key="frame" x="0.0" y="8" width="774" height="371.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" secondItem="SrG-Fb-8cH" secondAttribute="width" multiplier="0.56" id="aye-wm-9s4"/>
+                                            <constraint firstAttribute="height" secondItem="SrG-Fb-8cH" secondAttribute="width" multiplier="0.48" id="aye-wm-9s4"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Даты" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-pL-7Ie">
-                                        <rect key="frame" x="0.0" y="481" width="37" height="18"/>
+                                        <rect key="frame" x="0.0" y="419" width="37" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHF-MG-KJj" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="520.5" width="774" height="81.5"/>
+                                <rect key="frame" x="0.0" y="448" width="774" height="81.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ksM-Sd-ouR">
                                         <rect key="frame" x="0.0" y="37.5" width="774" height="40"/>
@@ -117,7 +117,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="ukn-lj-tqV" secondAttribute="trailing" id="GUF-65-EWt"/>
-                    <constraint firstItem="DjO-np-Q81" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.61" constant="28" id="MI3-5o-MTg"/>
+                    <constraint firstItem="DjO-np-Q81" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.52" constant="28" id="MI3-5o-MTg"/>
                     <constraint firstItem="ukn-lj-tqV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="d1b-eH-9qU"/>
                     <constraint firstItem="ukn-lj-tqV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="vn8-t9-RcF"/>
                     <constraint firstAttribute="bottomMargin" secondItem="ukn-lj-tqV" secondAttribute="bottom" priority="750" id="yDj-om-CDx"/>
@@ -137,7 +137,7 @@
                 <outlet property="tournamentResultsButton" destination="25p-k7-MMn" id="6hU-LQ-H0W"/>
                 <outlet property="tournamentTeamsButton" destination="Jwr-Vc-j95" id="BM5-O1-YcZ"/>
             </connections>
-            <point key="canvasLocation" x="-810" y="-63.75"/>
+            <point key="canvasLocation" x="-810" y="-97.5"/>
         </tableViewCell>
     </objects>
 </document>

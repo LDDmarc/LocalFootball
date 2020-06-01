@@ -56,3 +56,4 @@ protocol UpdatableManagedObject: Decodable & NSManagedObject {
     func update(with objectJSON: JSON, into context: NSManagedObjectContext)
 }
 
+

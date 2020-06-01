@@ -10,27 +10,16 @@ import UIKit
 
 class TournamentTableViewCell: UITableViewCell {
     
-    struct Const {
-        static let standartOffSet: CGFloat = 8
-        static let smallOffSet: CGFloat = 4
-        static let fontSize: CGFloat = 17
-        static let headingFontSize: CGFloat = 20
-        static let standartFontSize: CGFloat = 17
-        static let imageAspectRatio: CGFloat = 0.66
-        static let oneThird: CGFloat = 0.33
-    }
+    @IBOutlet private weak var stackView: UIStackView!
 
-    @IBOutlet weak var stackView: UIStackView!
-
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var tournamentNameLabel: UILabel!
+    @IBOutlet private weak var topView: UIView!
+    @IBOutlet private weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var tournamentImageView: UIImageView!
-    @IBOutlet weak var tournamentDatesLabel: UILabel!
+    @IBOutlet private weak var tournamentDatesLabel: UILabel!
  
-    
     @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var tournamentInfoLabel: UILabel!
-    @IBOutlet weak var buttonsStackView: UIStackView!
+    @IBOutlet private weak var tournamentInfoLabel: UILabel!
+    @IBOutlet private weak var buttonsStackView: UIStackView!
     
     @IBAction func tournamentTeamsButtonTap(_ sender: UIButton) {
         if delegate != nil,
@@ -54,6 +43,29 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentTeamsButton: UIButton!
     @IBOutlet weak var tournamentMatchesButton: UIButton!
     @IBOutlet weak var tournamentResultsButton: UIButton!
+    
+    var tournamentName: String? {
+        didSet {
+            guard let tournamentName = tournamentName else { return }
+            tournamentNameLabel.text = tournamentName
+        }
+    }
+    var dates: String? {
+        didSet {
+            guard let dates = dates else { return }
+            tournamentDatesLabel.text = dates
+        }
+    }
+    var info: String? {
+        didSet {
+            guard let info = info else { return }
+            tournamentInfoLabel.text = info
+        }
+    }
+    
+    
+    
+    let separator = UIView()
 
     var indexPath: IndexPath?
     
@@ -63,6 +75,16 @@ class TournamentTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         selectionStyle = .none
+        
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(separator)
+        NSLayoutConstraint.activate([
+            separator.topAnchor.constraint(equalTo: topAnchor),
+            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            separator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            separator.heightAnchor.constraint(equalToConstant:  1 / UIScreen.main.scale)
+        ])
+        separator.backgroundColor = .separator
         
         bottomView.isHidden = true
         
@@ -79,6 +101,3 @@ protocol TournamentTableViewCellDelegate: AnyObject {
     func showResults(indexPath: IndexPath)
 }
 
-protocol ExpandableCellDelegate: class {
-    func expandableCellLayoutChanged(_ expandableCell: TournamentTableViewCell)
-}

@@ -8,75 +8,54 @@
 
 import Foundation
 
-class NetworkManager {
+class NetworkManager: DataManagerProtocol {
     
-    static let shared = NetworkManager()
-    private init() {}
-  
-    private let baseURL = URL(string: "https://football-ios2020.herokuapp.com/main_info")
-    private let urlSession = URLSession.shared
+    var baseURL: String = "https://bmstu-ios.herokuapp.com/"
     
-    func getData(completion: @escaping(_ data: Data?, _ error: Error?) -> ()) {
-        guard let url = baseURL else {
-            let error = NSError(domain: dataErrorDomain, code: DataErrorCode.networkUnavailable.rawValue, userInfo: nil)
-            completion(nil, error)
+    func getAllData(completion: @escaping (Data?, DataManagerError?) -> ()) {
+        guard let url = URL(string: baseURL + "main_info") else {
+            completion(nil, DataManagerError.wrongURL)
             return
         }
-        // TODO: response
-        urlSession.dataTask(with: url) {(data, response, error) in
-            if let error = error {
-                completion(nil, error)
+        
+        URLSession.shared.dataTask(with: url) {(data, response, error) in
+            if let _ = error {
+                completion(nil, DataManagerError.networkUnavailable)
                 return
             }
             completion(data, nil)
         }.resume()
     }
     
-    func testGetData(from fileName: String, completion: @escaping(_ data: Data?, _ error: Error?) -> ()) {
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            fatalError("File \(fileName).json not found.")
+    func getMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping (Data?, DataManagerError?) -> ()) {
+        guard let date = date else {
+            completion(nil, DataManagerError.wrongDateFormat)
+            return
         }
         
-        do {
-            let data = try Data(contentsOf: url)
-            completion(data, nil)
-        } catch let error as NSError{
-            completion(nil, error)
-        }
-    }
-    
-    func testGetMatchesData(pastMatches: Bool, beginningFrom date: Date?, completion: @escaping(_ data: Data?, _ error: Error?) -> ()) {
-        var matchesURLString: String
-        var forResourse: String
-        if pastMatches {
-            if let date = date {
-                matchesURLString = "https://football-ios2020.herokuapp.com/pastMatches?date=\(date)"
-            } else {
-                matchesURLString = "https://football-ios2020.herokuapp.com/pastMatches"
-            }
-            forResourse = "matches1"
-            print(matchesURLString)
-        } else {
-            if let date = date {
-                matchesURLString = "https://football-ios2020.herokuapp.com/futureMatches?date=\(date)"
-            } else {
-                matchesURLString = "https://football-ios2020.herokuapp.com/futureMatches"
-            }
-            print(matchesURLString)
-            forResourse = "matches2"
-        }
-//        guard let url = URL(string: matchesURLString) else {
-//
-//        }
-        guard let url = Bundle.main.url(forResource: forResourse, withExtension: "json") else {
-            fatalError("File \(forResourse).json not found.")
+        let df = DateFormatter()
+        DateFormatter().dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let formatDate = df.string(from: date)
+        
+        var urlString: String
+        switch matchesStatus {
+        case .past:
+            urlString = baseURL + "matches?order=asc&before=\(formatDate)"
+        case .future:
+            urlString = baseURL + "matches?order=dsc&after=\(formatDate)"
         }
         
-        do {
-            let data = try Data(contentsOf: url)
-            completion(data, nil)
-        } catch let error as NSError{
-            completion(nil, error)
+        guard let url = URL(string: urlString) else {
+            completion(nil, DataManagerError.wrongURL)
+            return
         }
+        
+        URLSession.shared.dataTask(with: url) {(data, response, error) in
+            if let _ = error {
+                completion(nil, DataManagerError.networkUnavailable)
+                return
+            }
+            completion(data, nil)
+        }.resume()
     }
 }

@@ -8,7 +8,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 1999,
             "logoName": "Wolf",
-            "tournamemtsIds": [1101, 1100, 1102],
+            "tournamentsIds": [1101, 1100, 1102],
             "matchesIds": [1209, 1204, 1208, 1214],
             "teamStatistics":
             {
@@ -83,7 +83,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 1974,
             "logoName": "FCB",
-            "tournamemtsIds": [1100, 1102],
+            "tournamentsIds": [1100, 1102],
             "matchesIds": [1216, 1215, 1211, 1217],
             "teamStatistics":
             {
@@ -142,7 +142,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2000,
             "logoName": "RealMadrid",
-            "tournamemtsIds": [1100, 1102],
+            "tournamentsIds": [1100, 1102],
             "matchesIds": [1203, 1201, 1218, 1211],
             "teamStatistics":
             {
@@ -201,7 +201,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2000,
             "logoName": "ASM",
-            "tournamemtsIds": [1102, 1100],
+            "tournamentsIds": [1102, 1100],
             "matchesIds": [1218, 1209],
             "teamStatistics":
             {
@@ -260,7 +260,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "Junior",
-            "tournamemtsIds": [1102, 1101],
+            "tournamentsIds": [1102, 1101],
             "matchesIds": [1204, 1206, 1212],
             "teamStatistics":
             {
@@ -319,7 +319,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "FMF",
-            "tournamemtsIds": [1102, 1101, 1100],
+            "tournamentsIds": [1102, 1101, 1100],
             "matchesIds": [1205, 1217, 1202, 1214],
             "teamStatistics":
             {
@@ -394,7 +394,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "ManchesterUnited",
-            "tournamemtsIds": [1102],
+            "tournamentsIds": [1102],
             "matchesIds": [1212, 1213],
             "teamStatistics":
             {
@@ -437,7 +437,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "Millionarios",
-            "tournamemtsIds": [1100, 1102],
+            "tournamentsIds": [1100, 1102],
             "matchesIds": [1210, 1200],
             "teamStatistics":
             {
@@ -496,7 +496,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "SuttonColdfield",
-            "tournamemtsIds": [1100, 1101, 1102],
+            "tournamentsIds": [1100, 1101, 1102],
             "matchesIds": [1210, 1213, 1216, 1207, 1203, 1205],
             "teamStatistics":
             {
@@ -571,7 +571,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "Sydney",
-            "tournamemtsIds": [1102, 1100],
+            "tournamentsIds": [1102, 1100],
             "matchesIds": [1219, 1201],
             "teamStatistics":
             {
@@ -630,7 +630,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "URBSFA",
-            "tournamemtsIds": [1100, 1102],
+            "tournamentsIds": [1100, 1102],
             "matchesIds": [1202, 1206, 1200, 1219, 1215],
             "teamStatistics":
             {
@@ -689,7 +689,7 @@
             "colors": ["red", "blue", "green"],
             "yearOfFoundation": 2001,
             "logoName": "WestHamUnited",
-            "tournamemtsIds": [1100],
+            "tournamentsIds": [1100],
             "matchesIds": [1207, 1208],
             "teamStatistics":
             {

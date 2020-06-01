@@ -68,7 +68,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="250" text="Имя турнира" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3g-Hy-pDG">
-                    <rect key="frame" x="15" y="14" width="192" height="20"/>
+                    <rect key="frame" x="16" y="14" width="191" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                 <constraint firstItem="dDl-oa-S7X" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="51S-cw-pr4"/>
                 <constraint firstItem="u8M-4h-dww" firstAttribute="leading" secondItem="a0j-5d-2Q7" secondAttribute="trailing" constant="2" id="54L-to-9eg"/>
                 <constraint firstItem="y3g-Hy-pDG" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="AkK-2m-Yah"/>
-                <constraint firstItem="y3g-Hy-pDG" firstAttribute="leading" secondItem="I8h-RN-R99" secondAttribute="leading" constant="15" id="EUQ-Kx-vzr"/>
+                <constraint firstItem="y3g-Hy-pDG" firstAttribute="leading" secondItem="I8h-RN-R99" secondAttribute="leading" constant="16" id="EUQ-Kx-vzr"/>
                 <constraint firstItem="pgh-ds-YTR" firstAttribute="leading" secondItem="ZGY-aR-Bge" secondAttribute="trailing" constant="2" id="LGw-Ip-G60"/>
                 <constraint firstItem="MAk-7J-Xh9" firstAttribute="leading" secondItem="u8M-4h-dww" secondAttribute="trailing" constant="3" id="LkT-v1-Xob"/>
                 <constraint firstItem="a0j-5d-2Q7" firstAttribute="centerY" secondItem="I8h-RN-R99" secondAttribute="centerY" id="OZs-JL-G27"/>
@@ -114,7 +114,7 @@
                 <outlet property="tournamentNameLabel" destination="y3g-Hy-pDG" id="j0f-m4-z6d"/>
                 <outlet property="winsLabel" destination="pgh-ds-YTR" id="5x6-D4-gEn"/>
             </connections>
-            <point key="canvasLocation" x="65.599999999999994" y="-16.191904047976013"/>
+            <point key="canvasLocation" x="-158" y="60"/>
         </view>
     </objects>
 </document>

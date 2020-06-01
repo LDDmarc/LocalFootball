@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Match" representedClassName="Match" syncable="YES">
+        <attribute name="calendarId" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="location" optional="YES" attributeType="String"/>
@@ -72,7 +73,7 @@
         <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="tournamentsStatistics" inverseEntity="TeamStatistic"/>
     </entity>
     <elements>
-        <element name="Match" positionX="-662.71484375" positionY="-906.65625" width="128" height="253"/>
+        <element name="Match" positionX="-662.71484375" positionY="-906.65625" width="128" height="268"/>
         <element name="Statistics" positionX="-165.67578125" positionY="-450.51171875" width="128" height="208"/>
         <element name="Team" positionX="-184.6640625" positionY="-817.66015625" width="128" height="208"/>
         <element name="TeamStatistic" positionX="-355.40625" positionY="-550.84765625" width="128" height="88"/>

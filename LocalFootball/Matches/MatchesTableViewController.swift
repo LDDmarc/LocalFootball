@@ -9,11 +9,14 @@
 import UIKit
 import CoreData
 
-class MatchesTableViewController: UITableViewController {
+class MatchesTableViewController: TableViewControllerWithFRC {
     
-    // MARK: - CoreData & FetchedResultsController
-    
-    let dataProvider = DataProvider(persistentContainer: CoreDataManger.instance.persistentContainer, repository: NetworkManager.shared)
+    override var backgroundImageName: String {
+        get {
+            return "ball"
+        }
+    }
+    // MARK: - FetchedResultsController
     
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
@@ -53,6 +56,7 @@ class MatchesTableViewController: UITableViewController {
         }
     }
     
+  
     // MARK: - UI
     
     lazy var searchController: UISearchController = {
@@ -78,77 +82,54 @@ class MatchesTableViewController: UITableViewController {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    lazy var matchesRefreshControl: UIRefreshControl = {
-        let rc = UIRefreshControl()
-        rc.addTarget(self, action: #selector(fetchData), for: .valueChanged)
-        return rc
-    }()
-    
-    var activityIndicatorView: UIActivityIndicatorView!
     var loadMoreActivityIndicatorView: UIActivityIndicatorView!
-    
-    // MARK: - Loading View
     
     override func loadView() {
         super.loadView()
         
-        activityIndicatorView = UIActivityIndicatorView(style: .large)
-        tableView.backgroundView = activityIndicatorView
-        tableView.refreshControl = matchesRefreshControl
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
         navigationItem.titleView = segmentedControl
         
-        tableView.estimatedRowHeight = 135.5
+        tableView.estimatedRowHeight = 133.5
         
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
-        customView.backgroundColor = UIColor.clear
-        loadMoreActivityIndicatorView = UIActivityIndicatorView(style: .medium)
-        loadMoreActivityIndicatorView.center = CGPoint(x: customView.center.x, y: customView.center.y + 8)
-        customView.addSubview(loadMoreActivityIndicatorView)
-        tableView.tableFooterView = customView
-      
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
-    @objc private func fetchData() {
-        if fetchedResultsController.fetchedObjects?.isEmpty ?? true {
-            self.activityIndicatorView.startAnimating()
-        }
-        dataProvider.fetchAllData { (error) in
-            guard error == nil else { return }
+    @objc func reloadTableData() {
+        tableView.reloadData()
+    }
+    
+    @objc private func loadMatches() {
+        let date = fetchedResultsController.fetchedObjects?.last?.date
+        let matchesStatus = (segmentedControl.selectedSegmentIndex == 0) ? MatchesStatus.past : MatchesStatus.future
+        
+        dataProvider.fetchMatchesData(matchesStatus: matchesStatus, from: date) { (error) in
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
+                self.loadMoreActivityIndicatorView.stopAnimating()
                 self.tableView.refreshControl?.endRefreshing()
+                
+                self.tableView.tableFooterView = UIView()
+                self.tableView.beginUpdates()
+                self.tableView.setNeedsLayout()
+                self.tableView.endUpdates()
+                
+//                if let error = error {
+//
+//                }
             }
         }
     }
-    @objc private func loadMatches() {
-        let date = fetchedResultsController.fetchedObjects?.last?.date
-        let isPastMatches = segmentedControl.selectedSegmentIndex == 0
-           DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.dataProvider.fetchMatchesData(pastMatches: isPastMatches, beginningFrom: date) { (error) in
-                   guard error == nil else { return }
-                   DispatchQueue.main.async {
-                       self.activityIndicatorView.stopAnimating()
-                       self.loadMoreActivityIndicatorView.stopAnimating()
-                       self.tableView.refreshControl?.endRefreshing()
-                   }
-               }
-           }
-       }
     
     // MARK: - Table view data source
-    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
@@ -160,77 +141,47 @@ class MatchesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
         
         let match = fetchedResultsController.object(at: indexPath)
-        CellsConfiguration.shared.configureCell(cell, with: match)
+        
+        if let calendarId = match.calendarId {
+            if !eventsCalendarManager.isExistEvent(with: calendarId) {
+                match.calendarId = nil
+                do {
+                    try dataProvider.context.save()
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        MatchTableViewCellConfigurator().configureCell(cell, with: match)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            if indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 1) - 1 {
-                loadMoreActivityIndicatorView.startAnimating()
-                loadMatches()
-            }
+        if indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 1) - 1 {
+            let customView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+            customView.backgroundColor = UIColor.clear
+            loadMoreActivityIndicatorView = UIActivityIndicatorView(style: .medium)
+            loadMoreActivityIndicatorView.center = CGPoint(x: customView.center.x, y: customView.center.y + 8)
+            customView.addSubview(loadMoreActivityIndicatorView)
+            tableView.tableFooterView = customView
+            loadMoreActivityIndicatorView.startAnimating()
+            loadMatches()
         }
+    }
 }
 
-
 // MARK: - NSFetchedResultsController
+
 extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
-    
-    //    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    //        tableView.beginUpdates()
-    //    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
-        //        tableView.endUpdates()
-    }
-    
-    //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-    //                    didChange anObject: Any,
-    //                    at indexPath: IndexPath?,
-    //                    for type: NSFetchedResultsChangeType,
-    //                    newIndexPath: IndexPath?) {
-    //
-    //        switch type {
-    //        case .insert:
-    //            guard let newIndexPath = newIndexPath else { return }
-    //            tableView.insertRows(at: [newIndexPath], with: .fade)
-    //        case .delete:
-    //            guard let indexPath = indexPath else { return }
-    //            tableView.deleteRows(at: [indexPath], with: .automatic)
-    //        case .move:
-    //           // tableView.reloadData()
-    //            print("move")
-    //        case .update:
-    //            guard let indexPath = indexPath else { return }
-    //            tableView.reloadRows(at: [indexPath], with: .automatic)
-    //        @unknown default:
-    //            tableView.reloadData()
-    //        }
-    //    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange sectionInfo: NSFetchedResultsSectionInfo,
-                    atSectionIndex sectionIndex: Int,
-                    for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .automatic)
-        case .move:
-            tableView.reloadData()
-        default:
-            break
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, sectionIndexTitleForSectionName sectionName: String) -> String? {
-        print(sectionName)
-        return sectionName
     }
 }
 
@@ -281,13 +232,5 @@ extension MatchesTableViewController: UISearchResultsUpdating {
             print("Fetch failed")
         }
     }
-    
 }
 
-// TODO:
-
-extension MatchesTableViewController: MatchTableViewCellDelegate {
-    func favoriteStarTap(_ sender: UIButton) {
-        sender.setImage(UIImage(systemName: "fillStar"), for: .normal)
-    }
-}
