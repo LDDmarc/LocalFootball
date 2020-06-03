@@ -16,5 +16,12 @@ Group project for mail.ru iOS courses at BMStU
 
  ## Архитектура
  ![Архитектура](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/Architecture.png)
-Проект построен на архитектуре MVC. Использование паттерна `Dependency Injection` для сетевого слоя,
-        dir /fonts уйк
+Проект построен на архитектуре **MVC**. Избежать так называймой проблемы `Massive View Controller` позволило следующее:
+<li>
+ Выделение общей UI логики всех ViewController в отдельный суперкласс.
+<li>
+ Вынесение работы с календарем в отдельный модуль.
+<li>
+ Использование классов "конфигураторов" для каждой ячейки таблиц.
+ 
+ В проекте так же использован паттерн **Dependency Injection** для сетевого слоя.
