@@ -56,7 +56,7 @@ class TableViewControllerWithFRC: UITableViewController {
     
     @objc func loadData() {
         if self.tableView.numberOfRows(inSection: 0) == 0 {
-            
+            /*
             let backgroundView = UIView()
             backgroundView.backgroundColor = .clear
             backgroundView.addSubview(backgroundImageView)
@@ -72,7 +72,8 @@ class TableViewControllerWithFRC: UITableViewController {
                 activityIndicatorView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)
             ])
             tableView.backgroundView = backgroundView
-    
+            */
+            tableView.backgroundView = activityIndicatorView
             activityIndicatorView.startAnimating()
         }
         
@@ -83,17 +84,17 @@ class TableViewControllerWithFRC: UITableViewController {
                 if self.tableView.numberOfRows(inSection: 0) == 0 {
                     switch error {
                     case .networkUnavailable:
-                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network")
+                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network", imageType: CustomAlertImage.networkError)
                     case .wrongURL:
-                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network")
+                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network", imageType: .networkError)
                     case .noData:
-                        self.showAlertWithAction(title: "Нет данных", message: "На нашем сервере пусто. Ни одной команды 😫", imageName: "robot")
+                        self.showAlertWithAction(title: "Нет данных", message: "На нашем сервере пусто. Ни одной команды 😫", imageName: "robot", imageType: .wrongDataFormatError)
                     case .wrongDataFormat:
-                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось обработать данные", imageName: "gear")
+                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось обработать данные", imageName: "gear", imageType: .wrongDataFormatError)
                     case .coreDataError:
-                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot")
+                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot", imageType: .coreDataError)
                     case .failedToSaveToCoreData:
-                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot")
+                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot", imageType: .coreDataError)
                     default:
                         break
                     }
@@ -113,15 +114,17 @@ class TableViewControllerWithFRC: UITableViewController {
                 if let error = error {
                     switch error {
                     case .networkUnavailable:
-                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network")
+                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network", imageType: CustomAlertImage.networkError)
                     case .wrongURL:
-                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network")
+                        self.showAlertWithAction(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network", imageType: .networkError)
+                    case .noData:
+                        self.showAlertWithAction(title: "Нет данных", message: "На нашем сервере пусто. Ни одной команды 😫", imageName: "robot", imageType: .wrongDataFormatError)
                     case .wrongDataFormat:
-                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось обработать данные", imageName: "gear")
+                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось обработать данные", imageName: "gear", imageType: .wrongDataFormatError)
                     case .coreDataError:
-                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot")
+                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot", imageType: .coreDataError)
                     case .failedToSaveToCoreData:
-                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot")
+                        self.showAlertWithAction(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot", imageType: .coreDataError)
                     default:
                         break
                     }
@@ -136,9 +139,39 @@ class TableViewControllerWithFRC: UITableViewController {
         present(ac, animated: true, completion: nil)
     }
     
-    func showAlertWithAction(title: String?, message: String?, imageName: String?) {
-        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName)
-        vc.delegate = self
+//    func showAlertWithAction(title: String?, message: String?, imageName: String?) {
+//        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: .coreDataError)
+//
+//        vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
+//
+//        vc.addAction(CustomAlertAction(title: "Повторить", style: .default, handler: {
+//            if self.tableView.numberOfRows(inSection: 0) == 0 {
+//                self.activityIndicatorView.startAnimating()
+//            } else {
+//                self.tableView.refreshControl?.beginRefreshing()
+//            }
+//            self.loadData()
+//        }))
+//
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.modalTransitionStyle = .crossDissolve
+//        navigationController?.tabBarController?.present(vc, animated: true)
+//    }
+    
+    func showAlertWithAction(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage) {
+        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
+        
+        vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
+
+        vc.addAction(CustomAlertAction(title: "Повторить", style: .default, handler: {
+            if self.tableView.numberOfRows(inSection: 0) == 0 {
+                self.activityIndicatorView.startAnimating()
+            } else {
+                self.tableView.refreshControl?.beginRefreshing()
+            }
+            self.loadData()
+        }))
+        
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         navigationController?.tabBarController?.present(vc, animated: true)
@@ -154,13 +187,3 @@ class TableViewControllerWithFRC: UITableViewController {
     }
 }
 
-extension TableViewControllerWithFRC: CustomAlertProtocol {
-    func tryAgain() {
-        if tableView.numberOfRows(inSection: 0) == 0 {
-            activityIndicatorView.startAnimating()
-        } else {
-            tableView.refreshControl?.beginRefreshing()
-        }
-        loadData()
-    }
-}

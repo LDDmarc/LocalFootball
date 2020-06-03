@@ -28,11 +28,12 @@ class TestDataManager: DataManagerProtocol {
         case fullRequest3
     }
     
-    var arrayOfScenario: [Scenario] = [Scenario.networkUnavailable, /*Scenario.networkUnavailable, Scenario.networkUnavailable, Scenario.networkUnavailable, Scenario.fullRequest2, Scenario.wrongURL, */ Scenario.wrongDataFormat, Scenario.coreDataError,  Scenario.fullRequest3]
+//    var arrayOfScenario: [Scenario] = [Scenario.networkUnavailable, Scenario.networkUnavailable, Scenario.networkUnavailable, Scenario.networkUnavailable, Scenario.fullRequest2, Scenario.wrongURL, Scenario.wrongDataFormat, Scenario.fullRequest3]
+     var arrayOfScenario: [Scenario] = [Scenario.networkUnavailable, Scenario.coreDataError, Scenario.wrongDataFormat]
 //    var arrayOfScenario: [Scenario] = []
     
     func getAllData(completion: @escaping (Data?, DataManagerError?) -> ()) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if !self.arrayOfScenario.isEmpty {
                 let scenario = self.arrayOfScenario.removeFirst()
                 switch scenario {

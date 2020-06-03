@@ -48,6 +48,12 @@
 		BC45CD9A244636FC00C1B580 /* URBSFA.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8E244636FC00C1B580 /* URBSFA.png */; };
 		BC45CD9B244636FC00C1B580 /* Sydney.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD8F244636FC00C1B580 /* Sydney.png */; };
 		BC45CD9C244636FC00C1B580 /* ManchesterUnited.png in Resources */ = {isa = PBXBuildFile; fileRef = BC45CD90244636FC00C1B580 /* ManchesterUnited.png */; };
+		BC51CC5C2487A7D400EE1BE1 /* ExpandableCell.mov in Resources */ = {isa = PBXBuildFile; fileRef = BC51CC562487A7D400EE1BE1 /* ExpandableCell.mov */; };
+		BC51CC5D2487A7D400EE1BE1 /* calendar2.mov in Resources */ = {isa = PBXBuildFile; fileRef = BC51CC572487A7D400EE1BE1 /* calendar2.mov */; };
+		BC51CC5E2487A7D400EE1BE1 /* calendar3.mov in Resources */ = {isa = PBXBuildFile; fileRef = BC51CC582487A7D400EE1BE1 /* calendar3.mov */; };
+		BC51CC5F2487A7D400EE1BE1 /* calendar1.mov in Resources */ = {isa = PBXBuildFile; fileRef = BC51CC592487A7D400EE1BE1 /* calendar1.mov */; };
+		BC51CC602487A7D400EE1BE1 /* pagination.mov in Resources */ = {isa = PBXBuildFile; fileRef = BC51CC5A2487A7D400EE1BE1 /* pagination.mov */; };
+		BC51CC612487A7D400EE1BE1 /* Презентация.key in Resources */ = {isa = PBXBuildFile; fileRef = BC51CC5B2487A7D400EE1BE1 /* Презентация.key */; };
 		BC559A4224543E44007028F5 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC559A4024543E44007028F5 /* Team+CoreDataProperties.swift */; };
 		BC559A4324543E44007028F5 /* Tournament+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC559A4124543E44007028F5 /* Tournament+CoreDataProperties.swift */; };
 		BC73BEA3245C552E00700A04 /* ResultsTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC73BEA2245C552E00700A04 /* ResultsTableSectionHeader.xib */; };
@@ -149,6 +155,12 @@
 		BC45CD8E244636FC00C1B580 /* URBSFA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = URBSFA.png; sourceTree = "<group>"; };
 		BC45CD8F244636FC00C1B580 /* Sydney.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sydney.png; sourceTree = "<group>"; };
 		BC45CD90244636FC00C1B580 /* ManchesterUnited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ManchesterUnited.png; sourceTree = "<group>"; };
+		BC51CC562487A7D400EE1BE1 /* ExpandableCell.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ExpandableCell.mov; sourceTree = "<group>"; };
+		BC51CC572487A7D400EE1BE1 /* calendar2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = calendar2.mov; sourceTree = "<group>"; };
+		BC51CC582487A7D400EE1BE1 /* calendar3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = calendar3.mov; sourceTree = "<group>"; };
+		BC51CC592487A7D400EE1BE1 /* calendar1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = calendar1.mov; sourceTree = "<group>"; };
+		BC51CC5A2487A7D400EE1BE1 /* pagination.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = pagination.mov; sourceTree = "<group>"; };
+		BC51CC5B2487A7D400EE1BE1 /* Презентация.key */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Презентация.key"; sourceTree = "<group>"; };
 		BC559A4024543E44007028F5 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC559A4124543E44007028F5 /* Tournament+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tournament+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC73BEA2245C552E00700A04 /* ResultsTableSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsTableSectionHeader.xib; sourceTree = "<group>"; };
@@ -266,6 +278,20 @@
 			path = Teams;
 			sourceTree = "<group>";
 		};
+		BC51CC552487A7D400EE1BE1 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BC51CC562487A7D400EE1BE1 /* ExpandableCell.mov */,
+				BC51CC572487A7D400EE1BE1 /* calendar2.mov */,
+				BC51CC582487A7D400EE1BE1 /* calendar3.mov */,
+				BC51CC592487A7D400EE1BE1 /* calendar1.mov */,
+				BC51CC5A2487A7D400EE1BE1 /* pagination.mov */,
+				BC51CC5B2487A7D400EE1BE1 /* Презентация.key */,
+			);
+			name = Presentation;
+			path = LocalFootball/Presentation;
+			sourceTree = SOURCE_ROOT;
+		};
 		BC812086244B72EB00E0B5A2 /* DataProcessing */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +334,7 @@
 		BCB8554C244067EB004BEA34 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				BC51CC552487A7D400EE1BE1 /* Presentation */,
 				BCB09C79246B25380070D16D /* fullRequest11.json */,
 				BCB09C78246B25380070D16D /* fullRequest12.json */,
 				BC07E5972484517C00C64403 /* fullRequest20.json */,
@@ -494,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE7035124434BE0009D55FC /* teams.json in Resources */,
+				BC51CC5D2487A7D400EE1BE1 /* calendar2.mov in Resources */,
 				BCD8DCB724584E050053D930 /* matches3.json in Resources */,
 				BCB1ADF3244875F7000E3872 /* FIFA2019.png in Resources */,
 				BC73BEA3245C552E00700A04 /* ResultsTableSectionHeader.xib in Resources */,
@@ -508,6 +536,8 @@
 				BCF5D5A2243F70D7009E9876 /* LaunchScreen.storyboard in Resources */,
 				BCD8DCB524584E050053D930 /* fullRequest2.json in Resources */,
 				BC42A7D52444B3090039A851 /* TeamTableViewCell.xib in Resources */,
+				BC51CC5E2487A7D400EE1BE1 /* calendar3.mov in Resources */,
+				BC51CC602487A7D400EE1BE1 /* pagination.mov in Resources */,
 				BCB09C7B246B25380070D16D /* fullRequest11.json in Resources */,
 				BC07E59A248455F400C64403 /* fullRequest30.json in Resources */,
 				BCE79CB82459EF4F003B6767 /* ResultsTableTableViewCell.xib in Resources */,
@@ -520,6 +550,7 @@
 				BC45CD92244636FC00C1B580 /* CBF.png in Resources */,
 				BC45CD95244636FC00C1B580 /* FMF.png in Resources */,
 				BCB1ADF2244875F7000E3872 /* IFLimage.png in Resources */,
+				BC51CC612487A7D400EE1BE1 /* Презентация.key in Resources */,
 				BCB8554B244067E5004BEA34 /* Wolf.png in Resources */,
 				BCD17C5C2484FA0B0008216E /* CustomAlertViewController.xib in Resources */,
 				BC45CD9A244636FC00C1B580 /* URBSFA.png in Resources */,
@@ -529,6 +560,7 @@
 				BCA65EB6244A314500FF9C93 /* DetailTeamTableViewCell.xib in Resources */,
 				BCB1ADF1244875F7000E3872 /* FIFA2018.png in Resources */,
 				BC45CD93244636FC00C1B580 /* Romania.png in Resources */,
+				BC51CC5C2487A7D400EE1BE1 /* ExpandableCell.mov in Resources */,
 				BCD8DCB824584E050053D930 /* fullRequest3.json in Resources */,
 				BC45CD9C244636FC00C1B580 /* ManchesterUnited.png in Resources */,
 				BC7F30B8245050900021BB0B /* teams4.json in Resources */,
@@ -538,6 +570,7 @@
 				BCB85549244067E5004BEA34 /* RealMadrid.png in Resources */,
 				BC07E58524842A0400C64403 /* ball.png in Resources */,
 				BCB09C7A246B25380070D16D /* fullRequest12.json in Resources */,
+				BC51CC5F2487A7D400EE1BE1 /* calendar1.mov in Resources */,
 				BC45CD96244636FC00C1B580 /* WestHamUnited.png in Resources */,
 				BCE60A04245C8B6F001B7197 /* ResultsFormTableViewCell.xib in Resources */,
 				BCB85548244067E5004BEA34 /* Millionarios.png in Resources */,
