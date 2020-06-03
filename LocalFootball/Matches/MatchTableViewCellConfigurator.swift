@@ -27,7 +27,7 @@ class MatchTableViewCellConfigurator {
             let team2 = team2Obj as? Team {
             team2ImageData = team2.logoImageData
             if let team2Name = team2.name {
-                teamsNames += " : " + team2Name
+                teamsNames += " - " + team2Name
             }
         }
         
