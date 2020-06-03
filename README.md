@@ -16,4 +16,5 @@ Group project for mail.ru iOS courses at BMStU
 
  ## Архитектура
  ![Архитектура](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/Architecture.png)
-Проект построен на архитектуре MVC. Использование паттерна `Dependency Injection` для сетевого слоя,     dir /fonts
+Проект построен на архитектуре MVC. Использование паттерна `Dependency Injection` для сетевого слоя,
+    аойц
