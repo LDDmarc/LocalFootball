@@ -14,5 +14,11 @@ Group project for mail.ru iOS courses at BMStU
 <li>
 Напоминания о предстоящих матчах 
 
- ### Архитектура
+ ## Архитектура
  ![Архитектура](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/Architecture.png)
+<li>
+ MVC
+<li>
+ Паттерн Dependency Injection
+<li>
+ Работа 
