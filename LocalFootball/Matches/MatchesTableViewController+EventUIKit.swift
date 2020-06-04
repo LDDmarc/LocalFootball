@@ -13,6 +13,7 @@ import UIKit
 extension MatchesTableViewController: MatchTableViewCellDelegate {
     
     func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath) {
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         let match = fetchedResultsController.object(at: indexPath)
         eventsCalendarManager.match = match
         guard let team1 = match.teams?.firstObject as? Team,
@@ -45,6 +46,5 @@ extension MatchesTableViewController: MatchTableViewCellDelegate {
             }
         }
     }
-    
 }
 

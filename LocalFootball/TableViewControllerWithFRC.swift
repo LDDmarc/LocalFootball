@@ -104,12 +104,17 @@ class TableViewControllerWithFRC: UITableViewController {
             }
         }
     }
+    
+    func bindingCalendarEvent() {
+        
+    }
 }
 
 // MARK: - Alerts
 
 extension TableViewControllerWithFRC {
-    func showAlertWithOkButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage) {
+    
+    func showAlertWithOkButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
         let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
         vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
         vc.modalPresentationStyle = .overCurrentContext
@@ -117,7 +122,7 @@ extension TableViewControllerWithFRC {
         navigationController?.tabBarController?.present(vc, animated: true)
     }
     
-    func showAlertWithAccessButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage) {
+    func showAlertWithAccessButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
         let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
         vc.addAction(CustomAlertAction(title: "Не разрешать", style: .cancel))
         
@@ -138,7 +143,20 @@ extension TableViewControllerWithFRC {
         navigationController?.tabBarController?.present(vc, animated: true)
     }
     
-    func showAlertWithRepeatButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage) {
+    func showAlertWithBindingButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
+        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
+        vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
+        
+        vc.addAction(CustomAlertAction(title: "Связать", style: .default, handler: {
+            self.bindingCalendarEvent()
+        }))
+        
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        navigationController?.tabBarController?.present(vc, animated: true)
+    }
+    
+    func showAlertWithRepeatButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
         let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
         vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
         
@@ -182,7 +200,7 @@ extension TableViewControllerWithFRC {
         case .eventNotAddedToCalendar:
             self.showAlertWithOkButton(title: "Ошибка", message: "Данного события нет в Вашем календаре", imageName: nil, imageType: .calendarAcccess)
         case .eventAlreadyExistsInCalendar:
-            self.showAlertWithOkButton(title: "Ошибка", message: "Данное событие уже есть Вашем календаре", imageName: nil, imageType: .calendarAcccess)
+            self.showAlertWithBindingButton(title: "Ошибка", message: "Данное событие уже есть Вашем календаре", imageName: nil, imageType: .calendarAcccess)
         default: break
         }
     }

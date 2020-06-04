@@ -108,6 +108,47 @@ class EventsCalendarManager: NSObject {
         return eventToAdd.eventIdentifier
     }
     
+    func presentCalendarModalToAddEvent(event: Event, completion: @escaping EventsCalendarManagerResponse) {
+        let authorizationStatus = getAuthorizationStatus()
+        
+        switch authorizationStatus {
+        case .authorized:
+            let eventToAdd = generateEvent(event: event)
+            if !isAlreadyExist(event: eventToAdd) {
+                presentEventCalendarDetailModal(event: eventToAdd)
+                completion(.success(true))
+            } else {
+                completion(.failure(.eventAlreadyExistsInCalendar))
+            }
+        case .notDetermined:
+            requestAccess { (accessGranted, error) in
+                if accessGranted {
+                    let eventToAdd = self.generateEvent(event: event)
+                    if !self.isAlreadyExist(event: eventToAdd) {
+                        self.presentEventCalendarDetailModal(event: eventToAdd)
+                        completion(.success(true))
+                    } else {
+                        completion(.failure(.eventAlreadyExistsInCalendar))
+                    }
+                } else {
+                    completion(.failure(.calendarAccessDeniedOrRestricted))
+                }
+            }
+        default:
+            completion(.failure(.calendarAccessDeniedOrRestricted))
+        }
+    }
+    
+    func presentEventCalendarDetailModal(event: EKEvent) {
+        DispatchQueue.main.async {
+            let eventModalVC = EKEventEditViewController()
+            eventModalVC.event = event
+            eventModalVC.eventStore = self.eventStore
+            eventModalVC.editViewDelegate = self
+            self.presentingViewController?.present(eventModalVC, animated: true)
+        }
+    }
+    
     private func isAlreadyExist(event eventToAdd: EKEvent) -> Bool {
         let predicate = eventStore.predicateForEvents(withStart: eventToAdd.startDate, end: eventToAdd.endDate, calendars: nil)
         let existingEvents = eventStore.events(matching: predicate)
@@ -115,6 +156,13 @@ class EventsCalendarManager: NSObject {
         return existingEvents.contains { (event) -> Bool in
             return eventToAdd.title == event.title && eventToAdd.startDate == event.startDate && eventToAdd.endDate == event.endDate
         }
+    }
+    
+    func getIdentifier(of event: Event) -> String? {
+        let predicate = eventStore.predicateForEvents(withStart: event.startDate, end: event.endDate, calendars: nil)
+        let existingEvents = eventStore.events(matching: predicate)
+        
+        return existingEvents.first?.eventIdentifier
     }
     
     func isExistEvent(with identifier: String) -> Bool {
@@ -177,48 +225,6 @@ class EventsCalendarManager: NSObject {
             try eventStore.save(event, span: .thisEvent)
         } catch let error as NSError {
             print(error.localizedDescription)
-        }
-    }
-    
-    func presentCalendarModalToAddEvent(event: Event, completion: @escaping EventsCalendarManagerResponse) {
-        let authorizationStatus = getAuthorizationStatus()
-        
-        switch authorizationStatus {
-        case .authorized:
-            let eventToAdd = generateEvent(event: event)
-            if !isAlreadyExist(event: eventToAdd) {
-                presentEventCalendarDetailModal(event: eventToAdd)
-                completion(.success(true))
-            } else {
-                completion(.failure(.eventAlreadyExistsInCalendar))
-            }
-        case .notDetermined:
-            requestAccess { (accessGranted, error) in
-                if accessGranted {
-                    let eventToAdd = self.generateEvent(event: event)
-                    if !self.isAlreadyExist(event: eventToAdd) {
-                        self.presentEventCalendarDetailModal(event: eventToAdd)
-                        completion(.success(true))
-                    } else {
-                        completion(.failure(.eventAlreadyExistsInCalendar))
-                    }
-                } else {
-                    completion(.failure(.calendarAccessDeniedOrRestricted))
-                }
-            }
-        default:
-            completion(.failure(.calendarAccessDeniedOrRestricted))
-            
-        }
-    }
-    
-    func presentEventCalendarDetailModal(event: EKEvent) {
-        DispatchQueue.main.async {
-            let eventModalVC = EKEventEditViewController()
-            eventModalVC.event = event
-            eventModalVC.eventStore = self.eventStore
-            eventModalVC.editViewDelegate = self
-            self.presentingViewController?.present(eventModalVC, animated: true)
         }
     }
 }

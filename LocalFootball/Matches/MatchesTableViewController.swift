@@ -56,7 +56,7 @@ class MatchesTableViewController: TableViewControllerWithFRC {
         }
     }
     
-  
+    
     // MARK: - UI
     
     lazy var searchController: UISearchController = {
@@ -121,10 +121,27 @@ class MatchesTableViewController: TableViewControllerWithFRC {
                 self.tableView.beginUpdates()
                 self.tableView.setNeedsLayout()
                 self.tableView.endUpdates()
-                
-//                if let error = error {
-//
-//                }
+            }
+        }
+    }
+    
+    override func bindingCalendarEvent() {
+        guard let tableView = tableView,
+            let indexPath = tableView.indexPathForSelectedRow else { return }
+        let match = fetchedResultsController.object(at: indexPath)
+        guard let team1 = match.teams?.firstObject as? Team,
+            let team2 = match.teams?.lastObject as? Team,
+            let team1Name = team1.name,
+            let team2Name = team2.name else { return }
+        
+        if let startDate = match.date,
+            let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
+            let event = Event(name: "Матч \(team1Name) - \(team2Name)", startDate: startDate, endDate: endDate)
+            match.calendarId = eventsCalendarManager.getIdentifier(of: event)
+            do {
+                try dataProvider.context.save()
+            } catch let error as NSError {
+                print(error.localizedDescription)
             }
         }
     }
