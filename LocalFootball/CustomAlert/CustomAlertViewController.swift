@@ -33,6 +33,8 @@ enum CustomAlertImage {
     case coreDataError
     case networkError
     case wrongDataFormatError
+    case calendarAcccess
+    case settings
     
     func image() -> UIImage? {
         switch self {
@@ -42,6 +44,10 @@ enum CustomAlertImage {
             return UIImage(named: "errorNetwork")
         case .wrongDataFormatError:
             return UIImage(named: "errorWrongDataFormat")
+        case .calendarAcccess:
+            return UIImage(named: "calendarAccess")
+        case .settings:
+            return UIImage(named: "settings")
         }
     }
     
@@ -53,6 +59,10 @@ enum CustomAlertImage {
             return #colorLiteral(red: 0.1290173531, green: 0.5882815123, blue: 0.9528221488, alpha: 1)
         case .wrongDataFormatError:
             return #colorLiteral(red: 0.7019785047, green: 0.1373283267, blue: 0.7920630574, alpha: 1)
+        case .calendarAcccess:
+            return #colorLiteral(red: 0.7451130152, green: 0.211779207, blue: 0.2352870703, alpha: 1)
+        case .settings:
+            return #colorLiteral(red: 0.2753999596, green: 0.7058217005, blue: 0.6727463054, alpha: 1)
         }
     }
 }
