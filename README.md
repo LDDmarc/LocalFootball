@@ -46,5 +46,9 @@ Group project for mail.ru iOS courses at BMStU
 
 Ситуация с матчами другая: число матчей может оказаться велико, поэтому загружать их все разом - не самая лучшая идея. Для дозагрузки матчей в приложении была реализована пагинация. В дальнейшем планируется использование `UITableViewDataSourcePrefetching`.
 
- ![Пагинация](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/pagination.gif)
+При обновлении страницы, например если пользователь потянул *pull-to-refresh*, "подтянувшиеся лишние" матчи удаляются из CoreData.
 
+ ![Пагинация](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/pagination.gif)
+ 
+## Взаимодействие с календарем
+Было важно учесть все возможные сценарии, среди которых удаление и создание пользователем события в календаре не из нашего приложения.  
