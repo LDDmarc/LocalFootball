@@ -9,14 +9,14 @@
 import UIKit
 
 class MatchTableViewCell: UITableViewCell {
-    
+
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var tournamentNameLabel: UILabel!
     @IBOutlet private weak var team1LogoImageView: UIImageView!
     @IBOutlet private weak var team2LogoImageView: UIImageView!
     @IBOutlet private weak var teamsNamesLabel: UILabel!
     @IBOutlet private weak var scoreLabel: UILabel!
-    
+
     @IBOutlet weak var calendarButton: UIButton!
     @IBAction func calendarButtonTap(_ sender: UIButton) {
         if delegate != nil,
@@ -24,11 +24,10 @@ class MatchTableViewCell: UITableViewCell {
             delegate?.favoriteStarTap(sender, cellForRowAt: indexPath)
         }
     }
-    
+
     weak var delegate: MatchTableViewCellDelegate?
     var indexPath: IndexPath?
-    
-    
+
     var date: Date? {
         didSet {
             guard let date = date else { return }

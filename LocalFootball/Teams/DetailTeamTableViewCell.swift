@@ -9,35 +9,35 @@
 import UIKit
 
 class DetailTeamTableViewCell: UITableViewCell {
-    
+
     @IBOutlet private weak var teamLogoImageView: UIImageView!
-    
+
     @IBOutlet private weak var gamesLabel: UILabel!
     @IBOutlet private weak var winsLabel: UILabel!
     @IBOutlet private weak var goalsLabel: UILabel!
     @IBOutlet private weak var tournamentsLabel: UILabel!
-    
+
     @IBOutlet private weak var lastMatchesStackView: UIStackView!
-    
+
     @IBOutlet private weak var match1View: UIView!
     @IBOutlet private weak var match2View: UIView!
     @IBOutlet private weak var match3View: UIView!
     @IBOutlet private weak var match4View: UIView!
     @IBOutlet private weak var match5View: UIView!
-    
+
     @IBOutlet private weak var match1Label: UILabel!
     @IBOutlet private weak var match2Label: UILabel!
     @IBOutlet private weak var match3Label: UILabel!
     @IBOutlet private weak var match4Label: UILabel!
     @IBOutlet private weak var match5Label: UILabel!
-    
+
     var teamLogoData: Data? {
         didSet {
             guard let imageData = teamLogoData else { return }
             teamLogoImageView.image = UIImage(data: imageData)
         }
     }
-    
+
     var games: Int16? {
         didSet {
             guard let games = games else { return }
@@ -62,7 +62,7 @@ class DetailTeamTableViewCell: UITableViewCell {
             tournamentsLabel.text = "\(tournaments)"
         }
     }
-    
+
     var match1Info: Int? {
         didSet {
             setMatchResult(matchInfo: match1Info, matchView: match1View, matchLabel: match1Label)
@@ -88,7 +88,7 @@ class DetailTeamTableViewCell: UITableViewCell {
             setMatchResult(matchInfo: match5Info, matchView: match5View, matchLabel: match5Label)
         }
     }
-    
+
     private func setMatchResult(matchInfo: Int?, matchView: UIView, matchLabel: UILabel) {
         guard let matchInfo = matchInfo else {
             matchView.backgroundColor = .systemGray6
@@ -102,14 +102,14 @@ class DetailTeamTableViewCell: UITableViewCell {
         } else {
             matchView.backgroundColor = (matchInfo == 1) ? .systemGreen : .systemGray
             matchLabel.text = (matchInfo == 1) ? "В" : "Н"
-        } 
+        }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         selectionStyle = .none
-        
+
         for matchView in [match1View, match2View, match3View, match4View, match5View] {
             matchView?.layer.cornerRadius = 2 * .pi
             matchView?.clipsToBounds = true

@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Match {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Match> {

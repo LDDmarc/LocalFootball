@@ -11,7 +11,7 @@ import UIKit
 // MARK: - EventKit CalendarWorking
 
 extension DetailTeamTableViewController: MatchTableViewCellDelegate {
-    
+
     func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath) {
         let match = fetchedResultsControllerMatches.object(at: IndexPath(row: indexPath.row, section: indexPath.section - 1))
         eventsCalendarManager.match = match
@@ -19,12 +19,12 @@ extension DetailTeamTableViewController: MatchTableViewCellDelegate {
             let team2 = match.teams?.lastObject as? Team,
             let team1Name = team1.name,
             let team2Name = team2.name else { return }
-        
+
         if match.calendarId == nil {
             if let startDate = match.date,
                 let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
                 let event = Event(name: "Матч \(team1Name) - \(team2Name)", startDate: startDate, endDate: endDate)
-                
+
                 eventsCalendarManager.presentCalendarModalToAddEvent(event: event) { (result) in
                     DispatchQueue.main.async {
                       self.chooseAlertEventAdd(for: result)

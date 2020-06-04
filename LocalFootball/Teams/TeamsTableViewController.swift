@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 
 class TeamsTableViewController: TableViewControllerWithFRC {
-    
+
     // MARK: - FetchedResultsController
-    
+
     lazy var fetchedResultsController: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
         request.predicate = teamsByTournamentsPredicate
@@ -29,9 +29,6 @@ class TeamsTableViewController: TableViewControllerWithFRC {
         frc.delegate = fetchedResultsControllerDelegate
         return frc
     }()
-    
-    lazy var fetchedResultsControllerDelegate = DefaultFetchedResultsControllerDelegate(tableView: tableView)
-    
     var teamsPredicate: NSPredicate? {
         didSet {
             filterContent()
@@ -42,60 +39,59 @@ class TeamsTableViewController: TableViewControllerWithFRC {
             filterContent()
         }
     }
-    
+
     // MARK: - UISearchController
-    
+
     lazy var searchController: UISearchController = {
-        let sc = UISearchController(searchResultsController: nil)
-        sc.searchResultsUpdater = self
-        sc.obscuresBackgroundDuringPresentation = false
-        sc.searchBar.placeholder = "Введите название команды"
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите название команды"
         definesPresentationContext = true
-        return sc
+        return searchController
     }()
-    
+
     // MARK: - Loading View
-    
+
     override func loadView() {
         super.loadView()
-        
+
         navigationItem.searchController = searchController
-        
+
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 58.0
-        
-        
+
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.register(UINib(nibName: String(describing: TeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: TeamTableViewCell.self))
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TeamTableViewCell.self)) as! TeamTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TeamTableViewCell.self)) as? TeamTableViewCell
+            else { return UITableViewCell() }
         let team = fetchedResultsController.object(at: indexPath)
-        
+
         cell.teamNameLabel.text = team.name
         if let imageData = team.logoImageData {
             cell.teamLogoImageView.image = UIImage(data: imageData)
         }
-        
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailTeamTableViewController = DetailTeamTableViewController(dataProvider: dataProvider)
         let team = fetchedResultsController.object(at: indexPath)
@@ -109,25 +105,25 @@ class TeamsTableViewController: TableViewControllerWithFRC {
 // MARK: - UISearchResultsUpdating
 
 extension TeamsTableViewController: UISearchResultsUpdating {
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text, !searchText.isEmpty {
-            teamsPredicate = NSPredicate(format: "name CONTAINS[cd] %@",  searchText)
+            teamsPredicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText)
         } else {
             teamsPredicate = nil
         }
     }
-    
+
     private func filterContent() {
         var predicates = [NSPredicate]()
-        
+
         if let teamsByTournamentsPredicate = teamsByTournamentsPredicate {
             predicates.append(teamsByTournamentsPredicate)
         }
         if let teamsPredicate = teamsPredicate {
             predicates.append(teamsPredicate)
         }
-        
+
         fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         do {
             try fetchedResultsController.performFetch()
@@ -137,4 +133,3 @@ extension TeamsTableViewController: UISearchResultsUpdating {
         }
     }
 }
-

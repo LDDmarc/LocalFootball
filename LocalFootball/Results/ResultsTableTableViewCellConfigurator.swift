@@ -9,9 +9,9 @@
 import UIKit
 
 class ResultsTableTableViewCellConfigurator {
-    
+
     func configureCell(_ cell: ResultsTableTableViewCell, with tournamentStatistics: TournamentStatistics) {
-        
+
         cell.position = "\(tournamentStatistics.position)"
         if let teamStatistics = tournamentStatistics.teamStatistics,
             let team = teamStatistics.team {
@@ -20,7 +20,7 @@ class ResultsTableTableViewCellConfigurator {
                 cell.teamLogoData = imageData
             }
         }
-   
+
         cell.numberOfGames = "\(tournamentStatistics.statistics?.numberOfGames ?? 0)"
         cell.numberOfWins = "\(tournamentStatistics.statistics?.numberOfWins ?? 0)"
         cell.numberOfDraws = "\(tournamentStatistics.statistics?.numberOfDraws ?? 0)"

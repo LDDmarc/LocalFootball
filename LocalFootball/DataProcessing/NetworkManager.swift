@@ -9,34 +9,34 @@
 import Foundation
 
 class NetworkManager: DataManagerProtocol {
-    
+
     var baseURL: String = "https://bmstu-ios.herokuapp.com/"
-    
-    func getAllData(completion: @escaping (Data?, DataManagerError?) -> ()) {
+
+    func getAllData(completion: @escaping (Data?, DataManagerError?) -> Void) {
         guard let url = URL(string: baseURL + "main_info") else {
             completion(nil, DataManagerError.wrongURL)
             return
         }
-        
-        URLSession.shared.dataTask(with: url) {(data, response, error) in
-            if let _ = error {
+
+        URLSession.shared.dataTask(with: url) {(data, _, error) in
+            if error != nil {
                 completion(nil, DataManagerError.networkUnavailable)
                 return
             }
             completion(data, nil)
         }.resume()
     }
-    
-    func getMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping (Data?, DataManagerError?) -> ()) {
+
+    func getMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping (Data?, DataManagerError?) -> Void) {
         guard let date = date else {
             completion(nil, DataManagerError.wrongDateFormat)
             return
         }
-        
-        let df = DateFormatter()
+
+        let dateFormatter = DateFormatter()
         DateFormatter().dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let formatDate = df.string(from: date)
-        
+        let formatDate = dateFormatter.string(from: date)
+
         var urlString: String
         switch matchesStatus {
         case .past:
@@ -44,14 +44,14 @@ class NetworkManager: DataManagerProtocol {
         case .future:
             urlString = baseURL + "matches?order=dsc&after=\(formatDate)"
         }
-        
+
         guard let url = URL(string: urlString) else {
             completion(nil, DataManagerError.wrongURL)
             return
         }
-        
-        URLSession.shared.dataTask(with: url) {(data, response, error) in
-            if let _ = error {
+
+        URLSession.shared.dataTask(with: url) {(data, _, error) in
+            if error != nil {
                 completion(nil, DataManagerError.networkUnavailable)
                 return
             }

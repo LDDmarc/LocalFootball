@@ -14,74 +14,69 @@ import SwiftyJSON
 
 @objc(Tournament)
 public class Tournament: NSManagedObject, UpdatableManagedObject {
-    
+
     enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case modified = "modified"
-        case name = "name"
-        case imageName = "imageName"
-        case info = "info"
-        case status = "status"
-        case numberOfTeams = "numberOfTeams"
-        case tournamentTeams = "tournamentTeams"
-        case numberOfMatches = "numberOfMatches"
-        case dateOfTheBeginning = "dateOfTheBeginning"
-        case dateOfTheEnd = "dateOfTheEnd"
-        case teamsIds = "teamsIds"
-        case matchesIds = "matchesIds"
-        case teamsTournamentStatistics = "teamsTournamentStatistics"
+        case id
+        case modified
+        case name
+        case imageName
+        case info
+        case status
+        case numberOfTeams
+        case tournamentTeams
+        case numberOfMatches
+        case dateOfTheBeginning
+        case dateOfTheEnd
+        case teamsIds
+        case matchesIds
+        case teamsTournamentStatistics
     }
-    
+
     var tournamentTeamsIds: [Int64] {
-        get {
-            return teamsIds as? [Int64] ?? []
-        }
+        return teamsIds as? [Int64] ?? []
     }
-    
+
     var tournamentMatchesIds: [Int64] {
-        get {
-            return matchesIds as? [Int64] ?? []
-        }
+        return matchesIds as? [Int64] ?? []
     }
-    
+
     required convenience public init(from decoder: Decoder) throws {
         guard let contexUserInfoKey = CodingUserInfoKey.context,
             let managedObjectContext = decoder.userInfo[contexUserInfoKey] as? NSManagedObjectContext,
             let entity = NSEntityDescription.entity(forEntityName: "Tournament", in: managedObjectContext) else { fatalError("Failed to decode Tournament") }
         self.init(entity: entity, insertInto: managedObjectContext)
-        
+
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {
             name = try values.decode(String?.self, forKey: .name)
-            
+
             imageName = try values.decode(String?.self, forKey: .imageName)
             if let myimageName = imageName,
                 let myimage = UIImage(named: myimageName) {
                 let myimageData = myimage.pngData()
                 imageData = myimageData
             }
-            
+
             info = try values.decode(String?.self, forKey: .info)
             status = try values.decode(Bool.self, forKey: .status)
-            
+
             if let beginDate = try values.decode(String?.self, forKey: .dateOfTheBeginning) {
                 dateOfTheBeginning = DateFormatter.readingDateFormatter().date(from: beginDate)
             }
             if let endDate = try values.decode(String?.self, forKey: .dateOfTheEnd) {
                 dateOfTheEnd = DateFormatter.readingDateFormatter().date(from: endDate)
             }
-            
+
             numberOfTeams = try values.decode(Int16.self, forKey: .numberOfTeams)
             teamsIds = try values.decode([Int64]?.self, forKey: .tournamentTeams) as NSObject?
             numberOfMatches = try values.decode(Int16.self, forKey: .numberOfMatches)
             matchesIds = try values.decode([Int64]?.self, forKey: .matchesIds) as NSObject?
-           
-            
+
         } catch let error as NSError {
             print(error.localizedDescription)
         }
     }
-    
+
     func update(with tournamentJSON: JSON, into context: NSManagedObjectContext) {
         id = tournamentJSON[CodingKeys.id.rawValue].int64Value
         modified = tournamentJSON[CodingKeys.modified.rawValue].int64Value

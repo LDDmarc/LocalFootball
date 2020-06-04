@@ -10,13 +10,11 @@ import UIKit
 import CoreData
 
 class TableViewControllerWithFRC: UITableViewController {
-    
+
     let dataProvider: DataProvider
-    
+
     var backgroundImageName: String {
-        get {
-            return "boy"
-        }
+        return "boy"
     }
     lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -26,34 +24,38 @@ class TableViewControllerWithFRC: UITableViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     lazy var eventsCalendarManager = EventsCalendarManager(presentingViewController: self)
-    
+    // swiftlint:disable weak_delegate
+    // no reference cycles
+    lazy var fetchedResultsControllerDelegate = DefaultFetchedResultsControllerDelegate(tableView: tableView)
+    // swiftlint:enable weak_delegate
     init(dataProvider: DataProvider) {
         self.dataProvider = dataProvider
         super.init(nibName: nil, bundle: nil)
+
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     let activityIndicatorView = UIActivityIndicatorView(style: .large)
-    
+
     override func loadView() {
         super.loadView()
-        
+
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
+
         tableView.tableFooterView = UIView()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
     }
-    
+
     @objc func loadData() {
         if self.tableView.numberOfRows(inSection: 0) == 0 {
             /*
@@ -76,7 +78,7 @@ class TableViewControllerWithFRC: UITableViewController {
             tableView.backgroundView = activityIndicatorView
             activityIndicatorView.startAnimating()
         }
-        
+
         dataProvider.fetchAllData { (error) in
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
@@ -91,7 +93,7 @@ class TableViewControllerWithFRC: UITableViewController {
             }
         }
     }
-    
+
     @objc func refresh() {
         dataProvider.fetchAllData { (error) in
             DispatchQueue.main.async {
@@ -104,63 +106,60 @@ class TableViewControllerWithFRC: UITableViewController {
             }
         }
     }
-    
-    func bindingCalendarEvent() {
-        
-    }
+    func bindingCalendarEvent() { }
 }
 
 // MARK: - Alerts
 
 extension TableViewControllerWithFRC {
-    
+
     func showAlertWithOkButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
-        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
-        vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        navigationController?.tabBarController?.present(vc, animated: true)
+        let customAlertController = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
+        customAlertController.addAction(CustomAlertAction(title: "ОК", style: .cancel))
+        customAlertController.modalPresentationStyle = .overCurrentContext
+        customAlertController.modalTransitionStyle = .crossDissolve
+        navigationController?.tabBarController?.present(customAlertController, animated: true)
     }
-    
+
     func showAlertWithAccessButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
-        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
-        vc.addAction(CustomAlertAction(title: "Не разрешать", style: .cancel))
-        
-        vc.addAction(CustomAlertAction(title: "Перейти в настройки", style: .default, handler: {
+        let customAlertController = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
+        customAlertController.addAction(CustomAlertAction(title: "Не разрешать", style: .cancel))
+
+        customAlertController.addAction(CustomAlertAction(title: "Перейти в настройки", style: .default, handler: {
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
-            
+
             if UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
                     print("Settings opened: \(success)")
                 })
             }
         }))
-        
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        navigationController?.tabBarController?.present(vc, animated: true)
+
+        customAlertController.modalPresentationStyle = .overCurrentContext
+        customAlertController.modalTransitionStyle = .crossDissolve
+        navigationController?.tabBarController?.present(customAlertController, animated: true)
     }
-    
+
     func showAlertWithBindingButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
-        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
-        vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
-        
-        vc.addAction(CustomAlertAction(title: "Связать", style: .default, handler: {
+        let customAlertController = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
+        customAlertController.addAction(CustomAlertAction(title: "ОК", style: .cancel))
+
+        customAlertController.addAction(CustomAlertAction(title: "Связать", style: .default, handler: {
             self.bindingCalendarEvent()
         }))
-        
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        navigationController?.tabBarController?.present(vc, animated: true)
+
+        customAlertController.modalPresentationStyle = .overCurrentContext
+        customAlertController.modalTransitionStyle = .crossDissolve
+        navigationController?.tabBarController?.present(customAlertController, animated: true)
     }
-    
+
     func showAlertWithRepeatButton(title: String?, message: String?, imageName: String?, imageType: CustomAlertImage?) {
-        let vc = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
-        vc.addAction(CustomAlertAction(title: "ОК", style: .cancel))
-        
-        vc.addAction(CustomAlertAction(title: "Повторить", style: .default, handler: {
+        let customAlertController = CustomAlertViewController(titleText: title, messageText: message, imageName: imageName, imageType: imageType)
+        customAlertController.addAction(CustomAlertAction(title: "ОК", style: .cancel))
+
+        customAlertController.addAction(CustomAlertAction(title: "Повторить", style: .default, handler: {
             if self.tableView.numberOfRows(inSection: 0) == 0 {
                 self.activityIndicatorView.startAnimating()
             } else {
@@ -168,43 +167,70 @@ extension TableViewControllerWithFRC {
             }
             self.loadData()
         }))
-        
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        navigationController?.tabBarController?.present(vc, animated: true)
+
+        customAlertController.modalPresentationStyle = .overCurrentContext
+        customAlertController.modalTransitionStyle = .crossDissolve
+        navigationController?.tabBarController?.present(customAlertController, animated: true)
     }
-    
+
     func chooseAlert(for error: DataManagerError) {
         switch error {
         case .networkUnavailable:
-            self.showAlertWithRepeatButton(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network", imageType: CustomAlertImage.networkError)
+            self.showAlertWithRepeatButton(title: "Сеть недоступна",
+                                           message: "Не удалось связаться с сервером",
+                                           imageName: "network",
+                                           imageType: CustomAlertImage.networkError)
         case .wrongURL:
-            self.showAlertWithRepeatButton(title: "Сеть недоступна", message: "Не удалось связаться с сервером", imageName: "network", imageType: .networkError)
+            self.showAlertWithRepeatButton(title: "Сеть недоступна",
+                                           message: "Не удалось связаться с сервером",
+                                           imageName: "network",
+                                           imageType: .networkError)
         case .noData:
-            self.showAlertWithRepeatButton(title: "Нет данных", message: "На нашем сервере пусто. Ни одной команды 😫", imageName: "robot", imageType: .wrongDataFormatError)
+            self.showAlertWithRepeatButton(title: "Нет данных",
+                                           message: "На нашем сервере пусто. Ни одной команды 😫",
+                                           imageName: "robot",
+                                           imageType: .wrongDataFormatError)
         case .wrongDataFormat:
-            self.showAlertWithRepeatButton(title: "Ошибка данных", message: "Не удалось обработать данные", imageName: "gear", imageType: .wrongDataFormatError)
+            self.showAlertWithRepeatButton(title: "Ошибка данных",
+                                           message: "Не удалось обработать данные",
+                                           imageName: "gear",
+                                           imageType: .wrongDataFormatError)
         case .coreDataError:
-            self.showAlertWithRepeatButton(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot", imageType: .coreDataError)
+            self.showAlertWithRepeatButton(title: "Ошибка данных",
+                                           message: "Не удалось ничего сохранить",
+                                           imageName: "robot",
+                                           imageType: .coreDataError)
         case .failedToSaveToCoreData:
-            self.showAlertWithRepeatButton(title: "Ошибка данных", message: "Не удалось ничего сохранить", imageName: "robot", imageType: .coreDataError)
+            self.showAlertWithRepeatButton(title: "Ошибка данных",
+                                           message: "Не удалось ничего сохранить",
+                                           imageName: "robot",
+                                           imageType: .coreDataError)
         default:
             break
         }
     }
-    
+
     func chooseAlert(for error: CustomError) {
         switch error {
         case .calendarAccessDeniedOrRestricted:
-            self.showAlertWithAccessButton(title: "Нет доступа к календарю", message: "Разрешите доступ к календарю в системных настройках", imageName: nil, imageType: .settings)
+            self.showAlertWithAccessButton(title: "Нет доступа к календарю",
+                                           message: "Разрешите доступ к календарю в системных настройках",
+                                           imageName: nil,
+                                           imageType: .settings)
         case .eventNotAddedToCalendar:
-            self.showAlertWithOkButton(title: "Ошибка", message: "Данного события нет в Вашем календаре", imageName: nil, imageType: .calendarAcccess)
+            self.showAlertWithOkButton(title: "Ошибка",
+                                       message: "Данного события нет в Вашем календаре",
+                                       imageName: nil,
+                                       imageType: .calendarAcccess)
         case .eventAlreadyExistsInCalendar:
-            self.showAlertWithBindingButton(title: "Ошибка", message: "Данное событие уже есть Вашем календаре", imageName: nil, imageType: .calendarAcccess)
+            self.showAlertWithBindingButton(title: "Ошибка",
+                                            message: "Данное событие уже есть Вашем календаре",
+                                            imageName: nil,
+                                            imageType: .calendarAcccess)
         default: break
         }
     }
-    
+
     func chooseAlertEventAdd(for result: Result<Bool, CustomError>) {
         switch result {
         case .failure(let error):
@@ -213,7 +239,7 @@ extension TableViewControllerWithFRC {
             break
         }
     }
-    
+
     func chooseAlertEventDelete(for result: Result<Bool, CustomError>) {
         switch result {
         case .failure(let error):
@@ -222,6 +248,5 @@ extension TableViewControllerWithFRC {
             self.showAlertWithOkButton(title: "Удалено", message: "Матч удален из Вашего календаря", imageName: nil, imageType: .calendarAcccess)
         }
     }
-    
-}
 
+}

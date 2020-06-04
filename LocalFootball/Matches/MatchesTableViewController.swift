@@ -10,14 +10,12 @@ import UIKit
 import CoreData
 
 class MatchesTableViewController: TableViewControllerWithFRC {
-    
+
     override var backgroundImageName: String {
-        get {
-            return "ball"
-        }
+        return "ball"
     }
     // MARK: - FetchedResultsController
-    
+
     lazy var fetchedResultsController: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
         if let matchesByTournamentPredicate = matchesByTournamentPredicate {
@@ -37,9 +35,9 @@ class MatchesTableViewController: TableViewControllerWithFRC {
         frc.delegate = self
         return frc
     }()
-    
+
     var sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-    
+
     var matchesByStatusPredicate: NSPredicate = NSPredicate(format: "status == YES") {
         didSet {
             filterContent()
@@ -55,68 +53,67 @@ class MatchesTableViewController: TableViewControllerWithFRC {
             filterContent()
         }
     }
-    
-    
+
     // MARK: - UI
-    
+
     lazy var searchController: UISearchController = {
-        let sc = UISearchController(searchResultsController: nil)
-        sc.searchResultsUpdater = self
-        sc.obscuresBackgroundDuringPresentation = false
-        sc.searchBar.placeholder = "Введите название команды"
-        sc.searchResultsUpdater = self
-        sc.searchBar.isHidden = false
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите название команды"
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.isHidden = false
         definesPresentationContext = true
-        return sc
+        return searchController
     }()
-    
+
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Прошедшие", "Предстоящие"]
-        let sc = UISegmentedControl(items: items)
-        sc.addTarget(self, action: #selector(segmentedControlTap(sender:)), for: .valueChanged)
-        sc.selectedSegmentIndex = 0
-        return sc
+        let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.addTarget(self, action: #selector(segmentedControlTap(sender:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+        return segmentedControl
     }()
-    
+
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    
+
     var loadMoreActivityIndicatorView: UIActivityIndicatorView!
-    
+
     override func loadView() {
         super.loadView()
-        
+
         navigationItem.searchController = searchController
         navigationItem.titleView = segmentedControl
-        
+
         tableView.estimatedRowHeight = 133.5
-        
+
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
-    
+
     @objc func reloadTableData() {
         tableView.reloadData()
     }
-    
+
     @objc private func loadMatches() {
         let date = fetchedResultsController.fetchedObjects?.last?.date
         let matchesStatus = (segmentedControl.selectedSegmentIndex == 0) ? MatchesStatus.past : MatchesStatus.future
-        
-        dataProvider.fetchMatchesData(matchesStatus: matchesStatus, from: date) { (error) in
+
+        dataProvider.fetchMatchesData(matchesStatus: matchesStatus, from: date) { (_) in
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
                 self.loadMoreActivityIndicatorView.stopAnimating()
                 self.tableView.refreshControl?.endRefreshing()
-                
+
                 self.tableView.tableFooterView = UIView()
                 self.tableView.beginUpdates()
                 self.tableView.setNeedsLayout()
@@ -124,7 +121,7 @@ class MatchesTableViewController: TableViewControllerWithFRC {
             }
         }
     }
-    
+
     override func bindingCalendarEvent() {
         guard let tableView = tableView,
             let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -133,7 +130,7 @@ class MatchesTableViewController: TableViewControllerWithFRC {
             let team2 = match.teams?.lastObject as? Team,
             let team1Name = team1.name,
             let team2Name = team2.name else { return }
-        
+
         if let startDate = match.date,
             let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
             let event = Event(name: "Матч \(team1Name) - \(team2Name)", startDate: startDate, endDate: endDate)
@@ -145,24 +142,25 @@ class MatchesTableViewController: TableViewControllerWithFRC {
             }
         }
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as? MatchTableViewCell
+            else { return UITableViewCell() }
         cell.delegate = self
         cell.indexPath = indexPath
-        
+
         let match = fetchedResultsController.object(at: indexPath)
-        
+
         if let calendarId = match.calendarId {
             if !eventsCalendarManager.isExistEvent(with: calendarId) {
                 match.calendarId = nil
@@ -173,12 +171,12 @@ class MatchesTableViewController: TableViewControllerWithFRC {
                 }
             }
         }
-        
+
         MatchTableViewCellConfigurator().configureCell(cell, with: match)
-        
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 1) - 1 {
             let customView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
@@ -196,7 +194,7 @@ class MatchesTableViewController: TableViewControllerWithFRC {
 // MARK: - NSFetchedResultsController
 
 extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
-    
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
@@ -204,16 +202,16 @@ extension MatchesTableViewController: NSFetchedResultsControllerDelegate {
 
 // MARK: - UISearchResultsUpdating
 extension MatchesTableViewController: UISearchResultsUpdating {
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text,
             !searchText.isEmpty {
-            matchesByTeamsPredicate = NSPredicate(format: "ANY teams.name CONTAINS[cd] %@",  searchText)
+            matchesByTeamsPredicate = NSPredicate(format: "ANY teams.name CONTAINS[cd] %@", searchText)
         } else {
             matchesByTeamsPredicate = nil
         }
     }
-    
+
     @objc func segmentedControlTap(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -227,19 +225,19 @@ extension MatchesTableViewController: UISearchResultsUpdating {
             matchesByStatusPredicate = NSPredicate(format: "status == YES")
         }
     }
-    
+
     private func filterContent() {
         var predicates = [NSPredicate]()
-        
+
         predicates.append(matchesByStatusPredicate)
-        
+
         if let matchesByTeamsPredicate = matchesByTeamsPredicate {
             predicates.append(matchesByTeamsPredicate)
         }
         if let matchesByTournamentPredicate = matchesByTournamentPredicate {
             predicates.append(matchesByTournamentPredicate)
         }
-        
+
         fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
         fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         do {
@@ -250,4 +248,3 @@ extension MatchesTableViewController: UISearchResultsUpdating {
         }
     }
 }
-

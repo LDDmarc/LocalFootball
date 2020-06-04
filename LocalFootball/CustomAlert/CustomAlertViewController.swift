@@ -9,20 +9,20 @@
 import UIKit
 
 class CustomAlertAction {
-    
+
     init(title: String?, style: CustomAlertAction.Style, handler: (() -> Void)? = nil) {
         self.title = title
         self.style = style
         self.handler = handler
     }
-    
+
     let title: String?
     let style: Style?
     let handler: (() -> Void)?
 }
 
 extension CustomAlertAction {
-    
+
     enum Style: Int {
         case `default`
         case cancel
@@ -35,7 +35,7 @@ enum CustomAlertImage {
     case wrongDataFormatError
     case calendarAcccess
     case settings
-    
+
     func image() -> UIImage? {
         switch self {
         case .coreDataError:
@@ -50,7 +50,7 @@ enum CustomAlertImage {
             return UIImage(named: "settings")
         }
     }
-    
+
     func color() -> UIColor {
         switch self {
         case .coreDataError:
@@ -72,25 +72,25 @@ class CustomAlertButton: UIButton {
 }
 
 class CustomAlertViewController: UIViewController {
-    
+
     @IBOutlet weak var mainView: UIView!
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
-    
+
     @IBOutlet weak var buttonsStackView: UIStackView!
-    
+
     var stack = UIStackView()
-    
+
     let titleText: String?
     let messageText: String?
     let imageName: String?
     let imageType: CustomAlertImage?
-    
+
     var actions = [CustomAlertAction]()
     var buttons = [UIButton]()
-    
+
     init(titleText: String?, messageText: String?, imageName: String?, imageType: CustomAlertImage?) {
         self.titleText = titleText
         self.messageText = messageText
@@ -98,11 +98,11 @@ class CustomAlertViewController: UIViewController {
         self.imageType = imageType
         super.init(nibName: "CustomAlertViewController", bundle: Bundle.main)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func addAction(_ action: CustomAlertAction) {
         actions.append(action)
         let button = CustomAlertButton()
@@ -110,7 +110,7 @@ class CustomAlertViewController: UIViewController {
         button.setTitle(action.title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 19)
         button.action = action
-        
+
         if let imageType = imageType {
             button.backgroundColor = imageType.color()
         } else {
@@ -118,7 +118,7 @@ class CustomAlertViewController: UIViewController {
         }
         button.layer.cornerRadius = 12.0
         button.layer.cornerCurve = .continuous
-       
+
         switch action.style {
         case .cancel:
             button.addTarget(self, action: #selector(cancelButtonTap(_:)), for: .touchUpInside)
@@ -127,10 +127,10 @@ class CustomAlertViewController: UIViewController {
         }
         buttons.append(button)
     }
-    
+
     override func loadView() {
         super.loadView()
-        
+
         titleLabel.text = titleText
         messageLabel.text = messageText
         if let imageType = imageType {
@@ -138,24 +138,24 @@ class CustomAlertViewController: UIViewController {
         } else if let imageName = imageName {
             imageView.image = UIImage(named: imageName)
         }
-        
+
         mainView.layer.cornerRadius = 12.0
         mainView.layer.cornerCurve = .continuous
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: 45).isActive = true
             buttonsStackView.addArrangedSubview(button)
         }
     }
-    
+
     @objc private func cancelButtonTap(_ sender: CustomAlertButton) {
         self.dismiss(animated: true, completion: nil)
     }
-        
+
     @objc func alertButtonTap(_ sender: CustomAlertButton) {
         self.dismiss(animated: true, completion: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak sender] in
@@ -163,4 +163,3 @@ class CustomAlertViewController: UIViewController {
         }
     }
 }
-

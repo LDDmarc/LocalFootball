@@ -9,7 +9,7 @@
 import UIKit
 
 class ResultsTableTableViewCell: UITableViewCell {
-    
+
     @IBOutlet private weak var positionLabel: UILabel!
     @IBOutlet private weak var teamLogoImageView: UIImageView!
     @IBOutlet private weak var teamNameLabel: UILabel!
@@ -19,7 +19,7 @@ class ResultsTableTableViewCell: UITableViewCell {
     @IBOutlet private weak var numberOfLesionsLabel: UILabel!
     @IBOutlet private weak var numberOfGoalsAndMissedLabel: UILabel!
     @IBOutlet private weak var scoreLabel: UILabel!
-    
+
     var position: String? {
         didSet {
             guard let position = position else { return }
@@ -74,13 +74,10 @@ class ResultsTableTableViewCell: UITableViewCell {
             scoreLabel.text = score
         }
     }
-    
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
     }
 
-    
 }

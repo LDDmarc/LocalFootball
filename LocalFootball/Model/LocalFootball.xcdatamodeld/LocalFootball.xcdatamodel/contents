@@ -27,8 +27,8 @@
         <attribute name="numberOfWins" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="penaltyConceded" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="penaltyScored" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="fullStatistics" inverseEntity="TeamStatistic"/>
-        <relationship name="tournamentPartStatistics" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TournamentStatistics" inverseName="statistics" inverseEntity="TournamentStatistics"/>
+        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TeamStatistic" inverseName="fullStatistics" inverseEntity="TeamStatistic"/>
+        <relationship name="tournamentPartStatistics" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TournamentStatistics" inverseName="statistics" inverseEntity="TournamentStatistics"/>
     </entity>
     <entity name="Team" representedClassName="Team" syncable="YES">
         <attribute name="colors" optional="YES" attributeType="Transformable"/>
@@ -70,7 +70,7 @@
         <attribute name="teamId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tournamentId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="statistics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Statistics" inverseName="tournamentPartStatistics" inverseEntity="Statistics"/>
-        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamStatistic" inverseName="tournamentsStatistics" inverseEntity="TeamStatistic"/>
+        <relationship name="teamStatistics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TeamStatistic" inverseName="tournamentsStatistics" inverseEntity="TeamStatistic"/>
     </entity>
     <elements>
         <element name="Match" positionX="-662.71484375" positionY="-906.65625" width="128" height="268"/>

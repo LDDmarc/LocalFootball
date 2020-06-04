@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension TournamentStatistics {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TournamentStatistics> {

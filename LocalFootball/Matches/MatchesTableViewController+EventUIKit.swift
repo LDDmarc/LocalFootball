@@ -11,7 +11,7 @@ import UIKit
 // MARK: - EventKit CalendarWorking
 
 extension MatchesTableViewController: MatchTableViewCellDelegate {
-    
+
     func favoriteStarTap(_ sender: UIButton, cellForRowAt indexPath: IndexPath) {
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         let match = fetchedResultsController.object(at: indexPath)
@@ -20,7 +20,7 @@ extension MatchesTableViewController: MatchTableViewCellDelegate {
             let team2 = match.teams?.lastObject as? Team,
             let team1Name = team1.name,
             let team2Name = team2.name else { return }
-        
+
         if match.calendarId == nil {
             if let startDate = match.date,
                 let endDate = Calendar.current.date(byAdding: .hour, value: 2, to: startDate) {
@@ -47,4 +47,3 @@ extension MatchesTableViewController: MatchTableViewCellDelegate {
         }
     }
 }
-

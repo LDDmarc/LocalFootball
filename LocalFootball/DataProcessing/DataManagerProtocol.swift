@@ -26,6 +26,6 @@ enum DataManagerError {
 
 protocol DataManagerProtocol {
     var baseURL: String { get }
-    func getAllData(completion: @escaping(_ data: Data?, _ error: DataManagerError?) -> ())
-    func getMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping(_ data: Data?, _ error: DataManagerError?) -> ())
+    func getAllData(completion: @escaping(_ data: Data?, _ error: DataManagerError?) -> Void)
+    func getMatchesData(matchesStatus: MatchesStatus, from date: Date?, completion: @escaping(_ data: Data?, _ error: DataManagerError?) -> Void)
 }

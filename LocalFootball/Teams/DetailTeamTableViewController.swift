@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 
 class DetailTeamTableViewController: TableViewControllerWithFRC {
-    
+
     // MARK: - FetchedResultsController
-    
+
     lazy var fetchedResultsControllerTeam: NSFetchedResultsController<Team> = {
         let request: NSFetchRequest = Team.fetchRequest()
         request.predicate = teamPredicate
@@ -30,9 +30,7 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
         return frc
     }()
     var teamPredicate: NSPredicate!
-    
-    lazy var fetchedResultsControllerDelegate = DefaultFetchedResultsControllerDelegate(tableView: tableView)
-    
+
     lazy var fetchedResultsControllerMatches: NSFetchedResultsController<Match> = {
         let request: NSFetchRequest = Match.fetchRequest()
         request.predicate = matchesPredicate
@@ -50,9 +48,9 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
         return frc
     }()
     var matchesPredicate: NSPredicate!
-    
+
     // MARK: - UI rightBarButtonItemImageView
-    
+
     var rightBarButtonItemImageView: UIImageView = {
         let view = UIImageView()
         NSLayoutConstraint.activate([
@@ -63,7 +61,7 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
         view.isHidden = true
         return view
     }()
-    
+
     var isViewTitleHidden: Bool = true {
         didSet {
             if !isViewTitleHidden {
@@ -73,35 +71,37 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
             }
         }
     }
-    
+
     // MARK: - Loading View
-    
+
     override func loadView() {
         super.loadView()
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButtonItemImageView)
         navigationItem.largeTitleDisplayMode = .never
-        
+
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
-        tableView.register(UINib(nibName: String(describing: DetailTeamTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: DetailTeamTableViewCell.self))
-        
+
+        tableView.register(UINib(nibName: String(describing: MatchTableViewCell.self), bundle: nil),
+                           forCellReuseIdentifier: String(describing: MatchTableViewCell.self))
+        tableView.register(UINib(nibName: String(describing: DetailTeamTableViewCell.self), bundle: nil),
+                           forCellReuseIdentifier: String(describing: DetailTeamTableViewCell.self))
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
-    
+
     @objc func reloadTableData() {
         tableView.reloadData()
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+
         let offSet = tableView.visibleCells.first?.bounds.height ?? 120.0
         if scrollView.contentOffset.y + scrollView.adjustedContentInset.top > offSet/2 {
             if isViewTitleHidden {
@@ -111,11 +111,11 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
             isViewTitleHidden = true
         }
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return fetchedResultsControllerTeam.sections?[0].numberOfObjects ?? 0
@@ -123,21 +123,23 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
             return fetchedResultsControllerMatches.sections?[0].numberOfObjects ?? 0
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailTeamTableViewCell.self)) as! DetailTeamTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailTeamTableViewCell.self)) as? DetailTeamTableViewCell
+                else { return UITableViewCell() }
             let team = fetchedResultsControllerTeam.object(at: indexPath)
-           
+
             DetailTeamTableViewCellConfigurator().configureCell(cell, with: team)
-            
+
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as! MatchTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MatchTableViewCell.self)) as? MatchTableViewCell
+                else { return UITableViewCell() }
             cell.delegate = self
             cell.indexPath = indexPath
             let match = fetchedResultsControllerMatches.object(at: IndexPath(row: indexPath.row, section: 0))
-            
+
             if let calendarId = match.calendarId {
                 if !eventsCalendarManager.isExistEvent(with: calendarId) {
                     match.calendarId = nil
@@ -148,9 +150,9 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
                     }
                 }
             }
-            
+
             MatchTableViewCellConfigurator().configureCell(cell, with: match)
-            
+
             return cell
         }
     }
@@ -159,21 +161,21 @@ class DetailTeamTableViewController: TableViewControllerWithFRC {
 // MARK: - NSFetchedResultsController
 
 extension DetailTeamTableViewController: NSFetchedResultsControllerDelegate {
-    
+
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-    
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
                     at indexPath: IndexPath?,
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
-        
+
         switch type {
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
@@ -190,7 +192,7 @@ extension DetailTeamTableViewController: NSFetchedResultsControllerDelegate {
             tableView.reloadData()
         }
     }
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int,
@@ -204,6 +206,5 @@ extension DetailTeamTableViewController: NSFetchedResultsControllerDelegate {
             break
         }
     }
-    
-}
 
+}
