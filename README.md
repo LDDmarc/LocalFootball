@@ -16,9 +16,7 @@ Group project for mail.ru iOS courses at BMStU
 <li>
 Напоминания о предстоящих матчах 
  
- ![Команды и турниры](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/teams%26tournaments.png)
-  ![Матчи](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/matches.png)
-  ![Турнирная таблица](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/table.png)
+ ![Скриншоты](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/screens.png)
 
  ## Архитектура
  ![Архитектура](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/Architecture.png)
