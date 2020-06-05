@@ -10,18 +10,18 @@ import UIKit
 import CoreData
 
 class DefaultFetchedResultsControllerDelegate: NSObject, NSFetchedResultsControllerDelegate {
-    
+
     let tableView: UITableView
-    
+
     init(tableView: UITableView) {
         self.tableView = tableView
         super.init()
     }
-    
+
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
                     at indexPath: IndexPath?,
@@ -43,7 +43,7 @@ class DefaultFetchedResultsControllerDelegate: NSObject, NSFetchedResultsControl
             tableView.reloadData()
         }
     }
-    
+
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int,
@@ -57,7 +57,7 @@ class DefaultFetchedResultsControllerDelegate: NSObject, NSFetchedResultsControl
             break
         }
     }
-    
+
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }

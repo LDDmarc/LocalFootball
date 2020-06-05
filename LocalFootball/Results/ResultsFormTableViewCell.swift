@@ -9,27 +9,27 @@
 import UIKit
 
 class ResultsFormTableViewCell: UITableViewCell {
-    
+
     @IBOutlet private weak var positionLabel: UILabel!
     @IBOutlet private weak var teamLogoImageView: UIImageView!
     @IBOutlet private weak var teamNameLabel: UILabel!
-    
+
     @IBOutlet private weak var lastMatchesStackView: UIStackView!
-    
+
     @IBOutlet private weak var match1View: UIView!
     @IBOutlet private weak var match2View: UIView!
     @IBOutlet private weak var match3View: UIView!
     @IBOutlet private weak var match4View: UIView!
     @IBOutlet private weak var match5View: UIView!
     @IBOutlet private weak var match6View: UIView!
-    
+
     @IBOutlet private weak var match1Label: UILabel!
     @IBOutlet private weak var match2Label: UILabel!
     @IBOutlet private weak var match3Label: UILabel!
     @IBOutlet private weak var match4Label: UILabel!
     @IBOutlet private weak var match5Label: UILabel!
     @IBOutlet private weak var match6Label: UILabel!
-    
+
     var position: String? {
         didSet {
             guard let position = position else { return }
@@ -48,7 +48,7 @@ class ResultsFormTableViewCell: UITableViewCell {
             teamLogoImageView.image = UIImage(data: imageData)
         }
     }
-    
+
     var match1Info: Int? {
         didSet {
             setMatchResult(matchInfo: match1Info, matchView: match1View, matchLabel: match1Label)
@@ -79,9 +79,9 @@ class ResultsFormTableViewCell: UITableViewCell {
             setMatchResult(matchInfo: match6Info, matchView: match6View, matchLabel: match6Label)
         }
     }
-    
+
     var emptyColor = UIColor.systemGray6
-    
+
     private func setMatchResult(matchInfo: Int?, matchView: UIView, matchLabel: UILabel) {
         guard let matchInfo = matchInfo else {
             matchView.backgroundColor = emptyColor
@@ -100,9 +100,9 @@ class ResultsFormTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         selectionStyle = .none
-        
+
         for matchView in [match1View, match2View, match3View, match4View, match5View, match6View] {
             matchView?.layer.cornerRadius = 2 * .pi
             matchView?.clipsToBounds = true

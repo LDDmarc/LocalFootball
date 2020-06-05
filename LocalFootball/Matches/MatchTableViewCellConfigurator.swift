@@ -11,11 +11,11 @@ import CoreData
 
 class MatchTableViewCellConfigurator {
     func configureCell(_ cell: MatchTableViewCell, with match: Match) {
-        
+
         var team1ImageData: Data?
         var team2ImageData: Data?
         var teamsNames = ""
-        
+
         if let team1Obj = match.teams?.firstObject,
             let team1 = team1Obj as? Team {
             team1ImageData = team1.logoImageData
@@ -27,17 +27,17 @@ class MatchTableViewCellConfigurator {
             let team2 = team2Obj as? Team {
             team2ImageData = team2.logoImageData
             if let team2Name = team2.name {
-                teamsNames += " : " + team2Name
+                teamsNames += " - " + team2Name
             }
         }
-        
+
         var score: String?
         if match.status {
             score = "\(match.team1Score):\(match.team2Score)"
         } else {
              score = "❓:❓"
         }
-        
+
         cell.teamsNames = teamsNames
         cell.team1ImageData = team1ImageData
         cell.team2ImageData = team2ImageData

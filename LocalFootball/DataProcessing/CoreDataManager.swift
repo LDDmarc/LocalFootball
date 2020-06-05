@@ -14,24 +14,24 @@ import SwiftyJSON
 class CoreDataManger {
 
     static let instance = CoreDataManger()
-    
+
     private init() { }
-    
+
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "LocalFootball")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        
+
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.undoManager = nil
         container.viewContext.shouldDeleteInaccessibleFaults = true
         container.viewContext.automaticallyMergesChangesFromParent = true
-        
+
         return container
     }()
 
@@ -48,12 +48,10 @@ class CoreDataManger {
             }
         }
     }
-    
+
 }
 
 protocol UpdatableManagedObject: Decodable & NSManagedObject {
     var modified: Int64 { get }
     func update(with objectJSON: JSON, into context: NSManagedObjectContext)
 }
-
-

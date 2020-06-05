@@ -10,7 +10,7 @@ import UIKit
 
 class DetailTeamTableViewCellConfigurator {
     func configureCell(_ cell: DetailTeamTableViewCell, with team: Team) {
-        
+
         cell.teamLogoData = team.logoImageData
         if let statistics = team.teamStatistics,
             let fullstatistics = statistics.fullStatistics {
@@ -21,15 +21,15 @@ class DetailTeamTableViewCellConfigurator {
                 cell.tournaments = tournamentsCount
             }
         }
-        
+
         if var resultsOfLastMatches = team.teamStatistics?.fullStatistics?.resultsOfLastMatches {
-            
+
             cell.match1Info = !resultsOfLastMatches.isEmpty ? resultsOfLastMatches.removeLast() : nil
             cell.match2Info = !resultsOfLastMatches.isEmpty ? resultsOfLastMatches.removeLast() : nil
             cell.match3Info = !resultsOfLastMatches.isEmpty ? resultsOfLastMatches.removeLast() : nil
             cell.match4Info = !resultsOfLastMatches.isEmpty ? resultsOfLastMatches.removeLast() : nil
             cell.match5Info = !resultsOfLastMatches.isEmpty ? resultsOfLastMatches.removeLast() : nil
-            
+
         }
     }
 }

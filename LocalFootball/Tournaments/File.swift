@@ -24,7 +24,8 @@ class ExpandableCellViewController: UITableViewController, ExpandableCellDelegat
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "expandableCell", for: indexPath) as! ExpandableCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "expandableCell", for: indexPath) as? ExpandableCell
+            else { return UITableViewCell() }
         cell.delegate = self
         return cell
     }

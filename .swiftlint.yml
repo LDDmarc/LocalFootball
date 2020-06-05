@@ -1,0 +1,17 @@
+line_length:
+    warning: 170
+    ignores_function_declarations: false
+    ignores_comments: true
+    ignores_urls: true
+cyclomatic_complexity:
+    warning: 15
+function_body_length:
+    warning: 50
+    
+variable_name:
+    min_length: 3
+    excluded:
+    - id
+  
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+- Pods

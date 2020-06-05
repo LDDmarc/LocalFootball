@@ -1,0 +1,646 @@
+{
+    "teams":
+    [
+        {
+            "modified": 10,
+            "id": 100,
+            "name": "Arsenal",
+            "logoName": "Arsenal",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 5,
+                    "numberOfWins": 3,
+                    "numberOfLesions": 1,
+                    "numberOfDraws": 1,
+                    "goalsScored": 10,
+                    "goalsConceded": 5,
+                    "penaltyScored": 3,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, -1, -1, 0, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1100,
+                        "score": 5,
+                        "position": 1,
+                        "statistics":
+                        {
+                            "numberOfGames": 5,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 1,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 101,
+            "name":"Barcelona",
+            "logoName": "Barcelona",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 10,
+                    "numberOfWins": 6,
+                    "numberOfLesions": 7,
+                    "numberOfDraws": 1,
+                    "goalsScored": 10,
+                    "goalsConceded": 3,
+                    "penaltyScored": 3,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 1, 1, 0, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1100,
+                        "score": 3,
+                        "position": 2,
+                        "statistics":
+                        {
+                            "numberOfGames": 1,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 3,
+                            "numberOfDraws": 1,
+                            "goalsScored": 10,
+                            "goalsConceded": 4,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 1
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 102,
+            "name":"Basel",
+            "logoName": "Basel",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 75,
+                    "numberOfWins": 75,
+                    "numberOfLesions": 0,
+                    "numberOfDraws": 0,
+                    "goalsScored": 100,
+                    "goalsConceded": 10,
+                    "penaltyScored": 1,
+                    "penaltyConceded": 0,
+                    "lastMatches": [-1, 0, 0, 0, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1100,
+                        "score": 15,
+                        "position": 4,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 103,
+            "name": "Atlético",
+            "logoName": "Atlético",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 4,
+                    "numberOfWins": 3,
+                    "numberOfLesions": 1,
+                    "numberOfDraws": 1,
+                    "goalsScored": 10,
+                    "goalsConceded": 5,
+                    "penaltyScored": 3,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 1, -1, 1, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1100,
+                        "score": 5,
+                        "position": 1,
+                        "statistics":
+                        {
+                            "numberOfGames": 5,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 1,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 104,
+            "name":"Bayern München",
+            "logoName": "Bayern München",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 12,
+                    "numberOfWins": 11,
+                    "numberOfLesions": 7,
+                    "numberOfDraws": 1,
+                    "goalsScored": 10,
+                    "goalsConceded": 3,
+                    "penaltyScored": 3,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 1, 1, 1, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1101,
+                        "score": 12,
+                        "position": 1,
+                        "statistics":
+                        {
+                            "numberOfGames": 1,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 3,
+                            "numberOfDraws": 1,
+                            "goalsScored": 10,
+                            "goalsConceded": 4,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 1
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 105,
+            "name":"Chelsea",
+            "logoName": "Chelsea",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 35,
+                    "numberOfWins": 75,
+                    "numberOfLesions": 0,
+                    "numberOfDraws": 0,
+                    "goalsScored": 81,
+                    "goalsConceded": 10,
+                    "penaltyScored": 1,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 0, 0, 0, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1101,
+                        "score": 15,
+                        "position": 5,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 106,
+            "name":"Inter",
+            "logoName": "Inter",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 5,
+                    "numberOfWins": 75,
+                    "numberOfLesions": 0,
+                    "numberOfDraws": 0,
+                    "goalsScored": 11,
+                    "goalsConceded": 10,
+                    "penaltyScored": 1,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 1, 0, 0, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1101,
+                        "score": 15,
+                        "position": 5,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    },
+                    {
+                        "tournamentId": 1100,
+                        "score": 12,
+                        "position": 1,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 107,
+            "name":"Lokomotiv",
+            "logoName": "Lokomotiv",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 83,
+                    "numberOfWins": 80,
+                    "numberOfLesions": 0,
+                    "numberOfDraws": 0,
+                    "goalsScored": 12,
+                    "goalsConceded": 10,
+                    "penaltyScored": 1,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 1, 1, 1, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1101,
+                        "score": 15,
+                        "position": 9,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    },
+                    {
+                        "tournamentId": 1100,
+                        "score": 25,
+                        "position": 1,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 108,
+            "name":"Manchester City",
+            "logoName": "Manchester City",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 7,
+                    "numberOfWins": 7,
+                    "numberOfLesions": 0,
+                    "numberOfDraws": 0,
+                    "goalsScored": 10,
+                    "goalsConceded": 10,
+                    "penaltyScored": 1,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, -1, -1, 0, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1101,
+                        "score": 12,
+                        "position": 5,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "modified": 10,
+            "id": 109,
+            "name":"Manchester United",
+            "logoName": "Manchester United",
+            "colors":["yellow","white","green"],
+            "yearOfFoundation":1999,
+            "teamStatistics":
+            {
+                "fullStatistics":
+                {
+                    "numberOfGames": 20,
+                    "numberOfWins": 15,
+                    "numberOfLesions": 0,
+                    "numberOfDraws": 0,
+                    "goalsScored": 12,
+                    "goalsConceded": 10,
+                    "penaltyScored": 1,
+                    "penaltyConceded": 0,
+                    "lastMatches": [1, 1, 1, -1, 1]
+                },
+                "tournamentStatistics":
+                [
+                    {
+                        "tournamentId": 1101,
+                        "score": 11,
+                        "position": 9,
+                        "statistics":
+                        {
+                            "numberOfGames": 6,
+                            "numberOfWins": 3,
+                            "numberOfLesions": 1,
+                            "numberOfDraws": 6,
+                            "goalsScored": 10,
+                            "goalsConceded": 5,
+                            "penaltyScored": 3,
+                            "penaltyConceded": 9
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "tournaments":
+    [
+        {
+            "modified": 10,
+            "id": 1100,
+            "teamsIds": [100, 101, 102, 103, 104, 107],
+            "matchesIds": [1200, 1201, 1202, 1204, 1205],
+            "name": "Чемпионат IFL",
+            "imageName": "https://avatars.mds.yandex.net/get-pdb/234183/118e6682-8636-4f47-bcb6-29f50bfc900b/s1200",
+            "info": "Данный термин используется преимущественно по отношению к спортивным состязаниям, однако, наравне с этим, он применяется и к другим соревнованиям.",
+            "status": true,
+            "dateOfTheBeginning": "2019-01-23T18:00:43Z",
+            "dateOfTheEnd": "2020-04-23T18:00:00Z",
+            "numberOfTeams": 3,
+            "numberOfMatches": 5
+        },
+        {
+            "modified": 10,
+            "id": 1101,
+            "teamsIds": [103, 104, 109, 104, 107, 105, 106, 108],
+            "matchesIds": [1203],
+            "name": "FIFA 2018",
+            "imageName": "FIFA2018",
+            "info": "Масюсенький чемпионатик для множества перспективных команд с величайшей историей. Но за последнее время он разросся.",
+            "status": false,
+            "dateOfTheBeginning": "2018-03-10T18:25:43Z",
+            "dateOfTheEnd": "2018-05-15T18:25:43Z",
+            "numberOfTeams": 2,
+            "numberOfMatches": 2
+        }
+    ],
+    "matches":
+    [
+        {
+            "modified": 10,
+            "id": 1204,
+            "date": "2021-08-09T18:25:43Z",
+            "status": false,
+            "team1Id": 101,
+            "team2Id": 100,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL"
+        },
+        {
+            "modified": 10,
+            "id": 1205,
+            "date": "2020-10-30T18:25:43Z",
+            "status": false,
+            "team1Id": 101,
+            "team2Id": 102,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL"
+        },
+        {
+            "modified": 10,
+            "id": 1200,
+            "date": "2018-04-23T18:25:43Z",
+            "status": true,
+            "team1Id": 100,
+            "team2Id": 101,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL",
+            "team1Score": 2,
+            "team2Score": 5
+        },
+        {
+            "modified": 10,
+            "id": 1201,
+            "date": "2018-04-23T18:25:43Z",
+            "status": true,
+            "team1Id": 101,
+            "team2Id": 102,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL",
+            "team1Score": 1,
+            "team2Score": 1
+        },
+        {
+            "modified": 10,
+            "id": 1202,
+            "date": "2019-05-10T18:25:43Z",
+            "status": true,
+            "team1Id": 100,
+            "team2Id": 102,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL",
+            "team1Score": 2,
+            "team2Score": 3
+        },
+        {
+            "modified": 10,
+            "id": 1203,
+            "date": "2019-02-13T18:25:43Z",
+            "status": true,
+            "team1Id": 103,
+            "team2Id": 104,
+            "tournamentId": 1101,
+            "tournamentName": "FIFA 2018",
+            "team1Score": 3,
+            "team2Score": 2
+        },
+        
+        {
+            "modified": 10,
+            "id": 1205,
+            "date": "2020-08-09T18:25:43Z",
+            "status": false,
+            "team1Id": 104,
+            "team2Id": 103,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL"
+        },
+        {
+            "modified": 10,
+            "id": 1206,
+            "date": "2020-11-30T18:25:43Z",
+            "status": false,
+            "team1Id": 100,
+            "team2Id": 102,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL"
+        },
+        {
+            "modified": 10,
+            "id": 1207,
+            "date": "2018-04-23T18:25:43Z",
+            "status": true,
+            "team1Id": 109,
+            "team2Id": 104,
+            "tournamentId": 1101,
+            "tournamentName": "FIFA 2018",
+            "team1Score": 1,
+            "team2Score": 2
+        },
+        {
+            "modified": 10,
+            "id": 1208,
+            "date": "2019-04-03T18:25:43Z",
+            "status": true,
+            "team1Id": 103,
+            "team2Id": 107,
+            "tournamentId": 1100,
+            "tournamentName": "Чемпионат IFL",
+            "team1Score": 3,
+            "team2Score": 1
+        },
+        {
+            "modified": 10,
+            "id": 1209,
+            "date": "2019-05-10T18:25:43Z",
+            "status": true,
+            "team1Id": 106,
+            "team2Id": 105,
+            "tournamentId": 1101,
+            "tournamentName": "FIFA 2018",
+            "team1Score": 2,
+            "team2Score": 3
+        },
+        {
+            "modified": 10,
+            "id": 1210,
+            "date": "2020-06-13T18:25:43Z",
+            "status": false,
+            "team1Id": 108,
+            "team2Id": 104,
+            "tournamentId": 1101,
+            "tournamentName": "FIFA 2018"
+        },
+        {
+            "modified": 10,
+            "id": 1211,
+            "date": "2020-07-13T18:00:43Z",
+            "status": false,
+            "team1Id": 107,
+            "team2Id": 106,
+            "tournamentId": 1101,
+            "tournamentName": "FIFA 2018"
+        },
+        {
+            "modified": 10,
+            "id": 1210,
+            "date": "2020-09-11T17:15:43Z",
+            "status": false,
+            "team1Id": 106,
+            "team2Id": 105,
+            "tournamentId": 1101,
+            "tournamentName": "FIFA 2018"
+        }
+    ]
+}
