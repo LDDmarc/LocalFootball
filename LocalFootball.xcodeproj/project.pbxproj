@@ -24,6 +24,7 @@
 		BC07E58924842D6900C64403 /* boy.png in Resources */ = {isa = PBXBuildFile; fileRef = BC07E58724842D6900C64403 /* boy.png */; };
 		BC07E5982484517C00C64403 /* fullRequest20.json in Resources */ = {isa = PBXBuildFile; fileRef = BC07E5972484517C00C64403 /* fullRequest20.json */; };
 		BC07E59A248455F400C64403 /* fullRequest30.json in Resources */ = {isa = PBXBuildFile; fileRef = BC07E599248455F300C64403 /* fullRequest30.json */; };
+		BC0DEC122489581C00D8E600 /* TableViewControllerWithFRC + Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0DEC112489581C00D8E600 /* TableViewControllerWithFRC + Alerts.swift */; };
 		BC112FCB2482AA3C006A2529 /* DefaultFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC112FCA2482AA3C006A2529 /* DefaultFetchedResultsControllerDelegate.swift */; };
 		BC210E15245329E10056DDE3 /* Statistics+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC210E07245329E10056DDE3 /* Statistics+CoreDataProperties.swift */; };
 		BC210E17245329E10056DDE3 /* TeamStatistic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC210E09245329E10056DDE3 /* TeamStatistic+CoreDataProperties.swift */; };
@@ -134,6 +135,7 @@
 		BC07E58724842D6900C64403 /* boy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy.png; sourceTree = "<group>"; };
 		BC07E5972484517C00C64403 /* fullRequest20.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fullRequest20.json; sourceTree = "<group>"; };
 		BC07E599248455F300C64403 /* fullRequest30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fullRequest30.json; sourceTree = "<group>"; };
+		BC0DEC112489581C00D8E600 /* TableViewControllerWithFRC + Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableViewControllerWithFRC + Alerts.swift"; sourceTree = "<group>"; };
 		BC112FCA2482AA3C006A2529 /* DefaultFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
 		BC210E07245329E10056DDE3 /* Statistics+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Statistics+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BC210E09245329E10056DDE3 /* TeamStatistic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeamStatistic+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				BCF5D592243F70D5009E9876 /* AppDelegate.swift */,
 				BC42A7D02444A4080039A851 /* TabBarController.swift */,
 				BC0596DC2481916E0002A305 /* TableViewControllerWithFRC.swift */,
+				BC0DEC112489581C00D8E600 /* TableViewControllerWithFRC + Alerts.swift */,
 				BC112FCA2482AA3C006A2529 /* DefaultFetchedResultsControllerDelegate.swift */,
 				BC210E2224532A710056DDE3 /* Model */,
 				BC42A7D62444B3140039A851 /* Teams */,
@@ -704,6 +707,7 @@
 				BCF018B7244DA6D800EBD578 /* DataProvider.swift in Sources */,
 				BC07E5732483FAC400C64403 /* DetailTeamTableViewController+EventUIKit.swift in Sources */,
 				BCA823592440E3DA00FA67FF /* Tournament+CoreDataClass.swift in Sources */,
+				BC0DEC122489581C00D8E600 /* TableViewControllerWithFRC + Alerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

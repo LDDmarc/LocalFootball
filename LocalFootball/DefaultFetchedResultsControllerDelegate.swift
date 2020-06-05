@@ -12,7 +12,6 @@ import CoreData
 class DefaultFetchedResultsControllerDelegate: NSObject, NSFetchedResultsControllerDelegate {
 
     let tableView: UITableView
-//    lazy var tableView: UITableView
 
     init(tableView: UITableView) {
         self.tableView = tableView
