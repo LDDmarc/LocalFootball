@@ -32,7 +32,7 @@ Group project for mail.ru iOS courses at BMStU
  
  В проекте так же использован паттерн **Dependency Injection** для сетевого слоя. Создание легко-конфигурируемого класса с тестовыми данными - это удобный инструмент для тестирования различных сценариев и обработки ошибок.
  
- Для хранения данных на устройстве используется **CoreData**, а для отображения этих данных -  **FetchResultsController**.
+ Для хранения данных на устройстве используется **CoreData**, а для отображения этих данных -  `FetchResultsController`.
  
  UI построен с помощью **.xib** - файлов и **AutoLayout**.
 
@@ -53,5 +53,12 @@ Group project for mail.ru iOS courses at BMStU
 ## Взаимодействие с календарем
 Было важно учесть все возможные сценарии, среди которых удаление и создание пользователем события в календаре не из нашего приложения. А так же корректность времени матча в календаре, в случае если его перенесли.
 
+![Доступ к календарю и добавление событий](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/add&settings.gif)
+
+![Удаление и связывание событий](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/delete&binding.gif)
+
 ## Custom Alert
 Для UI обработки ошибок был создан кастомный класс `CustomAlert` с возможностью динамического добавления кнопок и настройки цветовой палитры.
+
+ ![Алерты](https://github.com/LDDmarc/LocalFootball/blob/daria/LocalFootball/Presentation/alerts.png)
+
